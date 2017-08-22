@@ -65,7 +65,7 @@ bool HelloWorld::init()
     this->addChild(label, 1);
 
     // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("/Users/yiner/Desktop/Warplane1.jpg");
+    auto sprite = Sprite::create("res/Warplane.jpg");
  
 
     // position the sprite on the center of the screen
