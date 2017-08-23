@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>planeName</key>
+	<array>
+		<dict>
+			<key>atk</key>
+			<integer>0</integer>
+			<key>def</key>
+			<integer>0</integer>
+			<key>exp</key>
+			<integer>0</integer>
+			<key>gameLevel</key>
+			<integer>0</integer>
+			<key>hp</key>
+			<integer>0</integer>
+			<key>mp</key>
+			<integer>0</integer>
+			<key>planeLevel</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>atk</key>
+			<integer>0</integer>
+			<key>def</key>
+			<integer>0</integer>
+			<key>exp</key>
+			<integer>0</integer>
+			<key>gameLevel</key>
+			<integer>0</integer>
+			<key>hp</key>
+			<integer>0</integer>
+			<key>mp</key>
+			<integer>0</integer>
+			<key>planeLevel</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+</dict>
+</plist>
