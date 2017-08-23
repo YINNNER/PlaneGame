@@ -183,3 +183,5 @@ out/
 .project
 .cproject
 cocos2d/
+PlaneGame/proj.win32/PlaneGame.vcxproj.filters
+*.filters

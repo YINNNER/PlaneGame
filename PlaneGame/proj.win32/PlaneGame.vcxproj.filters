@@ -19,7 +19,11 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SaveLayer.cpp">
+<<<<<<< HEAD
       <Filter>win32</Filter>
+=======
+      <Filter>src</Filter>
+>>>>>>> 2fda5141f26bd888349a9ec33b77fbb539aba0d6
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -30,7 +34,11 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SaveLayer.h">
+<<<<<<< HEAD
       <Filter>win32</Filter>
+=======
+      <Filter>src</Filter>
+>>>>>>> 2fda5141f26bd888349a9ec33b77fbb539aba0d6
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
