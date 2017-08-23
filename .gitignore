@@ -12,6 +12,9 @@ Thumbs.db
 *.vcproj.*.user
 *.vcxproj.user
 *.csproj.user
+*.vcxproj
+*.filters
+
 *.vspscc
 *_i.c
 *.i
@@ -183,5 +186,3 @@ out/
 .project
 .cproject
 cocos2d/
-PlaneGame/proj.win32/PlaneGame.vcxproj.filters
-*.filters
