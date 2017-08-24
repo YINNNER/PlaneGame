@@ -12,9 +12,10 @@ bool LoadLayer::init() {
 	this->addChild(_background);
 
 	_logo = Sprite::create("/res/UI/0aStart/logo.png");
-	_logo->setPosition(Vec2(origin.x + winSize.width /2, origin.y + winSize.height *3/5));
+	_logo->setPosition(Vec2(origin.x + winSize.width *0.6, origin.y + winSize.height *3/5));
 	//_logo->setScale(2);
 	this->addChild(_logo);
+
 
 	
 	scheduleOnce(CC_SCHEDULE_SELECTOR(LoadLayer::onScheduleOnce),0.1f);
