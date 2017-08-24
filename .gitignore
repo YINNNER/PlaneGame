@@ -12,9 +12,6 @@ Thumbs.db
 *.vcproj.*.user
 *.vcxproj.user
 *.csproj.user
-*.vcxproj
-*.filters
-
 *.vspscc
 *_i.c
 *.i
