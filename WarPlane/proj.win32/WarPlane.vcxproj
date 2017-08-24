@@ -145,31 +145,31 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\CreateLayer.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
-    <ClCompile Include="CreateLayer.cpp" />
-    <ClCompile Include="HelpLayer.cpp" />
-    <ClCompile Include="LoadLayer.cpp" />
+    <ClCompile Include="..\Classes\HelpLayer.cpp" />
+    <ClCompile Include="..\Classes\LoadLayer.cpp" />
+    <ClCompile Include="..\Classes\MapLayer.cpp" />
+    <ClCompile Include="..\Classes\MenuLayer.cpp" />
+    <ClCompile Include="..\Classes\RepoLayer.cpp" />
+    <ClCompile Include="..\Classes\SaveLayer.cpp" />
+    <ClCompile Include="..\Classes\SceneManager.cpp" />
+    <ClCompile Include="..\Classes\SetLayer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MapLayer.cpp" />
-    <ClCompile Include="MenuLayer.cpp" />
-    <ClCompile Include="RepoLayer.cpp" />
-    <ClCompile Include="SaveLayer.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SetLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\CreateLayer.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
-    <ClInclude Include="CreateLayer.h" />
-    <ClInclude Include="HelpLayer.h" />
-    <ClInclude Include="LoadLayer.h" />
+    <ClInclude Include="..\Classes\HelpLayer.h" />
+    <ClInclude Include="..\Classes\LoadLayer.h" />
+    <ClInclude Include="..\Classes\MapLayer.h" />
+    <ClInclude Include="..\Classes\MenuLayer.h" />
+    <ClInclude Include="..\Classes\RepoLayer.h" />
+    <ClInclude Include="..\Classes\SaveLayer.h" />
+    <ClInclude Include="..\Classes\SceneManager.h" />
+    <ClInclude Include="..\Classes\SetLayer.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="MapLayer.h" />
-    <ClInclude Include="MenuLayer.h" />
-    <ClInclude Include="RepoLayer.h" />
-    <ClInclude Include="SaveLayer.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SetLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">
