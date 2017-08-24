@@ -19,6 +19,11 @@ public:
     
     virtual bool init();
     
+    //!!encapsulation this 2 method
+    void setTitle(char * str,char * font,int fontSize,Size visibleSize,Vec2 origin,int childIndex);
+    
+    void setBg(const char * str,Size visibleSize,Vec2 origin,int childIndex);
+    
     //init plist
     void initInfo(Ref * pSender);
     
@@ -30,7 +35,9 @@ public:
     
     CREATE_FUNC(SaveLayer);
     
-    //
+    void menuCloseCallback(Ref *pSender);
+    
+    
 };
 
 #endif /* SaveLayer_h */
