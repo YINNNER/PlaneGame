@@ -26,7 +26,7 @@ bool CreateLayer :: init() {
 	show2->setPosition(Vec2(winSize.width *0.5, winSize.height*0.6));
 	//show2->setScale(1.2);
 	show2->setTag(11);
-	selected_2 = Sprite::create("res/UI/a1CreatePlayer/bar1.png");
+	selected_2 = Sprite::create("res/UI/a1CreatePlayer/bar2.png");
 	selected_2->setPosition(Vec2(winSize.width *0.51, winSize.height*0.61));
 	selected_2->retain();
 	this->addChild(selected_2, 1);
@@ -36,7 +36,7 @@ bool CreateLayer :: init() {
 	show3->setPosition(Vec2(winSize.width *0.82, winSize.height*0.6));
 	//show3->setScale(1.2);
 	show3->setTag(12);
-	selected_3 = Sprite::create("res/UI/a1CreatePlayer/bar1.png");
+	selected_3 = Sprite::create("res/UI/a1CreatePlayer/bar3.png");
 	selected_3->setPosition(Vec2(winSize.width *0.83, winSize.height*0.61));
 	selected_3->retain();
 	this->addChild(selected_3, 1);
