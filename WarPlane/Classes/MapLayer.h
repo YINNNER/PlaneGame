@@ -11,7 +11,13 @@ public:
 	virtual bool init();
 	CREATE_FUNC(MapLayer);
 
+	//void mouseMove(Event *event);
 	void CallMenu(Ref *pSender);
+
+private:
+	MenuItemImage *level_1;
+	MenuItemImage *level_2;
+	MenuItemImage *level_3;
 
 };
 

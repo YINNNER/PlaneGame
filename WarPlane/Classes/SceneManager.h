@@ -20,11 +20,21 @@ public:
 	static void goHelpLayer(int tag);
 	static void goSetLayer(int tag);
 	static void goRepoLayer(int tag);
-	
-
 
 	Scene *loadScene;
 };
+
+template <class layer,void (&CallBack)(Ref * pSender),  const char* normal, const char *selected>
+Menu* Back()
+{
+	layer *tsm = this;
+	auto back = MenuItemImage::create(normal, selected, CC_CALLBACK_1(CallBack,layer ));
+	back->setPosition(Vec2(winSize.width*0.15, winSize.height*0.9));
+
+	Menu*mu = Menu::create(back, NULL);
+	mu->setPosition(Point::ZERO);
+	
+}
 
 
 #endif

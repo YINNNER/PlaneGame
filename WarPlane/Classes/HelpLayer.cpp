@@ -1,5 +1,6 @@
 #include "HelpLayer.h"
-
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 
 bool HelpLayer::init() {
 	auto winSize = Director::getInstance()->getWinSize();
@@ -28,5 +29,6 @@ bool HelpLayer::init() {
 }
 void HelpLayer::CallBack(Ref *pSender) {
 	int tag = 2;
+	SimpleAudioEngine::getInstance()->playEffect("/ music / trans1.wav", true);
 	SceneManager::goSetLayer(tag);
 }
