@@ -35,7 +35,8 @@ public:
     void saveInfo();
     void loadInfo(int tag);
     
-    void getSysTime(std::string saveTime,std::string saveDay);
+    std::string getSysTime();
+    std::string getSysDay();
     
     
 };
