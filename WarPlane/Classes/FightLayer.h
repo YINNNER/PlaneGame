@@ -1,6 +1,7 @@
 #pragma once
 #include "cocos2d.h"
 #include"CCPlane.h"
+#include"SceneManager.h"
 
 USING_NS_CC;
 class FightLayer :
@@ -21,7 +22,7 @@ public:
 	void is_crash(float dt);
 	long getCurrentTime();
 	void addSkill(int i);
-
+	SceneManager * tsm;
 private:
 	Sprite * fightImg;
 	CCPlane * player_1;

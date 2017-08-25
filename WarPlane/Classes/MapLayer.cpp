@@ -1,5 +1,6 @@
 #include "MapLayer.h"
 #include "SimpleAudioEngine.h"
+#include"FightLayer.h"
 using namespace CocosDenshion;
 
 
@@ -7,7 +8,7 @@ bool MapLayer::init() {
 	
 	auto winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
-	auto _background = Sprite::create("/res/UI/a2SelectLevel/background.png");
+	auto _background = Sprite::create("/res/UI/1Menu/background.png");
 	_background->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height / 2));
 	auto scale = winSize.width / _background->getContentSize().width;
 	_background->setScale(scale);
@@ -86,6 +87,11 @@ void MapLayer::CallMenu(Ref * pSender) {
 		if (level_3->getScale() == 0.7f)
 			level_3->setScale(0.5);
 		level_1->setScale(0.7);
+		auto gameScene = Scene::create();
+		FightLayer * fightLayer_1 = FightLayer::create();
+		fightLayer_1->setPlayer(1);
+		gameScene->addChild(fightLayer_1);
+		Director::getInstance()->replaceScene(gameScene);
 	}break;
 	case 32:
 	{

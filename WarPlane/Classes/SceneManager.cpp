@@ -1,6 +1,10 @@
 
 #include "SceneManager.h"
 #include "AudioEngine.h"
+#include"FightLayer.h"
+#include "LoadLayer.h"
+#include "MenuLayer.h"
+#include "RepoLayer.h"
 using namespace experimental;
 
 USING_NS_CC;
@@ -126,4 +130,5 @@ void SceneManager::goRepoLayer(int tag) {
 	}
 
 }
+
 

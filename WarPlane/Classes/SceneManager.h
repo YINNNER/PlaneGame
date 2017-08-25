@@ -4,10 +4,6 @@
 
 #pragma once
 #include <cocos2d.h>
-#include "LoadLayer.h"
-#include "MenuLayer.h"
-#include "RepoLayer.h"
-
 USING_NS_CC;
 class SceneManager
 {
@@ -21,7 +17,9 @@ public:
 	static void goSetLayer(int tag);
 	static void goRepoLayer(int tag);
 
-	Scene *loadScene;
+public:
+	Scene * loadScene;
+
 };
 
 template <class layer,void (&CallBack)(Ref * pSender),  const char* normal, const char *selected>

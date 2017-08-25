@@ -1,6 +1,7 @@
 #pragma once
 #include <cocos2d.h>
 #include "MenuLayer.h"
+#include"SceneManager.h"
 
 USING_NS_CC;
 
@@ -13,7 +14,7 @@ public:
 
 	//void mouseMove(Event *event);
 	void CallMenu(Ref *pSender);
-
+	SceneManager * tsm;
 private:
 	MenuItemImage *level_1;
 	MenuItemImage *level_2;
