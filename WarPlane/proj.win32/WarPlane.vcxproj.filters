@@ -51,6 +51,14 @@
     <ClCompile Include="..\Classes\UserInfo.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Arms.cpp" />
+    <ClCompile Include="..\Classes\Bullet.cpp" />
+    <ClCompile Include="..\Classes\CCPlane.cpp" />
+    <ClCompile Include="..\Classes\FightLayer.cpp" />
+    <ClCompile Include="..\Classes\Flg.cpp" />
+    <ClCompile Include="..\Classes\Fuel.cpp" />
+    <ClCompile Include="..\Classes\GameManager.cpp" />
+    <ClCompile Include="..\Classes\Supply.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -92,6 +100,14 @@
     <ClInclude Include="..\Classes\UserInfo.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Arms.h" />
+    <ClInclude Include="..\Classes\Bullet.h" />
+    <ClInclude Include="..\Classes\CCPlane.h" />
+    <ClInclude Include="..\Classes\FightLayer.h" />
+    <ClInclude Include="..\Classes\Flg.h" />
+    <ClInclude Include="..\Classes\Fuel.h" />
+    <ClInclude Include="..\Classes\GameManager.h" />
+    <ClInclude Include="..\Classes\Supply.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

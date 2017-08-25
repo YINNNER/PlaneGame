@@ -44,7 +44,7 @@ void FightLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
 void FightLayer::update(float dt)
 {
-	static VISIBLESIZE;
+	static Size visibleSize = Director::getInstance()->getVisibleSize();
 	switch (key) {
 	case EventKeyboard::KeyCode::KEY_W:
 		if(visibleSize.height-player_1->getPositionY()<player_1->getContentSize().height/2){			
@@ -96,7 +96,7 @@ void FightLayer::update(float dt)
 
 void FightLayer::addSupply(float dt)
 {
-	static VISIBLESIZE;
+	static Size visibleSize = Director::getInstance()->getVisibleSize();
 	int temp = rand();
 	if (temp%2==0)
 	{
@@ -132,7 +132,7 @@ void FightLayer::addBullet(int bType)
 }
 void FightLayer::addEnemyPlane(float dt)
 {
-	static VISIBLESIZE;
+	static Size visibleSize = Director::getInstance()->getVisibleSize();
 	CCPlane * plane_1 = CCPlane::create();
 	plane_1->setImg("res/playerShip2_red.png");
 	plane_1->setRotation(180);
@@ -203,10 +203,10 @@ long FightLayer::getCurrentTime()
 	return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 void FightLayer::setPlayer(int cType) {
-	WINSIZE;
+	static Size visibleSize = Director::getInstance()->getVisibleSize();
 	player_1 = CCPlane::create();
 	player_1->setAttri(20,200,10,10,1);
-	player_1->setPosition(Vec2(winSize.width, winSize.height / 2));
+	player_1->setPosition(Vec2(visibleSize.width, visibleSize.height / 2));
 	player_1->setImg("res/playerShip1_blue.png");
 	this->addChild(player_1,2);
 }
