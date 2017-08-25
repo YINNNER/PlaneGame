@@ -48,6 +48,9 @@
     <ClCompile Include="..\Classes\SetLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\UserInfo.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -84,6 +87,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SetLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UserInfo.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

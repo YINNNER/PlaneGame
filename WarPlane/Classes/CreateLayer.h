@@ -10,6 +10,11 @@ public:
 	virtual bool init();
 	CREATE_FUNC(CreateLayer);
 	
-	bool CreatePlayer(Ref *pSender);
+	void CallBack(Ref *pSender);
+
+private:
+	Sprite *selected_1;
+	Sprite *selected_2;
+	Sprite *selected_3;
 
 };

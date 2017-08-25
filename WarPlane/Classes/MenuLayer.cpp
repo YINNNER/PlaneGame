@@ -1,8 +1,10 @@
 #include "MenuLayer.h"
-
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 
 
 bool MenuLayer::init(){
+	
 	auto winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 
@@ -39,6 +41,9 @@ bool MenuLayer::init(){
 	this->addChild(menu);
 
 
+	
+
+
 	return true;
 }
 void  MenuLayer::CallMenu(Ref* pSender) {
@@ -46,11 +51,13 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	switch (((MenuItem *)pSender)->getTag()) {
 	case 1:
 	{
+		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 		SceneManager::goCreateLayer(tag);
 
 	}
 	break;
 	case 2:
+		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 		SceneManager::goSaveLayer(tag);
 	
 	break;
@@ -58,10 +65,12 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	{
 		int tag = 1;
 		SceneManager::goSetLayer(tag);
+		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 	}
 	break;
 	case 4:
 	{
+
 		Director::getInstance()->end();
 		exit(0);
 	}
