@@ -11,43 +11,43 @@ bool SetLayer::init()
 	auto winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 
-	auto _background = Sprite::create("/res/UI/1Menu/background.png");
+	auto _background = Sprite::create("res/UI/1Menu/background.png");
 	_background->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height / 2));
 	auto scale = winSize.width / _background->getContentSize().width;
 	_background->setScale(scale);
 	this->addChild(_background);
 
-	auto music = Label::createWithSystemFont("Background", "/fonts/AdobeHeitiStd-Regular.ttf", 30);
+	auto music = Label::createWithSystemFont("Background", "fonts/AdobeHeitiStd-Regular.ttf", 30);
 	music->setPosition(Vec2(winSize.width*0.17, winSize.height*0.6));
 	this->addChild(music);
 
-	auto effect = Label::createWithSystemFont("Effect", "/fonts/AdobeHeitiStd-Regular.ttf", 30);
+	auto effect = Label::createWithSystemFont("Effect", "fonts/AdobeHeitiStd-Regular.ttf", 30);
 	effect->setPosition(Vec2(winSize.width*0.2, winSize.height*0.5));
 	this->addChild(effect);
 
-	backBar = Sprite::create("/res/UI/2Option/loadingBar.png");
+	backBar = Sprite::create("res/UI/2Option/loadingBar.png");
 	backBar->setPosition(Vec2(winSize.width*0.6, winSize.height*0.6));
 	this->addChild(backBar);
 
 	
 
 
-	effectBar = Sprite::create("/res/UI/2Option/loadingBar.png");
+	effectBar = Sprite::create("res/UI/2Option/loadingBar.png");
 	effectBar->setPosition(Vec2(winSize.width*0.6, winSize.height*0.5));
 	this->addChild(effectBar);
 
-	backCir = Sprite::create("/res/UI/2Option/circle.png");
+	backCir = Sprite::create("res/UI/2Option/circle.png");
 	backCir->setPosition(Vec2(winSize.width*0.4, winSize.height*0.6));
 	this->addChild(backCir);
-	effectCir = Sprite::create("/res/UI/2Option/circle.png");
+	effectCir = Sprite::create("res/UI/2Option/circle.png");
 	effectCir->setPosition(Vec2(winSize.width*0.4, winSize.height*0.5));
 	this->addChild(effectCir);
 
-	auto menuItem_1 = MenuItemImage::create("/res/UI/2Option/back.png", "/res/UI/2Option/backS.png", CC_CALLBACK_1(SetLayer::CallBack, this));
+	auto menuItem_1 = MenuItemImage::create("res/UI/2Option/back.png", "res/UI/2Option/backS.png", CC_CALLBACK_1(SetLayer::CallBack, this));
 	menuItem_1->setTag(2);
 	menuItem_1->setPosition(Vec2(origin.x + winSize.width *0.15, origin.y + winSize.height*0.9));
 
-	auto menuItem_2 = MenuItemImage::create("/res/UI/2Option/help.png", "/res/UI/2Option/helpS.png", CC_CALLBACK_1(SetLayer::CallBack, this));
+	auto menuItem_2 = MenuItemImage::create("res/UI/2Option/help.png", "res/UI/2Option/helpS.png", CC_CALLBACK_1(SetLayer::CallBack, this));
 	menuItem_2->setTag(1);
 	menuItem_2->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height*0.2));
 
@@ -67,11 +67,11 @@ void SetLayer::CallBack(Ref *pSender) {
 	switch (tag)
 	{
 	case 1:
-		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
 		SceneManager::goHelpLayer(tag);
 		break;
 	case 2:
-		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
 		SceneManager::goMenuLayer(tag);
 		break;
 	default:
