@@ -77,11 +77,11 @@ void CreateLayer::CallBack(Ref *pSender) {
 	{
 	case 1:
 	{
-		SimpleAudioEngine::sharedEngine()->playEffect("/ music / trans1.wav", true);
+		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav", true);
 		SceneManager::goMapLayer(tag);
 	}break;
 	case 2: {
-		SimpleAudioEngine::sharedEngine()->playEffect("/ music / trans1.wav", true);
+		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav", true);
 		SceneManager::goMenuLayer(tag);
 	}break;
 	case 10: {

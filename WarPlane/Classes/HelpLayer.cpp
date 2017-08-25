@@ -29,6 +29,6 @@ bool HelpLayer::init() {
 }
 void HelpLayer::CallBack(Ref *pSender) {
 	int tag = 2;
-	SimpleAudioEngine::getInstance()->playEffect("/ music / trans1.wav", true);
+	SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 	SceneManager::goSetLayer(tag);
 }

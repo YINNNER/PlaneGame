@@ -44,7 +44,7 @@ bool LoadLayer::init() {
 	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("/music/background1.mp3");
 	SimpleAudioEngine::sharedEngine()->preloadEffect("/music/trans1.wav");
 	
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("/music/background1.mp3");
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("/music/background3.mp3",true);
 	scheduleOnce(CC_SCHEDULE_SELECTOR(LoadLayer::onScheduleOnce),1.0f);
 	return true;
 }

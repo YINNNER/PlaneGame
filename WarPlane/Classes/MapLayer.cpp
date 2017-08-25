@@ -31,7 +31,7 @@ bool MapLayer::init() {
 	level_1 = MenuItemImage::create("/res/UI/a2SelectLevel/planet1.png", "/res/UI/a2SelectLevel/planet1.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_1->setScale(0.5);
 	level_1->setAnchorPoint(Vec2(0,0));
-	level_1->setPosition(Vec2(Vec2(winSize.width*0.6, winSize.height*0.1)));
+	level_1->setPosition(Vec2(Vec2(winSize.width*0.5, winSize.height*0.15)));
 	level_1->setTag(31);
 
 	
@@ -72,11 +72,11 @@ void MapLayer::CallMenu(Ref * pSender) {
 	switch (tag)
 	{
 	case 1:
-		SimpleAudioEngine::sharedEngine()->playEffect("/music /trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 		SceneManager::goRepoLayer(tag);
 		break;
 	case 2:
-		SimpleAudioEngine::sharedEngine()->playEffect("/music /trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 		SceneManager::goCreateLayer(tag);
 		break;
 	case 31:
