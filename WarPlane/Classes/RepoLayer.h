@@ -25,7 +25,11 @@ USING_NS_CC;
 		void menuCallBack_1(Ref * psender);//传递被点击的菜单的对象
 		void menuCallBack_2(Ref * psender);//传递被点击的菜单的对象
 
-		virtual bool onTouchBegan(Touch *touch, Event *unused_event);
+		//int getBarLength(int life);
+
+		//virtual bool onTouchBegan(Touch *touch, Event *unused_event);
+		
+
 
 	public:
 
@@ -52,6 +56,18 @@ USING_NS_CC;
 		Sprite * _equip_1Img;
 		Sprite * _equip_2;
 		Sprite * _equip_3;
+
+		Sprite * BaseBarHp;
+		Sprite * BaseBarEn;
+		Sprite * BaseBarAtk;
+		Sprite * BaseBarSpd;
+
+		Sprite * HpBar;
+		Sprite * EnBar;
+		Sprite * AtkBar;
+		Sprite * SpdBar;
+	//	Sprite * BaseBarHp;
+
 		
 	
     

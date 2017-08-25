@@ -11,10 +11,10 @@ void Equip::setType(int  type) {
 		break;
 	
 	case 2:
-		_ImpAtk = 0;
+		_ImpAtk = 100;
 		_ImpHp = 0;
 		_EquipNum = 0;
-		_ImpSpd = 100;
+		_ImpSpd = 0;
 
 		break;
 	
@@ -72,6 +72,8 @@ int Equip::getImpSpd()
 {
 	return _ImpSpd;
 }
+
+
 
 
 
