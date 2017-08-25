@@ -4,6 +4,7 @@ bool RepoLayer::init() {
 	Size winSize = Director::getInstance()->getWinSize();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
+
 	_background = Sprite::create("/res/UI/0Loading/star.png");
 	_background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	//_background->setScale(0.5);//缩放0.5倍
@@ -21,40 +22,24 @@ bool RepoLayer::init() {
 
 	_background_2 = Sprite::create("/res/UI/a6Repo/rect2.png");
 	_background_2->setPosition(Vec2(visibleSize.width * 0.7, visibleSize.height* 3/ 4));
+
 	_background_2->setScale(0.8);//缩放0.5倍
 	this->addChild(_background_2);
 
 
 
-	_background_3 = Sprite::create("/res/UI/a6Repo/rect3.png");
-	_background_3->setPosition(Vec2(visibleSize.width * 0.5, visibleSize.height * 0.5));
+
+	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
+	_background_3->setPosition(Vec2(winSize.width * 0.5, winSize.height * 0.5));
 	_background_3->setScale(0.8);//缩放0.5倍
 	this->addChild(_background_3);
 
-	_background_3_white = Sprite::create("/res/UI/a6Repo/rectWhite.png");
-	_background_3_white->setPosition(Vec2(visibleSize.width * 0.2, visibleSize.height * 0.5));
+	_background_3_white = Sprite::create("res/UI/a6Repo/rectWhite.png");
+	_background_3_white->setPosition(Vec2(winSize.width * 0.2, winSize.height * 0.5));
 	_background_3_white->setScale(0.45);//缩放0.5倍
 	this->addChild(_background_3_white);
 
-	_background_3 = Sprite::create("/res/UI/a6Repo/rect3.png");
-	_background_3->setPosition(Vec2(visibleSize.width * 0.5, visibleSize.height * 0.3));
-	_background_3->setScale(0.8);//缩放0.5倍
-	this->addChild(_background_3);
 
-	_background_3_white = Sprite::create("/res/UI/a6Repo/rectWhite.png");
-	_background_3_white->setPosition(Vec2(visibleSize.width * 0.2, visibleSize.height * 0.3));
-	_background_3_white->setScale(0.45);//缩放0.5倍
-	this->addChild(_background_3_white);
-
-	_background_3 = Sprite::create("/res/UI/a6Repo/rect3.png");
-	_background_3->setPosition(Vec2(visibleSize.width * 0.5, visibleSize.height * 0.1));
-	_background_3->setScale(0.8);//缩放0.5倍
-	this->addChild(_background_3);
-
-	_background_3_white = Sprite::create("/res/UI/a6Repo/rectWhite.png");
-	_background_3_white->setPosition(Vec2(visibleSize.width * 0.2, visibleSize.height * 0.1));
-	_background_3_white->setScale(0.45);//缩放0.5倍
-	this->addChild(_background_3_white);
 
 
 	/*auto eventTouchListener = EventListenerTouchOneByOne::create();
@@ -62,21 +47,27 @@ bool RepoLayer::init() {
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(eventTouchListener, this);*/
 
 
-	_plane = Sprite::create("/res/SpaceShooterRedux/PNG/Planes/playerShip1_blue.png");
-	_plane->setPosition(Vec2(visibleSize.width*0.3, visibleSize.height *3/ 4));
+
+	_plane = Sprite::create("res/SpaceShooterRedux/PNG/Planes/playerShip1_blue.png");
+	_plane->setPosition(Vec2(winSize.width*0.3, winSize.height*3/ 4));
+
 	//_plane->setScale(0.9);
 	this->addChild(_plane);
 
 	//判断是否拥有装备选择不同的图片
 
-	auto changeEquip_1 = MenuItemImage::create("/res/SpaceShooterRedux/PNG/Parts/cockpitRed_1.png", "/res/SpaceShooterRedux/PNG/Parts/cockpitRed_1.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this));
-	changeEquip_1->setPosition(Vec2(visibleSize.width *0.2, visibleSize.height *0.5));
+
+	auto changeEquip_1 = MenuItemImage::create("res/SpaceShooterRedux/PNG/Parts/cockpitRed_1.png", "res/SpaceShooterRedux/PNG/Parts/cockpitRed_1.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this));
+	changeEquip_1->setPosition(Vec2(winSize.width *0.2, winSize.height *0.5));
+
 	changeEquip_1->setScale(0.95);
 	
 
 
-	    _equip_1Img = Sprite::create("/res/SpaceShooterRedux/PNG/Parts/cockpitRed_1.png");
-		_equip_1Img->setPosition(Vec2(visibleSize.width *0.2, visibleSize.height *0.5));
+
+	    _equip_1Img = Sprite::create("res/SpaceShooterRedux/PNG/Parts/cockpitRed_1.png");
+		_equip_1Img->setPosition(Vec2(winSize.width *0.2, winSize.height *0.5));
+
 		_equip_1Img->setScale(0.95);//缩放0.5倍
 		this->addChild(_equip_1Img, 0, 1);
 
@@ -96,25 +87,28 @@ bool RepoLayer::init() {
 		}
 	}*/
 
-	auto changeEquip_2 = MenuItemImage::create("/res/SpaceShooterRedux/PNG/Parts/wingRed_1.png", "/res/SpaceShooterRedux/PNG/Parts/wingRed_1.png", CC_CALLBACK_1(RepoLayer::menuCallBack_2, this));
-	changeEquip_2->setPosition(Vec2(visibleSize.width *0.2, visibleSize.height *0.3));
+	auto changeEquip_2 = MenuItemImage::create("res/SpaceShooterRedux/PNG/Parts/wingRed_1.png", "res/SpaceShooterRedux/PNG/Parts/wingRed_1.png", CC_CALLBACK_1(RepoLayer::menuCallBack_2, this));
+	changeEquip_2->setPosition(Vec2(winSize.width *0.2, winSize.height *0.3));
 	changeEquip_2->setScale(0.95);
 
 
-	_equip_2 = Sprite::create("/res/SpaceShooterRedux/PNG/Parts/wingRed_1.png");
-	_equip_2->setPosition(Vec2(visibleSize.width *0.2, visibleSize.height *0.3));
+	_equip_2 = Sprite::create("res/SpaceShooterRedux/PNG/Parts/wingRed_1.png");
+	_equip_2->setPosition(Vec2(winSize.width *0.2, winSize.height *0.3));
 	_equip_2->setScale(0.95);
 	this->addChild(_equip_2);
 
-	auto changeEquip_3 = MenuItemImage::create("/res/SpaceShooterRedux/PNG/Parts/cockpitRed_2.png", "/res/SpaceShooterRedux/PNG/Parts/cockpitRed_2.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this));
-	changeEquip_3->setPosition(Vec2(visibleSize.width *0.2, visibleSize.height *0.1));
+	auto changeEquip_3 = MenuItemImage::create("res/SpaceShooterRedux/PNG/Parts/cockpitRed_2.png", "res/SpaceShooterRedux/PNG/Parts/cockpitRed_2.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this));
+	changeEquip_3->setPosition(Vec2(winSize.width *0.2, winSize.height *0.1));
+
 	changeEquip_3->setScale(0.95);
 	auto menu = Menu::create(changeEquip_1,changeEquip_2,changeEquip_3, NULL);
 	menu->setPosition(Vec2(Point::ZERO));
 	this->addChild(menu);
 
-	_equip_3 = Sprite::create("/res/SpaceShooterRedux/PNG/Parts/cockpitRed_2.png");
-	_equip_3->setPosition(Vec2(visibleSize.width *0.2, visibleSize.height *0.1));
+
+	_equip_3 = Sprite::create("res/SpaceShooterRedux/PNG/Parts/cockpitRed_2.png");
+	_equip_3->setPosition(Vec2(winSize.width *0.2, winSize.height *0.1));
+
 	_equip_3->setScale(0.95);
 	this->addChild(_equip_3);
 
@@ -269,8 +263,8 @@ bool RepoLayer::init() {
 menuItem->setTag(101);
 menuItem->setPosition(Vec2(winSize.width / 2, winSize.height*0.3));
 static MenuItemSprite * create(Node * normalSprite, Node * normalSprite, Node * normalSprite, );
-MenuItemImage * equip_1 = MenuItemImage::create("/res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png", "/res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
-MenuItemImage * equip_2 = MenuItemImage::create("/res/SpaceShooterRedux/PNG/Planes/playerShip1_blue.png", "/res/SpaceShooterRedux/PNG/Planes/playerShip1_blue.png");
+MenuItemImage * equip_1 = MenuItemImage::create("res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png", "res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
+MenuItemImage * equip_2 = MenuItemImage::create("res/SpaceShooterRedux/PNG/Planes/playerShip1_blue.png", "res/SpaceShooterRedux/PNG/Planes/playerShip1_blue.png");
 MenuItemToggle* equip = MenuItemToggle::createWithTarget(this,menu_selector(RepoLayer::changeEquip),equip_1,equip_2,NULL);
 
 Menu * equipMenu = Menu::create(equip,NULL);
@@ -309,7 +303,7 @@ this->addChild(equip);*/
 	if (rect.containsPoint(locationInNode)) {
 		target->runAction(ScaleBy::create(0.06f, 1.06f));
 		Size winSize = Director::getInstance()->getWinSize();
-		_plane_2 = Sprite::create("/res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
+		_plane_2 = Sprite::create("res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
 		_plane_2->setPosition(Vec2(winSize.width*0.3, winSize.height * 3 / 4));
 		//_plane->setScale(0.9);
 		this->addChild(_plane_2);
@@ -327,7 +321,7 @@ void RepoLayer::onExit() {
 void RepoLayer::menuCallBack_1(Ref * pSender) {
 
 	Size winSize = Director::getInstance()->getWinSize();
-	_plane_2 = Sprite::create("/res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
+	_plane_2 = Sprite::create("res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
 	_plane_2->setPosition(Vec2(winSize.width*0.3, winSize.height * 3 / 4));
 	//_plane->setScale(0.9);
 	this->addChild(_plane_2);
@@ -335,7 +329,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender) {
 
 void RepoLayer::menuCallBack_2(Ref * pSender) {
 	Size winSize = Director::getInstance()->getWinSize();
-	_plane_2 = Sprite::create("/res/SpaceShooterRedux/PNG/Planes/playerShip1_orange.png");
+	_plane_2 = Sprite::create("res/SpaceShooterRedux/PNG/Planes/playerShip1_orange.png");
 	_plane_2->setPosition(Vec2(winSize.width*0.3, winSize.height * 3 / 4));
 	//_plane->setScale(0.9);
 	this->addChild(_plane_2);
