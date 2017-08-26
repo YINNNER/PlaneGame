@@ -21,7 +21,7 @@ void Bullet::setBulletImg(const char * filename) {
 	
 }
 void Bullet::update(float dt) {
-	static Size visibleSize = Director::getInstance()->getVisibleSize();
+	static VISIBLESIZE;
  	this->setPositionY(this->getPositionY() + 5);
 	if (this->getPositionY()>visibleSize.height)
 	{

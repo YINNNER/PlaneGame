@@ -16,12 +16,12 @@ void Supply::setSpt(int type)
 	{
 	case 1 :
 		this->sType = type;
-		this->spyImg = Sprite::create("res/star_gold.png");
+		this->spyImg = Sprite::create("res/SpaceShooterRedux/PNG/Power-ups/star_gold.png");
 		this->addChild(spyImg);
 		break;
 	case 2 :
 		this->sType = type;
-		this->spyImg = Sprite::create("res/meteorBrown_med1.png");
+		this->spyImg = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png");
 		this->addChild(spyImg);
 		break;
 	default:
@@ -41,7 +41,7 @@ int Supply::getType()
 }
 void Supply::update(float dt)
 {
-	static Size visibleSize = Director::getInstance()->getVisibleSize();
+	static VISIBLESIZE;
 	if (sType == 1) {  //ฒนธ๘
 		this->setPositionY(this->getPositionY() - 3);
 		if (this->getPositionY()<0)
@@ -54,7 +54,17 @@ void Supply::update(float dt)
 	{
 		this->setPositionX(this->getPositionX() - 3);
 		this->setPositionY(this->getPositionY() - 4);
-		if (this->getPositionY()>visibleSize.height)
+		if (this->getPositionY()<0)
+		{
+			this->removeAllChildrenWithCleanup(true);
+			removeSupply();
+		}
+	}
+	else if (sType==3)
+	{
+		this->setPositionX(this->getPositionX() + 3);
+		this->setPositionY(this->getPositionY() - 4);
+		if (this->getPositionY()<0)
 		{
 			this->removeAllChildrenWithCleanup(true);
 			removeSupply();

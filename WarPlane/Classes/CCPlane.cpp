@@ -7,6 +7,7 @@ bool CCPlane::init() {
 	exp = 0;
 	speed = 0;
 	grade = 1;
+	type = 0;
 	planeArms = Arms::create();
 	planeFlg = Flg::create();
 	planeFuel = Fuel::create();
@@ -41,9 +42,10 @@ void CCPlane::changeSpd(int spd) {
 void CCPlane::changeExp(int exp)
 {
 	this->exp += exp;
-	if (exp>10*grade)
+	if (this->exp>(10*grade))
 	{
 		grade++;
+		this->exp = 0;
 	}
 }
 int CCPlane::getAtk() {
@@ -71,17 +73,14 @@ int CCPlane::getGrade() {
 	return grade;
 }
 
-void CCPlane::removePlane(float dt)
+int CCPlane::getType()
 {
-	this->removeFromParentAndCleanup(true);
-	this->unschedule(schedule_selector(CCPlane::removePlane));
-	GameManager::getInstance()->removePlane(this);
+	return type;
 }
 
-void CCPlane::plane_death()
+void CCPlane::setType(int type)
 {
-	this->setImg("res/playerShip3_damage3.png");
-	this->scheduleOnce(schedule_selector(CCPlane::removePlane), 1.0f);
+	this->type = type;
 }
 
 void CCPlane::hero_death()

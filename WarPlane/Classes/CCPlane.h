@@ -21,6 +21,8 @@ public:
 	int getSpd();
 	int getExp();
 	int getGrade();
+	int getType();
+	void setType(int type);
 	void removePlane(float dt);
 	void plane_death();
 	void hero_death();
@@ -36,6 +38,6 @@ private:
 	Fuel * planeFuel;
 	Flg * planeFlg;
 	Sprite * planeImg;
-	
+	int type;
 
 };

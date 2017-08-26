@@ -17,7 +17,7 @@ void GameManager::setSupply(Supply * supply)
 {
 	supply_list.pushBack(supply);
 }
-void GameManager::removePlane(CCPlane * plane)
+void GameManager::removePlane(enemyPlane * plane)
 {
 	plane_list.eraseObject(plane);
 }
@@ -34,7 +34,7 @@ Vector<Bullet*>& GameManager::getBulletList()
 	return this->bullet_list;
 	// TODO: 在此处插入 return 语句
 }
-Vector<CCPlane*>& GameManager::getPlaneList()
+Vector<enemyPlane*>& GameManager::getPlaneList()
 {
 	return this->plane_list;
 	// TODO: 在此处插入 return 语句
@@ -58,7 +58,7 @@ void GameManager::removeInstance() {
 	}
 }
 
-void GameManager::setPlane(CCPlane * plane)
+void GameManager::setPlane(enemyPlane * plane)
 {
 	plane_list.pushBack(plane);
 }
