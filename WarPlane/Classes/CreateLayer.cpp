@@ -78,7 +78,8 @@ void CreateLayer::CallBack(Ref *pSender) {
 	case 1:
 	{
 		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
-		SceneManager::goMapLayer(tag);
+        int gameLevel=1;
+		SceneManager::goMapLayer(tag,gameLevel);
 	}break;
 	case 2: {
 		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");

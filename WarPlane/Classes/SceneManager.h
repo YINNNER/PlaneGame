@@ -11,7 +11,7 @@ public:
 	void CreateLoadScene();
 	static void goMenuLayer(int tag,int transiTimes);
 	static void goCreateLayer(int tag);
-	static void goMapLayer(int tag);
+	static void goMapLayer(int tag,int gameLevel);
 	static void goSaveLayer(int tag);
 	static void goHelpLayer(int tag);
 	static void goSetLayer(int tag);

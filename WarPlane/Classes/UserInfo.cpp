@@ -58,5 +58,17 @@ void UserInfo::setInfo(int tag){
     //CCLOG("plane_type = %d", dict["planeType"].asInt());
     //CCLOG("user_name = %s", (dict["saveDay"].asString()).c_str());
     
-      
 }
+
+
+std::string UserInfo::getSaveTime(){return saveTime;}
+std::string UserInfo::getSaveDay(){return saveDay;}
+std::string UserInfo::getUserName(){return userName;}
+int UserInfo::getPlaneType(){return planeType;}
+int UserInfo::getAtk(){return atk;}
+int UserInfo::getDef(){return def;}
+int UserInfo::getExp(){return exp;}
+int UserInfo::getGameLevel(){return gameLevel;}
+int UserInfo::getHp(){return hp;}
+int UserInfo::getMp(){return mp;}
+int UserInfo::getPlaneLevel(){return planeLevel;}

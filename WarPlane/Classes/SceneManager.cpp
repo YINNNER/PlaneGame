@@ -61,7 +61,7 @@ void SceneManager::goCreateLayer(int tag) {
 	}
 }
 
-void SceneManager::goMapLayer(int tag) {
+void SceneManager::goMapLayer(int tag,int gameLevel) {
 	auto mapScene = Scene::create();
 	auto layer = MapLayer::create();
 

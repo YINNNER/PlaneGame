@@ -19,6 +19,8 @@ public:
     std::string userName;
     std::string saveTime;
     std::string saveDay;
+    
+private:
     int planeType;
     int atk;
     int def;
@@ -27,10 +29,22 @@ public:
     int hp;
     int mp;
     int planeLevel;
-    
+public:
     void setInfo(int tag);
     UserInfo();
 
+    //外部调用得到数据的接口
+    std::string getSaveTime();
+    std::string getSaveDay();
+    std::string getUserName();
+    int getPlaneType();
+    int getAtk();
+    int getDef();
+    int getExp();
+    int getGameLevel();
+    int getHp();
+    int getMp();
+    int getPlaneLevel();
     
     
 };

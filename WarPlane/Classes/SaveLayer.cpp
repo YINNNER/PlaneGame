@@ -8,6 +8,7 @@
 
 #include "SaveLayer.h"
 #include <time.h>
+#include "SceneManager.h"
 
 
 
@@ -74,25 +75,20 @@ bool SaveLayer::init() {
     setSaveMenu(origin, winSize ,0.45,2);
     setSaveMenu(origin, winSize ,0.20,3);
     
-    
-                          
-                          
-    
-    
-    
     return true;
 }
 
 
 void SaveLayer::callBack(Ref * pSender){
-
-   
+    
+    int back=2;
+    int transiTime=1;
+    SceneManager::goMenuLayer(back, transiTime);
 }
 
 
 void SaveLayer::saveMenuItem(Ref * pSender,int tag){
     return loadInfo(tag);
-
     
 }
 
@@ -196,15 +192,15 @@ void SaveLayer::initInfo(){
 
 void SaveLayer::saveInfo(){
     
+    
 }
 
 void SaveLayer::loadInfo(int tag){
-
     auto user=new UserInfo();
     user->setInfo(tag);
+    int enter=1;
+    SceneManager::goMapLayer(enter,tag);
     delete user;
-    //new一个战机1/2/3类的对象
-    //传数据给战机（初始化操作）
 }
 
 
@@ -222,7 +218,7 @@ void SaveLayer::setSaveMenu(Vec2 origin,Size winSize,float py,int tag){
 
     auto user=new UserInfo();
     user->setInfo(tag);
-    if (user->userName=="") {
+    if (user->getUserName()=="") {
         auto noInfo = Label::createWithTTF("暂无存档","fonts/simhei.ttf",40);
         noInfo->enableOutline(Color4B(73,75,80,130),3);
         noInfo->setAdditionalKerning(15);
@@ -233,14 +229,14 @@ void SaveLayer::setSaveMenu(Vec2 origin,Size winSize,float py,int tag){
     else{
         //1.add plane image
         std::stringstream picName;
-        picName<<"res/SpaceShooterRedux/PNG/Planes/playerShip"<<user->planeType<<"_blue.png";
+        picName<<"res/SpaceShooterRedux/PNG/Planes/playerShip"<<user->getPlaneType()<<"_blue.png";
         auto planeImg = Sprite::create(picName.str());
         planeImg->setPosition(Vec2(origin.x + winSize.width / 2 - planeImg->getContentSize().width*1.2, origin.y + winSize.height *py));
         this->addChild(planeImg);
         
         //2.add plane info
         std::stringstream name;
-        name<<"战机名："<<user->userName<<std::endl<<user->saveTime<<std::endl<<user->saveDay<<std::endl;
+        name<<"战机名："<<user->getUserName()<<std::endl<<user->getSaveTime()<<std::endl<<user->getSaveDay()<<std::endl;
         auto infoPlane = Label::createWithTTF(name.str(),"fonts/simhei.ttf",24);
         infoPlane->enableOutline(Color4B(73,75,80,130),3);
         infoPlane->setPosition(Vec2(origin.x + winSize.width / 2 + planeImg->getContentSize().width/2, origin.y + winSize.height *py- saveMenu->getContentSize().height * 0.1));
