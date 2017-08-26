@@ -40,7 +40,7 @@ bool SaveLayer::init() {
     menu->setPosition(Point::ZERO);
     this->addChild(menu);
     
-    /*
+    
     //create and init userInfo.plist
     std::string writablePath;
     
@@ -60,13 +60,14 @@ bool SaveLayer::init() {
     fullPath<< writablePath <<"userInfo.plist";
     
     //check whether userInfo.plist is existed(user info has been initialled)
-    //if (!FileUtils::getInstance()->isFileExist(fullPath.str().c_str())) {
-    if (!FileUtils::getInstance()->isFileExist("res/userInfo.plist")) {
-        initInfo();
+    if (!FileUtils::getInstance()->isFileExist(fullPath.str().c_str())) {
+    //if (!FileUtils::getInstance()->isFileExist("res/userInfo.plist")) {
         CCLOG("no exist");
+        initInfo();
+        
     }
     else CCLOG("exist") ;
-    */
+    
     
     //set save menu
     setSaveMenu(origin, winSize ,0.70,1);
@@ -84,7 +85,7 @@ bool SaveLayer::init() {
 
 
 void SaveLayer::callBack(Ref * pSender){
-    initInfo();
+
    
 }
 
@@ -96,29 +97,30 @@ void SaveLayer::saveMenuItem(Ref * pSender,int tag){
 }
 
 //获得系统时间
-void SaveLayer::getSysTime(std::string saveTime,std::string saveDay){
+std::string SaveLayer::getSysTime(){
     time_t t = time(0);
     //set saveTime
     char tmp1[64];
     strftime( tmp1, sizeof(tmp1), "%X",localtime(&t) );
-    saveTime=tmp1;
-    std::cout<<tmp1<<std::endl;
+    return tmp1;
+
+}
+
+std::string SaveLayer::getSysDay(){
+    time_t t = time(0);
     //set saveDay
     char tmp2[64];
     strftime( tmp2, sizeof(tmp2), "%Y/%m/%d",localtime(&t) );
-    saveDay=tmp2;
-    std::cout<<tmp2<<std::endl;
+    return tmp2;
 }
-
 
 void SaveLayer::initInfoDetail( __Dictionary * user){
     //通过key设置value
-    user->setObject(__String::create("a"), "userName");
+    user->setObject(__String::create(""), "userName");
     //获得系统时间，并用userInfo类的成员变量记录下来
     auto userInfo=new UserInfo();
-    getSysTime(userInfo->saveTime, userInfo->saveDay);
-    std::cout<<userInfo->saveTime;
-    std::cout<<userInfo->saveDay;
+    userInfo->saveTime=getSysTime();
+    userInfo->saveDay=getSysDay();
     user->setObject(__String::create(userInfo->saveTime), "saveTime");
     user->setObject(__String::create(userInfo->saveDay), "saveDay");
     user->setObject(__Integer::create(10), "atk");
@@ -162,8 +164,8 @@ void SaveLayer::initInfo(){
     
     //获得可写入目录
     std::string writablePath;
-    writablePath = "res/";
-    /*
+    
+    
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
@@ -175,8 +177,8 @@ void SaveLayer::initInfo(){
         writablePath = FileUtils::getInstance()->getWritablePath();
     }
     else ;
-    */
     
+    //set file path
     FileUtils::getInstance()->setWritablePath(writablePath);
     
     std::stringstream fullPath;
@@ -190,6 +192,8 @@ void SaveLayer::initInfo(){
     
 }
 
+
+
 void SaveLayer::saveInfo(){
     
 }
@@ -197,7 +201,7 @@ void SaveLayer::saveInfo(){
 void SaveLayer::loadInfo(int tag){
 
     auto user=new UserInfo();
-    user->getInfo(tag);
+    user->setInfo(tag);
     delete user;
     //new一个战机1/2/3类的对象
     //传数据给战机（初始化操作）
@@ -217,7 +221,7 @@ void SaveLayer::setSaveMenu(Vec2 origin,Size winSize,float py,int tag){
     //1.If there is no info in the menu
 
     auto user=new UserInfo();
-    user->getInfo(tag);
+    user->setInfo(tag);
     if (user->userName=="") {
         auto noInfo = Label::createWithTTF("暂无存档","fonts/simhei.ttf",40);
         noInfo->enableOutline(Color4B(73,75,80,130),3);

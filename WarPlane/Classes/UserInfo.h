@@ -28,7 +28,7 @@ public:
     int mp;
     int planeLevel;
     
-    void getInfo(int tag);
+    void setInfo(int tag);
     UserInfo();
 
     

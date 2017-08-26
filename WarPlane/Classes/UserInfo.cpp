@@ -23,10 +23,10 @@ UserInfo::UserInfo(){
     
    }
 
-void UserInfo::getInfo(int tag){
+void UserInfo::setInfo(int tag){
     
     // 文件路径
-    std::string path = "res/userInfo.plist";
+    std::string path = "./res/userInfo.plist";
     
     
     // 读取plist文件
