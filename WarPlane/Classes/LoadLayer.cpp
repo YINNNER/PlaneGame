@@ -82,7 +82,7 @@ void LoadLayer::loadingCallback(Object *pSender) {
 	m_loadedSp++;
 
 	char buf_str[56];
-	sprintf(buf_str, "%d%%", (int)(((float)m_loadedSp / m_numSp) * 100), m_numSp);
+	sprintf(buf_str, "%d%d", (int)(((float)m_loadedSp / m_numSp) * 100), m_numSp);
 	percentLabel->setString(buf_str);//更新percentLabel的值  
 
 	float newPercent = 100 - ((float)m_numSp - (float)m_loadedSp) / ((float)m_numSp / 100);//计算进度条当前的百分比  

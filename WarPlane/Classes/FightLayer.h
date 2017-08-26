@@ -1,7 +1,6 @@
 #pragma once
 #include "cocos2d.h"
 #include"CCPlane.h"
-#include"SceneManager.h"
 
 USING_NS_CC;
 class FightLayer :
@@ -18,14 +17,22 @@ public:
 	virtual void update(float dt);
 	void addSupply(float dt);
 	void addBullet(int bType);
-	void addEnemyPlane(float dt);
+	void addEnemyPlane(int playerLevel);
 	void is_crash(float dt);
 	long getCurrentTime();
-	void addSkill(int i);
-	SceneManager * tsm;
+	void onEnterTransitionDidFinish();
+	void openSkillU();
+	void closeSkillU(float dt);
 private:
 	Sprite * fightImg;
 	CCPlane * player_1;
 	EventKeyboard::KeyCode key;
+	int scoreValue;
+	Label * score;
+	Label * hp;
+	Label * exp;
+	Label * grade;
+	Sprite * shield;
 };
+
 
