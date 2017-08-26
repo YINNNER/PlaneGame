@@ -44,22 +44,29 @@ bool SaveLayer::init() {
     
     //create and init userInfo.plist
     std::string writablePath;
-    
+
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
         writablePath = "res/";
+		
+	
     }
     else if(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     {
-        //WIN32平台
-        writablePath = FileUtils::getInstance()->getWritablePath();
+       
+		writablePath ="res/";
+	
     }
     else ;
     
     std::stringstream fullPath;
     fullPath<< writablePath <<"userInfo.plist";
-    
+
+	//using for debug
+	//std::string full_path = FileUtils::getInstance()->fullPathForFilename(fullPath.str());
+	//CCLOG(full_path.c_str());
+
     //check whether userInfo.plist is existed(user info has been initialled)
     if (!FileUtils::getInstance()->isFileExist(fullPath.str().c_str())) {
     //if (!FileUtils::getInstance()->isFileExist("res/userInfo.plist")) {
@@ -170,7 +177,7 @@ void SaveLayer::initInfo(){
     else if(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     {
         //WIN32平台
-        writablePath = FileUtils::getInstance()->getWritablePath();
+        writablePath = "res/";
     }
     else ;
     

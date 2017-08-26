@@ -25,8 +25,24 @@ UserInfo::UserInfo(){
 
 void UserInfo::setInfo(int tag){
     
+	std::string path;
     // 文件路径
-    std::string path = "./res/userInfo.plist";
+	if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+	{
+		//是MAC平台
+		path = "./res/userInfo.plist";
+	}
+	else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	{
+		//WIN32平台
+		
+		
+		path = "res/userInfo.plist";
+
+
+	}
+	else;
+    
     
     
     // 读取plist文件
