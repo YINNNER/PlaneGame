@@ -19,19 +19,30 @@ void SceneManager::CreateLoadScene() {
 
 
 }
-void SceneManager::goMenuLayer(int tag) {
+void SceneManager::goMenuLayer(int tag,int times) {
+	//static int times = 1;
+	
 	auto menuScene = Scene::create();
 	MenuLayer *layer = MenuLayer::create();
 	menuScene->addChild(layer);
-	if (tag == 1) {
-		auto transition = TransitionFade::create(2.0f, menuScene);
-		Director::getInstance()->replaceScene(transition);
-	}
-	else {
-		auto transition = TransitionMoveInL::create(0.2f, menuScene);
-		Director::getInstance()->replaceScene(transition);
+	if (times == 1) {
+		//times++;
+		if (tag == 1) {
+			
+			auto transition = TransitionFade::create(2.0f, menuScene);
+			Director::getInstance()->replaceScene(transition);
+			
+		}
+		else {
+			auto transition = TransitionMoveInL::create(0.2f, menuScene);
+			Director::getInstance()->replaceScene(transition);
+		}
 
 	}
+	else {
+		Director::getInstance()->pushScene(menuScene);
+	}
+	
 }
 
 void SceneManager::goCreateLayer(int tag) {
@@ -89,11 +100,11 @@ void SceneManager::goHelpLayer(int tag) {
 	helpScene->addChild(layer);
 	if (tag == 1) {
 		auto transition = TransitionMoveInR::create(0.2f, helpScene);
-		Director::getInstance()->replaceScene(transition);
+		Director::getInstance()->pushScene(transition);
 	}
 	else {
 		auto transition = TransitionMoveInL::create(0.2f, helpScene);
-		Director::getInstance()->replaceScene(transition);
+		Director::getInstance()->pushScene(transition);
 
 	}
 }
@@ -102,6 +113,7 @@ void SceneManager::goSetLayer(int tag) {
 	auto setScene = Scene::create();
 	auto layer = SetLayer::create();
 	setScene->addChild(layer);
+	/*
 	if (tag == 1) {
 		auto transition = TransitionMoveInR::create(0.2f, setScene);
 		Director::getInstance()->replaceScene(transition);
@@ -110,7 +122,19 @@ void SceneManager::goSetLayer(int tag) {
 		auto transition = TransitionMoveInL::create(0.2f, setScene);
 		Director::getInstance()->replaceScene(transition);
 	}
-	
+	*/
+	static int times = 1;
+	if (times == 1) {
+		auto setScene = Scene::create();
+		auto layer = SetLayer::create();
+		setScene->addChild(layer);
+		auto transition = TransitionMoveInR::create(0.2f, setScene);
+		Director::getInstance()->replaceScene(transition);
+		times++;
+	}
+	else {
+		Director::getInstance()->popScene();
+	}
 
 }
 

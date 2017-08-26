@@ -27,6 +27,8 @@ bool FightLayer::init() {
 	this->schedule(schedule_selector(FightLayer::is_crash));
 	//this->schedule(schedule_selector(FightLayer::addEnemyPlane), 5.0f);
 	addEnemyPlane(1);
+
+
 	return true;
 }
 void FightLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
@@ -91,7 +93,11 @@ void FightLayer::update(float dt)
 			interval = this->getCurrentTime();
 		}
 		break;
+	//case EventKeyboard::KeyCode::KEY_ESCAPE:
+		
+
 	}
+
 }
 
 void FightLayer::addSupply(float dt)

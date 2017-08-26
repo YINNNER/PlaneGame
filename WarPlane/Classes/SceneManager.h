@@ -9,7 +9,7 @@ class SceneManager
 {
 public:
 	void CreateLoadScene();
-	static void goMenuLayer(int tag);
+	static void goMenuLayer(int tag,int transiTimes);
 	static void goCreateLayer(int tag);
 	static void goMapLayer(int tag);
 	static void goSaveLayer(int tag);

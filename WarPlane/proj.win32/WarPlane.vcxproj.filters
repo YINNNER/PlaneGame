@@ -59,6 +59,9 @@
     <ClCompile Include="..\Classes\Fuel.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\Supply.cpp" />
+    <ClCompile Include="..\Classes\Equip.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -108,6 +111,9 @@
     <ClInclude Include="..\Classes\Fuel.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\Supply.h" />
+    <ClInclude Include="..\Classes\Equip.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

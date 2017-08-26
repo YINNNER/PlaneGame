@@ -77,12 +77,13 @@ void CreateLayer::CallBack(Ref *pSender) {
 	{
 	case 1:
 	{
-		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav", true);
+		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 		SceneManager::goMapLayer(tag);
 	}break;
 	case 2: {
-		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav", true);
-		SceneManager::goMenuLayer(tag);
+		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
+		int transiTimes = 1;
+		SceneManager::goMenuLayer(tag,transiTimes);
 	}break;
 	case 10: {
 		if (selected_2->isVisible())

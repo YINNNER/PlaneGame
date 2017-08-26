@@ -50,13 +50,10 @@ bool LoadLayer::init() {
 }
 
 void LoadLayer::onScheduleOnce(float dt){
-	/*
-	auto menuScene = Scene::create();
-	MenuLayer *layer = MenuLayer::create();
-	menuScene->addChild(layer);
-	Director::getInstance()->replaceScene(menuScene);*/
+
 	int tag = 1;
-	SceneManager::goMenuLayer(tag);
+	int transiTime = 1;
+	SceneManager::goMenuLayer(tag,transiTime);
 
 }
 
