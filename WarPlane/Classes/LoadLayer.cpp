@@ -14,8 +14,11 @@ bool LoadLayer::init() {
 	_logo = Sprite::create("res/UI/0aStart/logo.png");
 	_logo->setPosition(Vec2(origin.x + winSize.width /2, origin.y + winSize.height *3/5));
 	//_logo->setScale(2);
-	this->addChild(_logo);
-
+	//this->addChild(_logo);
+    _logo->setOpacity(0);
+    _logo->runAction(FadeIn::create(1.0f));
+    this->addChild(_logo);
+   
 	/*
 	loadLabel = LabelTTF::create("Loading", "fonts/Anklepan.ttf", 20);
 	loadLabel->setPosition(Vec2(winSize.width*0.5, winSize.height*0.5));
@@ -45,7 +48,7 @@ bool LoadLayer::init() {
 	SimpleAudioEngine::sharedEngine()->preloadEffect("music/trans1.wav");
 	
 	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("music/background3.mp3",true);
-	scheduleOnce(CC_SCHEDULE_SELECTOR(LoadLayer::onScheduleOnce),1.0f);
+	scheduleOnce(CC_SCHEDULE_SELECTOR(LoadLayer::onScheduleOnce),3.0f);
 	return true;
 }
 
