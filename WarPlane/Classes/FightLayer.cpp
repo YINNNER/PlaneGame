@@ -76,7 +76,7 @@ void FightLayer::addEnemyPlane(int playerLevel) {
 }
 
 bool FightLayer::init() {
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	fightImg = Sprite::create("res/star.png");
 	fightImg->setAnchorPoint(Point::ZERO);
 	fightImg->setPosition(Vec2(Point::ZERO));
@@ -118,7 +118,7 @@ void FightLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
 void FightLayer::update(float dt)
 {
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	switch (key) {
 	case EventKeyboard::KeyCode::KEY_W:
 		if(visibleSize.height-player_1->getPositionY()<player_1->getContentSize().height/2){			
@@ -182,7 +182,7 @@ void FightLayer::update(float dt)
 
 void FightLayer::addSupply(float dt)
 {
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	int temp = rand();
 	if (temp%2==0)
 	{
@@ -300,7 +300,7 @@ long FightLayer::getCurrentTime()
 	return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 void FightLayer::setPlayer(int cType) {
-	WINSIZE;
+	auto winSize = Director::getInstance()->getWinSize();
 	player_1 = CCPlane::create();
 	player_1->setPosition(Vec2(winSize.width/2, winSize.height / 2));
 	player_1->setType(cType);
@@ -325,7 +325,7 @@ void FightLayer::setPlayer(int cType) {
 		break;
 	}
 	this->addChild(player_1, 3);
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	TTFConfig ttfConfig("fonts/Marker Felt.ttf", 24);
 	hp = Label::createWithTTF(ttfConfig, CCString::createWithFormat("HP:%d", player_1->getHp())->getCString());
 	hp->setColor(Color3B::RED);
