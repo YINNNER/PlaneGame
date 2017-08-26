@@ -25,6 +25,13 @@ void Equip::setType(int  type) {
 		_ImpSpd = 100;
 
 		break;
+	case 4:
+		_ImpAtk = 0;
+		_ImpHp = 500;
+		_EquipNum = 0;
+		_ImpSpd = 0;
+
+		break;
 	}
 		
 	
@@ -53,9 +60,9 @@ int Equip::getEquipType() {
 	return _EquipType;
 }
 
-void Equip::setEquipNum(int equipNum) {
-	_EquipNum = equipNum;
-	//如果获得该装备数量+1
+int Equip::getImpSpd()
+{
+	return _ImpSpd;
 }
 
 int Equip::getImpAtk()
@@ -68,9 +75,24 @@ int Equip::getImpHp()
 	return _ImpHp;
 }
 
-int Equip::getImpSpd()
+void Equip::setEquipNum(int equipNum) {
+	_EquipNum = equipNum;
+	//如果获得该装备数量+1
+}
+
+int Equip::getEAtk()
 {
-	return _ImpSpd;
+	return EAtk;
+}
+
+int Equip::getEHp()
+{
+	return EHp;
+}
+
+int Equip::getESpd()
+{
+	return ESpd;
 }
 
 

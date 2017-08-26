@@ -2,6 +2,7 @@
 #include<iostream>
 #include"cocos2d.h"
 #include"Equip.h"
+#include"SceneManager.h"
 USING_NS_CC;
 /*typedef enum {
 	kEquip_1_Tag=102,
@@ -24,6 +25,13 @@ USING_NS_CC;
 
 		void menuCallBack_1(Ref * psender);//传递被点击的菜单的对象
 		void menuCallBack_2(Ref * psender);//传递被点击的菜单的对象
+		void menuCallBack_3(Ref * psender);//传递被点击的菜单的对象
+		//void menuCallBack_4(Ref * psender);//传递被点击的菜单的对象
+
+
+		//返回关卡选择
+		void CallMenu(Ref *pSender);
+		SceneManager * tsm;
 
 		//int getBarLength(int life);
 
@@ -50,12 +58,16 @@ USING_NS_CC;
 		Sprite * _background_3_white;
 
 		Sprite * _plane;//plane photo
-		Sprite * _plane_2;//plane photo
 		//EquipManager * tsm;
 		Equip * _equip_1;//equip photo
 		Sprite * _equip_1Img;
 		Sprite * _equip_2;
 		Sprite * _equip_3;
+
+		Sprite * _body_1;
+		Sprite * _tail_1;
+		Sprite * _wing_1;
+		Sprite * _wing_2;
 
 		Sprite * BaseBarHp;
 		Sprite * BaseBarEn;
@@ -66,8 +78,9 @@ USING_NS_CC;
 		Sprite * EnBar;
 		Sprite * AtkBar;
 		Sprite * SpdBar;
-	//	Sprite * BaseBarHp;
 
+	private:
+		
 		
 	
     
