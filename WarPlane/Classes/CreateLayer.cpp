@@ -1,6 +1,13 @@
 #include "CreateLayer.h"
 #include "SimpleAudioEngine.h"
+
 using namespace CocosDenshion;
+
+
+CreateLayer::CreateLayer() {
+	
+}
+
 
 bool CreateLayer :: init() {
 	auto winSize = Director::getInstance()->getWinSize();
@@ -12,9 +19,8 @@ bool CreateLayer :: init() {
 	_background->setScale(scale);
 	this->addChild(_background);
 
-	auto show1 = MenuItemImage::create("res/UI/a1CreatePlayer/plane1_unselected.png", "res/UI/a1CreatePlayer/plane1_unselected.png",CC_CALLBACK_1(CreateLayer::CallBack,this));
+	auto show1 = MenuItemImage::create("res/UI/a1CreatePlayer/plane1_unselected.png", "res/UI/a1CreatePlayer/plane1_unselected.png", CC_CALLBACK_1(CreateLayer::CallBack,this));
 	show1->setPosition(Vec2(winSize.width *0.18, winSize.height*0.6));
-	//show1->setScale(1.1);
 	show1->setTag(10);
 	selected_1 = Sprite::create("res/UI/a1CreatePlayer/bar1.png");
 	selected_1->setPosition(Vec2(winSize.width *0.19, winSize.height*0.61));
@@ -50,7 +56,7 @@ bool CreateLayer :: init() {
 	username->setPosition(Vec2(winSize.width*0.3, winSize.height*0.25));
 	this->addChild(username);
 
-	auto menuItem_1 = MenuItemImage::create("res/UI/a1CreatePlayer/createButton.png", "res/UI/a1CreatePlayer/createButtonS.png", CC_CALLBACK_1(CreateLayer::CallBack, this));
+	auto menuItem_1 = MenuItemImage::create("res/UI/a1CreatePlayer/createButton.png", "res/UI/a1CreatePlayer/createButtonS.png",CC_CALLBACK_1(CreateLayer::CallBack, this));
 	menuItem_1->setTag(1);
 	menuItem_1->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height*0.1));
 
@@ -62,6 +68,19 @@ bool CreateLayer :: init() {
 	menu2->setPosition(Point::ZERO);
 	this->addChild(menu2);
 
+	//编辑框
+	nameEditBox = EditBox::create(CCSizeMake(250, 50), Scale9Sprite::create("res/UI/a1CreatePlayer/editBar.png"));
+	nameEditBox->setPosition(Vec2(winSize.width*0.6, winSize.height*0.25));
+	nameEditBox->setScale(1.0,0.9);
+	nameEditBox->setFontColor(Color3B(77,77,77));//设置字体颜色
+	nameEditBox->setFontName("fonts/simhei.ttf");//设置字体样式
+	nameEditBox->setPlaceHolder("Name:");//预置文本
+	nameEditBox->setMaxLength(8);//最大长度
+	nameEditBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);//单行输入
+	nameEditBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_WORD);//输入标志位
+	nameEditBox->setReturnType(cocos2d::ui::EditBox::KeyboardReturnType::DONE);//设置返回类型  
+	nameEditBox->setDelegate(this);//当前类继承CCEditBoxDelegate类
+	this->addChild(nameEditBox);
 
 	return true;
 }
@@ -78,7 +97,8 @@ void CreateLayer::CallBack(Ref *pSender) {
 	case 1:
 	{
 		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
-        int gameLevel=1;
+		auto userName = nameEditBox->getText();
+		int gameLevel = 1;
 		SceneManager::goMapLayer(tag,gameLevel);
 	}break;
 	case 2: {
@@ -92,6 +112,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 		if (selected_3->isVisible())
 			selected_3->setVisible(false);
 		selected_1->setVisible(true);
+		planeKind = 1;
 	}break;
 	case 11: {
 		if(selected_1->isVisible())
@@ -99,6 +120,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 		if (selected_3->isVisible())
 			selected_3->setVisible(false);
 		selected_2->setVisible(true);
+		planeKind = 2;
 	}break;
 	case 12: {
 		if (selected_1->isVisible())
@@ -106,6 +128,29 @@ void CreateLayer::CallBack(Ref *pSender) {
 		if (selected_2->isVisible())
 			selected_2->setVisible(false);
 		selected_3->setVisible(true);
+		planeKind = 3;
 	}break;
 	}
+}
+
+
+void CreateLayer::editBoxEditingDidBegin(EditBox *editBox) {
+	CCLOG("start edit");
+}
+
+void CreateLayer::editBoxEditingDidEnd(EditBox *editBox)
+{
+	CCLOG("end edit");
+}
+void CreateLayer::editBoxReturn(EditBox *editBox)
+{
+	CCLOG("editbox return");
+}
+
+void CreateLayer::editBoxTextChanged(EditBox *editBox,const std::string &text) {
+	auto editbox = (EditBox*)editBox;
+	CCLOG("EditBox_name changed");
+	m_name = text;
+
+	
 }
