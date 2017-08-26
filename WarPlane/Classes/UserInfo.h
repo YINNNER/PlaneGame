@@ -31,6 +31,7 @@ private:
     int planeLevel;
 public:
     void setInfo(int tag);
+    void saveInfoToPlist(std::string planeName,int planeType);
     UserInfo();
 
     //外部调用得到数据的接口

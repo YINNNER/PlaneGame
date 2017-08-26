@@ -23,6 +23,7 @@ UserInfo::UserInfo(){
     
    }
 
+//load&read info from plist
 void UserInfo::setInfo(int tag){
     
 	std::string path;
@@ -35,10 +36,10 @@ void UserInfo::setInfo(int tag){
 	else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	{
 		//WIN32平台
-		
-		
-		path = "res/userInfo.plist";
-
+		std::string writablePath = FileUtils::getInstance()->getWritablePath();
+		std::stringstream tmp;
+		tmp << writablePath << "userInfo.plist";
+		std::string path = tmp.str();
 
 	}
 	else;
@@ -73,6 +74,10 @@ void UserInfo::setInfo(int tag){
     //CCLOG("plane_type = %s", (dict["planeType"].asString()).c_str());
     //CCLOG("plane_type = %d", dict["planeType"].asInt());
     //CCLOG("user_name = %s", (dict["saveDay"].asString()).c_str());
+    
+}
+
+void UserInfo::saveInfoToPlist(std::string planeName,int planeType){
     
 }
 
