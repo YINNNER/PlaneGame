@@ -6,7 +6,7 @@
 USING_NS_CC_EXT;
 USING_NS_CC;
 class CreateLayer :
-	public Layer,public EditBoxDelegate
+	public Layer,public  EditBoxDelegate
 {
 public:
 	CreateLayer();
