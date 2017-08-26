@@ -57,6 +57,8 @@
 		3E96082D1F501AD90065E1DC /* SetLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607921F4EA4910065E1DC /* SetLayer.cpp */; };
 		3E9608311F5022810065E1DC /* music in Resources */ = {isa = PBXBuildFile; fileRef = 3E96082E1F501BAF0065E1DC /* music */; };
 		3E9608331F5022CA0065E1DC /* music in Resources */ = {isa = PBXBuildFile; fileRef = 3E96082E1F501BAF0065E1DC /* music */; };
+		3E9608571F5176D80065E1DC /* enemyPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608551F5176D80065E1DC /* enemyPlane.cpp */; };
+		3E9608591F5177040065E1DC /* enemyPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608551F5176D80065E1DC /* enemyPlane.cpp */; };
 		3EACC98F19EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
@@ -199,6 +201,8 @@
 		3E9607F41F50150D0065E1DC /* UserInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserInfo.cpp; sourceTree = "<group>"; };
 		3E9607F51F50150D0065E1DC /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		3E96082E1F501BAF0065E1DC /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = music; sourceTree = "<group>"; };
+		3E9608551F5176D80065E1DC /* enemyPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = enemyPlane.cpp; sourceTree = "<group>"; };
+		3E9608561F5176D80065E1DC /* enemyPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enemyPlane.h; sourceTree = "<group>"; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		46880B7619C43A67006E1F66 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		46880B7719C43A67006E1F66 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
@@ -387,6 +391,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3E9608551F5176D80065E1DC /* enemyPlane.cpp */,
+				3E9608561F5176D80065E1DC /* enemyPlane.h */,
 				3E9607DF1F50150D0065E1DC /* Arms.cpp */,
 				3E9607E01F50150D0065E1DC /* Arms.h */,
 				3E9607E11F50150D0065E1DC /* Bullet.cpp */,
@@ -645,6 +651,7 @@
 				3E96080E1F5017790065E1DC /* UserInfo.cpp in Sources */,
 				3E96080F1F5017790065E1DC /* AppDelegate.cpp in Sources */,
 				3E9608101F5017790065E1DC /* CreateLayer.cpp in Sources */,
+				3E9608571F5176D80065E1DC /* enemyPlane.cpp in Sources */,
 				3E9608111F5017790065E1DC /* HelpLayer.cpp in Sources */,
 				3E9608121F5017790065E1DC /* LoadLayer.cpp in Sources */,
 				3E9608131F5017790065E1DC /* MapLayer.cpp in Sources */,
@@ -660,6 +667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E9608591F5177040065E1DC /* enemyPlane.cpp in Sources */,
 				3E9608191F501AD90065E1DC /* Arms.cpp in Sources */,
 				3E96081A1F501AD90065E1DC /* Bullet.cpp in Sources */,
 				3E96081B1F501AD90065E1DC /* CCPlane.cpp in Sources */,

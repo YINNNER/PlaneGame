@@ -71,6 +71,7 @@ void SetLayer::CallBack(Ref *pSender) {
 	case 1:
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
 		SceneManager::goHelpLayer(tag);
+           
 		break;
 	case 2:
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");

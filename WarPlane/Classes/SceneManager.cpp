@@ -121,8 +121,8 @@ void SceneManager::goSetLayer(int tag) {
 	else {
 		auto transition = TransitionMoveInL::create(0.2f, setScene);
 		Director::getInstance()->replaceScene(transition);
-	}
-	*/
+	}*/
+	
 	static int times = 1;
 	if (times == 1) {
 		auto setScene = Scene::create();
