@@ -432,7 +432,8 @@ void RepoLayer::menuCallBack_3(Ref * pSender) {
 //返回关卡选择
 void RepoLayer::CallMenu(Ref * pSender)
 {
-	SceneManager::goMapLayer(2);
+	int gameLevel = 1;
+	SceneManager::goMapLayer(2,gameLevel);
 }
 
 /*void RepoLayer::menuCallBack_4(Ref * pSender) {
