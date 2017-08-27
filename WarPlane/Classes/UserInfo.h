@@ -32,12 +32,12 @@ private:
 public:
     void setInfo(int tag);
     //点击保存进度调用的api
-    void saveInfoToPlist(UserInfo & userInfo);
+    void saveInfoToPlist(UserInfo & userInfo,int tag);
     //点击创建对象调用的api
     UserInfo  createUser(std::string planeName,int planeType);
     //读取plist文件
     ValueMap readPlist();
-    
+
     UserInfo();
     
     UserInfo(UserInfo const & userInfo);
@@ -54,7 +54,8 @@ public:
     int getHp();
     int getMp();
     int getPlaneLevel();
-    
+	std::string getSysTime();
+	std::string getSysDay();
     
 };
 

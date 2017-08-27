@@ -95,24 +95,93 @@ void UserInfo::setInfo(int tag){
     
 }
 
+std::string UserInfo::getSysTime() {
+	time_t t = time(0);
+	//set saveTime
+	char tmp1[64];
+	strftime(tmp1, sizeof(tmp1), "%X", localtime(&t));
+	return tmp1;
+
+}
+
+std::string UserInfo::getSysDay() {
+	time_t t = time(0);
+	//set saveDay
+	char tmp2[64];
+	strftime(tmp2, sizeof(tmp2), "%Y/%m/%d", localtime(&t));
+	return tmp2;
+}
+
+void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
+
+    //judge which user to save info 
+	std::stringstream name;
+	name << "user" << tag;
+	std::string key = name.str();
+
+	//open plist file
+	//1.设置文件路径
+	std::string path;
+	if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+	{
+		//是MAC平台
+		path = "./res/userInfo.plist";
+	}
+	else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	{
+		//WIN32平台
+		path = "res/userInfo.plist";
+
+	}
+	else;
+	//2.从文件中创建字典对象
+	__Dictionary * root = __Dictionary::createWithContentsOfFile(path.c_str());
+
+	
+	//从字典对象Root中取出字典对象user1/2/3
+	auto user = static_cast<__Dictionary *>(root->objectForKey(key));
+
+	if (user==NULL) {
+		CCLOG("false");
+
+	}
+	else {
+		CCLOG("true");
+	}
+	
+	//auto user = __Dictionary::create();
 
 
+	//4.更新user内部数据
 
-void UserInfo::saveInfoToPlist(UserInfo & userInfo){
-    auto saveLayer = new SaveLayer();
-    //create and init userInfo.plist
-    saveLayer->createInfo();
-    //read plist file
-    ValueMap plist = readPlist();
-    
-    //judge which user number to save info
-    
-    //save info into user1
-    ValueMap& dict = plist["user1"].asValueMap();
-    auto user = new __Dictionary();
-    //user->setObject(__Integer::create(planeType), "planeType");
-    //user->setObject(__String::create(planeName), "userName");
+	//通过key设置value
+	user->setObject(__String::create(userInfo.userName), "userName");
+	//获得系统时间，并用userInfo类的成员变量记录下来
+	userInfo.saveTime = getSysTime();
+	userInfo.saveDay = getSysDay();
+	user->setObject(__String::create(userInfo.saveTime), "saveTime");
+	user->setObject(__String::create(userInfo.saveDay), "saveDay");
+	user->setObject(__Integer::create(userInfo.atk), "atk");
+	user->setObject(__Integer::create(userInfo.def), "def");
+	user->setObject(__Integer::create(userInfo.exp), "exp");
+	user->setObject(__Integer::create(userInfo.gameLevel), "gameLevel");
+	user->setObject(__Integer::create(userInfo.hp), "hp");
+	user->setObject(__Integer::create(userInfo.mp), "mp");
+	user->setObject(__Integer::create(userInfo.planeLevel), "planeLevel");
+	user->setObject(__Integer::create(userInfo.planeType), "planeType");
 
+	//root->setObject(user, "user5");
+
+	//5.将字典对象root写入到plist里
+	if (root->writeToFile(path.c_str())) 
+	{
+		log("see the plist file at %s", path.c_str());
+		auto a = FileUtils::getInstance()->fullPathForFilename(path);
+		log(a.c_str());
+	}
+	else
+		log("write plist file failed");
+	
     
 }
 

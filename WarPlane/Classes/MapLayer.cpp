@@ -17,15 +17,20 @@ bool MapLayer::init() {
 	_background->setScale(scale);
 	this->addChild(_background);
 
-	auto repo = MenuItemImage::create("res/UI/a2SelectLevel/repo.png", "res/UI/a2SelectLevel/repo.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
-	repo->setPosition(Vec2(winSize.width*0.9, winSize.height*0.9));
-	repo->setScale(0.3);
+	auto repo = MenuItemImage::create("res/UI/a2SelectLevel/repo.png", "res/UI/a2SelectLevel/repoS.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
+	repo->setPosition(Vec2(winSize.width*0.9, winSize.height*0.92));
+	repo->setScale(0.25);
 	repo->setTag(1);
 
 	auto back = MenuItemImage::create("res/UI/a2SelectLevel/back.png", "res/UI/a2SelectLevel/backB.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
-	back->setPosition(Vec2(winSize.width*0.15, winSize.height*0.9));
-	back->setScale(0.55);
+	back->setPosition(Vec2(winSize.width*0.1, winSize.height*0.92));
+	back->setScale(0.4);
 	back->setTag(2);
+
+	auto save = MenuItemImage::create("res/UI/a2SelectLevel/save.png", "res/UI/a2SelectLevel/saveS.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
+	save->setPosition(Vec2(winSize.width*0.78, winSize.height*0.92));
+	save->setScale(0.25);
+	save->setTag(4);
 	
 	auto level_1_label = Label::createWithSystemFont("Level 1", "fonts/AdobeHeitiStd-Regular.ttf", 20);
 	level_1_label->setPosition(Vec2(winSize.width*0.7, winSize.height*0.1));
@@ -60,7 +65,7 @@ bool MapLayer::init() {
 	level_3->setPosition(Vec2(winSize.width*0.7, winSize.height*0.7));
 	level_3->setTag(33);
 
-	Menu*menu = Menu::create(back,repo,level_1,level_2,level_3, NULL);        
+	Menu*menu = Menu::create(back,repo,save,level_1,level_2,level_3, NULL);        
 	menu->setPosition(Point::ZERO); 
 	this->addChild(menu, 1);
 	
@@ -115,6 +120,10 @@ void MapLayer::CallMenu(Ref * pSender) {
 		gameScene->addChild(fightLayer_1);
 		Director::getInstance()->replaceScene(gameScene);
 	}break;
+	case 4:
+	{
+		SceneManager::goSaveLayer(2,user);
+	}
 	}
 }
 /*

@@ -64,9 +64,9 @@ void SceneManager::goCreateLayer(int tag) {
 void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto mapScene = Scene::create();
 	auto layer = MapLayer::create();
-	layer->level = userInfo.getGameLevel();
+	layer->user = userInfo;
 	
-	switch (layer->level)
+	switch (layer->user.getGameLevel())
 	{
 	case 1:
 		layer->level_2->setEnabled(false);
@@ -87,9 +87,29 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	}
 }
 
+void SceneManager::goSaveLayer(int tag, UserInfo &userInfo) {
+	auto saveScene = Scene::create();
+	auto layer = SaveLayer::create();
+	layer->times = tag;
+	layer->user = userInfo;
+	saveScene->addChild(layer);
+	if (tag == 1) {
+		auto transition = TransitionMoveInR::create(0.2f, saveScene);
+		Director::getInstance()->replaceScene(transition);
+	}
+	else {
+		auto transition = TransitionMoveInL::create(0.2f, saveScene);
+		Director::getInstance()->replaceScene(transition);
+
+	}
+
+
+}
+
 void SceneManager::goSaveLayer(int tag) {
 	auto saveScene = Scene::create();
 	auto layer = SaveLayer::create();
+	layer->times = tag;
 	saveScene->addChild(layer);
 	if (tag == 1) {
 		auto transition = TransitionMoveInR::create(0.2f, saveScene);

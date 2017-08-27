@@ -15,7 +15,7 @@ public:
 	//void mouseMove(Event *event);
 	void CallMenu(Ref *pSender);
 	SceneManager * tsm;
-	int level;
+	UserInfo user;
 
 public:
 	MenuItemImage *level_1;

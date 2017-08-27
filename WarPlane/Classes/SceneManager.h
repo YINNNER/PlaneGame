@@ -13,7 +13,8 @@ public:
 	static void goMenuLayer(int tag,int transiTimes);
 	static void goCreateLayer(int tag);
 	static void goMapLayer(int tag,UserInfo &userInfo);
-	static void goSaveLayer(int tag);
+	static void goSaveLayer(int tag,UserInfo &userInfo);//存储进度时调用
+	static void goSaveLayer(int tag);//读取进度时调用
 	static void goHelpLayer(int tag);
 	static void goSetLayer(int tag);
 	static void goRepoLayer(int tag);

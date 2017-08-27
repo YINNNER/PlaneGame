@@ -33,11 +33,13 @@ public:
     void createInfo();
     void initInfo();
     void initInfoDetail( __Dictionary * user);
-    void saveInfo();
+    void saveInfo(int tag);
     void loadInfo(int tag);
     
     std::string getSysTime();
     std::string getSysDay();
+	int times;//判断从哪里跳转过来，menu过来为1，其他都为2
+	UserInfo user;
     
     
 };
