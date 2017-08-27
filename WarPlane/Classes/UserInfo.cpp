@@ -141,16 +141,6 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	//从字典对象Root中取出字典对象user1/2/3
 	auto user = static_cast<__Dictionary *>(root->objectForKey(key));
 
-	if (user==NULL) {
-		CCLOG("false");
-
-	}
-	else {
-		CCLOG("true");
-	}
-	
-	//auto user = __Dictionary::create();
-
 
 	//4.更新user内部数据
 
@@ -170,14 +160,12 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	user->setObject(__Integer::create(userInfo.planeLevel), "planeLevel");
 	user->setObject(__Integer::create(userInfo.planeType), "planeType");
 
-	//root->setObject(user, "user5");
 
-	//5.将字典对象root写入到plist里
+	//5.将字典对象root写入到plist里，log用于调试
 	if (root->writeToFile(path.c_str())) 
 	{
 		log("see the plist file at %s", path.c_str());
-		auto a = FileUtils::getInstance()->fullPathForFilename(path);
-		log(a.c_str());
+		
 	}
 	else
 		log("write plist file failed");

@@ -26,16 +26,16 @@ public:
     void callBack(Ref * pSender);
     
     //save menu
-    void setSaveMenu(Vec2 origin,Size winSize,float py,int tag);
+    void setSaveMenu(float py,int tag);
     void saveMenuItem(Ref * pSender,int tag);
-    
+	void setInfoLabel(float py);
     //manager user info
     void createInfo();
     void initInfo();
     void initInfoDetail( __Dictionary * user);
     void saveInfo(int tag);
     void loadInfo(int tag);
-    
+  
     std::string getSysTime();
     std::string getSysDay();
 	int times;//判断从哪里跳转过来，menu过来为1，其他都为2

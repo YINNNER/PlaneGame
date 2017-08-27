@@ -10,7 +10,8 @@
 #include <time.h>
 #include "SceneManager.h"
 
-
+#define winSize Director::getInstance()->getVisibleSize()
+#define origin Director::getInstance()->getVisibleOrigin()
 
 bool SaveLayer::init() {
     
@@ -18,10 +19,7 @@ bool SaveLayer::init() {
     {
         return false;
     }
-    
-    auto winSize = Director::getInstance()->getVisibleSize();
-    auto origin = Director::getInstance()->getVisibleOrigin();
-    
+   
     //set background
     auto _background = Sprite::create("res/UI/1Menu/background.png");
     _background->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height / 2));
@@ -47,9 +45,9 @@ bool SaveLayer::init() {
     
     
     //set save menu
-    setSaveMenu(origin, winSize ,0.70,1);
-    setSaveMenu(origin, winSize ,0.45,2);
-    setSaveMenu(origin, winSize ,0.20,3);
+    setSaveMenu(0.70,1);
+    setSaveMenu(0.45,2);
+    setSaveMenu(0.20,3);
     
     return true;
 }
@@ -72,6 +70,7 @@ void SaveLayer::saveMenuItem(Ref * pSender,int tag){
 	else{
 	
 	saveInfo(tag);
+
 	}
 
     
@@ -214,8 +213,21 @@ void SaveLayer::initInfo(){
 void SaveLayer::saveInfo(int tag){
 	
 	user.saveInfoToPlist(user,tag);
+	this->removeChildByTag(tag);
 
-    
+	float py;
+	switch (tag){
+	case 1:	py = 0.70;
+	break;
+	case 2:	py = 0.45;
+	break;
+	case 3:	py = 0.20;
+	break;
+	default:
+		break;
+	}
+	setSaveMenu(py,tag);
+	
 }
 
 void SaveLayer::loadInfo(int tag){
@@ -226,8 +238,42 @@ void SaveLayer::loadInfo(int tag){
     SceneManager::goMapLayer(enter,user);
 }
 
+void SaveLayer::setInfoLabel(float py){
+	//1.If there is no info in the menu
+	if (user.getUserName() == "") {
+		auto noInfo = Label::createWithTTF("暂无存档", "fonts/simhei.ttf", 40);
+		noInfo->enableOutline(Color4B(73, 75, 80, 130), 3);
+		noInfo->setAdditionalKerning(15);
+		noInfo->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height *py));
+		noInfo->setTag(100);
+		this->addChild(noInfo);
+	}
+	//2.If there if info in the menu
+	else {
+		//1.add plane image
+		std::stringstream picName;
+		picName << "res/SpaceShooterRedux/PNG/Planes/playerShip" << user.getPlaneType() << "_blue.png";
+		auto planeImg = Sprite::create(picName.str());
+		planeImg->setPosition(Vec2(origin.x + winSize.width / 2 - planeImg->getContentSize().width*1.2, origin.y + winSize.height *py));
+		planeImg->setTag(101);
+		this->addChild(planeImg);
 
-void SaveLayer::setSaveMenu(Vec2 origin,Size winSize,float py,int tag){
+		//2.add plane info
+		std::stringstream name;
+		name << "战机名：" << user.getUserName() << std::endl << user.getSaveTime() << std::endl << user.getSaveDay() << std::endl;
+		auto infoPlane = Label::createWithTTF(name.str(), "fonts/simhei.ttf", 23);
+		infoPlane->enableOutline(Color4B(73, 75, 80, 130), 3);
+		infoPlane->setPosition(Vec2(origin.x + winSize.width / 2 + planeImg->getContentSize().width *0.52, origin.y + winSize.height *(py-0.02) ));
+		infoPlane->setAdditionalKerning(4);
+		infoPlane->setLineHeight(38);
+		infoPlane->setTag(102);
+		this->addChild(infoPlane);
+	}
+}
+
+
+
+void SaveLayer::setSaveMenu(float py,int tag){
     auto saveMenu = MenuItemImage::create("res/UI/3LoadingSave/rec1.png","res/UI/3LoadingSave/rec2.png",CC_CALLBACK_1(SaveLayer::saveMenuItem,this,tag));
     saveMenu->setPosition(Vec2(origin.x + winSize.width /2, origin.y + winSize.height *py));
     saveMenu->setScale(0.8);
@@ -237,41 +283,6 @@ void SaveLayer::setSaveMenu(Vec2 origin,Size winSize,float py,int tag){
     this->addChild(menu);
     
     //add save menu info
-    //1.If there is no info in the menu
-
-    //auto user=new UserInfo();
     user.setInfo(tag);
-    if (user.getUserName()=="") {
-        auto noInfo = Label::createWithTTF("暂无存档","fonts/simhei.ttf",40);
-        noInfo->enableOutline(Color4B(73,75,80,130),3);
-        noInfo->setAdditionalKerning(15);
-        noInfo->setPosition(Vec2(origin.x + winSize.width /2, origin.y + winSize.height *py));
-        this->addChild(noInfo);
-    }
-    //2.If there if info in the menu
-    else{
-        //1.add plane image
-        std::stringstream picName;
-        picName<<"res/SpaceShooterRedux/PNG/Planes/playerShip"<<user.getPlaneType()<<"_blue.png";
-        auto planeImg = Sprite::create(picName.str());
-        planeImg->setPosition(Vec2(origin.x + winSize.width / 2 - planeImg->getContentSize().width*1.2, origin.y + winSize.height *py));
-        this->addChild(planeImg);
-        
-        //2.add plane info
-        std::stringstream name;
-        name<<"战机名："<<user.getUserName()<<std::endl<<user.getSaveTime()<<std::endl<<user.getSaveDay()<<std::endl;
-        auto infoPlane = Label::createWithTTF(name.str(),"fonts/simhei.ttf",24);
-        infoPlane->enableOutline(Color4B(73,75,80,130),3);
-        infoPlane->setPosition(Vec2(origin.x + winSize.width / 2 + planeImg->getContentSize().width/2, origin.y + winSize.height *py- saveMenu->getContentSize().height * 0.1));
-        infoPlane->setAdditionalKerning(4);
-        this->addChild(infoPlane);
-        
-        //delete user;
-       
-    }
-    
-    
-
-    
-
+	setInfoLabel(py);
 }
