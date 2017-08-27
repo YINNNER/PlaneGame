@@ -16,7 +16,7 @@ bool LoadLayer::init() {
 	//_logo->setScale(2);
 	//this->addChild(_logo);
     _logo->setOpacity(0);
-    _logo->runAction(FadeIn::create(1.0f));
+    _logo->runAction(FadeIn::create(2.0f));
     this->addChild(_logo);
    
 	/*
