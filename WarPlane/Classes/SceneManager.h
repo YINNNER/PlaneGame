@@ -19,6 +19,7 @@ public:
 
 public:
 	Scene * loadScene;
+	//int level;
 
 };
 

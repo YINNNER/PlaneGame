@@ -15,10 +15,12 @@ public:
 	//void mouseMove(Event *event);
 	void CallMenu(Ref *pSender);
 	SceneManager * tsm;
-private:
+	int level;
+
+public:
 	MenuItemImage *level_1;
 	MenuItemImage *level_2;
 	MenuItemImage *level_3;
-
+	
 };
 

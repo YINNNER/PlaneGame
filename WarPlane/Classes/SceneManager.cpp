@@ -61,10 +61,19 @@ void SceneManager::goCreateLayer(int tag) {
 	}
 }
 
-void SceneManager::goMapLayer(int tag,int gameLevel) {
+void SceneManager::goMapLayer(int tag, int gameLevel) {
 	auto mapScene = Scene::create();
 	auto layer = MapLayer::create();
-
+	layer->level = gameLevel;
+	switch (layer->level)
+	{
+	case 1:
+		layer->level_2->setEnabled(false);
+		layer->level_3->setEnabled(false);
+		break;
+	case 2:
+		layer->level_3->setEnabled(false);
+	}
 	mapScene->addChild(layer);
 	if (tag == 1) {
 		auto transition = TransitionMoveInR::create(0.2f, mapScene);
@@ -121,8 +130,8 @@ void SceneManager::goSetLayer(int tag) {
 	else {
 		auto transition = TransitionMoveInL::create(0.2f, setScene);
 		Director::getInstance()->replaceScene(transition);
-	}*/
-	
+	}
+	*/
 	static int times = 1;
 	if (times == 1) {
 		auto setScene = Scene::create();

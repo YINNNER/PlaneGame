@@ -5,6 +5,9 @@ using namespace CocosDenshion;
 
 
 bool MapLayer::init() {
+
+	auto cursor = Sprite::create("res/SpaceShooterRedux/PNG/UI/cursor.png");
+	
 	
 	auto winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
@@ -42,7 +45,7 @@ bool MapLayer::init() {
 	this->addChild(level_2_label);
 	
 
-	level_2 = MenuItemImage::create("res/UI/a2SelectLevel/planet2.png", "res/UI/a2SelectLevel/planet2.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
+	level_2 = MenuItemImage::create("res/UI/a2SelectLevel/planet2.png", "res/UI/a2SelectLevel/planet2.png", "res/UI/a2SelectLevel/planet2Forbidden.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_2->setScale(0.5);
 	level_2->setPosition(Vec2(Vec2(winSize.width*0.2, winSize.height*0.5)));
 	level_2->setTag(32);
@@ -52,14 +55,19 @@ bool MapLayer::init() {
 	this->addChild(level_3_label);
 	
 	
-	level_3 = MenuItemImage::create("res/UI/a2SelectLevel/planet3.png", "res/UI/a2SelectLevel/planet3.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
+	level_3 = MenuItemImage::create("res/UI/a2SelectLevel/planet3.png", "res/UI/a2SelectLevel/planet3.png", "res/UI/a2SelectLevel/planet3Forbidden.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_3->setScale(0.5);
 	level_3->setPosition(Vec2(winSize.width*0.7, winSize.height*0.7));
 	level_3->setTag(33);
 
 	Menu*menu = Menu::create(back,repo,level_1,level_2,level_3, NULL);        
 	menu->setPosition(Point::ZERO); 
-	this->addChild(menu,1);
+	this->addChild(menu, 1);
+	
+
+
+
+	
 	/*
 	auto listener = EventListenerMouse::create();//´´½¨Êó±ê¼àÌý
 	listener->onMouseMove = CC_CALLBACK_1(MapLayer::mouseMove, this);
@@ -70,7 +78,7 @@ bool MapLayer::init() {
 
 void MapLayer::CallMenu(Ref * pSender) {
 	int tag = ((MenuItem *)pSender)->getTag();
-	int times = 1;
+	
 	switch (tag)
 	{
 	case 1:
@@ -79,16 +87,11 @@ void MapLayer::CallMenu(Ref * pSender) {
 		break;
 	case 2:
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
-		
-		SceneManager::goMenuLayer(tag, times);
+		SceneManager::goCreateLayer(tag);
 		break;
 	case 31:
 	{
-		if (level_2->getScale() == 0.7f)
-			level_2->setScale(0.5);
-		if (level_3->getScale() == 0.7f)
-			level_3->setScale(0.5);
-		level_1->setScale(0.7);
+		
 		auto gameScene = Scene::create();
 		FightLayer * fightLayer_1 = FightLayer::create();
 		fightLayer_1->setPlayer(1);
@@ -97,22 +100,19 @@ void MapLayer::CallMenu(Ref * pSender) {
 	}break;
 	case 32:
 	{
-		if (level_1->getScale() == 0.7f)
-			level_1->setScale(0.5);
-		if (level_3->getScale() == 0.7f)
-			level_3->setScale(0.5);
-		level_2->setScale(0.7);
+		auto gameScene = Scene::create();
+		FightLayer * fightLayer_1 = FightLayer::create();
+		fightLayer_1->setPlayer(1);
+		gameScene->addChild(fightLayer_1);
+		Director::getInstance()->replaceScene(gameScene);
 	}break;
 	case 33:
 	{
-		log("%f", level_1->getScale());
-		if (level_1->getScale() == 0.7f)
-			level_1->setScale(0.5);
-		
-		if (level_2->getScale() == 0.7f) 
-			level_2->setScale(0.5);
-			
-		level_3->setScale(0.7);
+		auto gameScene = Scene::create();
+		FightLayer * fightLayer_1 = FightLayer::create();
+		fightLayer_1->setPlayer(1);
+		gameScene->addChild(fightLayer_1);
+		Director::getInstance()->replaceScene(gameScene);
 	}break;
 	}
 }

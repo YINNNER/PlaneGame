@@ -6,7 +6,7 @@
 USING_NS_CC_EXT;
 USING_NS_CC;
 class CreateLayer :
-	public Layer,public  EditBoxDelegate
+	public Layer,public EditBoxDelegate
 {
 public:
 	CreateLayer();
@@ -27,8 +27,9 @@ private:
 	Sprite *selected_1;
 	Sprite *selected_2;
 	Sprite *selected_3;
-	std::string m_name;
+	MenuItemImage * menuItem_1;
+	std::string planeName;
 	EditBox *nameEditBox;
-	int planeKind;
+	int planeType;
 
 };
