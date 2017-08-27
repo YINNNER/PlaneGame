@@ -30,6 +30,7 @@ public:
     void saveMenuItem(Ref * pSender,int tag);
     
     //manager user info
+    void createInfo();
     void initInfo();
     void initInfoDetail( __Dictionary * user);
     void saveInfo();
