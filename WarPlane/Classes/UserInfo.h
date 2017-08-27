@@ -31,8 +31,16 @@ private:
     int planeLevel;
 public:
     void setInfo(int tag);
-    void saveInfoToPlist(std::string planeName,int planeType);
+    //点击保存进度调用的api
+    void saveInfoToPlist(UserInfo & userInfo);
+    //点击创建对象调用的api
+    UserInfo  createUser(std::string planeName,int planeType);
+    //读取plist文件
+    ValueMap readPlist();
+    
     UserInfo();
+    
+    UserInfo(UserInfo const & userInfo);
 
     //外部调用得到数据的接口
     std::string getSaveTime();

@@ -7,6 +7,7 @@
 //
 
 #include "UserInfo.h"
+#include "SaveLayer.h"
 
 UserInfo::UserInfo(){
     userName="";
@@ -23,34 +24,51 @@ UserInfo::UserInfo(){
     
    }
 
-//load&read info from plist
-void UserInfo::setInfo(int tag){
-    
-	std::string path;
-    // 文件路径
-	if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-	{
-		//是MAC平台
-		path = "./res/userInfo.plist";
-	}
-	else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	{
-		//WIN32平台
-		std::string writablePath = FileUtils::getInstance()->getWritablePath();
-		std::stringstream tmp;
-		tmp << writablePath << "userInfo.plist";
-		std::string path = tmp.str();
+UserInfo::UserInfo(UserInfo const & userInfo){
+    //add userName and planeType
+    userName=userInfo.userName;
+    planeType=userInfo.planeType;
+    //the same as constructor
+    saveTime=userInfo.saveTime;
+    saveDay=userInfo.saveDay;
+    atk=userInfo.atk;
+    def=userInfo.def;
+    exp=userInfo.exp;
+    gameLevel=userInfo.gameLevel;
+    hp=userInfo.hp;
+    mp=userInfo.mp;
+    planeLevel=userInfo.planeLevel;
+}
 
-	}
-	else;
-    
-    
+ValueMap UserInfo::readPlist(){
+    //设置文件路径
+    std::string path;
+    if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    {
+        //是MAC平台
+        path = "./res/userInfo.plist";
+    }
+    else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+    {
+        //WIN32平台
+        path = "res/userInfo.plist";
+        
+    }
+    else ;
     
     // 读取plist文件
     // 根节点为字典Dictionary , 读取为一个ValueMap
     ValueMap plist = FileUtils::getInstance()->getValueMapFromFile(path);
     
+    return plist;
     
+}
+
+//load&read info from plist
+void UserInfo::setInfo(int tag){
+    
+    //read plist file
+    ValueMap plist = readPlist();
     
     // 获取数据
     // 读取 "user1/2/3" , 也是一个字典ValueMap
@@ -77,9 +95,39 @@ void UserInfo::setInfo(int tag){
     
 }
 
-void UserInfo::saveInfoToPlist(std::string planeName,int planeType){
+
+
+
+void UserInfo::saveInfoToPlist(UserInfo & userInfo){
+    auto saveLayer = new SaveLayer();
+    //create and init userInfo.plist
+    saveLayer->createInfo();
+    //read plist file
+    ValueMap plist = readPlist();
+    
+    //judge which user number to save info
+    
+    //save info into user1
+    ValueMap& dict = plist["user1"].asValueMap();
+    auto user = new __Dictionary();
+    //user->setObject(__Integer::create(planeType), "planeType");
+    //user->setObject(__String::create(planeName), "userName");
+
     
 }
+
+
+UserInfo UserInfo::createUser(std::string planeName,int planeType){
+    auto saveLayer = new SaveLayer();
+    //create and init userInfo.plist
+    saveLayer->createInfo();
+    auto userInfo = UserInfo();
+    userInfo.userName = planeName;
+    userInfo.planeType = planeType;
+    return userInfo;
+
+}
+
 
 
 std::string UserInfo::getSaveTime(){return saveTime;}
