@@ -80,13 +80,13 @@ void UserInfo::setInfo(int tag){
     saveTime=(dict["saveTime"].asString()).c_str();
     saveDay=(dict["saveDay"].asString()).c_str();
     planeType=dict["planeType"].asInt();
-    atk=dict["planeType"].asInt();
-    def=dict["planeType"].asInt();
-    exp=dict["planeType"].asInt();
-    gameLevel=dict["planeType"].asInt();
-    hp=dict["planeType"].asInt();
-    mp=dict["planeType"].asInt();
-    planeLevel=dict["planeType"].asInt();
+    atk=dict["atk"].asInt();
+    def=dict["def"].asInt();
+    exp=dict["exp"].asInt();
+    gameLevel=dict["gameLevel"].asInt();
+    hp=dict["hp"].asInt();
+    mp=dict["mp"].asInt();
+    planeLevel=dict["planeLevel"].asInt();
     
     //用CCLOG做调试语句
     //CCLOG("plane_type = %s", (dict["planeType"].asString()).c_str());

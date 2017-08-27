@@ -78,7 +78,7 @@ bool MapLayer::init() {
 
 void MapLayer::CallMenu(Ref * pSender) {
 	int tag = ((MenuItem *)pSender)->getTag();
-	
+	int times = 1;
 	switch (tag)
 	{
 	case 1:
@@ -87,7 +87,8 @@ void MapLayer::CallMenu(Ref * pSender) {
 		break;
 	case 2:
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
-		SceneManager::goCreateLayer(tag);
+		
+		SceneManager::goMenuLayer(tag,times);
 		break;
 	case 31:
 	{

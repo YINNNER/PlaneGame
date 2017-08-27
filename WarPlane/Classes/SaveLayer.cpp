@@ -209,11 +209,11 @@ void SaveLayer::saveInfo(){
 }
 
 void SaveLayer::loadInfo(int tag){
-    auto user=new UserInfo();
-    user->setInfo(tag);
+    auto user= UserInfo();
+    user.setInfo(tag);
     int enter=1;
-    SceneManager::goMapLayer(enter,tag);
-    delete user;
+	
+    SceneManager::goMapLayer(enter,user);
 }
 
 

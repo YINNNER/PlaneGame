@@ -4,6 +4,7 @@
 
 #pragma once
 #include <cocos2d.h>
+#include "UserInfo.h"
 USING_NS_CC;
 class SceneManager
 {
@@ -11,7 +12,7 @@ public:
 	void CreateLoadScene();
 	static void goMenuLayer(int tag,int transiTimes);
 	static void goCreateLayer(int tag);
-	static void goMapLayer(int tag,int gameLevel);
+	static void goMapLayer(int tag,UserInfo &userInfo);
 	static void goSaveLayer(int tag);
 	static void goHelpLayer(int tag);
 	static void goSetLayer(int tag);

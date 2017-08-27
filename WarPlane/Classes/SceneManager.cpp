@@ -61,10 +61,11 @@ void SceneManager::goCreateLayer(int tag) {
 	}
 }
 
-void SceneManager::goMapLayer(int tag, int gameLevel) {
+void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto mapScene = Scene::create();
 	auto layer = MapLayer::create();
-	layer->level = gameLevel;
+	layer->level = userInfo.getGameLevel();
+	
 	switch (layer->level)
 	{
 	case 1:

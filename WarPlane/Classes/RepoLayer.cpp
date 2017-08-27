@@ -433,7 +433,7 @@ void RepoLayer::menuCallBack_3(Ref * pSender) {
 void RepoLayer::CallMenu(Ref * pSender)
 {
 	int gameLevel = 1;
-	SceneManager::goMapLayer(2,gameLevel);
+	//SceneManager::goMapLayer(2,gameLevel);
 }
 
 /*void RepoLayer::menuCallBack_4(Ref * pSender) {
