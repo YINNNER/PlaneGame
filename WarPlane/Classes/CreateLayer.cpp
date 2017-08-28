@@ -110,7 +110,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 		auto file = new UserInfo();
 		UserInfo user = file->createUser(planeName, planeType);
-		CCLOG(user.getUserName().c_str());
+		//CCLOG(user.getUserName().c_str());
 		delete file;
 		SceneManager::goMapLayer(tag, user);
 

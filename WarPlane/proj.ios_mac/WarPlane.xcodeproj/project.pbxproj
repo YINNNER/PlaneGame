@@ -61,6 +61,8 @@
 		3E9608591F5177040065E1DC /* enemyPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608551F5176D80065E1DC /* enemyPlane.cpp */; };
 		3E9608601F51EC370065E1DC /* GameFin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E96085E1F51EC370065E1DC /* GameFin.cpp */; };
 		3E9608621F51EC4B0065E1DC /* GameFin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E96085E1F51EC370065E1DC /* GameFin.cpp */; };
+		3E9608691F52B64A0065E1DC /* GamePause.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608671F52B64A0065E1DC /* GamePause.cpp */; };
+		3E96086A1F52B64A0065E1DC /* GamePause.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608671F52B64A0065E1DC /* GamePause.cpp */; };
 		3EACC98F19EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
@@ -207,6 +209,8 @@
 		3E9608561F5176D80065E1DC /* enemyPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enemyPlane.h; sourceTree = "<group>"; };
 		3E96085E1F51EC370065E1DC /* GameFin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameFin.cpp; sourceTree = "<group>"; };
 		3E96085F1F51EC370065E1DC /* GameFin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameFin.h; sourceTree = "<group>"; };
+		3E9608671F52B64A0065E1DC /* GamePause.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GamePause.cpp; sourceTree = "<group>"; };
+		3E9608681F52B64A0065E1DC /* GamePause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePause.h; sourceTree = "<group>"; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		46880B7619C43A67006E1F66 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		46880B7719C43A67006E1F66 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
@@ -442,6 +446,8 @@
 				3E9607911F4EA4910065E1DC /* SceneManager.h */,
 				3E9607921F4EA4910065E1DC /* SetLayer.cpp */,
 				3E9607931F4EA4910065E1DC /* SetLayer.h */,
+				3E9608671F52B64A0065E1DC /* GamePause.cpp */,
+				3E9608681F52B64A0065E1DC /* GamePause.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -666,6 +672,7 @@
 				3E9608151F5017790065E1DC /* RepoLayer.cpp in Sources */,
 				3E9608161F5017790065E1DC /* SaveLayer.cpp in Sources */,
 				3E9608171F5017790065E1DC /* SceneManager.cpp in Sources */,
+				3E9608691F52B64A0065E1DC /* GamePause.cpp in Sources */,
 				3E9608181F5017790065E1DC /* SetLayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,6 +684,7 @@
 				3E9608621F51EC4B0065E1DC /* GameFin.cpp in Sources */,
 				3E9608591F5177040065E1DC /* enemyPlane.cpp in Sources */,
 				3E9608191F501AD90065E1DC /* Arms.cpp in Sources */,
+				3E96086A1F52B64A0065E1DC /* GamePause.cpp in Sources */,
 				3E96081A1F501AD90065E1DC /* Bullet.cpp in Sources */,
 				3E96081B1F501AD90065E1DC /* CCPlane.cpp in Sources */,
 				3E96081C1F501AD90065E1DC /* Equip.cpp in Sources */,
