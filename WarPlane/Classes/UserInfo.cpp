@@ -21,6 +21,19 @@ UserInfo::UserInfo(){
     hp=500;
     mp=500;
     planeLevel=1;
+    //equip
+    //1.head
+     _equip_head=Vec2(0,0);
+     _equip_head_b=Vec2(0,0);
+     _equip_head_c=Vec2(0,0);
+    //2.arm
+     _equip_arm=Vec2(0,0);
+     _equip_arm_b=Vec2(0,0);
+     _equip_arm_c=Vec2(0,0);
+    //3.tail
+     _equip_tail=Vec2(0,0);
+     _equip_tail_b=Vec2(0,0);
+     _equip_tail_c=Vec2(0,0);
     
    }
 
@@ -38,6 +51,16 @@ UserInfo::UserInfo(UserInfo const & userInfo){
     hp=userInfo.hp;
     mp=userInfo.mp;
     planeLevel=userInfo.planeLevel;
+    //equip
+    _equip_head=userInfo._equip_head;
+    _equip_head_b=userInfo._equip_head_b;
+    _equip_head_c=userInfo._equip_head_c;
+    _equip_arm=userInfo._equip_arm;
+    _equip_arm_b=userInfo._equip_arm_b;
+    _equip_arm_c=userInfo._equip_arm_c;
+    _equip_tail=userInfo._equip_tail;
+    _equip_tail_b=userInfo._equip_tail_b;
+    _equip_tail_c=userInfo._equip_tail_c;
 }
 
 ValueMap UserInfo::readPlist(){
@@ -87,6 +110,29 @@ void UserInfo::setInfo(int tag){
     hp=dict["hp"].asInt();
     mp=dict["mp"].asInt();
     planeLevel=dict["planeLevel"].asInt();
+    //equip
+    _equip_head.x=dict["_equip_head_have"].asBool();
+    _equip_head.y=dict["_equip_head_load"].asBool();
+    _equip_head_b.x=dict["_equip_head_b_have"].asBool();
+    _equip_head_b.y=dict["_equip_head_b_load"].asBool();
+    _equip_head_c.x=dict["_equip_head_c_have"].asBool();
+    _equip_head_c.y=dict["_equip_head_c_load"].asBool();
+
+    _equip_arm.x=dict["_equip_arm_have"].asBool();
+    _equip_arm.y=dict["_equip_arm_load"].asBool();
+    _equip_arm_b.x=dict["_equip_arm_b_have"].asBool();
+    _equip_arm_b.y=dict["_equip_arm_b_load"].asBool();
+    _equip_arm_c.x=dict["_equip_arm_c_have"].asBool();
+    _equip_arm_c.y=dict["_equip_arm_c_load"].asBool();
+    
+    _equip_tail.x=dict["_equip_tail_have"].asBool();
+    _equip_tail.y=dict["_equip_tail_load"].asBool();
+    _equip_tail_b.x=dict["_equip_tail_b_have"].asBool();
+    _equip_tail_b.y=dict["_equip_tail_b_load"].asBool();
+    _equip_tail_c.x=dict["_equip_tail_c_have"].asBool();
+    _equip_tail_c.y=dict["_equip_tail_c_load"].asBool();
+
+    
     
     //用CCLOG做调试语句
     //CCLOG("plane_type = %s", (dict["planeType"].asString()).c_str());
@@ -159,6 +205,25 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	user->setObject(__Integer::create(userInfo.mp), "mp");
 	user->setObject(__Integer::create(userInfo.planeLevel), "planeLevel");
 	user->setObject(__Integer::create(userInfo.planeType), "planeType");
+    //equip
+    user->setObject(__Bool::create(userInfo._equip_head.x),"_equip_head_have" );
+    user->setObject(__Bool::create(userInfo._equip_head.y),"_equip_head_load" );
+    user->setObject(__Bool::create(userInfo._equip_head_b.x),"_equip_head_b_have" );
+    user->setObject(__Bool::create(userInfo._equip_head_b.y),"_equip_head_b_load" );
+    user->setObject(__Bool::create(userInfo._equip_head_c.x),"_equip_head_c_have" );
+    user->setObject(__Bool::create(userInfo._equip_head_c.y),"_equip_head_c_load" );
+    user->setObject(__Bool::create(userInfo._equip_arm.x),"_equip_arm_have" );
+    user->setObject(__Bool::create(userInfo._equip_arm.y),"_equip_arm_load" );
+    user->setObject(__Bool::create(userInfo._equip_arm_b.x),"_equip_arm_b_have" );
+    user->setObject(__Bool::create(userInfo._equip_arm_b.y),"_equip_arm_b_load" );
+    user->setObject(__Bool::create(userInfo._equip_arm_c.x),"_equip_arm_c_have" );
+    user->setObject(__Bool::create(userInfo._equip_arm_c.y),"_equip_arm_c_load" );
+    user->setObject(__Bool::create(userInfo._equip_tail.x),"_equip_tail_have" );
+    user->setObject(__Bool::create(userInfo._equip_tail.y),"_equip_tail_load" );
+    user->setObject(__Bool::create(userInfo._equip_tail_b.x),"_equip_tail_b_have" );
+    user->setObject(__Bool::create(userInfo._equip_tail_b.y),"_equip_tail_b_load" );
+    user->setObject(__Bool::create(userInfo._equip_tail_c.x),"_equip_tail_c_have" );
+    user->setObject(__Bool::create(userInfo._equip_tail_c.y),"_equip_tail_c_load" );
 
 
 	//5.将字典对象root写入到plist里，log用于调试
@@ -198,3 +263,12 @@ int UserInfo::getGameLevel(){return gameLevel;}
 int UserInfo::getHp(){return hp;}
 int UserInfo::getMp(){return mp;}
 int UserInfo::getPlaneLevel(){return planeLevel;}
+Vec2 UserInfo::get_equip_head(){return _equip_head;}
+Vec2 UserInfo::get_equip_head_b(){return _equip_head_b;}
+Vec2 UserInfo::get_equip_head_c(){return _equip_head_c;}
+Vec2 UserInfo::get_equip_arm(){return _equip_arm;}
+Vec2 UserInfo::get_equip_arm_b(){return _equip_arm_b;}
+Vec2 UserInfo::get_equip_arm_c(){return _equip_arm_c;}
+Vec2 UserInfo::get_equip_tail(){return _equip_tail;}
+Vec2 UserInfo::get_equip_tail_b(){return _equip_tail_b;}
+Vec2 UserInfo::get_equip_tail_c(){return _equip_tail_c;}

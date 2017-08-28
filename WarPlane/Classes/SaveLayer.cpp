@@ -148,6 +148,27 @@ void SaveLayer::initInfoDetail( __Dictionary * user){
     user->setObject(__Integer::create(500), "mp");
     user->setObject(__Integer::create(10), "planeLevel");
     user->setObject(__Integer::create(1), "planeType");
+    //equip
+    user->setObject(__Bool::create(0),"_equip_head_have" );
+    user->setObject(__Bool::create(0),"_equip_head_load" );
+    user->setObject(__Bool::create(0),"_equip_head_b_have" );
+    user->setObject(__Bool::create(0),"_equip_head_b_load" );
+    user->setObject(__Bool::create(0),"_equip_head_c_have" );
+    user->setObject(__Bool::create(0),"_equip_head_c_load" );
+    user->setObject(__Bool::create(0),"_equip_arm_have" );
+    user->setObject(__Bool::create(0),"_equip_arm_load" );
+    user->setObject(__Bool::create(0),"_equip_arm_b_have" );
+    user->setObject(__Bool::create(0),"_equip_arm_b_load" );
+    user->setObject(__Bool::create(0),"_equip_arm_c_have" );
+    user->setObject(__Bool::create(0),"_equip_arm_c_load" );
+    user->setObject(__Bool::create(0),"_equip_tail_have" );
+    user->setObject(__Bool::create(0),"_equip_tail_load" );
+    user->setObject(__Bool::create(0),"_equip_tail_b_have" );
+    user->setObject(__Bool::create(0),"_equip_tail_b_load" );
+    user->setObject(__Bool::create(0),"_equip_tail_c_have" );
+    user->setObject(__Bool::create(0),"_equip_tail_c_load" );
+
+
     delete userInfo;
 }
 
@@ -231,11 +252,12 @@ void SaveLayer::saveInfo(int tag){
 }
 
 void SaveLayer::loadInfo(int tag){
-    //auto user= UserInfo();
     user.setInfo(tag);
-    int enter=1;
-	
-    SceneManager::goMapLayer(enter,user);
+    if (user.getUserName()!= "") {
+        int enter=1;
+        SceneManager::goMapLayer(enter,user);
+    }
+    
 }
 
 void SaveLayer::setInfoLabel(float py){

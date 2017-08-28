@@ -89,11 +89,13 @@ void MapLayer::CallMenu(Ref * pSender) {
 	switch (tag)
 	{
 	case 1:
+
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::getInstance()->playEffect("music/click4.wav");
 		}
-		SceneManager::goRepoLayer(tag);
+		SceneManager::goRepoLayer(tag, user);
+
 		break;
 	case 2:
 		if (SetLayer::getEffectState() == 1) {
