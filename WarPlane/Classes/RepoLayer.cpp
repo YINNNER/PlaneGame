@@ -1,5 +1,5 @@
 #include"RepoLayer.h"
-
+using namespace::std;
 bool RepoLayer::init() {
 
 	Size winSize = Director::getInstance()->getWinSize();
@@ -70,50 +70,12 @@ bool RepoLayer::init() {
 	this->addChild(_plane, 2);
 
 	//判断是否拥有装备选择不同的图片
-
-	
-
-	_equip_1 = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_blue_02.png");
-	_equip_1->setPosition(Vec2(origin.x + winSize.width *0.2, winSize.height *0.5 ));
-	this->addChild(_equip_1, 3);
-
-	_equip_1_b = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_red_02.png");
-	_equip_1_b->setPosition(Vec2(winSize.width *0.2+winSize.width, origin.y + winSize.height *0.5 ));
-	CCLOG("%f \n", Vec2(_equip_1_b->getPosition()).x);
-	this->addChild(_equip_1_b, 2);
-
-	_equip_1_c = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_orange_02.png");
-	_equip_1_c->setPosition(Vec2(winSize.width *2.2, origin.y + winSize.height *0.5));
-	this->addChild(_equip_1_c, 2);
+	setEquipImg(1);
 
 	/*auto changeEquip_2 = MenuItemImage::create("res/UI/plane_parts/planeType1/playerShip1_blue_01.png", "res/UI/plane_parts/planeType1/playerShip1_blue_01.png", CC_CALLBACK_1(RepoLayer::menuCallBack_2, this));
 	changeEquip_2->setPosition(Vec2(origin.x + winSize.width *0.2, origin.y + winSize.height *0.3 ));
 	//changeEquip_2->setScale(0.95);*/
 
-
-	_equip_2 = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_blue_01.png");
-	_equip_2->setPosition(Vec2(winSize.width *0.2, winSize.height *0.3));
-	this->addChild(_equip_2, 2);
-
-	_equip_2_b = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_red_01.png");
-	_equip_2_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.3));
-	this->addChild(_equip_2_b, 2);
-
-	_equip_2_c = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_orange_01.png");
-	_equip_2_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.3));
-	this->addChild(_equip_2_c, 2);
-
-	_equip_3 = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_blue_04.png");
-	_equip_3->setPosition(Vec2(winSize.width *0.2, winSize.height *0.1));
-	this->addChild(_equip_3, 2);
-
-	_equip_3_b = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_red_04.png");
-	_equip_3_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.1));
-	this->addChild(_equip_3_b, 2);
-
-	_equip_3_c = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_orange_04.png");
-	_equip_3_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.1));
-	this->addChild(_equip_3_c, 2);
 
 	/*auto change = MenuItemImage::create("res/UI/plane_parts/planeType1/playerShip1_blue_01.png", "res/UI/plane_parts/planeType1/playerShip1_blue_01.png", CC_CALLBACK_1(RepoLayer::menuCallBack_4, this));
 	change->setPosition(Vec2(origin.x + winSize.width *0.9, origin.y + winSize.height *0.1));*/
@@ -361,11 +323,12 @@ void RepoLayer::menuCallBack_1(Ref * pSender) {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 
+	//加那个图片
 	_body_1 = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_blue_02.png");
 	_body_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.757));
 	this->addChild(_body_1,2);
 
-	//void setEHP(存档中 + getImpHp());
+	//void setEHP(存档中 + getImpHp(type（哪个等级的装备）));
 
 }
 
@@ -405,17 +368,67 @@ void RepoLayer::CallMenu(Ref * pSender)
 	//SceneManager::goMapLayer(2);
 }
 
-void RepoLayer::setOffset(float offset)
-{
-	Offset = offset;
+//设置装备栏的图片
+void RepoLayer::setEquipImg(int type) {
+	Size winSize = Director::getInstance()->getWinSize();
+	auto origin = Director::getInstance()->getVisibleOrigin();
+	stringstream filename1;
+	stringstream filename2;
+	stringstream filename3;
+	stringstream filename4;
+	stringstream filename5;
+	stringstream filename6;
+	stringstream filename7;
+	stringstream filename8;
+	stringstream filename9;
+	filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_02.png";
+	filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_02.png";
+	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_02.png";
+	filename4 << "res/UI/plane_parts/playerShip" << type << "_blue_01.png";
+	filename5 << "res/UI/plane_parts/playerShip" << type << "_orange_01.png";
+	filename6 << "res/UI/plane_parts/playerShip" << type << "_red_01.png";
+	filename7 << "res/UI/plane_parts/playerShip" << type << "_blue_04.png";
+	filename8 << "res/UI/plane_parts/playerShip" << type << "_orange_04.png";
+	filename9 << "res/UI/plane_parts/playerShip" << type << "_red_04.png";
+
+	_equip_1 = Sprite::create(filename1.str().c_str());
+	_equip_1->setPosition(Vec2(winSize.width *0.2, winSize.height *0.5));
+	this->addChild(_equip_1, 3);
+
+	_equip_1_b = Sprite::create(filename2.str().c_str());
+	_equip_1_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.5));
+	this->addChild(_equip_1_b, 2);
+	//CCLOG("%f \n", Vec2(_equip_1_b->getPosition()).x);
+
+	_equip_1_c = Sprite::create(filename3.str().c_str());
+	_equip_1_c->setPosition(Vec2(winSize.width *2.2, origin.y + winSize.height *0.5));
+	this->addChild(_equip_1_c, 2);
+
+	_equip_2 = Sprite::create(filename4.str().c_str());
+	_equip_2->setPosition(Vec2(winSize.width *0.2, winSize.height *0.3));
+	this->addChild(_equip_2, 2);
+
+	_equip_2_b = Sprite::create(filename5.str().c_str());
+	_equip_2_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.3));
+	this->addChild(_equip_2_b, 2);
+
+	_equip_2_c = Sprite::create(filename6.str().c_str());
+	_equip_2_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.3));
+	this->addChild(_equip_2_c, 2);
+
+	_equip_3 = Sprite::create(filename7.str().c_str());
+	_equip_3->setPosition(Vec2(winSize.width *0.2, winSize.height *0.1));
+	this->addChild(_equip_3, 2);
+
+	_equip_3_b = Sprite::create(filename8.str().c_str());
+	_equip_3_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.1));
+	this->addChild(_equip_3_b, 2);
+
+	_equip_3_c = Sprite::create(filename9.str().c_str());
+	_equip_3_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.1));
+	this->addChild(_equip_3_c, 2);
+
 }
-
-void RepoLayer::setTag(int tag)
-{
-	Tag = tag;
-}
-
-
 
 //监听键盘修改RepoLayer::Offset
 void RepoLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
@@ -440,7 +453,7 @@ void RepoLayer::equipUpdate(float dt)
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	//CCLOG("%s \n", "A string");
 	switch (key) {
-	case EventKeyboard::KeyCode::KEY_S:
+	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
 		if (_equip_1->getPositionX() > -1080) {
 			_equip_1->setPositionX(_equip_1->getPositionX() - winSize.width);
 			_equip_1_b->setPositionX(_equip_1_b->getPositionX() - winSize.width);

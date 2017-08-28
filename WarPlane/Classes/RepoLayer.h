@@ -16,14 +16,13 @@ USING_NS_CC;
 		//virtual void onExit();
 		//声明单点触摸回调函数
 		//bool touchBegan(Touch * touch, Event * event);
-
+		void setEquipImg(int type);
 
 		void menuCallBack_1(Ref * psender);//传递被点击的菜单的对象
 		void menuCallBack_2(Ref * psender);//传递被点击的菜单的对象
 		void menuCallBack_3(Ref * psender);//传递被点击的菜单的对象
 		//void menuCallBack_4(Ref * psender);//传递被点击的菜单的对象
-		void setOffset(float);
-		void setTag(int);
+	
 
 
 		//监听键盘事件
@@ -31,28 +30,19 @@ USING_NS_CC;
 		virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 		virtual void equipUpdate(float dt);
 	
-		//void schedule(SEL_SCHEDULE selector, float interval);
-		//long getCurrentTime();
+	
 		//返回关卡选择
 		void CallMenu(Ref *pSender);
 		SceneManager * tsm;
 
-		//int getBarLength(int life);
-		//virtual bool onTouchBegan(Touch *touch, Event *unused_event);
-
-
-		
-
-
+		//鼠标监听
+		//virtual bool onTouchBegan(Touch *touch, Event *event);
 	public:
 
 		/*void hpUpdate(int dt);
 		void spdUpdate(int dt);
 		void atkUpdate(int dt);
-
-		virtual bool onTouchBegan(Touch * touch, Event * event);
-
-		*/
+	*/
 		Sprite * _background;
 		Sprite * _background_1;
 		Sprite * _background_2;
@@ -63,7 +53,17 @@ USING_NS_CC;
 		Sprite * _background_3_white;
 
 		Sprite * _plane;//plane photo
-		//EquipManager * tsm;
+		//装备栏图片
+		Sprite * _equip_1;
+		Sprite * _equip_1_b;
+		Sprite * _equip_1_c;
+		Sprite * _equip_2;
+		Sprite * _equip_2_b;
+		Sprite * _equip_2_c;
+		Sprite * _equip_3;
+		Sprite * _equip_3_b;
+		Sprite * _equip_3_c;
+		//获取传入值的equip对象
 		Equip * _equip_head;
 		Equip * _equip_head_b;
 		Equip * _equip_head_c;
@@ -76,15 +76,7 @@ USING_NS_CC;
 		Equip * _equip_tail_b;
 		Equip * _equip_tail_c;
 
-		Sprite * _equip_1;
-		Sprite * _equip_1_b;
-		Sprite * _equip_1_c;
-		Sprite * _equip_2;
-		Sprite * _equip_2_b;
-		Sprite * _equip_2_c;
-		Sprite * _equip_3;
-		Sprite * _equip_3_b;
-		Sprite * _equip_3_c;
+		
 
 		Label * equipNum_1_1;
 		Label * equipNum_1_2;
