@@ -95,7 +95,7 @@ bool CreateLayer::init() {
 	nameEditBox->setScale(1.0, 0.9);
 	nameEditBox->setFontColor(Color3B(77, 77, 77));//设置字体颜色
 	nameEditBox->setFontName("fonts/simhei.ttf");//设置字体样式
-	nameEditBox->setPlaceHolder("Name:");//预置文本
+	nameEditBox->setPlaceHolder("请输入战机名");//预置文本
 	nameEditBox->setMaxLength(8);//最大长度
 	nameEditBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);//单行输入
 	nameEditBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_WORD);//输入标志位
@@ -379,7 +379,10 @@ void CreateLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		addWords(temp);
 		break;
 	case EventKeyboard::KeyCode::KEY_BACKSPACE:
-		minusWords(temp);
+		if (planeName != "") {
+			minusWords(temp);
+		}
+		
 
 	}
 	if (planeName != "") {
