@@ -6,7 +6,7 @@ class Equip :public Node
 public:
 	virtual bool init();
 	void setEquipNum(int);
-	void setEquipImg(const char * filename);
+	
 	void setType(int);
 	void setEHp(int);
 	void setEAtk(int);
@@ -19,6 +19,8 @@ public:
 	int getImpHp();
 	int getImpSpd();
 	int getImpAtk();
+
+	
 
 	CREATE_FUNC(Equip);
 
@@ -35,6 +37,6 @@ private:
 	int ESpd;
 
 	char _EquipType;
-	Sprite * _EquipImg;
+
 };
 

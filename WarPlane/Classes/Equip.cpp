@@ -1,5 +1,5 @@
 #include "Equip.h"
-
+using namespace std;
 
 void Equip::setType(int  type) {
 	switch (type) {
@@ -90,11 +90,8 @@ bool Equip::init() {
 	return true;
 }
 
-void Equip::setEquipImg(const char * filename) {
-	_EquipImg = Sprite::create(filename);
-	this->addChild(_EquipImg);
-	setContentSize(_EquipImg->getContentSize());
-}
+
+
 
 int Equip::getEquipNum() {
 	return _EquipNum;
