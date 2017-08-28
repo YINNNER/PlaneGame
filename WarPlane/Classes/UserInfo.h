@@ -29,6 +29,20 @@ private:
     int hp;
     int mp;
     int planeLevel;
+    //equip
+    //1.head
+    Vec2 _equip_head;
+    Vec2 _equip_head_b;
+    Vec2 _equip_head_c;
+    //2.arm
+    Vec2 _equip_arm;
+    Vec2 _equip_arm_b;
+    Vec2 _equip_arm_c;
+    //3.tail
+    Vec2 _equip_tail;
+    Vec2 _equip_tail_b;
+    Vec2 _equip_tail_c;
+    
 public:
     void setInfo(int tag);
     //点击保存进度调用的api
