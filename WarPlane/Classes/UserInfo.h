@@ -24,7 +24,7 @@ private:
     int planeType;
     int atk;
     int def;
-    int exp;
+    int spd;
     int gameLevel;
     int hp;
     int mp;
@@ -63,7 +63,7 @@ public:
     int getPlaneType();
     int getAtk();
     int getDef();
-    int getExp();
+    int getSpd();
     int getGameLevel();
     int getHp();
     int getMp();

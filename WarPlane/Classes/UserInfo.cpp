@@ -16,7 +16,7 @@ UserInfo::UserInfo(){
     planeType=0;
     atk=0;
     def=0;
-    exp=0;
+    spd=0;
     gameLevel=1;
     hp=500;
     mp=500;
@@ -46,7 +46,7 @@ UserInfo::UserInfo(UserInfo const & userInfo){
     saveDay=userInfo.saveDay;
     atk=userInfo.atk;
     def=userInfo.def;
-    exp=userInfo.exp;
+    spd=userInfo.spd;
     gameLevel=userInfo.gameLevel;
     hp=userInfo.hp;
     mp=userInfo.mp;
@@ -69,7 +69,10 @@ ValueMap UserInfo::readPlist(){
     if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        path = "./res/userInfo.plist";
+        path = "res/userInfo.plist";
+        std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
+        CCLOG("read the plist file at %s", _fullPath.c_str());
+
     }
     else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     {
@@ -105,7 +108,7 @@ void UserInfo::setInfo(int tag){
     planeType=dict["planeType"].asInt();
     atk=dict["atk"].asInt();
     def=dict["def"].asInt();
-    exp=dict["exp"].asInt();
+    spd=dict["spd"].asInt();
     gameLevel=dict["gameLevel"].asInt();
     hp=dict["hp"].asInt();
     mp=dict["mp"].asInt();
@@ -171,7 +174,10 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 	{
 		//是MAC平台
-		path = "./res/userInfo.plist";
+		path = "res/userInfo.plist";
+        std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
+        CCLOG("see the plist file at %s", _fullPath.c_str());
+
 	}
 	else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	{
@@ -199,7 +205,7 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	user->setObject(__String::create(userInfo.saveDay), "saveDay");
 	user->setObject(__Integer::create(userInfo.atk), "atk");
 	user->setObject(__Integer::create(userInfo.def), "def");
-	user->setObject(__Integer::create(userInfo.exp), "exp");
+	user->setObject(__Integer::create(userInfo.spd), "spd");
 	user->setObject(__Integer::create(userInfo.gameLevel), "gameLevel");
 	user->setObject(__Integer::create(userInfo.hp), "hp");
 	user->setObject(__Integer::create(userInfo.mp), "mp");
@@ -258,7 +264,7 @@ std::string UserInfo::getUserName(){return userName;}
 int UserInfo::getPlaneType(){return planeType;}
 int UserInfo::getAtk(){return atk;}
 int UserInfo::getDef(){return def;}
-int UserInfo::getExp(){return exp;}
+int UserInfo::getSpd(){return spd;}
 int UserInfo::getGameLevel(){return gameLevel;}
 int UserInfo::getHp(){return hp;}
 int UserInfo::getMp(){return mp;}

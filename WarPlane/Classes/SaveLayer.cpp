@@ -142,7 +142,7 @@ void SaveLayer::initInfoDetail( __Dictionary * user){
     user->setObject(__String::create(userInfo->saveDay), "saveDay");
     user->setObject(__Integer::create(10), "atk");
     user->setObject(__Integer::create(10), "def");
-    user->setObject(__Integer::create(0), "exp");
+    user->setObject(__Integer::create(0), "spd");
     user->setObject(__Integer::create(1), "gameLevel");
     user->setObject(__Integer::create(500), "hp");
     user->setObject(__Integer::create(500), "mp");
