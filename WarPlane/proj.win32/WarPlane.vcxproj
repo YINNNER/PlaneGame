@@ -155,6 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Flg.cpp" />
     <ClCompile Include="..\Classes\Fuel.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
+    <ClCompile Include="..\Classes\GamePause.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\HelpLayer.cpp" />
     <ClCompile Include="..\Classes\LoadLayer.cpp" />
@@ -180,6 +181,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Flg.h" />
     <ClInclude Include="..\Classes\Fuel.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
+    <ClInclude Include="..\Classes\GamePause.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\HelpLayer.h" />
     <ClInclude Include="..\Classes\LoadLayer.h" />

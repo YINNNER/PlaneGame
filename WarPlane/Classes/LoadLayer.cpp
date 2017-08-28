@@ -1,6 +1,7 @@
 #include "LoadLayer.h"
 #include "SimpleAudioEngine.h"
 using namespace CocosDenshion;
+
 bool LoadLayer::init() {
 	auto winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
@@ -44,11 +45,14 @@ bool LoadLayer::init() {
 	m_numSp = 19;
 	loading();
 */
+
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/a1CreatePlayer/createScene.plist");
 	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/background1.mp3");
 	SimpleAudioEngine::sharedEngine()->preloadEffect("music/trans1.wav");
 	
 	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("music/background3.mp3",true);
 	scheduleOnce(CC_SCHEDULE_SELECTOR(LoadLayer::onScheduleOnce),3.0f);
+
 	return true;
 }
 
@@ -58,46 +62,4 @@ void LoadLayer::onScheduleOnce(float dt){
 	int transiTime = 1;
 	SceneManager::goMenuLayer(tag,transiTime);
 
-}
-
-void LoadLayer::loading() {
-
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/1Menu/title.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/1Menu/new.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/1Menu/newS.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/1Menu/load.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/1Menu/loadS.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/1Menu/option.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/1Menu/optionS.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/1Menu/exit.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/1Menu/exitS.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a1CreatePlayer/plane1_unselected.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a1CreatePlayer/plane3_unselected.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a1CreatePlayer/bar1.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a1CreatePlayer/bar2.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a1CreatePlayer/bar3.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a1CreatePlayer/createButton.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a1CreatePlayer/createButtonS.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a1CreatePlayer/background.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
-
-}
-void LoadLayer::loadingCallback(Object *pSender) {
-	m_loadedSp++;
-
-	char buf_str[56];
-	sprintf(buf_str, "%d%d", (int)(((float)m_loadedSp / m_numSp) * 100), m_numSp);
-	percentLabel->setString(buf_str);//更新percentLabel的值  
-
-	float newPercent = 100 - ((float)m_numSp - (float)m_loadedSp) / ((float)m_numSp / 100);//计算进度条当前的百分比  
-																						   //因为加载图片速度很快，所以就没有使用ProgressTo，  
-																						   //或者ProgressFromTo这种动作来更新进度条  
-	loadProgress->setPercentage(newPercent);//更新进度条  
-
-											//图片加载完成后  
-	if (m_loadedSp == m_numSp)
-	{
-		this->removeChild(loadProgress);//将添加的几个对象删除掉  
-		this->removeChild(percentLabel);
-		this->removeChild(loadLabel);
-	}
 }

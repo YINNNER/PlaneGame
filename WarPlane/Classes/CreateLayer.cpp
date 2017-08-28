@@ -14,14 +14,17 @@ bool CreateLayer::init() {
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	planeName = "";
 	planeType = 0;
+	
 
 	auto _background = Sprite::create("res/UI/1Menu/background.png");
 	_background->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height / 2));
 	auto scale = winSize.width / _background->getContentSize().width;
 	_background->setScale(scale);
 	this->addChild(_background);
+	//SpriteBatchNode*batchNode = SpriteBatchNode::create("res/UI/a1CreatePlayer/createScene.png");
 
-	auto show1 = MenuItemImage::create("res/UI/a1CreatePlayer/plane1_unselected.png", "res/UI/a1CreatePlayer/plane1_unselected.png", CC_CALLBACK_1(CreateLayer::CallBack, this));
+
+	auto show1 = MenuItemImage::create("res/UI/a1CreatePlayer/plane1_unselected.png","res/UI/a1CreatePlayer/plane1_unselected.png", CC_CALLBACK_1(CreateLayer::CallBack, this));
 	show1->setPosition(Vec2(winSize.width *0.18, winSize.height*0.6));
 	show1->setTag(10);
 	selected_1 = Sprite::create("res/UI/a1CreatePlayer/bar1.png");
@@ -50,7 +53,7 @@ bool CreateLayer::init() {
 	this->addChild(selected_3, 1);
 	selected_3->setVisible(false);
 
-	auto menu1 = Menu::create(show1, show2, show3, NULL);
+	auto menu1 = Menu::create(show1,show2, show3, NULL);
 	menu1->setPosition(Point::ZERO);
 	this->addChild(menu1, 0);
 
@@ -71,7 +74,7 @@ bool CreateLayer::init() {
 	auto menu2 = Menu::create(menuItem_1, back, NULL);
 	menu2->setPosition(Point::ZERO);
 	this->addChild(menu2);
-
+	
 
 	
 
