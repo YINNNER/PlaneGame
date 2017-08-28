@@ -70,6 +70,16 @@ public:
     int getPlaneLevel();
 	std::string getSysTime();
 	std::string getSysDay();
+    //equip
+    Vec2 get_equip_head();
+    Vec2 get_equip_head_b();
+    Vec2 get_equip_head_c();
+    Vec2 get_equip_arm();
+    Vec2 get_equip_arm_b();
+    Vec2 get_equip_arm_c();
+    Vec2 get_equip_tail();
+    Vec2 get_equip_tail_b();
+    Vec2 get_equip_tail_c();
     
 };
 
