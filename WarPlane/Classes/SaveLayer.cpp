@@ -222,8 +222,11 @@ void SaveLayer::initInfo(){
     fullPath<< writablePath <<"userInfo.plist";
     //将字典对象Root写入属性列表文件中
     //std::stringstream a; a.str().c_str();//---->string--->char *
-    if(Root->writeToFile(fullPath.str().c_str()))
+    if(Root->writeToFile(fullPath.str().c_str())){
         log("see the plist file at %s",fullPath.str().c_str());
+        std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(fullPath.str());
+        CCLOG("see the plist file at %s", _fullPath.c_str());
+    }
     else
         log("write plist file failed");
     

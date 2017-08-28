@@ -1,5 +1,25 @@
 #include"RepoLayer.h"
 using namespace::std;
+
+RepoLayer * RepoLayer::createRepo(UserInfo &userInfo){
+    
+    RepoLayer *pRet = new(std::nothrow) RepoLayer();
+    user=userInfo;
+    
+    if (pRet && pRet->init())
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+    
+}
+
 bool RepoLayer::init() {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();

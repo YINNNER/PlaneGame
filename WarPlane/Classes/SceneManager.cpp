@@ -183,8 +183,8 @@ void SceneManager::goSetLayer(int tag) {
 
 void SceneManager::goRepoLayer(int tag,UserInfo &userInfo) {
 	auto repoScene = Scene::create();
-	auto layer = RepoLayer::create();
-	layer->user = userInfo;
+    auto layer = new RepoLayer();
+    layer->createRepo(userInfo);
 	repoScene->addChild(layer);
 
 	if (tag == 1) {

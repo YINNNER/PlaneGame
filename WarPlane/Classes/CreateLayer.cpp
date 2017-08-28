@@ -1,7 +1,8 @@
 #include "CreateLayer.h"
 #include "SimpleAudioEngine.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
 #include <Winuser.h>
-
+#endif
 using namespace CocosDenshion;
 
 bool CreateLayer::capslock = false;
@@ -79,21 +80,22 @@ bool CreateLayer::init() {
 
 	
 
-
-	////编辑框
-	//nameEditBox = EditBox::create(CCSizeMake(250, 50), Scale9Sprite::create("res/UI/a1CreatePlayer/editBar.png"));
-	//nameEditBox->setPosition(Vec2(winSize.width*0.6, winSize.height*0.25));
-	//nameEditBox->setScale(1.0, 0.9);
-	//nameEditBox->setFontColor(Color3B(77, 77, 77));//设置字体颜色
-	//nameEditBox->setFontName("fonts/simhei.ttf");//设置字体样式
-	//nameEditBox->setPlaceHolder("Name:");//预置文本
-	//nameEditBox->setMaxLength(8);//最大长度
-	//nameEditBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);//单行输入
-	//nameEditBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_WORD);//输入标志位
-	//nameEditBox->setReturnType(cocos2d::ui::EditBox::KeyboardReturnType::DONE);//设置返回类型  
-	//nameEditBox->setDelegate(this);//当前类继承CCEditBoxDelegate类
-	//this->addChild(nameEditBox);
-
+    if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC){
+	//MAC编辑框
+	nameEditBox = EditBox::create(CCSizeMake(250, 50), Scale9Sprite::create("res/UI/a1CreatePlayer/editBar.png"));
+	nameEditBox->setPosition(Vec2(winSize.width*0.6, winSize.height*0.25));
+	nameEditBox->setScale(1.0, 0.9);
+	nameEditBox->setFontColor(Color3B(77, 77, 77));//设置字体颜色
+	nameEditBox->setFontName("fonts/simhei.ttf");//设置字体样式
+	nameEditBox->setPlaceHolder("Name:");//预置文本
+	nameEditBox->setMaxLength(8);//最大长度
+	nameEditBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);//单行输入
+	nameEditBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_WORD);//输入标志位
+	nameEditBox->setReturnType(cocos2d::ui::EditBox::KeyboardReturnType::DONE);//设置返回类型  
+	nameEditBox->setDelegate(this);//当前类继承CCEditBoxDelegate类
+	this->addChild(nameEditBox);
+    }
+    else if(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32){
 	//Win32编辑框
 	auto editBox = Sprite::create("res/UI/a1CreatePlayer/editBar.png");
 	editBox->setPosition(Vec2(winSize.width*0.6, winSize.height*0.25));
@@ -108,20 +110,27 @@ bool CreateLayer::init() {
 	this->addChild(cursor, 2);
 	auto cursorBlink = RepeatForever::create(Sequence::create(FadeOut::create(0.4f), FadeIn::create(0.4f), NULL));
 	cursor->runAction(cursorBlink);
-	
+    }
+    else ;
+        
 	return true;
+        
 }
 
 void CreateLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	key = keyCode;
 	CCLOG("%d",capslock);
+    
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
 	if (GetKeyState(VK_CAPITAL) & 0x1) {   //判断大小写状态
 		capslock = true;
 	}
 	else {
 		capslock = false;
-	}
+    }
+#endif
+    
 	std::string temp;
 	switch (key) {
 	case EventKeyboard::KeyCode::KEY_Q:
