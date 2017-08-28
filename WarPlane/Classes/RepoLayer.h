@@ -32,6 +32,7 @@ USING_NS_CC;
 	
 		//返回关卡选择
 		void CallMenu(Ref *pSender, UserInfo &userInfo);
+		void SaveEquip(Ref *pSender, UserInfo &userInfo);
 		SceneManager * tsm;
 
 		//鼠标监听
@@ -114,7 +115,7 @@ USING_NS_CC;
 		Sprite * AtkBar;
 		Sprite * SpdBar;
 
-		
+		UserInfo user;
 
 
 	private:

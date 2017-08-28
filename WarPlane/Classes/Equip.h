@@ -1,42 +1,20 @@
-#pragma once
 #include"cocos2d.h"
-using namespace cocos2d;
-class Equip :public Node
-{
+USING_NS_CC;
+class Equip :public Node {
 public:
+	CREATE_FUNC(Equip);
 	virtual bool init();
-	void setEquipNum(int);
-	
+
 	void setType(int);
-	void setEHp(int);
-	void setEAtk(int);
-	void setESpd(int);
-	int getEquipNum();
 	int getEAtk();
 	int getEHp();
 	int getESpd();
 	int getEquipType();
-	int getImpHp();
-	int getImpSpd();
-	int getImpAtk();
-
-	
-
-	CREATE_FUNC(Equip);
-
-	//static Equip * createWithSpriteFrameName(const char * spriteFrameName);
-
+	void setEquipImg(const char * filename);
 private:
 	int _ImpAtk;
 	int _ImpHp;
 	int _ImpSpd;
-	int _EquipNum;
-
-	int EHp;
-	int EAtk;
-	int ESpd;
-
-	char _EquipType;
-
+	int type;
+	Sprite * equipImg;
 };
-

@@ -1,9 +1,11 @@
 #include"RepoLayer.h"
 using namespace::std;
 bool RepoLayer::init() {
-
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
+
+
+
     //RepoLayer::Offset = 0;
 	//RepoLayer::Tag= 1;
 	//监听键盘事件
@@ -37,7 +39,7 @@ bool RepoLayer::init() {
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.5 ));
 	this->addChild(_background_3, 1);
 
-	auto _background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this,3));
+	auto _background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this, user.getPlaneType()));
 	_background_3_white_1->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.5 ));
 	_background_3_white_1->setScale(0.6);
 
@@ -45,7 +47,7 @@ bool RepoLayer::init() {
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.3 ));
 	this->addChild(_background_3, 1);
 
-	auto _background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_2, this,3));
+	auto _background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_2, this, user.getPlaneType()));
    _background_3_white_2->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.3 ));
    _background_3_white_2->setScale(0.6);//缩放0.5倍
 
@@ -53,28 +55,29 @@ bool RepoLayer::init() {
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.1 ));
 	this->addChild(_background_3, 1);
 
-	auto _background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this,3));
+	auto _background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this, user.getPlaneType()));
 	_background_3_white_3->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.1 ));
 	_background_3_white_3->setScale(0.6);//缩放0.5倍
 
 
 
 	//设置飞机图片
-	setPlaneImg(3);
+	CCLOG("%f \n" ,user.getPlaneType());
+	setPlaneImg(user.getPlaneType());
 
 	//设置装备列表9个
-	setEquipImg(3);
+	setEquipImg(user.getPlaneType());
 
 
 
 	//返回按钮
-	auto back = MenuItemImage::create("res/UI/a2SelectLevel/back.png", "res/UI/a2SelectLevel/backB.png", CC_CALLBACK_1(RepoLayer::CallMenu, this));
+	auto back = MenuItemImage::create("res/UI/a2SelectLevel/back.png", "res/UI/a2SelectLevel/backB.png", CC_CALLBACK_1(RepoLayer::CallMenu, this,user));
 	back->setPosition(Vec2(winSize.width*0.15, winSize.height*0.9));
 	back->setScale(0.55);
 	back->setTag(2);
 
 	//保存装备
-	auto save = MenuItemImage::create("res/UI/a6Repo/saveEquip.png", "res/UI/a6Repo/saveEquipS.png", CC_CALLBACK_1(RepoLayer::CallMenu, this));
+	auto save = MenuItemImage::create("res/UI/a6Repo/saveEquip.png", "res/UI/a6Repo/saveEquipS.png", CC_CALLBACK_1(RepoLayer::CallMenu, this,user));
 	save->setPosition(Vec2(winSize.width*0.8, winSize.height*0.9));
 	save->setScale(0.55);
 	save->setTag(2);
@@ -115,17 +118,17 @@ bool RepoLayer::init() {
 	_equip_head = Equip::create();
 	_equip_head->setType(1);
 	std::stringstream hp;
-	hp << (_equip_head->getImpHp());
+	hp << (_equip_head->getEHp());
 
 	_equip_head_b = Equip::create();
 	_equip_head_b->setType(2);
 	std::stringstream hp_b;
-	hp_b << (_equip_head_b->getImpHp());
+	hp_b << (_equip_head_b->getEHp());
 
 	 _equip_head_c = Equip::create();
 	 _equip_head_c->setType(3);
 	std::stringstream hp_c;
-	hp_c << (_equip_head_c->getImpHp());
+	hp_c << (_equip_head_c->getEHp());
 
 	Label * equipName_1 = Label::createWithTTF("部件名称    机身", "fonts/simhei.ttf", 15);
 	equipName_1->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.55 ));
@@ -159,17 +162,17 @@ bool RepoLayer::init() {
 	_equip_arm = Equip::create();
 	_equip_arm->setType(4);
 	std::stringstream atk;
-	atk << (_equip_arm->getImpAtk());
+	atk << (_equip_arm->getEAtk());
 
 	_equip_arm_b = Equip::create();
 	_equip_arm_b->setType(5);
 	std::stringstream atk_b;
-	atk_b << (_equip_arm_b->getImpAtk());
+	atk_b << (_equip_arm_b->getEAtk());
 
 	_equip_arm_c = Equip::create();
 	_equip_arm_c->setType(6);
 	std::stringstream atk_c;
-	atk_c << (_equip_arm_c->getImpAtk());
+	atk_c << (_equip_arm_c->getEAtk());
 	//d << (_equip_2->getEquipNum());
 
 	Label * equipName_2 = Label::createWithTTF("部件名称    机翼", "fonts/simhei.ttf", 15);
@@ -204,17 +207,17 @@ bool RepoLayer::init() {
 	_equip_tail = Equip::create();
 	_equip_tail->setType(7);
 	std::stringstream spd;
-	spd << (_equip_tail->getImpSpd());
+	spd << (_equip_tail->getESpd());
 
 	_equip_tail_b = Equip::create();
 	_equip_tail_b->setType(8);
 	std::stringstream spd_b;
-	spd_b << (_equip_tail_b->getImpSpd());
+	spd_b << (_equip_tail_b->getESpd());
 
 	_equip_tail_c = Equip::create();
 	_equip_tail_c->setType(9);
 	std::stringstream spd_c;
-	spd_c << (_equip_tail_c->getImpSpd());
+	spd_c << (_equip_tail_c->getESpd());
 	//f << (_equip_3->getEquipNum());
 
 	Label * equipName_3 = Label::createWithTTF("部件名称    机尾", "fonts/simhei.ttf", 15);
@@ -269,7 +272,7 @@ bool RepoLayer::init() {
 
 	HpBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	HpBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.798));
-	HpBar->setScale(0.25*(_equip_head->getImpHp()) / 1000, 0.5);
+	HpBar->setScale(0.25*(_equip_head->getEHp()) / 1000, 0.5);
 	HpBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(HpBar, 2);
 	/*
@@ -281,13 +284,13 @@ bool RepoLayer::init() {
 */
 	AtkBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.64, origin.y + winSize.height *0.718));
-	AtkBar->setScale(0.25*(_equip_arm->getImpAtk()) / 1000, 0.5);
+	AtkBar->setScale(0.25*(_equip_arm->getEAtk()) / 1000, 0.5);
 	AtkBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(AtkBar, 2);
 
 	SpdBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	SpdBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.678));
-	SpdBar->setScale(0.25*(_equip_tail->getImpSpd()) / 1000, 0.5);
+	SpdBar->setScale(0.25*(_equip_tail->getESpd()) / 1000, 0.5);
 	SpdBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(SpdBar, 2);
 
@@ -307,17 +310,17 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 	filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_02.png";
 	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_02.png";
 	//加那个图片
-	if (_equip_1->getPositionX()==120) {
+	if (_equip_1->getPositionX()==120 && user.get_equip_head().x==1) {
 		_body_1 = Sprite::create(filename1.str().c_str());
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1, 2);
 	}
-	else if (_equip_1_b->getPositionX()==120) {
+	else if (_equip_1_b->getPositionX()==120 && user.get_equip_head_b().x == 1) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
 	}
-	else if (_equip_1_c->getPositionX()==120) {
+	else if (_equip_1_c->getPositionX()==120 && user.get_equip_head_c().x == 1) {
 		_body_1_c = Sprite::create(filename3.str().c_str());
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1_c, 2);
@@ -340,17 +343,17 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 	filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_01.png";
 	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_01.png";
 
-	if (_equip_1->getPositionX() == 120) {
+	if (_equip_1->getPositionX() == 120&&user.get_equip_arm().x == 1) {
 		_wing_1 = Sprite::create(filename1.str().c_str());
 		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1, 2);
 	}
-	else if (_equip_1_b->getPositionX() == 120) {
+	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b().x == 1) {
 		_wing_1_b = Sprite::create(filename2.str().c_str());
 		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_b, 2);
 	}
-	else if (_equip_1_c->getPositionX() == 120) {
+	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_c().x == 1) {
 		_wing_1_c = Sprite::create(filename3.str().c_str());
 		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_c, 2);
@@ -363,17 +366,17 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 	filename5 << "res/UI/plane_parts/playerShip" << type << "_orange_03.png";
 	filename6 << "res/UI/plane_parts/playerShip" << type << "_red_03.png";
 
-	if (_equip_1->getPositionX() == 120) {
+	if (_equip_1->getPositionX() == 120 && user.get_equip_arm().x == 1) {
 		_wing_2 = Sprite::create(filename4.str().c_str());
 		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2, 2);
 	}
-	else if (_equip_1_b->getPositionX() == 120) {
+	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b().x == 1) {
 		_wing_2_b = Sprite::create(filename5.str().c_str());
 		_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2_b, 2);
 	}
-	else if (_equip_1_c->getPositionX() == 120) {
+	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_b().x == 1) {
 		_wing_2_c = Sprite::create(filename6.str().c_str());
 		_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2_c, 2);
@@ -393,24 +396,21 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 	filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_04.png";
 	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_04.png";
 
-	if (_equip_1->getPositionX() == 120) {
+	if (_equip_1->getPositionX() == 120 && user.get_equip_tail().x == 1) {
 		_tail_1 = Sprite::create(filename1.str().c_str());
 		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		this->addChild(_tail_1, 2);
 	}
-	else if (_equip_1_b->getPositionX() == 120) {
+	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_tail_b().x == 1) {
 		_tail_1_b = Sprite::create(filename2.str().c_str());
 		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		this->addChild(_tail_1_b, 2);
 	}
-	else if (_equip_1_c->getPositionX() == 120) {
+	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_tail_c().x == 1) {
 		_tail_1_c = Sprite::create(filename3.str().c_str());
 		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		this->addChild(_tail_1_c, 2);
 	}
-
-	
-	
 }
 
 
@@ -418,6 +418,11 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 void RepoLayer::CallMenu(Ref * pSender,UserInfo & userInfo)
 {
 	SceneManager::goMapLayer(2,user);
+}
+
+void RepoLayer::SaveEquip(Ref * pSender, UserInfo & userInfo)
+{
+	SceneManager::goMapLayer(2, user);
 }
 
 //设置装备栏的图片
@@ -486,11 +491,91 @@ void RepoLayer::setEquipImg(int type) {
 void RepoLayer::setPlaneImg(int type) {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
-	stringstream filename1;
-	filename1 << "res/UI/plane_parts/playerShip" << type << "_green.png";
-	_plane = Sprite::create(filename1.str().c_str());
+	stringstream filename;
+
+	filename << "res/UI/plane_parts/playerShip" << type << "_green.png";
+	_plane = Sprite::create(filename.str().c_str());
 	_plane->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 3 / 4));
 	this->addChild(_plane, 2);
+	if (user.get_equip_head().y == 1) {
+		stringstream filename1;
+		filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_02.png";
+		_body_1 = Sprite::create(filename1.str().c_str());
+		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
+		this->addChild(_body_1, 2);
+	}
+	else if (user.get_equip_head_b().y == 1) {
+		stringstream filename2;
+		filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_02.png";
+		_body_1_b = Sprite::create(filename2.str().c_str());
+		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
+		this->addChild(_body_1_b, 2);
+	}
+	else if (user.get_equip_head_c().y == 1) {
+		stringstream filename3;
+		filename3 << "res/UI/plane_parts/playerShip" << type << "_red_02.png";
+		_body_1_c = Sprite::create(filename3.str().c_str());
+		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
+		this->addChild(_body_1_c, 2);
+	}
+
+	else if (user.get_equip_arm().y == 1) {
+		stringstream filename4;
+		stringstream filename7;
+		filename4 << "res/UI/plane_parts/playerShip" << type << "_blue_01.png";
+		filename7 << "res/UI/plane_parts/playerShip" << type << "_blue_03.png";
+		_wing_1 = Sprite::create(filename4.str().c_str());
+		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
+		this->addChild(_wing_1, 2);
+		_wing_2 = Sprite::create(filename7.str().c_str());
+		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
+		this->addChild(_wing_2, 2);
+	}
+	else if (user.get_equip_arm_b().y == 1) {
+		stringstream filename5;
+		stringstream filename8;
+		filename5 << "res/UI/plane_parts/playerShip" << type << "_orange_01.png";
+		filename8 << "res/UI/plane_parts/playerShip" << type << "_orange_03.png";
+		_wing_1_b = Sprite::create(filename5.str().c_str());
+		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
+		this->addChild(_wing_1_b, 2);
+		_wing_2_b = Sprite::create(filename8.str().c_str());
+		_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
+		this->addChild(_wing_2_b, 2);
+	}
+	else if (user.get_equip_arm_c().y == 1) {
+		stringstream filename6;
+		stringstream filename9;
+		filename6 << "res/UI/plane_parts/playerShip" << type << "_red_01.png";
+		filename9 << "res/UI/plane_parts/playerShip" << type << "_red_03.png";
+		_wing_1_c = Sprite::create(filename6.str().c_str());
+		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
+		this->addChild(_wing_1_c, 2);
+		_wing_2_c = Sprite::create(filename9.str().c_str());
+		_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
+		this->addChild(_wing_2_c, 2);
+	}
+	else if (user.get_equip_tail().y == 1) {
+		stringstream filename1;
+		filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_04.png";
+		_tail_1 = Sprite::create(filename1.str().c_str());
+		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		this->addChild(_tail_1, 2);
+	}
+	else if (user.get_equip_tail_b().y == 1) {
+		stringstream filename2;
+		filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_04.png";
+		_tail_1_b = Sprite::create(filename2.str().c_str());
+		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		this->addChild(_tail_1_b, 2);
+	}
+	else if (user.get_equip_tail_c().y == 1) {
+		stringstream filename3;
+		filename3 << "res/UI/plane_parts/playerShip" << type << "_red_04.png";
+		_tail_1_c = Sprite::create(filename3.str().c_str());
+		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		this->addChild(_tail_1_c, 2);
+	}
 }
 
 
