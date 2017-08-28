@@ -39,7 +39,7 @@ bool RepoLayer::init() {
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.5 ));
 	this->addChild(_background_3, 1);
 
-	auto _background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this, user.getPlaneType()));
+	auto _background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this, 1));
 	_background_3_white_1->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.5 ));
 	_background_3_white_1->setScale(0.6);
 
@@ -47,7 +47,7 @@ bool RepoLayer::init() {
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.3 ));
 	this->addChild(_background_3, 1);
 
-	auto _background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_2, this, user.getPlaneType()));
+	auto _background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_2, this, 1));
    _background_3_white_2->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.3 ));
    _background_3_white_2->setScale(0.6);//缩放0.5倍
 
@@ -55,7 +55,7 @@ bool RepoLayer::init() {
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.1 ));
 	this->addChild(_background_3, 1);
 
-	auto _background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this, user.getPlaneType()));
+	auto _background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this, 1));
 	_background_3_white_3->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.1 ));
 	_background_3_white_3->setScale(0.6);//缩放0.5倍
 
@@ -63,10 +63,10 @@ bool RepoLayer::init() {
 
 	//设置飞机图片
 	CCLOG("%f \n" ,user.getPlaneType());
-	setPlaneImg(user.getPlaneType());
+	setPlaneImg(1);
 
 	//设置装备列表9个
-	setEquipImg(user.getPlaneType());
+	setEquipImg(1);
 
 
 
@@ -272,25 +272,19 @@ bool RepoLayer::init() {
 
 	HpBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	HpBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.798));
-	HpBar->setScale(0.25*(_equip_head->getEHp()) / 1000, 0.5);
+	HpBar->setScale(0.25*(user.getHp()) / 1000, 0.5);
 	HpBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(HpBar, 2);
-	/*
-	EnBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
-	EnBar->setPosition(Vec2(origin.x+winSize.width *0.665, origin.y+winSize.height *0.76));
-	EnBar->setScale(0.25*(_equip_2->getImpAtk()) / 1000, 0.5);
-	EnBar->setAnchorPoint(Vec2(0, 0));
-	this->addChild(EnBar);
-*/
+
 	AtkBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.64, origin.y + winSize.height *0.718));
-	AtkBar->setScale(0.25*(_equip_arm->getEAtk()) / 1000, 0.5);
+	AtkBar->setScale(0.25*(user.getAtk()) / 1000, 0.5);
 	AtkBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(AtkBar, 2);
 
 	SpdBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	SpdBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.678));
-	SpdBar->setScale(0.25*(_equip_tail->getESpd()) / 1000, 0.5);
+	SpdBar->setScale(0.25*(user.getSpd()) / 1000, 0.5);
 	SpdBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(SpdBar, 2);
 
@@ -309,21 +303,24 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 	filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_02.png";
 	filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_02.png";
 	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_02.png";
-	//加那个图片
+	
 	if (_equip_1->getPositionX()==120 && user.get_equip_head().x==1) {
 		_body_1 = Sprite::create(filename1.str().c_str());
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1, 2);
+		HpBar->setScale(0.25*(user.getHp()+10) / 1000, 0.5);
 	}
 	else if (_equip_1_b->getPositionX()==120 && user.get_equip_head_b().x == 1) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
+		HpBar->setScale(0.25*(user.getHp() + 50) / 1000, 0.5);
 	}
 	else if (_equip_1_c->getPositionX()==120 && user.get_equip_head_c().x == 1) {
 		_body_1_c = Sprite::create(filename3.str().c_str());
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1_c, 2);
+		HpBar->setScale(0.25*(user.getHp() + 100) / 1000, 0.5);
 	}
 
 	
@@ -347,16 +344,19 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_1 = Sprite::create(filename1.str().c_str());
 		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1, 2);
+		AtkBar->setScale(0.25*(user.getAtk()+10) / 1000, 0.5);
 	}
 	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b().x == 1) {
 		_wing_1_b = Sprite::create(filename2.str().c_str());
 		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_b, 2);
+		AtkBar->setScale(0.25*(user.getAtk()+50) / 1000, 0.5);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_c().x == 1) {
 		_wing_1_c = Sprite::create(filename3.str().c_str());
 		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_c, 2);
+		AtkBar->setScale(0.25*(user.getAtk()+100) / 1000, 0.5);
 	}
 
 	stringstream filename4;
@@ -370,16 +370,19 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_2 = Sprite::create(filename4.str().c_str());
 		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2, 2);
+		SpdBar->setScale(0.25*(user.getSpd()+10) / 1000, 0.5);
 	}
 	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b().x == 1) {
 		_wing_2_b = Sprite::create(filename5.str().c_str());
 		_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2_b, 2);
+		SpdBar->setScale(0.25*(user.getSpd()+50) / 1000, 0.5);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_b().x == 1) {
 		_wing_2_c = Sprite::create(filename6.str().c_str());
 		_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2_c, 2);
+		SpdBar->setScale(0.25*(user.getSpd()+100) / 1000, 0.5);
 	}
 
 	
@@ -497,12 +500,14 @@ void RepoLayer::setPlaneImg(int type) {
 	_plane = Sprite::create(filename.str().c_str());
 	_plane->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 3 / 4));
 	this->addChild(_plane, 2);
-	if (user.get_equip_head().y == 1) {
+	CCLOG("%f /n", user.get_equip_head().y);
+	if (user.get_equip_head().y == 0) {
 		stringstream filename1;
 		filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_02.png";
 		_body_1 = Sprite::create(filename1.str().c_str());
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1, 2);
+		HpBar->setScale(0.25*(user.getHp() + 10) / 1000, 0.5);
 	}
 	else if (user.get_equip_head_b().y == 1) {
 		stringstream filename2;
@@ -510,6 +515,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
+		HpBar->setScale(0.25*(user.getHp() + 50) / 1000, 0.5);
 	}
 	else if (user.get_equip_head_c().y == 1) {
 		stringstream filename3;
@@ -517,6 +523,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_body_1_c = Sprite::create(filename3.str().c_str());
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1_c, 2);
+		HpBar->setScale(0.25*(user.getHp() + 100) / 1000, 0.5);
 	}
 
 	else if (user.get_equip_arm().y == 1) {
@@ -530,6 +537,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_wing_2 = Sprite::create(filename7.str().c_str());
 		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2, 2);
+		AtkBar->setScale(0.25*(user.getAtk()+10) / 1000, 0.5);
 	}
 	else if (user.get_equip_arm_b().y == 1) {
 		stringstream filename5;
@@ -542,6 +550,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_wing_2_b = Sprite::create(filename8.str().c_str());
 		_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2_b, 2);
+		AtkBar->setScale(0.25*(user.getAtk()+50) / 1000, 0.5);
 	}
 	else if (user.get_equip_arm_c().y == 1) {
 		stringstream filename6;
@@ -554,6 +563,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_wing_2_c = Sprite::create(filename9.str().c_str());
 		_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2_c, 2);
+		AtkBar->setScale(0.25*(user.getAtk()+100) / 1000, 0.5);
 	}
 	else if (user.get_equip_tail().y == 1) {
 		stringstream filename1;
@@ -561,6 +571,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_tail_1 = Sprite::create(filename1.str().c_str());
 		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		this->addChild(_tail_1, 2);
+		SpdBar->setScale(0.25*(user.getSpd()+10) / 1000, 0.5);
 	}
 	else if (user.get_equip_tail_b().y == 1) {
 		stringstream filename2;
@@ -568,6 +579,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_tail_1_b = Sprite::create(filename2.str().c_str());
 		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		this->addChild(_tail_1_b, 2);
+		SpdBar->setScale(0.25*(user.getSpd()+50) / 1000, 0.5);
 	}
 	else if (user.get_equip_tail_c().y == 1) {
 		stringstream filename3;
@@ -575,6 +587,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_tail_1_c = Sprite::create(filename3.str().c_str());
 		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		this->addChild(_tail_1_c, 2);
+		SpdBar->setScale(0.25*(user.getSpd()+100) / 1000, 0.5);
 	}
 }
 
