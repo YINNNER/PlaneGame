@@ -14,11 +14,15 @@ public:
 	
 	void CallBack(Ref *pSender);
 	
+	static int getEffectState();
+	static int effectState;
 
 private:
 	Sprite *backCir;
 	Sprite *effectCir;
 	Sprite *backBar;
 	Sprite *effectBar;
+
 };
+
 

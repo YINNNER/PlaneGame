@@ -1,5 +1,6 @@
 #include "HelpLayer.h"
 #include "SimpleAudioEngine.h"
+#include "SetLayer.h"
 using namespace CocosDenshion;
 
 bool HelpLayer::init() {
@@ -29,6 +30,8 @@ bool HelpLayer::init() {
 }
 void HelpLayer::CallBack(Ref *pSender) {
 	int tag = 2;
-	SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+	}
 	SceneManager::goSetLayer(tag);
 }

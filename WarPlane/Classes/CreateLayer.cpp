@@ -1,9 +1,10 @@
 #include "CreateLayer.h"
 #include "SimpleAudioEngine.h"
+#include <Winuser.h>
 
 using namespace CocosDenshion;
 
-
+bool CreateLayer::capslock = false;
 CreateLayer::CreateLayer() {
 	
 }
@@ -14,6 +15,7 @@ bool CreateLayer::init() {
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	planeName = "";
 	planeType = 0;
+	addTimes = 0;
 	
 
 	auto _background = Sprite::create("res/UI/1Menu/background.png");
@@ -22,9 +24,8 @@ bool CreateLayer::init() {
 	_background->setScale(scale);
 	this->addChild(_background);
 	//SpriteBatchNode*batchNode = SpriteBatchNode::create("res/UI/a1CreatePlayer/createScene.png");
-
-
-	auto show1 = MenuItemImage::create("res/UI/a1CreatePlayer/plane1_unselected.png","res/UI/a1CreatePlayer/plane1_unselected.png", CC_CALLBACK_1(CreateLayer::CallBack, this));
+	
+	MenuItemImage* show1 = MenuItemImage::create("res/UI/a1CreatePlayer/plane1_unselected.png","res/UI/a1CreatePlayer/plane1_unselected.png", CC_CALLBACK_1(CreateLayer::CallBack, this));
 	show1->setPosition(Vec2(winSize.width *0.18, winSize.height*0.6));
 	show1->setTag(10);
 	selected_1 = Sprite::create("res/UI/a1CreatePlayer/bar1.png");
@@ -79,27 +80,348 @@ bool CreateLayer::init() {
 	
 
 
-	//编辑框
-	nameEditBox = EditBox::create(CCSizeMake(250, 50), Scale9Sprite::create("res/UI/a1CreatePlayer/editBar.png"));
-	nameEditBox->setPosition(Vec2(winSize.width*0.6, winSize.height*0.25));
-	nameEditBox->setScale(1.0, 0.9);
-	nameEditBox->setFontColor(Color3B(77, 77, 77));//设置字体颜色
-	nameEditBox->setFontName("fonts/simhei.ttf");//设置字体样式
-	nameEditBox->setPlaceHolder("Name:");//预置文本
-	nameEditBox->setMaxLength(8);//最大长度
-	nameEditBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);//单行输入
-	nameEditBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_WORD);//输入标志位
-	nameEditBox->setReturnType(cocos2d::ui::EditBox::KeyboardReturnType::DONE);//设置返回类型  
-	nameEditBox->setDelegate(this);//当前类继承CCEditBoxDelegate类
-	this->addChild(nameEditBox);
+	////编辑框
+	//nameEditBox = EditBox::create(CCSizeMake(250, 50), Scale9Sprite::create("res/UI/a1CreatePlayer/editBar.png"));
+	//nameEditBox->setPosition(Vec2(winSize.width*0.6, winSize.height*0.25));
+	//nameEditBox->setScale(1.0, 0.9);
+	//nameEditBox->setFontColor(Color3B(77, 77, 77));//设置字体颜色
+	//nameEditBox->setFontName("fonts/simhei.ttf");//设置字体样式
+	//nameEditBox->setPlaceHolder("Name:");//预置文本
+	//nameEditBox->setMaxLength(8);//最大长度
+	//nameEditBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);//单行输入
+	//nameEditBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_WORD);//输入标志位
+	//nameEditBox->setReturnType(cocos2d::ui::EditBox::KeyboardReturnType::DONE);//设置返回类型  
+	//nameEditBox->setDelegate(this);//当前类继承CCEditBoxDelegate类
+	//this->addChild(nameEditBox);
 
 	//Win32编辑框
+	auto editBox = Sprite::create("res/UI/a1CreatePlayer/editBar.png");
+	editBox->setPosition(Vec2(winSize.width*0.6, winSize.height*0.25));
+	editBox->setScale(1.3, 0.9);
+	this->addChild(editBox,0);
+	auto listenerKeyboard = EventListenerKeyboard::create();
+	listenerKeyboard->onKeyPressed = CC_CALLBACK_2(CreateLayer::onKeyPressed, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyboard, this);
+	//this->schedule(schedule_selector(CreateLayer::addWords),1.0f);
+	cursor = Sprite::create("res/UI/a1CreatePlayer/cursor.png");
+	cursor->setPosition(Vec2(winSize.width*0.4, winSize.height*0.25));
+	this->addChild(cursor, 2);
+	auto cursorBlink = RepeatForever::create(Sequence::create(FadeOut::create(0.4f), FadeIn::create(0.4f), NULL));
+	cursor->runAction(cursorBlink);
 	
-
 	return true;
 }
 
+void CreateLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
+{
+	key = keyCode;
+	CCLOG("%d",capslock);
+	if (GetKeyState(VK_CAPITAL) & 0x1) {   //判断大小写状态
+		capslock = true;
+	}
+	else {
+		capslock = false;
+	}
+	std::string temp;
+	switch (key) {
+	case EventKeyboard::KeyCode::KEY_Q:
+		if (capslock) {
+			temp = "Q";
+		}
+		else {
+			temp = "q";
+		}
+		
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_W:
+		if (capslock) {
+			temp = "W";
+		}
+		else {
+			temp = "w";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_E:
+		if (capslock) {
+			temp = "E";
+		}
+		else {
+			temp = "e";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_R:
+		if (capslock) {
+			temp = "R";
+		}
+		else {
+			temp = "r";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_T:
+		if (capslock) {
+			temp = "T";
+		}
+		else {
+			temp = "q";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_Y:
+		if (capslock) {
+			temp = "Y";
+		}
+		else {
+			temp = "y";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_U:
+		if (capslock) {
+			temp = "U";
+		}
+		else {
+			temp = "u";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_I:
+		if (capslock) {
+			temp = "I";
+		}
+		else {
+			temp = "i";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_O:
+		if (capslock) {
+			temp = "O";
+		}
+		else {
+			temp = "o";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_P:
+		if (capslock) {
+			temp = "P";
+		}
+		else {
+			temp = "p";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_A:
+		if (capslock) {
+			temp = "A";
+		}
+		else {
+			temp = "a";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_S:
+		if (capslock) {
+			temp = "S";
+		}
+		else {
+			temp = "s";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_D:
+		if (capslock) {
+			temp = "D";
+		}
+		else {
+			temp = "d";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_F:
+		if (capslock) {
+			temp = "F";
+		}
+		else {
+			temp = "f";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_G:
+		if (capslock) {
+			temp = "G";
+		}
+		else {
+			temp = "g";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_H:
+		if (capslock) {
+			temp = "H";
+		}
+		else {
+			temp = "h";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_J:
+		if (capslock) {
+			temp = "J";
+		}
+		else {
+			temp = "j";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_K:
+		if (capslock) {
+			temp = "K";
+		}
+		else {
+			temp = "k";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_L:
+		if (capslock) {
+			temp = "L";
+		}
+		else {
+			temp = "l";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_Z:
+		if (capslock) {
+			temp = "Z";
+		}
+		else {
+			temp = "z";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_X:
+		if (capslock) {
+			temp = "X";
+		}
+		else {
+			temp = "x";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_C:
+		if (capslock) {
+			temp = "C";
+		}
+		else {
+			temp = "c";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_V:
+		if (capslock) {
+			temp = "V";
+		}
+		else {
+			temp = "v";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_B:
+		if (capslock) {
+			temp = "B";
+		}
+		else {
+			temp = "b";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_N:
+		if (capslock) {
+			temp = "N";
+		}
+		else {
+			temp = "n";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_M:
+		if (capslock) {
+			temp = "M";
+		}
+		else {
+			temp = "m";
+		}
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_BACKSPACE:
+		minusWords(temp);
+	}
+}
 
+void CreateLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
+{
+	if (key == keyCode)
+	{
+		key = EventKeyboard::KeyCode::KEY_NONE;
+	}
+}
+
+
+void CreateLayer::addWords(std::string temp) {
+	
+	auto winSize = Director::getInstance()->getWinSize();
+	auto word = Label::createWithSystemFont(temp.c_str(), "fonts/simhei.ttf", 20);
+	
+	
+	if (planeName.length() < 10) {
+		planeName += temp;
+		addTimes++;
+		label.pushBack(word);
+		int move = planeName.length();
+		CCLOG("%d", move);
+		auto setWord = label.at(addTimes-1);
+		auto vec = Vec2(winSize.width*0.38+move*10, winSize.height*0.24);
+		setWord->setAnchorPoint(Vec2(0,0));
+		setWord->setPosition(vec);
+		setWord->setColor(Color3B(0, 0, 0));
+		this->addChild(setWord,1);
+		auto cursorMove = MoveTo::create(0.1f, Vec2(vec.x+10, vec.y+8.5));
+		cursor->runAction(cursorMove);
+		
+		if (selected_1->isVisible() || selected_2->isVisible() || selected_3->isVisible()) {
+			menuItem_1->setEnabled(true);
+		}
+		
+		CCLOG("%s", planeName.c_str());
+	}
+	else {
+		auto label = Label::createWithSystemFont("太多字啦", "fonts/simhei.ttf", 20);
+		label->setPosition(Vec2(winSize.width*0.9, winSize.height*0.25));
+		this->addChild(label);
+	}
+}
+
+void CreateLayer::minusWords(std::string temp) {
+	auto winSize = Director::getInstance()->getWinSize();
+	
+	planeName.pop_back();
+	int move = planeName.length();
+	CCLOG("%d", move);
+	auto vec = Vec2(winSize.width*0.38 + (move+1) * 10, winSize.height*0.24);
+	
+	CCLOG("%s", planeName.c_str());
+	label.back()->removeFromParentAndCleanup(true);
+	label.popBack();
+	auto cursorMove = MoveTo::create(0.1f, Vec2(vec.x, vec.y + 8.5));
+	cursor->runAction(cursorMove);
+	addTimes--;
+}
 
 void CreateLayer::CallBack(Ref *pSender) {
 	int tag = ((MenuItem*)pSender)->getTag();
@@ -110,8 +432,10 @@ void CreateLayer::CallBack(Ref *pSender) {
 	{
 	case 1:
 	{
-		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
-		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
+		if (SetLayer::getEffectState() == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+		}
 		auto file = new UserInfo();
 		UserInfo user = file->createUser(planeName, planeType);
 		//CCLOG(user.getUserName().c_str());
@@ -120,13 +444,18 @@ void CreateLayer::CallBack(Ref *pSender) {
 
 	}break;
 	case 2: {
-		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
-		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
+		if (SetLayer::getEffectState() == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+		}
 		int transiTimes = 1;
 		SceneManager::goMenuLayer(tag,transiTimes);
 	}break;
 	case 10: {
-		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+		if (SetLayer::getEffectState() == 1) {
+			
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+		}
 		if (selected_2->isVisible())
 			selected_2->setVisible(false);
 		if (selected_3->isVisible())
@@ -138,7 +467,10 @@ void CreateLayer::CallBack(Ref *pSender) {
 		planeType = 1;
 	}break;
 	case 11: {
-		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+		if (SetLayer::getEffectState() == 1) {
+			
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+		}
 		if(selected_1->isVisible())
 			selected_1->setVisible(false);
 		if (selected_3->isVisible())
@@ -150,7 +482,10 @@ void CreateLayer::CallBack(Ref *pSender) {
 		planeType = 2;
 	}break;
 	case 12: {
-		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+		if (SetLayer::getEffectState() == 1) {
+			
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+		}
 		if (selected_1->isVisible())
 			selected_1->setVisible(false);
 		if (selected_2->isVisible())
