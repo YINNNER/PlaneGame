@@ -1,6 +1,6 @@
 #include "CreateLayer.h"
 #include "SimpleAudioEngine.h"
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32   //判断是mac平台还是win32
 #include <Winuser.h>
 #endif
 using namespace CocosDenshion;
@@ -77,7 +77,15 @@ bool CreateLayer::init() {
 	menu2->setPosition(Point::ZERO);
 	this->addChild(menu2);
 	
+	defaultLabel = Label::createWithSystemFont("请输10个以内字母支持大小写", "", 15);
+	defaultLabel->setColor(Color3B(72,72,72));
+	defaultLabel->setPosition(Vec2(winSize.width*0.55, winSize.height*0.25));
+	this->addChild(defaultLabel,1);
 
+	warning = Label::createWithSystemFont("太多字啦", "fonts/simhei.ttf", 20);
+	warning->setPosition(Vec2(winSize.width*0.9, winSize.height*0.25));
+	warning->setVisible(false);
+	this->addChild(warning);
 	
 
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC){
@@ -107,6 +115,7 @@ bool CreateLayer::init() {
 	//this->schedule(schedule_selector(CreateLayer::addWords),1.0f);
 	cursor = Sprite::create("res/UI/a1CreatePlayer/cursor.png");
 	cursor->setPosition(Vec2(winSize.width*0.4, winSize.height*0.25));
+	cursor->setVisible(false);
 	this->addChild(cursor, 2);
 	auto cursorBlink = RepeatForever::create(Sequence::create(FadeOut::create(0.4f), FadeIn::create(0.4f), NULL));
 	cursor->runAction(cursorBlink);
@@ -121,7 +130,8 @@ void CreateLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	key = keyCode;
 	CCLOG("%d",capslock);
-    
+	
+	
 #if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
 	if (GetKeyState(VK_CAPITAL) & 0x1) {   //判断大小写状态
 		capslock = true;
@@ -370,6 +380,15 @@ void CreateLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		break;
 	case EventKeyboard::KeyCode::KEY_BACKSPACE:
 		minusWords(temp);
+
+	}
+	if (planeName != "") {
+		defaultLabel->setVisible(false);
+		cursor->setVisible(true);
+	}
+	else {
+		defaultLabel->setVisible(true);
+		cursor->setVisible(false);
 	}
 }
 
@@ -389,6 +408,7 @@ void CreateLayer::addWords(std::string temp) {
 	
 	
 	if (planeName.length() < 10) {
+		warning->setVisible(false);
 		planeName += temp;
 		addTimes++;
 		label.pushBack(word);
@@ -410,15 +430,13 @@ void CreateLayer::addWords(std::string temp) {
 		CCLOG("%s", planeName.c_str());
 	}
 	else {
-		auto label = Label::createWithSystemFont("太多字啦", "fonts/simhei.ttf", 20);
-		label->setPosition(Vec2(winSize.width*0.9, winSize.height*0.25));
-		this->addChild(label);
+		warning->setVisible(true);
 	}
 }
 
 void CreateLayer::minusWords(std::string temp) {
 	auto winSize = Director::getInstance()->getWinSize();
-	
+	warning->setVisible(false);
 	planeName.pop_back();
 	int move = planeName.length();
 	CCLOG("%d", move);
