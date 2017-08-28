@@ -17,13 +17,12 @@ USING_NS_CC;
 		//声明单点触摸回调函数
 		//bool touchBegan(Touch * touch, Event * event);
 		void setEquipImg(int type);
+		void setPlaneImg(int type);
 
-		void menuCallBack_1(Ref * psender);//传递被点击的菜单的对象
-		void menuCallBack_2(Ref * psender);//传递被点击的菜单的对象
-		void menuCallBack_3(Ref * psender);//传递被点击的菜单的对象
-		//void menuCallBack_4(Ref * psender);//传递被点击的菜单的对象
+		void menuCallBack_1(Ref * psender,int type);//传递被点击的菜单的对象
+		void menuCallBack_2(Ref * psender,int type);//传递被点击的菜单的对象
+		void menuCallBack_3(Ref * psender,int type);//传递被点击的菜单的对象
 	
-
 
 		//监听键盘事件
 		virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
@@ -93,9 +92,17 @@ USING_NS_CC;
 
 //装备部件
 		Sprite * _body_1;
+		Sprite * _body_1_b;
+		Sprite * _body_1_c;
 		Sprite * _tail_1;
+		Sprite * _tail_1_b;
+		Sprite * _tail_1_c;
 		Sprite * _wing_1;
+		Sprite * _wing_1_b;
+		Sprite * _wing_1_c;
 		Sprite * _wing_2;
+		Sprite * _wing_2_b;
+		Sprite * _wing_2_c;
 
 		Sprite * BaseBarHp;
 		Sprite * BaseBarEn;
