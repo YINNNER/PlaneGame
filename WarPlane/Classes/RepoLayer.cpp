@@ -415,9 +415,9 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 
 
 //返回关卡选择
-void RepoLayer::CallMenu(Ref * pSender)
+void RepoLayer::CallMenu(Ref * pSender,UserInfo & userInfo)
 {
-	//SceneManager::goMapLayer(2);
+	SceneManager::goMapLayer(2,user);
 }
 
 //设置装备栏的图片

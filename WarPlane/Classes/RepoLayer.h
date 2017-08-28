@@ -31,7 +31,7 @@ USING_NS_CC;
 	
 	
 		//返回关卡选择
-		void CallMenu(Ref *pSender);
+		void CallMenu(Ref *pSender, UserInfo &userInfo);
 		SceneManager * tsm;
 
 		//鼠标监听

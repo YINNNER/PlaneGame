@@ -91,7 +91,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 	case 1:
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click2.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
-		SceneManager::goRepoLayer(tag);
+		SceneManager::goRepoLayer(tag,user);
 		break;
 	case 2:
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click2.wav");
