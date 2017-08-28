@@ -1,5 +1,7 @@
 #include"RepoLayer.h"
 using namespace::std;
+
+
 bool RepoLayer::init() {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
@@ -62,8 +64,10 @@ bool RepoLayer::init() {
 
 
 	//设置飞机图片
-	CCLOG("%f \n" ,user.getPlaneType());
-	setPlaneImg(1);
+
+	CCLOG("%d \n" ,user.getPlaneType());
+	setPlaneImg(user.getPlaneType());
+
 
 	//设置装备列表9个
 	setEquipImg(1);

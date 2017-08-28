@@ -9,7 +9,6 @@ USING_NS_CC;
 	public:
 
 		virtual bool init();
-		CREATE_FUNC(RepoLayer);
 		//在该函数中注册监听器和初始化设置
 		//virtual void onEnter();
 		//注销监听器、释放资源

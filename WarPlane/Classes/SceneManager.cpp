@@ -1,6 +1,5 @@
 
 #include "SceneManager.h"
-#include "AudioEngine.h"
 #include"FightLayer.h"
 #include "LoadLayer.h"
 #include "MenuLayer.h"
@@ -183,8 +182,9 @@ void SceneManager::goSetLayer(int tag) {
 
 void SceneManager::goRepoLayer(int tag,UserInfo &userInfo) {
 	auto repoScene = Scene::create();
-	auto layer = RepoLayer::create();
-	layer->user = userInfo;
+    auto layer = new RepoLayer();
+    layer->user=userInfo;
+    layer->init();
 	repoScene->addChild(layer);
 
 	if (tag == 1) {

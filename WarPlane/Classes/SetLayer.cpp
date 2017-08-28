@@ -4,7 +4,7 @@
 using namespace CocosDenshion;
 using namespace cocos2d::ui;
 
-
+int SetLayer::effectState = 1;
 
 bool SetLayer::init()
 {	
@@ -57,24 +57,30 @@ bool SetLayer::init()
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu);
 
-
-
 	return true;
 }
 
-
+int SetLayer::getEffectState() {
+	return effectState;
+}
 void SetLayer::CallBack(Ref *pSender) {
 	int tag = ((MenuItem*)pSender)->getTag();
 	int transiTimes = 2;
 	switch (tag)
 	{
 	case 1:
-		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
+		if (effectState == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		}
+		
 		SceneManager::goHelpLayer(tag);
            
 		break;
 	case 2:
-		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
+		
+		if (effectState == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		}
 		
 		SceneManager::goMenuLayer(tag,transiTimes);
 		break;
@@ -88,9 +94,11 @@ void SetLayer::CallBack(Ref *pSender) {
 		MenuItemFont *item = (MenuItemFont*)((MenuItemToggle *)pSender)->getSelectedItem();
 		char* musicState = (char*)item->getUserData();
 		if (musicState == "off")
-			SimpleAudioEngine::getInstance()->pauseAllEffects();
+			
+			effectState = 0;
 		else {
-			SimpleAudioEngine::getInstance()->resumeAllEffects();
+			
+			effectState = 1;
 		}
 		break;
 	}
