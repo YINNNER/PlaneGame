@@ -14,7 +14,6 @@ public:
 
 	//void mouseMove(Event *event);
 	void CallMenu(Ref *pSender);
-	SceneManager * tsm;
 	UserInfo user;
 
 public:

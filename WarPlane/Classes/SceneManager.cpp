@@ -65,10 +65,7 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto layer = MapLayer::create();
 	layer->user = userInfo;
 	auto action=FadeIn::create(1.0f);
-	/*ActionInterval *actionMove_1 = MoveTo::create(2.0f,
-		Vec2(winSize.width*0.7 + layer->level_2->getContentSize().width*0.25, winSize.height*0.7 + layer->level_2->getContentSize().height*0.25));
-	FiniteTimeAction *actionMove_2 = MoveTo::create(0.5f,
-		Vec2(winSize.width*0.7 + layer->level_2->getContentSize().width*0.25, winSize.height*0.7 + layer->level_2->getContentSize().height*0.25));*/
+	
 	switch (layer->user.getGameLevel())
 	{
 	case 1:
@@ -79,12 +76,12 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 		layer->level_3->setEnabled(false);
 		layer->level_2->setOpacity(0);
 		layer->level_2->runAction(action);
-		//layer->plane->runAction(actionMove_1);
+		
 		break;
 	case 3:
 		layer->level_3->setOpacity(0);
 		layer->level_3->runAction(action);
-		//layer->plane->runAction(actionMove_2);
+		
 		break;
 	}
 	mapScene->addChild(layer);
@@ -151,6 +148,7 @@ void SceneManager::goHelpLayer(int tag) {
 	}
 }
 
+//从菜单第一次进入时创建setScene，之后不管从哪里进入都是用popScene(),setScene进入任何场景都是pushScene()
 void SceneManager::goSetLayer(int tag) {
 	auto setScene = Scene::create();
 	auto layer = SetLayer::create();

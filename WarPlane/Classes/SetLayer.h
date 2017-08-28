@@ -15,7 +15,7 @@ public:
 	void CallBack(Ref *pSender);
 	
 	static int getEffectState();
-	static int effectState;
+	static int effectState;//ÒôĞ§¿ª¹Ø×´Ì¬
 
 private:
 	Sprite *backCir;

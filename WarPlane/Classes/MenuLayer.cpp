@@ -21,19 +21,22 @@ bool MenuLayer::init(){
 	this->addChild(title);
 
 	
-
+	//创建游戏按钮
 	auto menuItem_1 = MenuItemImage::create("res/UI/1Menu/new.png","res/UI/1Menu/newS.png",CC_CALLBACK_1(MenuLayer::CallMenu,this));
 	menuItem_1->setTag(1);
 	menuItem_1->setPosition(Vec2(origin.x+winSize.width / 2, origin.y+winSize.height*0.6));
-
+	
+	//载入游戏按钮
 	auto menuItem_2 = MenuItemImage::create("res/UI/1Menu/load.png", "res/UI/1Menu/loadS.png", CC_CALLBACK_1(MenuLayer::CallMenu, this));
 	menuItem_2->setTag(2);
 	menuItem_2->setPosition(Vec2(origin.x+winSize.width / 2, origin.y + winSize.height*0.45));
 
+	//选项按钮
 	auto menuItem_3 = MenuItemImage::create("res/UI/1Menu/option.png", "res/UI/1Menu/optionS.png", CC_CALLBACK_1(MenuLayer::CallMenu, this));
 	menuItem_3->setTag(3);
 	menuItem_3->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height*0.3));
 
+	//退出游戏按钮
 	auto menuItem_4 = MenuItemImage::create("res/UI/1Menu/exit.png", "res/UI/1Menu/exitS.png", CC_CALLBACK_1(MenuLayer::CallMenu, this));
 	menuItem_4->setTag(4);
 	menuItem_4->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height*0.15));
