@@ -51,18 +51,21 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	switch (((MenuItem *)pSender)->getTag()) {
 	case 1:
 	{
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
 		SceneManager::goCreateLayer(tag);
 
 	}
 	break;
 	case 2:
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
 		SceneManager::goSaveLayer(tag);
 	
 	break;
 	case 3:
 	{
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		int tag = 1;
 		SceneManager::goSetLayer(tag);
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
@@ -70,7 +73,7 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	break;
 	case 4:
 	{
-
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		Director::getInstance()->end();
 		exit(0);
 	}

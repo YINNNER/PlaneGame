@@ -47,10 +47,12 @@ bool LoadLayer::init() {
 */
 
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/a1CreatePlayer/createScene.plist");
-	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("music/background1.mp3");
-	SimpleAudioEngine::sharedEngine()->preloadEffect("music/trans1.wav");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/background1.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/trans1.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/click4.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/click2.wav");
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3",true);
 	
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("music/background3.mp3",true);
 	scheduleOnce(CC_SCHEDULE_SELECTOR(LoadLayer::onScheduleOnce),3.0f);
 
 	return true;

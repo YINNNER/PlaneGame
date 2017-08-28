@@ -6,9 +6,6 @@ using namespace CocosDenshion;
 
 bool MapLayer::init() {
 
-	auto cursor = Sprite::create("res/SpaceShooterRedux/PNG/UI/cursor.png");
-	
-	
 	auto winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	auto _background = Sprite::create("res/UI/1Menu/background.png");
@@ -16,6 +13,9 @@ bool MapLayer::init() {
 	auto scale = winSize.width / _background->getContentSize().width;
 	_background->setScale(scale);
 	this->addChild(_background);
+
+	
+
 
 	auto repo = MenuItemImage::create("res/UI/a2SelectLevel/repo.png", "res/UI/a2SelectLevel/repoS.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
 	repo->setPosition(Vec2(winSize.width*0.9, winSize.height*0.92));
@@ -40,7 +40,7 @@ bool MapLayer::init() {
 	level_1 = MenuItemImage::create("res/UI/a2SelectLevel/planet1.png", "res/UI/a2SelectLevel/planet1.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_1->setScale(0.5);
 	level_1->setAnchorPoint(Vec2(0,0));
-	level_1->setPosition(Vec2(Vec2(winSize.width*0.5, winSize.height*0.15)));
+	level_1->setPosition(Vec2(winSize.width*0.5, winSize.height*0.15));
 	level_1->setTag(31);
 
 	
@@ -52,7 +52,7 @@ bool MapLayer::init() {
 
 	level_2 = MenuItemImage::create("res/UI/a2SelectLevel/planet2.png", "res/UI/a2SelectLevel/planet2.png", "res/UI/a2SelectLevel/planet2Forbidden.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_2->setScale(0.5);
-	level_2->setPosition(Vec2(Vec2(winSize.width*0.2, winSize.height*0.5)));
+	level_2->setPosition(Vec2(winSize.width*0.2, winSize.height*0.5));
 	level_2->setTag(32);
 
 	auto level_3_label = Label::createWithSystemFont("Level 3", "fonts/AdobeHeitiStd-Regular.ttf", 20);
@@ -68,6 +68,8 @@ bool MapLayer::init() {
 	Menu*menu = Menu::create(back,repo,save,level_1,level_2,level_3, NULL);        
 	menu->setPosition(Point::ZERO); 
 	this->addChild(menu, 1);
+	
+	
 	
 
 
@@ -87,41 +89,49 @@ void MapLayer::CallMenu(Ref * pSender) {
 	switch (tag)
 	{
 	case 1:
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click2.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
 		SceneManager::goRepoLayer(tag);
 		break;
 	case 2:
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click2.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/trans1.wav");
 		
 		SceneManager::goMenuLayer(tag,times);
 		break;
 	case 31:
 	{
-		
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click2.wav");
 		auto gameScene = Scene::create();
 		FightLayer * fightLayer_1 = FightLayer::create();
 		fightLayer_1->setPlayer(1);
 		gameScene->addChild(fightLayer_1);
-		Director::getInstance()->replaceScene(gameScene);
+		auto transit = TransitionSlideInR::create(0.5f, gameScene);
+		Director::getInstance()->replaceScene(transit);
 	}break;
 	case 32:
 	{
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		auto gameScene = Scene::create();
 		FightLayer * fightLayer_1 = FightLayer::create();
 		fightLayer_1->setPlayer(1);
 		gameScene->addChild(fightLayer_1);
-		Director::getInstance()->replaceScene(gameScene);
+		auto transit = TransitionSlideInR::create(0.5f, gameScene);
+		Director::getInstance()->replaceScene(transit);
 	}break;
 	case 33:
 	{
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		auto gameScene = Scene::create();
 		FightLayer * fightLayer_1 = FightLayer::create();
 		fightLayer_1->setPlayer(1);
 		gameScene->addChild(fightLayer_1);
-		Director::getInstance()->replaceScene(gameScene);
+		auto transit= TransitionSlideInR::create(0.5f, gameScene);
+		Director::getInstance()->replaceScene(transit);
 	}break;
 	case 4:
 	{
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		SceneManager::goSaveLayer(2,user);
 	}
 	}

@@ -110,6 +110,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 	{
 	case 1:
 	{
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 		auto file = new UserInfo();
 		UserInfo user = file->createUser(planeName, planeType);
@@ -119,12 +120,13 @@ void CreateLayer::CallBack(Ref *pSender) {
 
 	}break;
 	case 2: {
-
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("/music/trans1.wav");
 		int transiTimes = 1;
 		SceneManager::goMenuLayer(tag,transiTimes);
 	}break;
 	case 10: {
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		if (selected_2->isVisible())
 			selected_2->setVisible(false);
 		if (selected_3->isVisible())
@@ -136,6 +138,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 		planeType = 1;
 	}break;
 	case 11: {
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		if(selected_1->isVisible())
 			selected_1->setVisible(false);
 		if (selected_3->isVisible())
@@ -147,6 +150,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 		planeType = 2;
 	}break;
 	case 12: {
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
 		if (selected_1->isVisible())
 			selected_1->setVisible(false);
 		if (selected_2->isVisible())

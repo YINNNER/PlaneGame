@@ -402,7 +402,7 @@ void RepoLayer::menuCallBack_3(Ref * pSender) {
 //返回关卡选择
 void RepoLayer::CallMenu(Ref * pSender)
 {
-	SceneManager::goMapLayer(2);
+	//SceneManager::goMapLayer(2);
 }
 
 void RepoLayer::setOffset(float offset)

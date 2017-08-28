@@ -65,7 +65,11 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto mapScene = Scene::create();
 	auto layer = MapLayer::create();
 	layer->user = userInfo;
-	
+	auto action=FadeIn::create(1.0f);
+	/*ActionInterval *actionMove_1 = MoveTo::create(2.0f,
+		Vec2(winSize.width*0.7 + layer->level_2->getContentSize().width*0.25, winSize.height*0.7 + layer->level_2->getContentSize().height*0.25));
+	FiniteTimeAction *actionMove_2 = MoveTo::create(0.5f,
+		Vec2(winSize.width*0.7 + layer->level_2->getContentSize().width*0.25, winSize.height*0.7 + layer->level_2->getContentSize().height*0.25));*/
 	switch (layer->user.getGameLevel())
 	{
 	case 1:
@@ -74,6 +78,15 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 		break;
 	case 2:
 		layer->level_3->setEnabled(false);
+		layer->level_2->setOpacity(0);
+		layer->level_2->runAction(action);
+		//layer->plane->runAction(actionMove_1);
+		break;
+	case 3:
+		layer->level_3->setOpacity(0);
+		layer->level_3->runAction(action);
+		//layer->plane->runAction(actionMove_2);
+		break;
 	}
 	mapScene->addChild(layer);
 	if (tag == 1) {
