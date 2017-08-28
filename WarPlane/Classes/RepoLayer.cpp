@@ -1,24 +1,6 @@
 #include"RepoLayer.h"
 using namespace::std;
 
-RepoLayer * RepoLayer::createRepo(UserInfo &userInfo){
-    
-    RepoLayer *pRet = new(std::nothrow) RepoLayer();
-    user=userInfo;
-    
-    if (pRet && pRet->init())
-    {
-        pRet->autorelease();
-        return pRet;
-    }
-    else
-    {
-        delete pRet;
-        pRet = nullptr;
-        return nullptr;
-    }
-    
-}
 
 bool RepoLayer::init() {
 	Size winSize = Director::getInstance()->getWinSize();
@@ -82,7 +64,7 @@ bool RepoLayer::init() {
 
 
 	//设置飞机图片
-	CCLOG("%f \n" ,user.getPlaneType());
+	CCLOG("%d \n" ,user.getPlaneType());
 	setPlaneImg(user.getPlaneType());
 
 	//设置装备列表9个
