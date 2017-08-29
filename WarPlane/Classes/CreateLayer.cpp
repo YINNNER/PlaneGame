@@ -419,6 +419,7 @@ void CreateLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		if (planeName != "") {
 			minusWords(temp);
 		}
+		break;
 	case EventKeyboard::KeyCode::KEY_0:
 		temp = "0";
 		addWords(temp);
