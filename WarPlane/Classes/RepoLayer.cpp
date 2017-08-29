@@ -1,4 +1,7 @@
 #include"RepoLayer.h"
+#include "SetLayer.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 using namespace::std;
 
 
@@ -302,7 +305,10 @@ bool RepoLayer::init() {
 
 }
 void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
-
+	if (SetLayer::getEffectState() == 1) {
+		
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	stringstream filename1;
@@ -340,7 +346,9 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
-
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	stringstream filename1;
 	stringstream filename2;
 	stringstream filename3;
@@ -403,6 +411,9 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	stringstream filename1;
 	stringstream filename2;
 	stringstream filename3;
@@ -434,11 +445,19 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 //返回关卡选择
 void RepoLayer::CallMenu(Ref * pSender,UserInfo & userInfo)
 {
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	SceneManager::goMapLayer(2,user);
 }
 //保存装备
 void RepoLayer::SaveEquip(Ref * pSender, UserInfo & userInfo)
 {
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	SceneManager::goMapLayer(2, user);
 }
 
