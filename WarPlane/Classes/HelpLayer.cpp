@@ -34,6 +34,6 @@ void HelpLayer::CallBack(Ref *pSender) {
 		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}
-	SceneManager::goSetLayer(tag);
-	//Director::getInstance()->popScene();
+	
+	Director::getInstance()->popScene();
 }
