@@ -19,6 +19,8 @@ bool RepoLayer::init() {
 	//this->schedule(SEL_SCHEDULE selector(RepoLayer::equipUpdate), 2.0f);
 	//this->scheduleUpdate();
 
+
+
 	_background = Sprite::create("res/UI/0Loading/star.png");
 	_background->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height / 2));
 	this->addChild(_background, 0);
@@ -36,10 +38,35 @@ bool RepoLayer::init() {
 	this->addChild(_background_2, 2);
 
 
+	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
+	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.5));
+	this->addChild(_background_3, 1);
+	//白色装备按钮1
+	_background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/block.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this, user.getPlaneType()));
+
+	_background_3_white_1->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.5));
+	_background_3_white_1->setScale(0.6);
+	//背景3
+	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
+	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.3));
+	this->addChild(_background_3, 1);
+	//白色装备按钮2
+	_background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/block.png", CC_CALLBACK_1(RepoLayer::menuCallBack_2, this, user.getPlaneType()));
+	_background_3_white_2->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.3));
+
+	_background_3_white_2->setScale(0.6);//缩放0.5倍
+	//背景3
+	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
+	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.1));
+	this->addChild(_background_3, 1);
+	//白色装备按钮3
+	_background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/block.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this, user.getPlaneType()));
+	_background_3_white_3->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.1));
+	_background_3_white_3->setScale(0.6);//缩放0.5倍
+
 
 	//设置装备列表9个
 	setEquipImg(user.getPlaneType());
-
 	//飞机进度条
 	BaseBarHp = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
 	BaseBarHp->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.8));
@@ -69,13 +96,13 @@ bool RepoLayer::init() {
 
 	AtkBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.64, origin.y + winSize.height *0.718));
-	AtkBar->setScale(0.25*(user.getAtk()) / 1000, 0.5);
+	AtkBar->setScale(0.25*(user.getAtk()) / 200, 0.5);
 	AtkBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(AtkBar, 2);
 
 	SpdBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	SpdBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.678));
-	SpdBar->setScale(0.25*(user.getSpd()) / 1000, 0.5);
+	SpdBar->setScale(0.25*(user.getSpd()) / 100, 0.5);
 	SpdBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(SpdBar, 2);
 
@@ -83,69 +110,6 @@ bool RepoLayer::init() {
 
 	CCLOG("%d \n", user.getPlaneType());
 	setPlaneImg(user.getPlaneType());
-
-
-	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
-	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.5 ));
-	this->addChild(_background_3, 1);
-	//白色装备按钮1
-	_background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/block.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this, user.getPlaneType()));
-/*	if (_equip_1->getPositionX() == 120 && user.get_equip_head_have() == 0) {
-		_background_3_white_1->setEnabled(false);
-	}
-	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_head_b_have() == 0) {
-		_background_3_white_1->setEnabled(false);
-	}
-	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_head_c_have() == 0) {
-		_background_3_white_1->setEnabled(false);
-	}
-	else {
-		_background_3_white_1->setEnabled(true);
-	}*/
-	_background_3_white_1->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.5));
-	_background_3_white_1->setScale(0.6);
-	//背景3
-	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
-	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.3 ));
-	this->addChild(_background_3, 1);
-	//白色装备按钮2
-	_background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/block.png",CC_CALLBACK_1(RepoLayer::menuCallBack_2, this, user.getPlaneType()));
-   _background_3_white_2->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.3 ));
- /*  if (_equip_1->getPositionX() == 120 && user.get_equip_arm_have() == 0) {
-	   _background_3_white_3->setEnabled(false);
-   }
-   else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b_have() == 0) {
-	   _background_3_white_2->setEnabled(false);
-   }
-   else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_c_have() == 0) {
-	   _background_3_white_2->setEnabled(false);
-   }
-   else {
-	   _background_3_white_2->setEnabled(true);
-   }*/
-   _background_3_white_2->setScale(0.6);//缩放0.5倍
-   //背景3
-	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
-	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.1 ));
-	this->addChild(_background_3, 1);
-	//白色装备按钮3
-	_background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/block.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this, user.getPlaneType()));
-	_background_3_white_3->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.1 ));
-	_background_3_white_3->setScale(0.6);//缩放0.5倍
-	/*if (_equip_1->getPositionX() == 120 && user.get_equip_tail_have() == 0) {
-		_background_3_white_3->setEnabled(false);
-	}
-	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_tail_b_have() == 0) {
-		_background_3_white_3->setEnabled(false);
-	}
-	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_tail_c_have() == 0) {
-		_background_3_white_3->setEnabled(false);
-	}
-	else {
-		_background_3_white_3->setEnabled(true);
-	}*/
-
-
 
 
 	//返回按钮
@@ -167,28 +131,31 @@ bool RepoLayer::init() {
 
 
 	//传入战机名
-	Label * planeName = Label::createWithTTF("plane1", "fonts/simhei.ttf", 28);
-	planeName->setPosition(Vec2(origin.x + winSize.width * 0.6, origin.y + winSize.height * 0.84));
+	Label * planeName = Label::createWithTTF(user.getUserName(), "fonts/simhei.ttf", 25);
+	planeName->setPosition(Vec2(origin.x + winSize.width * 0.57, origin.y + winSize.height * 0.84));
 	this->addChild(planeName, 2);
 
 	//传入等级值
-	Label * level = Label::createWithTTF("lv.", "fonts/simhei.ttf", 28);
-	level->setPosition(Vec2(origin.x + winSize.width * 0.8, origin.y + winSize.height * 0.84));
+	std::stringstream Level;
+	Level << "Lv."<<user.getPlaneLevel();
+	
+	Label * level = Label::createWithTTF(Level.str().c_str(), "fonts/simhei.ttf", 25);
+	level->setPosition(Vec2(origin.x + winSize.width * 0.77, origin.y + winSize.height * 0.84));
 	this->addChild(level, 2);
 	//飞机属性栏
-	Label * life = Label::createWithTTF("生命", "fonts/simhei.ttf", 15);
+	Label * life = Label::createWithTTF("生命", "fonts/simhei.ttf", 18);
 	life->setPosition(Vec2(origin.x + winSize.width * 0.57, origin.y + winSize.height * 0.8));
 	this->addChild(life, 2);
 
-	Label *  energy = Label::createWithTTF("能量", "fonts/simhei.ttf", 15);
+	Label *  energy = Label::createWithTTF("能量", "fonts/simhei.ttf", 18);
 	energy->setPosition(Vec2(origin.x + winSize.width * 0.57, origin.y + winSize.height * 0.76));
 	this->addChild(energy, 2);
 
-	Label *  attack = Label::createWithTTF("攻击", "fonts/simhei.ttf", 15);
+	Label *  attack = Label::createWithTTF("攻击", "fonts/simhei.ttf", 18);
 	attack->setPosition(Vec2(origin.x + winSize.width * 0.57, origin.y + winSize.height * 0.72));
 	this->addChild(attack, 2);
 
-	Label *  speed = Label::createWithTTF("速度", "fonts/simhei.ttf", 15);
+	Label *  speed = Label::createWithTTF("速度", "fonts/simhei.ttf", 18);
 	speed->setPosition(Vec2(origin.x + winSize.width * 0.57, origin.y + winSize.height * 0.68));
 	this->addChild(speed, 2);
 	//装备栏
@@ -208,31 +175,31 @@ bool RepoLayer::init() {
 	std::stringstream hp_c;
 	hp_c << (_equip_head_c->getEHp());
 
-	Label * equipName_1 = Label::createWithTTF("部件名称    机身", "fonts/simhei.ttf", 15);
+	Label * equipName_1 = Label::createWithTTF("部件名称    机身", "fonts/simhei.ttf", 18);
 	equipName_1->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.55 ));
 	this->addChild(equipName_1, 1);
 
-	Label * equipName_1_1 = Label::createWithTTF("hp", "fonts/simhei.ttf", 15);
+	Label * equipName_1_1 = Label::createWithTTF("生命", "fonts/simhei.ttf", 18);
 	equipName_1_1->setPosition(Vec2(origin.x + winSize.width * 0.41, origin.y + winSize.height * 0.5 ));
 	this->addChild(equipName_1_1, 1);
 
-	equipNum_1_1 = Label::createWithTTF(hp.str().c_str(), "fonts/simhei.ttf", 15);
+	equipNum_1_1 = Label::createWithTTF(hp.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_1_1->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.5 ));
 	this->addChild(equipNum_1_1, 1);
 
-	equipNum_1_2 = Label::createWithTTF(hp_b.str().c_str(), "fonts/simhei.ttf", 15);
+	equipNum_1_2 = Label::createWithTTF(hp_b.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_1_2->setPosition(Vec2(origin.x + winSize.width * 1.5 , origin.y + winSize.height * 0.5));
 	this->addChild(equipNum_1_2, 1);
 
-	equipNum_1_3 = Label::createWithTTF(hp_c.str().c_str(), "fonts/simhei.ttf", 15);
+	equipNum_1_3 = Label::createWithTTF(hp_c.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_1_3->setPosition(Vec2(origin.x + winSize.width * 2.5, origin.y + winSize.height * 0.5));
 	this->addChild(equipNum_1_3, 1);
 
-	/*Label * equipName_1_2 = Label::createWithTTF("数量", "fonts/simhei.ttf", 15);
+	/*Label * equipName_1_2 = Label::createWithTTF("数量", "fonts/simhei.ttf", 18);
 	equipName_1_2->setPosition(Vec2(origin.x + winSize.width * 0.7, origin.y + winSize.height * 0.5 ));
 	this->addChild(equipName_1_2, 1);
 
-	Label * equipNum_1_2 = Label::createWithTTF(b.str().c_str(), "fonts/simhei.ttf", 15);
+	Label * equipNum_1_2 = Label::createWithTTF(b.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_1_2->setPosition(Vec2(origin.x + winSize.width * 0.8, origin.y + winSize.height * 0.5 ));
 	this->addChild(equipNum_1_2, 1);*/
 
@@ -253,31 +220,31 @@ bool RepoLayer::init() {
 	atk_c << (_equip_arm_c->getEAtk());
 	//d << (_equip_2->getEquipNum());
 
-	Label * equipName_2 = Label::createWithTTF("部件名称    机翼", "fonts/simhei.ttf", 15);
+	Label * equipName_2 = Label::createWithTTF("部件名称    机翼", "fonts/simhei.ttf", 18);
 	equipName_2->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.35 ));
 	this->addChild(equipName_2, 1);
 
-	Label * equipName_2_1 = Label::createWithTTF("攻击", "fonts/simhei.ttf", 15);
+	Label * equipName_2_1 = Label::createWithTTF("攻击", "fonts/simhei.ttf", 18);
 	equipName_2_1->setPosition(Vec2(origin.x + winSize.width * 0.41, origin.y + winSize.height * 0.3 ));
 	this->addChild(equipName_2_1, 1);
 
-	equipNum_2_1 = Label::createWithTTF(atk.str().c_str(), "fonts/simhei.ttf", 15);
+	equipNum_2_1 = Label::createWithTTF(atk.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_2_1->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.3));
 	this->addChild(equipNum_2_1, 1);
 
-	equipNum_2_2 = Label::createWithTTF(atk_b.str().c_str(), "fonts/simhei.ttf", 15);
+	equipNum_2_2 = Label::createWithTTF(atk_b.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_2_2->setPosition(Vec2(origin.x + winSize.width * 1.5, origin.y + winSize.height * 0.3));
 	this->addChild(equipNum_2_2, 1);
 
-	equipNum_2_3 = Label::createWithTTF(atk_c.str().c_str(), "fonts/simhei.ttf", 15);
+	equipNum_2_3 = Label::createWithTTF(atk_c.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_2_3->setPosition(Vec2(origin.x + winSize.width * 2.5, origin.y + winSize.height * 0.3));
 	this->addChild(equipNum_2_3, 1);
 
-	/*Label * equipName_2_2 = Label::createWithTTF("数量", "fonts/simhei.ttf", 15);
+	/*Label * equipName_2_2 = Label::createWithTTF("数量", "fonts/simhei.ttf", 18);
 	equipName_2_2->setPosition(Vec2(origin.x + winSize.width * 0.7, origin.y + winSize.height * 0.3 ));
 	this->addChild(equipName_2_2, 1);
 
-	Label * equipNum_2_2 = Label::createWithTTF(d.str().c_str(), "fonts/simhei.ttf", 15);
+	Label * equipNum_2_2 = Label::createWithTTF(d.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_2_2->setPosition(Vec2(origin.x + winSize.width * 0.8, origin.y + winSize.height * 0.3 ));
 	this->addChild(equipNum_2_2, 1);*/
 
@@ -298,32 +265,32 @@ bool RepoLayer::init() {
 	spd_c << (_equip_tail_c->getESpd());
 	//f << (_equip_3->getEquipNum());
 
-	Label * equipName_3 = Label::createWithTTF("部件名称    机尾", "fonts/simhei.ttf", 15);
+	Label * equipName_3 = Label::createWithTTF("部件名称    机尾", "fonts/simhei.ttf", 18);
 	equipName_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.15 ));
 	this->addChild(equipName_3, 1);
 
 
-	Label * equipName_3_1 = Label::createWithTTF("速度", "fonts/simhei.ttf", 15);
+	Label * equipName_3_1 = Label::createWithTTF("速度", "fonts/simhei.ttf", 18);
 	equipName_3_1->setPosition(Vec2(origin.x + winSize.width * 0.41, origin.y + winSize.height * 0.1 ));
 	this->addChild(equipName_3_1, 1);
 
-	equipNum_3_1 = Label::createWithTTF(spd.str().c_str(), "fonts/simhei.ttf", 15);
+	equipNum_3_1 = Label::createWithTTF(spd.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_3_1->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.1));
 	this->addChild(equipNum_3_1, 1);
 
-	equipNum_3_2 = Label::createWithTTF(spd_b.str().c_str(), "fonts/simhei.ttf", 15);
+	equipNum_3_2 = Label::createWithTTF(spd_b.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_3_2->setPosition(Vec2(origin.x + winSize.width * 1.5, origin.y + winSize.height * 0.1));
 	this->addChild(equipNum_3_2, 1);
 
-	equipNum_3_3 = Label::createWithTTF(spd_c.str().c_str(), "fonts/simhei.ttf", 15);
+	equipNum_3_3 = Label::createWithTTF(spd_c.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_3_3->setPosition(Vec2(origin.x + winSize.width * 2.5, origin.y + winSize.height * 0.1));
 	this->addChild(equipNum_3_3, 1);
 
-	/*Label * equipName_3_2 = Label::createWithTTF("数量", "fonts/simhei.ttf", 15);
+	/*Label * equipName_3_2 = Label::createWithTTF("数量", "fonts/simhei.ttf", 18);
 	equipName_3_2->setPosition(Vec2(origin.x + winSize.width * 0.7, origin.y + winSize.height * 0.1 ));
 	this->addChild(equipName_3_2, 1);
 
-	Label * equipNum_3_2 = Label::createWithTTF(f.str().c_str(), "fonts/simhei.ttf", 15);
+	Label * equipNum_3_2 = Label::createWithTTF(f.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_3_2->setPosition(Vec2(origin.x + winSize.width * 0.8, origin.y + winSize.height * 0.1 ));
 	this->addChild(equipNum_3_2, 1);*/
 
@@ -355,13 +322,13 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
-		HpBar->setScale(0.25*(user.getHp() + 50) / 1000, 0.5);
+		HpBar->setScale(0.25*(user.getHp() + 50) / 100, 0.5);
 	}
 	else if (_equip_1_c->getPositionX()==120 && user.get_equip_head_c_have() == 1) {
 		_body_1_c = Sprite::create(filename3.str().c_str());
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1_c, 2);
-		HpBar->setScale(0.25*(user.getHp() + 100) / 1000, 0.5);
+		HpBar->setScale(0.25*(user.getHp() + 100) / 100, 0.5);
 	}
 
 	
@@ -393,14 +360,14 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_b, 2);
 
-		AtkBar->setScale(0.25*(user.getAtk()+50) / 1000, 0.5);
+		AtkBar->setScale(0.25*(user.getAtk()+50) / 100, 0.5);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_c_have() == 1) {
 		_wing_1_c = Sprite::create(filename3.str().c_str());
 		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_c, 2);
 
-		AtkBar->setScale(0.25*(user.getAtk()+100) / 1000, 0.5);
+		AtkBar->setScale(0.25*(user.getAtk()+100) / 100, 0.5);
 	}
 
 	stringstream filename4;
@@ -414,19 +381,19 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_2 = Sprite::create(filename4.str().c_str());
 		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2, 2);
-		SpdBar->setScale(0.25*(user.getSpd()+10) / 1000, 0.5);
+		SpdBar->setScale(0.25*(user.getSpd()+10) / 200, 0.5);
 	}
 	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b_have() == 1) {
 		_wing_2_b = Sprite::create(filename5.str().c_str());
 		_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2_b, 2);
-		SpdBar->setScale(0.25*(user.getSpd()+50) / 1000, 0.5);
+		SpdBar->setScale(0.25*(user.getSpd()+50) / 200, 0.5);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_b_have() == 1) {
 		_wing_2_c = Sprite::create(filename6.str().c_str());
 		_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_2_c, 2);
-		SpdBar->setScale(0.25*(user.getSpd()+100) / 1000, 0.5);
+		SpdBar->setScale(0.25*(user.getSpd()+100) / 200, 0.5);
 	}
 
 	
@@ -469,7 +436,7 @@ void RepoLayer::CallMenu(Ref * pSender,UserInfo & userInfo)
 {
 	SceneManager::goMapLayer(2,user);
 }
-
+//保存装备
 void RepoLayer::SaveEquip(Ref * pSender, UserInfo & userInfo)
 {
 	SceneManager::goMapLayer(2, user);
@@ -498,6 +465,7 @@ void RepoLayer::setEquipImg(int type) {
 	filename8 << "res/UI/plane_parts/playerShip" << type << "_orange_04.png";
 	filename9 << "res/UI/plane_parts/playerShip" << type << "_red_04.png";
 
+	
 	_equip_1 = Sprite::create(filename1.str().c_str());
 	_equip_1->setPosition(Vec2(winSize.width *0.2, winSize.height *0.5));
 	this->addChild(_equip_1, 3);
@@ -534,6 +502,23 @@ void RepoLayer::setEquipImg(int type) {
 	_equip_3_c = Sprite::create(filename9.str().c_str());
 	_equip_3_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.1));
 	this->addChild(_equip_3_c, 2);
+
+	//判断初始装备黑白框
+	if (user.get_equip_head_have() == 0) {
+		_background_3_white_1->setEnabled(false);
+		reorderChild(_background_3_white_1,4);
+		_background_3_white_1->setOpacity(255 * 0.75);
+	}
+	if (user.get_equip_arm_have() == 0) {
+		_background_3_white_2->setEnabled(false);
+		reorderChild(_background_3_white_2, 4);
+		_background_3_white_2->setOpacity(255 * 0.75);
+	}
+	if (user.get_equip_tail_have() == 0) {
+		_background_3_white_3->setEnabled(false);
+		reorderChild(_background_3_white_3, 4);
+		_background_3_white_3->setOpacity(255 * 0.75);
+	}
 
 }
 
@@ -666,6 +651,19 @@ void RepoLayer::equipUpdate(float dt)
 	switch (key) {
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
 		if (_equip_1->getPositionX() > -1080) {
+			//判断黑白框
+			if (_equip_1->getPositionX() == 120 && user.get_equip_head_have() == 0) {
+				_background_3_white_1->setEnabled(false);
+			}
+			else if (_equip_1_b->getPositionX() == 120 && user.get_equip_head_b_have() == 0) {
+				_background_3_white_1->setEnabled(false);
+			}
+			else if (_equip_1_c->getPositionX() == 120 && user.get_equip_head_c_have() == 0) {
+				_background_3_white_1->setEnabled(false);
+			}
+			else {
+				_background_3_white_1->setEnabled(true);
+			}
 			_equip_1->setPositionX(_equip_1->getPositionX() - winSize.width);
 			_equip_1_b->setPositionX(_equip_1_b->getPositionX() - winSize.width);
 			_equip_1_c->setPositionX(_equip_1_c->getPositionX() - winSize.width);
@@ -673,12 +671,40 @@ void RepoLayer::equipUpdate(float dt)
 			equipNum_1_2->setPositionX(equipNum_1_2->getPositionX() - winSize.width);
 			equipNum_1_3->setPositionX(equipNum_1_3->getPositionX() - winSize.width);
 
+				//判断黑白框
+				if (_equip_2->getPositionX() == 120 && user.get_equip_arm_have() == 0) {
+					_background_3_white_2->setEnabled(false);
+				}
+				else if (_equip_2_b->getPositionX() == 120 && user.get_equip_arm_have() == 0) {
+					_background_3_white_2->setEnabled(false);
+				}
+				else if (_equip_2_c->getPositionX() == 120 && user.get_equip_arm_have() == 0) {
+					_background_3_white_2->setEnabled(false);
+				}
+				else {
+					_background_3_white_2->setEnabled(true);
+				}
+
 			_equip_2->setPositionX(_equip_2->getPositionX() - winSize.width);
 			_equip_2_b->setPositionX(_equip_2_b->getPositionX() - winSize.width);
 			_equip_2_c->setPositionX(_equip_2_c->getPositionX() - winSize.width);
 			equipNum_2_1->setPositionX(equipNum_2_1->getPositionX() - winSize.width);
 			equipNum_2_2->setPositionX(equipNum_2_2->getPositionX() - winSize.width);
 			equipNum_2_3->setPositionX(equipNum_2_3->getPositionX() - winSize.width);
+
+			//判断黑白框
+			if (_equip_3->getPositionX() == 120 && user.get_equip_tail_have() == 0) {
+				_background_3_white_3->setEnabled(false);
+			}
+			else if (_equip_3_b->getPositionX() == 120 && user.get_equip_tail_have() == 0) {
+				_background_3_white_3->setEnabled(false);
+			}
+			else if (_equip_3_c->getPositionX() == 120 && user.get_equip_tail_have() == 0) {
+				_background_3_white_3->setEnabled(false);
+			}
+			else {
+				_background_3_white_3->setEnabled(true);
+			}
 
 			_equip_3->setPositionX(_equip_3->getPositionX() - winSize.width);
 			_equip_3_b->setPositionX(_equip_3_b->getPositionX() - winSize.width);
