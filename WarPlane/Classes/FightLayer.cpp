@@ -78,7 +78,7 @@ void FightLayer::addEnemyPlane(int playerLevel) {
 }
 
 bool FightLayer::init() {
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	fightImg = Sprite::create("res/star.png");
 	fightImg->setAnchorPoint(Point::ZERO);
 	fightImg->setPosition(Vec2(Point::ZERO));
@@ -165,7 +165,7 @@ void FightLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
 void FightLayer::update(float dt)
 {
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	switch (key) {
 	case EventKeyboard::KeyCode::KEY_W:
 		if(visibleSize.height-player_1->getPositionY()<player_1->getContentSize().height/2){			
@@ -244,7 +244,7 @@ void FightLayer::update(float dt)
 
 void FightLayer::addSupply(float dt)
 {
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	int temp = rand();
 	if (temp%2==0)
 	{
@@ -284,7 +284,7 @@ void FightLayer::addBullet(int bType)
 /*
 void FightLayer::addEnemyPlane(float dt)
 {
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	CCPlane * plane_1 = CCPlane::create();
 	plane_1->setImg("res/playerShip2_red.png");
 	plane_1->setRotation(180);
@@ -412,7 +412,7 @@ long FightLayer::getCurrentTime()
 	return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 void FightLayer::setPlayer(int cType) {
-	WINSIZE;
+	auto winSize = Director::getInstance()->getWinSize();
 	player_1 = CCPlane::create();
 	player_1->setPosition(Vec2(winSize.width / 2, winSize.height / 2));
 	player_1->setType(cType);
@@ -435,7 +435,7 @@ void FightLayer::setPlayer(int cType) {
 		break;
 	}
 	this->addChild(player_1, 3);
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	TTFConfig ttfConfig("fonts/Marker Felt.ttf", 24);
 	exp = Label::createWithTTF(ttfConfig, CCString::createWithFormat("EXP:%d", player_1->getExp())->getCString());
 	exp->setColor(Color3B::RED);
@@ -466,7 +466,7 @@ void FightLayer::expChange()
 }
 void FightLayer::goToGameOver(int value)
 {
-	VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	gameOver = Sprite::create("res/UI/a5GameFin/rect.png");
 	auto gameOverSize = gameOver->getContentSize();
 	Sprite * star_1 = Sprite::create("res/star_gold.png");
@@ -579,7 +579,7 @@ void FightLayer::gamePause()
 	{
 		supply_list_1.at(i)->unscheduleUpdate();
 	}
-	static VISIBLESIZE;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	pause = Label::createWithSystemFont("GamePause", "", 40);
 	pause->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 3 / 4));
 	this->addChild(pause, 5);
