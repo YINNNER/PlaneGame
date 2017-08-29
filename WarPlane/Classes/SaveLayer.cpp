@@ -86,14 +86,16 @@ void SaveLayer::saveMenuItem(Ref * pSender,int tag){
     
 }
 
-//create and init userInfo.plist
+
+//check whether userInfo.plist is existed
+//if is not existed, create and init userInfo.plist
 void SaveLayer::createInfo(){
     std::string writablePath;
     
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        writablePath = "./res/";
+        writablePath = "res/";
         
         
     }
@@ -107,10 +109,6 @@ void SaveLayer::createInfo(){
     
     std::stringstream fullPath;
     fullPath<< writablePath <<"userInfo.plist";
-    
-    //using for debug
-    std::string full_path = FileUtils::getInstance()->fullPathForFilename(fullPath.str());
-    CCLOG("%s", full_path.c_str());
     
     //check whether userInfo.plist is existed(user info has been initialled)
     if (!FileUtils::getInstance()->isFileExist(fullPath.str().c_str())) {
@@ -216,7 +214,7 @@ void SaveLayer::initInfo(){
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        writablePath = "./res/";
+        writablePath = "res/";
     }
     else if(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     {
@@ -232,7 +230,7 @@ void SaveLayer::initInfo(){
     //将字典对象Root写入属性列表文件中
     //std::stringstream a; a.str().c_str();//---->string--->char *
     if(Root->writeToFile(fullPath.str().c_str())){
-        log("create info and init it \n see the plist file at %s \n",fullPath.str().c_str());
+        log("create info and init it,see the plist file at %s",fullPath.str().c_str());
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(fullPath.str());
         CCLOG("see the plist file at %s", _fullPath.c_str());
     }
