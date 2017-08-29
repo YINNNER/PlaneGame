@@ -93,7 +93,7 @@ void SaveLayer::createInfo(){
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        writablePath = "res/";
+        writablePath = "./res/";
         
         
     }
@@ -109,8 +109,8 @@ void SaveLayer::createInfo(){
     fullPath<< writablePath <<"userInfo.plist";
     
     //using for debug
-    //std::string full_path = FileUtils::getInstance()->fullPathForFilename(fullPath.str());
-    //CCLOG(full_path.c_str());
+    std::string full_path = FileUtils::getInstance()->fullPathForFilename(fullPath.str());
+    CCLOG("%s", full_path.c_str());
     
     //check whether userInfo.plist is existed(user info has been initialled)
     if (!FileUtils::getInstance()->isFileExist(fullPath.str().c_str())) {
@@ -216,7 +216,7 @@ void SaveLayer::initInfo(){
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        writablePath = "res/";
+        writablePath = "./res/";
     }
     else if(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     {
@@ -234,7 +234,7 @@ void SaveLayer::initInfo(){
     if(Root->writeToFile(fullPath.str().c_str())){
         log("create info and init it \n see the plist file at %s \n",fullPath.str().c_str());
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(fullPath.str());
-        CCLOG("see the plist file at %s \n", _fullPath.c_str());
+        CCLOG("see the plist file at %s", _fullPath.c_str());
     }
     else
         log("write plist file failed");
