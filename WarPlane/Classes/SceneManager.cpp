@@ -170,7 +170,7 @@ void SceneManager::goSetLayer(int tag) {
 	SetLayer * layer = SetLayer::create();
 	setScene->addChild(layer);*/
 	auto transition = TransitionMoveInR::create(0.2f, setScene);
-	Director::getInstance()->replaceScene(transition);
+	Director::getInstance()->pushScene(transition);
 	/*	times++;
 	}
 	else {
