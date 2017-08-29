@@ -89,9 +89,9 @@ ValueMap UserInfo::readPlist(){
     if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        path = "./res/userInfo.plist";
+        path = "res/userInfo.plist";
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
-        CCLOG("read the plist file at %s", _fullPath.c_str());
+        CCLOG("read the plist file at %s \n", _fullPath.c_str());
 
     }
     else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -193,9 +193,9 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 	{
 		//是MAC平台
-		path = "./res/userInfo.plist";
+		path = "res/userInfo.plist";
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
-        CCLOG("see the plist file at %s", _fullPath.c_str());
+        CCLOG("see the plist file at %s \n", _fullPath.c_str());
 
 	}
 	else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -253,7 +253,7 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	//5.将字典对象root写入到plist里，log用于调试
 	if (root->writeToFile(path.c_str())) 
 	{
-		log("see the plist file at %s", path.c_str());
+		log("save the plist file at %s \n", path.c_str());
 		
 	}
 	else
