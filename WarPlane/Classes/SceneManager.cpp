@@ -64,6 +64,7 @@ void SceneManager::goCreateLayer(int tag) {
 void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto mapScene = Scene::create();
 	auto layer = MapLayer::create();
+
     //åˆ¤æ–­æˆ˜æœºç±»åž‹ï¼Œå¹¶æ ¹æ®ä¸åŒç±»åž‹å†æ¬¡åˆå§‹åŒ–æˆ˜æœºå±žæ€§
     if (userInfo.getPlaneType()==2) {
         userInfo.setAtk(150);
@@ -81,21 +82,45 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
     }
     else ;
     layer->user = userInfo;
-	auto action=FadeIn::create(1.0f);
+
+	auto action=FadeIn::create(1.0f);//ÐÇÇò½¥±ä³öÏÖµÄÌØÐ§
+	auto planeAction = MoveTo::create(1.0f, Vec2(layer->level_2->getPosition().x+layer->level_2->getContentSize().width*0.25,
+		layer->level_2->getPosition().y));//·É»ú´ÓµÚÒ»¹ØÒÆ¶¯µ½µÚ¶þ¹Ø
+	auto planeAction_2 = MoveTo::create(1.0f, Vec2(layer->level_3->getPosition().x-50,
+		layer->level_3->getPosition().y-50));//·É»ú´ÓµÚ¶þ¹ØÒÆ¶¯µ½µÚÈý¹Ø
+	auto planeFadeIn = FadeIn::create(1.0f);
+
+	auto levelAction_1 = MoveBy::create(0.8f, Vec2(0, 10));
+	MoveBy *levelAction_back = levelAction_1->reverse();
+	auto repeat = RepeatForever::create(Sequence::create(levelAction_1, levelAction_back, NULL));
+
 	
+
+	
+
 	switch (layer->user.getGameLevel())
 	{
 	case 1:
+		layer->level_1->runAction(repeat);
+		layer->plane->runAction(planeFadeIn);
 		layer->level_2->setEnabled(false);
 		layer->level_3->setEnabled(false);
 		break;
 	case 2:
+		layer->level_2->runAction(repeat);
+		layer->plane->setRotation(340);
+		layer->plane->runAction(Sequence::create( planeAction, NULL));
 		layer->level_3->setEnabled(false);
 		layer->level_2->setOpacity(0);
 		layer->level_2->runAction(action);
 		
 		break;
 	case 3:
+		layer->level_3->runAction(repeat);
+		layer->plane->setPosition(Vec2(layer->level_2->getPosition().x + layer->level_2->getContentSize().width*0.25,
+			layer->level_2->getPosition().y));
+		layer->plane->setRotation(60);
+		layer->plane->runAction(Sequence::create(planeAction_2, NULL));
 		layer->level_3->setOpacity(0);
 		layer->level_3->runAction(action);
 		

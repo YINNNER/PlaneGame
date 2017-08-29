@@ -14,29 +14,39 @@ bool MapLayer::init() {
 	_background->setScale(scale);
 	this->addChild(_background);
 
+	//小飞机移动动画
+	auto animation = Animation::create();
+	for (int i = 1; i <= 3; i++) {
+		char szName[100] = { 0 };
+		sprintf(szName, "res/UI/a2SelectLevel/%d.png", i);
+		animation->addSpriteFrameWithFile(szName);
+	}
+	animation->setDelayPerUnit(0.1f);
+	animation->setRestoreOriginalFrame(true);
+	auto spray = Animate::create(animation);
+	RepeatForever *sprayForever = RepeatForever::create(spray);
 	
 
-
+	//跳入仓库
 	auto repo = MenuItemImage::create("res/UI/a2SelectLevel/repo.png", "res/UI/a2SelectLevel/repoS.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
 	repo->setPosition(Vec2(winSize.width*0.9, winSize.height*0.92));
 	repo->setScale(0.25);
 	repo->setTag(1);
-
+	//返回菜单
 	auto back = MenuItemImage::create("res/UI/a2SelectLevel/back.png", "res/UI/a2SelectLevel/backB.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
 	back->setPosition(Vec2(winSize.width*0.1, winSize.height*0.92));
 	back->setScale(0.4);
 	back->setTag(2);
-
+	//存储游戏
 	auto save = MenuItemImage::create("res/UI/a2SelectLevel/save.png", "res/UI/a2SelectLevel/saveS.png", CC_CALLBACK_1(MapLayer::CallMenu, this));
 	save->setPosition(Vec2(winSize.width*0.78, winSize.height*0.92));
 	save->setScale(0.25);
 	save->setTag(4);
-	
+	//第一关文字显示
 	auto level_1_label = Label::createWithSystemFont("Level 1", "fonts/AdobeHeitiStd-Regular.ttf", 20);
 	level_1_label->setPosition(Vec2(winSize.width*0.7, winSize.height*0.1));
 	this->addChild(level_1_label);
 	
-
 	level_1 = MenuItemImage::create("res/UI/a2SelectLevel/planet1.png", "res/UI/a2SelectLevel/planet1.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_1->setScale(0.5);
 	level_1->setAnchorPoint(Vec2(0,0));
@@ -44,16 +54,17 @@ bool MapLayer::init() {
 	level_1->setTag(31);
 
 	
-
 	auto level_2_label = Label::createWithSystemFont("Level 2", "fonts/AdobeHeitiStd-Regular.ttf", 20);
 	level_2_label->setPosition(Vec2(winSize.width*0.2, winSize.height*0.35));
 	this->addChild(level_2_label);
+	
 	
 
 	level_2 = MenuItemImage::create("res/UI/a2SelectLevel/planet2.png", "res/UI/a2SelectLevel/planet2.png", "res/UI/a2SelectLevel/planet2Forbidden.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_2->setScale(0.5);
 	level_2->setPosition(Vec2(winSize.width*0.2, winSize.height*0.5));
 	level_2->setTag(32);
+
 
 	auto level_3_label = Label::createWithSystemFont("Level 3", "fonts/AdobeHeitiStd-Regular.ttf", 20);
 	level_3_label->setPosition(Vec2(winSize.width*0.7, winSize.height*0.55));
@@ -69,8 +80,14 @@ bool MapLayer::init() {
 	menu->setPosition(Point::ZERO); 
 	this->addChild(menu, 1);
 	
-	
-	
+	//移动的小飞机
+	plane = Sprite::create("res/UI/a2SelectLevel/plane01.png");
+	plane->setPosition(Vec2(level_1->getPosition().x,level_1->getPosition().y));
+	plane->setScale(0.5);
+	plane->setRotation(60);
+	//plane->setOpacity(0);
+	plane->runAction(sprayForever);
+	this->addChild(plane,2);
 
 
 
