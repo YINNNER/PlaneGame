@@ -328,13 +328,13 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
-		HpBar->setScale(0.25*(user.getHp() + 50) / 100, 0.5);
+		HpBar->setScale(0.25*(user.getHp() + 50) / 1000, 0.5);
 	}
 	else if (_equip_1_c->getPositionX()==120 && user.get_equip_head_c_have() == 1) {
 		_body_1_c = Sprite::create(filename3.str().c_str());
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1_c, 2);
-		HpBar->setScale(0.25*(user.getHp() + 100) / 100, 0.5);
+		HpBar->setScale(0.25*(user.getHp() + 100) / 1000, 0.5);
 	}
 
 	
@@ -361,7 +361,7 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1, 2);
 
-		AtkBar->setScale(0.25*(user.getAtk()+10) / 1000, 0.5);
+		AtkBar->setScale(0.25*(user.getAtk()+10) / 100, 0.5);
 	}
 	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b_have() == 1) {
 		_wing_1_b = Sprite::create(filename2.str().c_str());
