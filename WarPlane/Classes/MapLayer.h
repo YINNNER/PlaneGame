@@ -20,6 +20,6 @@ public:
 	MenuItemImage *level_1;
 	MenuItemImage *level_2;
 	MenuItemImage *level_3;
-	
+	Sprite *plane;
 };
 

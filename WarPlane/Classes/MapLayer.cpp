@@ -70,7 +70,12 @@ bool MapLayer::init() {
 	this->addChild(menu, 1);
 	
 	
-	
+	plane = Sprite::create("res/UI/a2SelectLevel/plane.png");
+	plane->setPosition(Vec2(level_1->getPosition().x,level_1->getPosition().y));
+	plane->setScale(0.5);
+	plane->setRotation(60);
+	plane->setOpacity(0);
+	this->addChild(plane,2);
 
 
 

@@ -66,20 +66,33 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto layer = MapLayer::create();
 	layer->user = userInfo;
 	auto action=FadeIn::create(1.0f);
-	
+	auto planeAction = MoveTo::create(1.0f, Vec2(layer->level_2->getPosition().x+layer->level_2->getContentSize().width*0.25,
+		layer->level_2->getPosition().y));
+	auto planeAction_2 = MoveTo::create(1.0f, Vec2(layer->level_3->getPosition().x-50,
+		layer->level_3->getPosition().y-50));
+	auto planeFadeIn = FadeIn::create(1.0f);
+
 	switch (layer->user.getGameLevel())
 	{
 	case 1:
+		layer->plane->runAction(planeFadeIn);
 		layer->level_2->setEnabled(false);
 		layer->level_3->setEnabled(false);
 		break;
 	case 2:
+		
+		layer->plane->setRotation(340);
+		layer->plane->runAction(Sequence::create(planeFadeIn, planeAction, NULL));
 		layer->level_3->setEnabled(false);
 		layer->level_2->setOpacity(0);
 		layer->level_2->runAction(action);
 		
 		break;
 	case 3:
+		layer->plane->setPosition(Vec2(layer->level_2->getPosition().x + layer->level_2->getContentSize().width*0.25,
+			layer->level_2->getPosition().y));
+		layer->plane->setRotation(60);
+		layer->plane->runAction(Sequence::create(planeFadeIn, planeAction_2, NULL));
 		layer->level_3->setOpacity(0);
 		layer->level_3->runAction(action);
 		
