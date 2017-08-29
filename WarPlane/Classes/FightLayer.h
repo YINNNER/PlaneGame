@@ -50,10 +50,14 @@ public:
 	void addEnemy(float dt);
 	void addBoss();
 	void backMove(float);
+	void equipMove(float);
+	int getRandomHeight();
+	int getRandomWidth();
 private:
 	Sprite * fightImg;
 	Sprite * fightImg2;
-	//Sprite * barri;
+	Sprite * barri_1;
+	Sprite * barri_2;
 	CCPlane * player_1;
 	EventKeyboard::KeyCode key;
 	int scoreValue;
