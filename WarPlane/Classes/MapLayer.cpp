@@ -92,7 +92,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
-			SimpleAudioEngine::getInstance()->playEffect("music/click4.wav");
+			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
 		SceneManager::goRepoLayer(tag, user);
 
@@ -100,7 +100,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 	case 2:
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
-			SimpleAudioEngine::getInstance()->playEffect("music/click4.wav");
+			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
 		
 		SceneManager::goMenuLayer(tag,times);
@@ -146,7 +146,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 	{
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
-			SimpleAudioEngine::getInstance()->playEffect("music/click4.wav");
+			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
 		SceneManager::goSaveLayer(2,user);
 	}

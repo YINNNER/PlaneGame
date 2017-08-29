@@ -58,7 +58,7 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	{
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
 		
 		SceneManager::goCreateLayer(tag);
@@ -68,7 +68,7 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	case 2:
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
 		SceneManager::goSaveLayer(tag);
 	
@@ -77,7 +77,7 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	{
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
 		int tag = 1;
 		SceneManager::goSetLayer(tag);
@@ -87,7 +87,7 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	{
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
 		Director::getInstance()->end();
 		exit(0);

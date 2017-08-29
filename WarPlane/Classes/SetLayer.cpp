@@ -71,6 +71,7 @@ void SetLayer::CallBack(Ref *pSender) {
 	case 1:
 		if (effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
 		
 		SceneManager::goHelpLayer(tag);
@@ -80,17 +81,25 @@ void SetLayer::CallBack(Ref *pSender) {
 		
 		if (effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
 		
 		SceneManager::goMenuLayer(tag,transiTimes);
 		break;
 	case 3:
+		if (effectState == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/switch01.wav");
+		}
+		
 		if (SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying())
 			SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 		else
 			SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 		break;
 	case 4:
+		if (effectState == 0) {
+			SimpleAudioEngine::getInstance()->playEffect("music/switch01.wav");
+		}
 		MenuItemFont *item = (MenuItemFont*)((MenuItemToggle *)pSender)->getSelectedItem();
 		char* musicState = (char*)item->getUserData();
 		if (musicState == "off")

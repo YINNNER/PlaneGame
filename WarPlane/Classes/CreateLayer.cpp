@@ -541,7 +541,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 	{
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
 		auto file = new UserInfo();
 		UserInfo user = file->createUser(planeName, planeType);
@@ -553,7 +553,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 	case 2: {
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
 		int transiTimes = 1;
 		SceneManager::goMenuLayer(tag,transiTimes);
@@ -561,7 +561,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 	case 10: {
 		if (SetLayer::getEffectState() == 1) {
 			
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
 		if (selected_2->isVisible())
 			selected_2->setVisible(false);
@@ -576,7 +576,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 	case 11: {
 		if (SetLayer::getEffectState() == 1) {
 			
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
 		if(selected_1->isVisible())
 			selected_1->setVisible(false);
@@ -591,7 +591,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 	case 12: {
 		if (SetLayer::getEffectState() == 1) {
 			
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click4.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
 		if (selected_1->isVisible())
 			selected_1->setVisible(false);
