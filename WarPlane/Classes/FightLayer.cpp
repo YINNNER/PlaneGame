@@ -81,17 +81,37 @@ void FightLayer::addEnemyPlane() {
 */
 bool FightLayer::init() {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	fightImg = Sprite::create("res/star.png");
+	fightImg = Sprite::create("res/UI/a3Game/backGround1.png");
 	fightImg->setAnchorPoint(Point::ZERO);
 	fightImg->setPosition(Vec2(Point::ZERO));
 	fightImg->getTexture()->setAliasTexParameters();
 	this->addChild(fightImg, 1);
-	fightImg2 = Sprite::create("res/star.png");
+	fightImg2 = Sprite::create("res/UI/a3Game/backGround1.png");
 	fightImg2->setAnchorPoint(Point::ZERO);
 	fightImg2->setPosition(Point(fightImg->getPositionX(), fightImg->getPositionY() + fightImg->getContentSize().width - 2));
 	fightImg2->getTexture()->setAliasTexParameters();
 	this->addChild(fightImg2, 1);
 	this->schedule(schedule_selector(FightLayer::backMove));
+	//障碍物
+	/*barri_1 = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_big1.png");
+	barri_1->setAnchorPoint(Point::ZERO);
+	barri_1->setPosition(Vec2(Point::ZERO));
+	this->addChild(barri_1, 1);
+	barri_2= Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorGrey_big1.png");
+	barri_2->setAnchorPoint(Point::ZERO);
+	barri_2->setPosition(Vec2(Point::ZERO));
+	this->addChild(barri_2, 1);
+	this->schedule(schedule_selector(FightLayer::equipMove),3.0f);*/
+	//添加刚体
+/*	auto body = PhysicsBody::create();
+	body->setDynamic(false);
+	body->addShape(PhysicsShapeBox::create(barri_1->getContentSize(), PHYSICSSHAPE_MATERIAL_DEFAULT, Point(0, 0)));
+	//body->addShape(PhysicsShapeBox::create(barri_2->getContentSize(), PHYSICSSHAPE_MATERIAL_DEFAULT, Point(0, 0)));
+	body->setCategoryBitmask(1);    // 0001  
+	body->setCollisionBitmask(1);   // 0001  
+	body->setContactTestBitmask(1); // 0001  
+	this->setPhysicsBody(body);*/
+
 
 
 	auto skillBar = Sprite::create("res/skillBar.png");
@@ -158,6 +178,33 @@ bool FightLayer::init() {
 	this->schedule(schedule_selector(FightLayer::timeSche),1.0f);
 	return true;
 }
+
+/*void FightLayer::equipMove(float) {
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	barri_1->setPositionY(fightImg->getPositionY() - 10);
+	barri_2->setPositionY(fightImg2->getPositionY() - 10);
+	//for (int i = 0; i < 2; i++) {
+		barri_1 = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_big1.png");
+		barri_2 = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorGrey_big1.png");
+		barri_1->setPosition(Point(this->getRandomWidth(), this->getRandomHeight()));
+		barri_2->setPosition(Point(this->getRandomWidth(), this->getRandomHeight()));
+		this->addChild(barri_1, 4);
+		this->addChild(barri_2, 4);
+	
+
+}*/
+//获得随机高度
+/*int FightLayer::getRandomHeight() {
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	return rand() % (int)(2 * 5 + 5 - visibleSize.height);
+}
+//获得随机宽度
+int FightLayer::getRandomWidth() {
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	return rand() % (int)(2 * 5 + 5 - visibleSize.width);
+}*/
+
+//背景滚动
 void FightLayer::backMove(float)
 {
 	//通过不断改变背景y轴的位置来实现背景滚动  
@@ -173,9 +220,9 @@ void FightLayer::backMove(float)
 		fightImg2->setPositionY(fightImg->getPositionY() + fightImg->getContentSize().height);
 	}
 
+
 }
 
-//增加障碍物
 
 void FightLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {

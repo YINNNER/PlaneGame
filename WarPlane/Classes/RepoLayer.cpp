@@ -122,7 +122,7 @@ bool RepoLayer::init() {
 	back->setTag(2);
 
 	//保存装备
-	auto save = MenuItemImage::create("res/UI/a6Repo/saveEquip.png", "res/UI/a6Repo/saveEquipS.png", CC_CALLBACK_1(RepoLayer::CallMenu, this,user));
+	auto save = MenuItemImage::create("res/UI/a6Repo/saveEquip.png", "res/UI/a6Repo/saveEquipS.png", CC_CALLBACK_1(RepoLayer::SaveEquip, this,user));
 	save->setPosition(Vec2(winSize.width*0.8, winSize.height*0.93));
 	save->setScale(0.55);
 	save->setTag(2);
@@ -323,6 +323,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1, 2);
 		HpBar->setScale(0.25*(user.getHp()+10) / 1000, 0.5);
+		//user.atk = 1;
 	}
 	else if (_equip_1_b->getPositionX()==120 && user.get_equip_head_b_have() == 1) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
@@ -458,7 +459,7 @@ void RepoLayer::SaveEquip(Ref * pSender, UserInfo & userInfo)
 		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}
-	SceneManager::goMapLayer(2, user);
+	SceneManager::goSaveLayer(2, user);
 }
 
 //设置装备栏的图片
