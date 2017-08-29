@@ -13,12 +13,12 @@ UserInfo::UserInfo(){
     userName="";
     saveTime="";
     saveDay="";
-    planeType=0;
-    atk=0;
-    spd=0;
+    planeType=1;
+    atk=100;
+    spd=40;
     gameLevel=1;
     hp=500;
-    mp=500;
+    mp=100;
     planeLevel=1;
     //equip
     //1.head
