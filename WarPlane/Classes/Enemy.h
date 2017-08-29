@@ -11,7 +11,7 @@ public:
 	int getRandomNumber(int a, int b);
 	void setEnemyImg();
 	void plane_death();
-	void Enemy::removePlane(float dt);
+	void removePlane(float dt);
 public:
 	Enemy();
 	~Enemy();
