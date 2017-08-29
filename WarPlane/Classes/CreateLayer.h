@@ -27,6 +27,8 @@ public:
 	void addWords(std::string temp);
 	void minusWords(std::string temp);
 
+	bool onTouchBegan(Touch *touch, Event *unused_event);
+
 
 private:
 	Label *defaultLabel;

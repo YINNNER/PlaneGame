@@ -77,10 +77,7 @@ bool CreateLayer::init() {
 	menu2->setPosition(Point::ZERO);
 	this->addChild(menu2);
 	
-	defaultLabel = Label::createWithSystemFont("请输10个以内字母支持大小写", "", 15);
-	defaultLabel->setColor(Color3B(72,72,72));
-	defaultLabel->setPosition(Vec2(winSize.width*0.55, winSize.height*0.25));
-	this->addChild(defaultLabel,1);
+	
 
 	warning = Label::createWithSystemFont("太多字啦", "fonts/simhei.ttf", 20);
 	warning->setPosition(Vec2(winSize.width*0.9, winSize.height*0.25));
@@ -109,9 +106,12 @@ bool CreateLayer::init() {
 	editBox->setPosition(Vec2(winSize.width*0.6, winSize.height*0.25));
 	editBox->setScale(1.3, 0.9);
 	this->addChild(editBox,0);
-	auto listenerKeyboard = EventListenerKeyboard::create();
-	listenerKeyboard->onKeyPressed = CC_CALLBACK_2(CreateLayer::onKeyPressed, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyboard, this);
+
+	defaultLabel = Label::createWithSystemFont("请输10个以内字母支持大小写", "", 15);
+	defaultLabel->setColor(Color3B(72, 72, 72));
+	defaultLabel->setPosition(Vec2(winSize.width*0.56, winSize.height*0.25));
+	this->addChild(defaultLabel, 1);
+	
 	//this->schedule(schedule_selector(CreateLayer::addWords),1.0f);
 	cursor = Sprite::create("res/UI/a1CreatePlayer/cursor.png");
 	cursor->setPosition(Vec2(winSize.width*0.4, winSize.height*0.25));
@@ -119,11 +119,42 @@ bool CreateLayer::init() {
 	this->addChild(cursor, 2);
 	auto cursorBlink = RepeatForever::create(Sequence::create(FadeOut::create(0.4f), FadeIn::create(0.4f), NULL));
 	cursor->runAction(cursorBlink);
+
+	auto cursorListener = EventListenerTouchOneByOne::create();
+	cursorListener->setSwallowTouches(true);
+	cursorListener->onTouchBegan = CC_CALLBACK_2(CreateLayer::onTouchBegan, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(cursorListener, editBox);
+
     }
     else ;
+
+	
         
 	return true;
         
+}
+
+bool CreateLayer::onTouchBegan(Touch *touch, Event *unused_event) {
+	auto target = static_cast<Layer*>(unused_event->getCurrentTarget());
+	if (target == nullptr)
+	{
+		return true;
+	}
+	Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+	Size s = target->getContentSize();
+	Rect rect = Rect(0, 0, s.width, s.height);
+
+	auto listenerKeyboard = EventListenerKeyboard::create();
+	listenerKeyboard->onKeyPressed = CC_CALLBACK_2(CreateLayer::onKeyPressed, this);
+
+	if (rect.containsPoint(locationInNode))
+	{
+		cursor->setVisible(true);
+		
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyboard, this);
+		return true;
+	}
+	return false;
 }
 
 void CreateLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
