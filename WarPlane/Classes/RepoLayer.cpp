@@ -37,17 +37,71 @@ bool RepoLayer::init() {
 
 
 
+	//设置装备列表9个
+	setEquipImg(user.getPlaneType());
+
+	//飞机进度条
+	BaseBarHp = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
+	BaseBarHp->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.8));
+	BaseBarHp->setScale(0.25, 0.5);
+	this->addChild(BaseBarHp, 2);
+
+	BaseBarEn = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
+	BaseBarEn->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.76));
+	BaseBarEn->setScale(0.25, 0.5);
+	this->addChild(BaseBarEn, 2);
+
+	BaseBarAtk = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
+	BaseBarAtk->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.72));
+	BaseBarAtk->setScale(0.25, 0.5);
+	this->addChild(BaseBarAtk, 2);
+
+	BaseBarSpd = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
+	BaseBarSpd->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.68));
+	BaseBarSpd->setScale(0.25, 0.5);
+	this->addChild(BaseBarSpd, 2);
+
+	HpBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
+	HpBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.798));
+	HpBar->setScale(0.25*(user.getHp()) / 1000, 0.5);
+	HpBar->setAnchorPoint(Vec2(0, 0));
+	this->addChild(HpBar, 2);
+
+	AtkBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
+	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.64, origin.y + winSize.height *0.718));
+	AtkBar->setScale(0.25*(user.getAtk()) / 1000, 0.5);
+	AtkBar->setAnchorPoint(Vec2(0, 0));
+	this->addChild(AtkBar, 2);
+
+	SpdBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
+	SpdBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.678));
+	SpdBar->setScale(0.25*(user.getSpd()) / 1000, 0.5);
+	SpdBar->setAnchorPoint(Vec2(0, 0));
+	this->addChild(SpdBar, 2);
+
+	//设置飞机图片
+
+	CCLOG("%d \n", user.getPlaneType());
+	setPlaneImg(user.getPlaneType());
+
+
 	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.5 ));
 	this->addChild(_background_3, 1);
-	//白色装备按钮2
-	_background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png","res/UI/a1CreatePlayer/createButtonForbidden.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this, user.getPlaneType()));
-	if (user.get_equip_arm_have() == 0) {
+	//白色装备按钮1
+	_background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/block.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this, user.getPlaneType()));
+/*	if (_equip_1->getPositionX() == 120 && user.get_equip_head_have() == 0) {
+		_background_3_white_1->setEnabled(false);
+	}
+	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_head_b_have() == 0) {
+		_background_3_white_1->setEnabled(false);
+	}
+	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_head_c_have() == 0) {
 		_background_3_white_1->setEnabled(false);
 	}
 	else {
 		_background_3_white_1->setEnabled(true);
-	}
+	}*/
 	_background_3_white_1->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.5));
 	_background_3_white_1->setScale(0.6);
 	//背景3
@@ -55,53 +109,54 @@ bool RepoLayer::init() {
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.3 ));
 	this->addChild(_background_3, 1);
 	//白色装备按钮2
-	_background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a1CreatePlayer/createButtonForbidden.png",CC_CALLBACK_1(RepoLayer::menuCallBack_2, this, user.getPlaneType()));
+	_background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/block.png",CC_CALLBACK_1(RepoLayer::menuCallBack_2, this, user.getPlaneType()));
    _background_3_white_2->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.3 ));
-   if (user.get_equip_head_have() == 0) {
+ /*  if (_equip_1->getPositionX() == 120 && user.get_equip_arm_have() == 0) {
+	   _background_3_white_3->setEnabled(false);
+   }
+   else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b_have() == 0) {
+	   _background_3_white_2->setEnabled(false);
+   }
+   else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_c_have() == 0) {
 	   _background_3_white_2->setEnabled(false);
    }
    else {
 	   _background_3_white_2->setEnabled(true);
-   }
+   }*/
    _background_3_white_2->setScale(0.6);//缩放0.5倍
    //背景3
 	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.1 ));
 	this->addChild(_background_3, 1);
 	//白色装备按钮3
-	_background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png","res/UI/a1CreatePlayer/createButtonForbidden.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this, user.getPlaneType()));
+	_background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/block.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this, user.getPlaneType()));
 	_background_3_white_3->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.1 ));
 	_background_3_white_3->setScale(0.6);//缩放0.5倍
-	if (user.get_equip_tail_have() == 0) {
+	/*if (_equip_1->getPositionX() == 120 && user.get_equip_tail_have() == 0) {
+		_background_3_white_3->setEnabled(false);
+	}
+	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_tail_b_have() == 0) {
+		_background_3_white_3->setEnabled(false);
+	}
+	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_tail_c_have() == 0) {
 		_background_3_white_3->setEnabled(false);
 	}
 	else {
 		_background_3_white_3->setEnabled(true);
-	}
+	}*/
 
-
-
-
-	//设置飞机图片
-
-	CCLOG("%d \n" ,user.getPlaneType());
-	setPlaneImg(user.getPlaneType());
-
-
-	//设置装备列表9个
-	setEquipImg(user.getPlaneType());
 
 
 
 	//返回按钮
 	auto back = MenuItemImage::create("res/UI/a2SelectLevel/back.png", "res/UI/a2SelectLevel/backB.png", CC_CALLBACK_1(RepoLayer::CallMenu, this,user));
-	back->setPosition(Vec2(winSize.width*0.15, winSize.height*0.9));
+	back->setPosition(Vec2(winSize.width*0.15, winSize.height*0.93));
 	back->setScale(0.55);
 	back->setTag(2);
 
 	//保存装备
 	auto save = MenuItemImage::create("res/UI/a6Repo/saveEquip.png", "res/UI/a6Repo/saveEquipS.png", CC_CALLBACK_1(RepoLayer::CallMenu, this,user));
-	save->setPosition(Vec2(winSize.width*0.8, winSize.height*0.9));
+	save->setPosition(Vec2(winSize.width*0.8, winSize.height*0.93));
 	save->setScale(0.55);
 	save->setTag(2);
 
@@ -272,44 +327,7 @@ bool RepoLayer::init() {
 	equipNum_3_2->setPosition(Vec2(origin.x + winSize.width * 0.8, origin.y + winSize.height * 0.1 ));
 	this->addChild(equipNum_3_2, 1);*/
 
-	//飞机进度条
-	BaseBarHp = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
-	BaseBarHp->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.8));
-	BaseBarHp->setScale(0.25, 0.5);
-	this->addChild(BaseBarHp, 2);
-
-	BaseBarEn = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
-	BaseBarEn->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.76));
-	BaseBarEn->setScale(0.25, 0.5);
-	this->addChild(BaseBarEn, 2);
-
-	BaseBarAtk = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
-	BaseBarAtk->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.72));
-	BaseBarAtk->setScale(0.25, 0.5);
-	this->addChild(BaseBarAtk, 2);
-
-	BaseBarSpd = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
-	BaseBarSpd->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.68));
-	BaseBarSpd->setScale(0.25, 0.5);
-	this->addChild(BaseBarSpd, 2);
-
-	HpBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
-	HpBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.798));
-	HpBar->setScale(0.25*(user.getHp()) / 1000, 0.5);
-	HpBar->setAnchorPoint(Vec2(0, 0));
-	this->addChild(HpBar, 2);
-
-	AtkBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
-	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.64, origin.y + winSize.height *0.718));
-	AtkBar->setScale(0.25*(user.getAtk()) / 1000, 0.5);
-	AtkBar->setAnchorPoint(Vec2(0, 0));
-	this->addChild(AtkBar, 2);
-
-	SpdBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
-	SpdBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.678));
-	SpdBar->setScale(0.25*(user.getSpd()) / 1000, 0.5);
-	SpdBar->setAnchorPoint(Vec2(0, 0));
-	this->addChild(SpdBar, 2);
+	
 
 	return true;
 
@@ -331,21 +349,18 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		_body_1 = Sprite::create(filename1.str().c_str());
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1, 2);
-		_background_3_white_1->setEnabled(false);
 		HpBar->setScale(0.25*(user.getHp()+10) / 1000, 0.5);
 	}
 	else if (_equip_1_b->getPositionX()==120 && user.get_equip_head_b_have() == 1) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
-		_background_3_white_1->setEnabled(false);
 		HpBar->setScale(0.25*(user.getHp() + 50) / 1000, 0.5);
 	}
 	else if (_equip_1_c->getPositionX()==120 && user.get_equip_head_c_have() == 1) {
 		_body_1_c = Sprite::create(filename3.str().c_str());
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1_c, 2);
-		_background_3_white_1->setEnabled(false);
 		HpBar->setScale(0.25*(user.getHp() + 100) / 1000, 0.5);
 	}
 
@@ -370,21 +385,21 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_1 = Sprite::create(filename1.str().c_str());
 		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1, 2);
-		_background_3_white_2->setEnabled(false);
+
 		AtkBar->setScale(0.25*(user.getAtk()+10) / 1000, 0.5);
 	}
 	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b_have() == 1) {
 		_wing_1_b = Sprite::create(filename2.str().c_str());
 		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_b, 2);
-		_background_3_white_2->setEnabled(false);
+
 		AtkBar->setScale(0.25*(user.getAtk()+50) / 1000, 0.5);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_c_have() == 1) {
 		_wing_1_c = Sprite::create(filename3.str().c_str());
 		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_c, 2);
-		_background_3_white_2->setEnabled(false);
+
 		AtkBar->setScale(0.25*(user.getAtk()+100) / 1000, 0.5);
 	}
 
@@ -431,19 +446,19 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 	if (_equip_1->getPositionX() == 120 && user.get_equip_tail_have() == 1) {
 		_tail_1 = Sprite::create(filename1.str().c_str());
 		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
-		_background_3_white_3->setEnabled(false);
+
 		this->addChild(_tail_1, 2);
 	}
 	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_tail_b_have() == 1) {
 		_tail_1_b = Sprite::create(filename2.str().c_str());
 		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
-		_background_3_white_3->setEnabled(false);
+
 		this->addChild(_tail_1_b, 2);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_tail_c_have() == 1) {
 		_tail_1_c = Sprite::create(filename3.str().c_str());
 		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
-		_background_3_white_3->setEnabled(false);
+	
 		this->addChild(_tail_1_c, 2);
 	}
 }
