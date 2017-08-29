@@ -23,7 +23,6 @@ public:
 private:
     int planeType;
     int atk;
-    int def;
     int spd;
     int gameLevel;
     int hp;
@@ -71,7 +70,6 @@ public:
     std::string getUserName();
     int getPlaneType();
     int getAtk();
-    int getDef();
     int getSpd();
     int getGameLevel();
     int getHp();
