@@ -15,7 +15,6 @@ UserInfo::UserInfo(){
     saveDay="";
     planeType=0;
     atk=0;
-    def=0;
     spd=0;
     gameLevel=1;
     hp=500;
@@ -55,7 +54,6 @@ UserInfo::UserInfo(UserInfo const & userInfo){
     saveTime=userInfo.saveTime;
     saveDay=userInfo.saveDay;
     atk=userInfo.atk;
-    def=userInfo.def;
     spd=userInfo.spd;
     gameLevel=userInfo.gameLevel;
     hp=userInfo.hp;
@@ -129,7 +127,6 @@ void UserInfo::setInfo(int tag){
     saveDay=(dict["saveDay"].asString()).c_str();
     planeType=dict["planeType"].asInt();
     atk=dict["atk"].asInt();
-    def=dict["def"].asInt();
     spd=dict["spd"].asInt();
     gameLevel=dict["gameLevel"].asInt();
     hp=dict["hp"].asInt();
@@ -226,7 +223,6 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	user->setObject(__String::create(userInfo.saveTime), "saveTime");
 	user->setObject(__String::create(userInfo.saveDay), "saveDay");
 	user->setObject(__Integer::create(userInfo.atk), "atk");
-	user->setObject(__Integer::create(userInfo.def), "def");
 	user->setObject(__Integer::create(userInfo.spd), "spd");
 	user->setObject(__Integer::create(userInfo.gameLevel), "gameLevel");
 	user->setObject(__Integer::create(userInfo.hp), "hp");
@@ -285,7 +281,6 @@ std::string UserInfo::getSaveDay(){return saveDay;}
 std::string UserInfo::getUserName(){return userName;}
 int UserInfo::getPlaneType(){return planeType;}
 int UserInfo::getAtk(){return atk;}
-int UserInfo::getDef(){return def;}
 int UserInfo::getSpd(){return spd;}
 int UserInfo::getGameLevel(){return gameLevel;}
 int UserInfo::getHp(){return hp;}
