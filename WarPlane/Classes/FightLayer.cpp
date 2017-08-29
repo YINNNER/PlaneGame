@@ -81,12 +81,12 @@ bool FightLayer::init() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto winSize = Director::getInstance()->getWinSize();
 
-	fightImg = Sprite::create("res/star.png");
+	fightImg = Sprite::create("res/UI/a3Game/backGround1.png");
 	fightImg->setAnchorPoint(Point::ZERO);
 	fightImg->setPosition(Vec2(Point::ZERO));
 	fightImg->getTexture()->setAliasTexParameters();
 	this->addChild(fightImg, 1);
-	fightImg2 = Sprite::create("res/star.png");
+	fightImg2 = Sprite::create("res/UI/a3Game/backGround1.png");
 	fightImg2->setAnchorPoint(Point::ZERO);
 	fightImg2->setPosition(Point(fightImg->getPositionX(), fightImg->getPositionY() + fightImg->getContentSize().width - 2));
 	fightImg2->getTexture()->setAliasTexParameters();
