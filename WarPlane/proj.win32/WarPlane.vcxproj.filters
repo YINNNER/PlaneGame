@@ -51,21 +51,15 @@
     <ClCompile Include="..\Classes\UserInfo.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Arms.cpp" />
     <ClCompile Include="..\Classes\Bullet.cpp" />
     <ClCompile Include="..\Classes\CCPlane.cpp" />
     <ClCompile Include="..\Classes\FightLayer.cpp" />
-    <ClCompile Include="..\Classes\Flg.cpp" />
-    <ClCompile Include="..\Classes\Fuel.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\Supply.cpp" />
     <ClCompile Include="..\Classes\Equip.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\enemyPlane.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GamePause.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -109,21 +103,15 @@
     <ClInclude Include="..\Classes\UserInfo.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Arms.h" />
     <ClInclude Include="..\Classes\Bullet.h" />
     <ClInclude Include="..\Classes\CCPlane.h" />
     <ClInclude Include="..\Classes\FightLayer.h" />
-    <ClInclude Include="..\Classes\Flg.h" />
-    <ClInclude Include="..\Classes\Fuel.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\Supply.h" />
     <ClInclude Include="..\Classes\Equip.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\enemyPlane.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GamePause.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

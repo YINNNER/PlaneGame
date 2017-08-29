@@ -419,7 +419,46 @@ void CreateLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		if (planeName != "") {
 			minusWords(temp);
 		}
-		
+	case EventKeyboard::KeyCode::KEY_0:
+		temp = "0";
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_1:
+		temp = "1";
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_2:
+		temp = "2";
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_3:
+		temp = "3";
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_4:
+		temp = "4";
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_5:
+		temp = "5";
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_6:
+		temp = "6";
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_7:
+		temp = "7";
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_8:
+		temp = "8";
+		addWords(temp);
+		break;
+	case EventKeyboard::KeyCode::KEY_9:
+		temp = "9";
+		addWords(temp);
+		break;
 
 	}
 	if (planeName != "") {
