@@ -65,7 +65,7 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto mapScene = Scene::create();
 	auto layer = MapLayer::create();
 
-    //判断战机类型，并根据不同类型再次初始化战机属性
+    //判断战机类型，并根据不同类型再次初始化战机属�?
     if (userInfo.getPlaneType()==2) {
         userInfo.setAtk(150);
         userInfo.setSpd(50);
