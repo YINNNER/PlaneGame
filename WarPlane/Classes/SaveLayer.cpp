@@ -9,6 +9,9 @@
 #include "SaveLayer.h"
 #include <time.h>
 #include "SceneManager.h"
+#include "SetLayer.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 
 #define winSize Director::getInstance()->getVisibleSize()
 #define origin Director::getInstance()->getVisibleOrigin()
@@ -54,7 +57,10 @@ bool SaveLayer::init() {
 
 
 void SaveLayer::callBack(Ref * pSender){
-    
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
     int back=2;
     int transiTime=1;
     SceneManager::goMenuLayer(back, transiTime);
@@ -62,6 +68,10 @@ void SaveLayer::callBack(Ref * pSender){
 
 
 void SaveLayer::saveMenuItem(Ref * pSender,int tag){
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	if (times==1)
 	{
 		loadInfo(tag);
