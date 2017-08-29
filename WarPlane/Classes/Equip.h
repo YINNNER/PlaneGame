@@ -11,11 +11,11 @@ public:
 	int getEHp();
 	int getESpd();
 	int getEquipType();
-	void setEquipImg(const char * filename);
 private:
 	int _ImpAtk;
 	int _ImpHp;
 	int _ImpSpd;
 	int type;
 	Sprite * equipImg;
+	void setEquipImg(const char * filename);
 };

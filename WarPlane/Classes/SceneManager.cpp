@@ -201,7 +201,7 @@ void SceneManager::goRepoLayer(int tag,UserInfo &userInfo) {
 void SceneManager::goFightLayer(UserInfo &userInfo) {
 	auto scene = Scene::create();
 	FightLayer *layer = FightLayer::create();
-	layer->user = userInfo;
+
 	scene->addChild(layer);
 
 }

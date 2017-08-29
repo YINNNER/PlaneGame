@@ -2,7 +2,7 @@
 #include "cocos2d.h"
 #include"CCPlane.h"
 #include"Bullet.h"
-#include "UserInfo.h"
+#include"Enemy.h"
 USING_NS_CC;
 class FightLayer :
 	public Layer
@@ -13,16 +13,14 @@ public:
 	CREATE_FUNC(FightLayer);
 	virtual bool init();
 	void setPlayer(int cType);
-	void backMove(float dt);
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void update(float dt);
 	void addSupply(float dt);
 	void addBullet(int bType);
-	void addEnemyPlane(int playerLevel);
+	void addEnemyPlane();
 	void is_crash(float dt);
 	long getCurrentTime();
-	void onEnterTransitionDidFinish();
 
 	void openSkillU();
 	void openSkillI();
@@ -46,7 +44,13 @@ public:
 	void removeAnimation(float dt);
 	void closeWhite(float dt);
 	void addHp(float dt);
-	UserInfo user;
+
+	void dropEquip(Enemy * plane);
+	void drawEquip(float dt);
+
+	void addEnemy(float dt);
+	void addBoss();
+	void backMove(float);
 private:
 	Sprite * fightImg;
 	Sprite * fightImg2;
@@ -56,11 +60,11 @@ private:
 	time_t secTime;
 	int minTime;
 	Label * score;
-	Label * hp;
-	Label * exp;
+	Label * hpLabel;
 	Label * grade;
 	Label * time;
 	Label * pause;
+	Label * attarkLabel;
 	Menu * menu;
 	Sprite * shield;
 	Sprite * hpSprite;
@@ -71,7 +75,7 @@ private:
 	Sprite * skill_1;
 	Sprite * skill_2;
 	Sprite * white;
-
+	Enemy * boss;
 };
 
 

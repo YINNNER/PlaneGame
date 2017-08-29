@@ -5,28 +5,30 @@
     <dict>
         <key>user1</key>
         <dict>
+            <key>exp</key>
+            <string>0</string>
             <key>atk</key>
-            <integer>0</integer>
+            <integer>10</integer>
             <key>userName</key>
-            <string>王子昂</string>
+            <string>a</string>
             <key>_equip_head_b_load</key>
             <false/>
             <key>saveTime</key>
-            <string>16:52:24</string>
+            <string>17:17:51</string>
             <key>saveDay</key>
-            <string>2017/08/28</string>
+            <string>2017/08/29</string>
             <key>def</key>
-            <integer>0</integer>
-            <key>mp</key>
-            <integer>500</integer>
-            <key>exp</key>
+            <integer>10</integer>
+            <key>spd</key>
             <integer>0</integer>
             <key>gameLevel</key>
             <integer>1</integer>
             <key>hp</key>
             <integer>500</integer>
+            <key>mp</key>
+            <integer>500</integer>
             <key>planeLevel</key>
-            <integer>1</integer>
+            <integer>10</integer>
             <key>planeType</key>
             <integer>1</integer>
             <key>_equip_head_have</key>
@@ -69,11 +71,11 @@
             <key>atk</key>
             <string>10</string>
             <key>userName</key>
-            <string></string>
+            <string>a</string>
             <key>saveTime</key>
-            <string>00:45:17</string>
+            <string></string>
             <key>saveDay</key>
-            <string>2017/08/27</string>
+            <string></string>
             <key>def</key>
             <string>10</string>
             <key>mp</key>
@@ -94,11 +96,11 @@
             <key>atk</key>
             <string>10</string>
             <key>userName</key>
-            <string></string>
+            <string>a</string>
             <key>saveTime</key>
-            <string>00:45:17</string>
+            <string></string>
             <key>saveDay</key>
-            <string>2017/08/27</string>
+            <string></string>
             <key>def</key>
             <string>10</string>
             <key>mp</key>

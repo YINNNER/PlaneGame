@@ -11,7 +11,7 @@ Bullet::~Bullet()
 {
 }
 bool Bullet::init() {
-	
+	type = 0;
 	return true;
 }
 void Bullet::setBulletImg(const char * filename) {
@@ -21,12 +21,25 @@ void Bullet::setBulletImg(const char * filename) {
 	
 }
 void Bullet::update(float dt) {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
- 	this->setPositionY(this->getPositionY() + 5);
-	if (this->getPositionY()>visibleSize.height)
+	static VISIBLESIZE;
+	if (type==1)
 	{
-		removeBullet();
+		this->setPositionY(this->getPositionY() + 5);
+		if (this->getPositionY()>visibleSize.height)
+		{
+			removeBullet();
+		}
 	}
+	else
+	{
+		this->setPositionY(this->getPositionY() - 5);
+		if (this->getPositionY()<0)
+		{
+			removeBullet();
+		}
+	}
+ 	
+
 }
 
 void Bullet::removeBullet()
@@ -36,7 +49,7 @@ void Bullet::removeBullet()
 }
 void Bullet::skillMove(float dt)
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
+	static VISIBLESIZE;
 	this->setPositionY(this->getPositionY() + 30);
 	if (this->getPositionY() > visibleSize.height)
 	{
@@ -66,4 +79,14 @@ void Bullet::setSkillImg(int type)
 		break;
 	}
 	schedule(schedule_selector(Bullet::skillMove), 0.1f);
+}
+
+int Bullet::getType()
+{
+	return type;
+}
+
+void Bullet::setType(int t)
+{
+	this->type = t;
 }
