@@ -125,13 +125,14 @@ bool CreateLayer::init() {
 	cursorListener->onTouchBegan = CC_CALLBACK_2(CreateLayer::onTouchBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(cursorListener, editBox);
 
-    }
-    else ;
-
 	listenerKeyboard = EventListenerKeyboard::create();
 	listenerKeyboard->onKeyPressed = CC_CALLBACK_2(CreateLayer::onKeyPressed, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyboard, this);
 	listenerKeyboard->setEnabled(false);
+    }
+    else ;
+
+	
         
 	return true;
         
