@@ -40,26 +40,45 @@ bool RepoLayer::init() {
 	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.5 ));
 	this->addChild(_background_3, 1);
-
-	auto _background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this, user.getPlaneType()));
-	_background_3_white_1->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.5 ));
+	//白色装备按钮2
+	_background_3_white_1 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png","res/UI/a1CreatePlayer/createButtonForbidden.png", CC_CALLBACK_1(RepoLayer::menuCallBack_1, this, user.getPlaneType()));
+	if (user.get_equip_arm_have() == 0) {
+		_background_3_white_1->setEnabled(false);
+	}
+	else {
+		_background_3_white_1->setEnabled(true);
+	}
+	_background_3_white_1->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.5));
 	_background_3_white_1->setScale(0.6);
-
+	//背景3
 	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.3 ));
 	this->addChild(_background_3, 1);
-
-	auto _background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_2, this, user.getPlaneType()));
+	//白色装备按钮2
+	_background_3_white_2 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", "res/UI/a1CreatePlayer/createButtonForbidden.png",CC_CALLBACK_1(RepoLayer::menuCallBack_2, this, user.getPlaneType()));
    _background_3_white_2->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.3 ));
+   if (user.get_equip_head_have() == 0) {
+	   _background_3_white_2->setEnabled(false);
+   }
+   else {
+	   _background_3_white_2->setEnabled(true);
+   }
    _background_3_white_2->setScale(0.6);//缩放0.5倍
-
+   //背景3
 	_background_3 = Sprite::create("res/UI/a6Repo/rect3.png");
 	_background_3->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.1 ));
 	this->addChild(_background_3, 1);
-
-	auto _background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this, user.getPlaneType()));
+	//白色装备按钮3
+	_background_3_white_3 = MenuItemImage::create("res/UI/a6Repo/rectWhite.png", "res/UI/a6Repo/rectWhite.png","res/UI/a1CreatePlayer/createButtonForbidden.png", CC_CALLBACK_1(RepoLayer::menuCallBack_3, this, user.getPlaneType()));
 	_background_3_white_3->setPosition(Vec2(origin.x + winSize.width * 0.2, origin.y + winSize.height * 0.1 ));
 	_background_3_white_3->setScale(0.6);//缩放0.5倍
+	if (user.get_equip_tail_have() == 0) {
+		_background_3_white_3->setEnabled(false);
+	}
+	else {
+		_background_3_white_3->setEnabled(true);
+	}
+
 
 
 
@@ -312,18 +331,21 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		_body_1 = Sprite::create(filename1.str().c_str());
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1, 2);
+		_background_3_white_1->setEnabled(false);
 		HpBar->setScale(0.25*(user.getHp()+10) / 1000, 0.5);
 	}
 	else if (_equip_1_b->getPositionX()==120 && user.get_equip_head_b_have() == 1) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
+		_background_3_white_1->setEnabled(false);
 		HpBar->setScale(0.25*(user.getHp() + 50) / 1000, 0.5);
 	}
 	else if (_equip_1_c->getPositionX()==120 && user.get_equip_head_c_have() == 1) {
 		_body_1_c = Sprite::create(filename3.str().c_str());
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1_c, 2);
+		_background_3_white_1->setEnabled(false);
 		HpBar->setScale(0.25*(user.getHp() + 100) / 1000, 0.5);
 	}
 
@@ -348,18 +370,21 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_1 = Sprite::create(filename1.str().c_str());
 		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1, 2);
+		_background_3_white_2->setEnabled(false);
 		AtkBar->setScale(0.25*(user.getAtk()+10) / 1000, 0.5);
 	}
 	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_arm_b_have() == 1) {
 		_wing_1_b = Sprite::create(filename2.str().c_str());
 		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_b, 2);
+		_background_3_white_2->setEnabled(false);
 		AtkBar->setScale(0.25*(user.getAtk()+50) / 1000, 0.5);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_arm_c_have() == 1) {
 		_wing_1_c = Sprite::create(filename3.str().c_str());
 		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_c, 2);
+		_background_3_white_2->setEnabled(false);
 		AtkBar->setScale(0.25*(user.getAtk()+100) / 1000, 0.5);
 	}
 
@@ -406,16 +431,19 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 	if (_equip_1->getPositionX() == 120 && user.get_equip_tail_have() == 1) {
 		_tail_1 = Sprite::create(filename1.str().c_str());
 		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		_background_3_white_3->setEnabled(false);
 		this->addChild(_tail_1, 2);
 	}
 	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_tail_b_have() == 1) {
 		_tail_1_b = Sprite::create(filename2.str().c_str());
 		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		_background_3_white_3->setEnabled(false);
 		this->addChild(_tail_1_b, 2);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_tail_c_have() == 1) {
 		_tail_1_c = Sprite::create(filename3.str().c_str());
 		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		_background_3_white_3->setEnabled(false);
 		this->addChild(_tail_1_c, 2);
 	}
 }
@@ -511,6 +539,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_body_1 = Sprite::create(filename1.str().c_str());
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1, 2);
+		CCLOG("%f /n", user.getHp());
 		HpBar->setScale(0.25*(user.getHp() + 10) / 1000, 0.5);
 	}
 	else if (user.get_equip_head_b_load() == 1) {
@@ -519,6 +548,7 @@ void RepoLayer::setPlaneImg(int type) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
+		CCLOG("%f /n", user.getHp());
 		HpBar->setScale(0.25*(user.getHp() + 50) / 1000, 0.5);
 	}
 	else if (user.get_equip_head_c_load() == 1) {

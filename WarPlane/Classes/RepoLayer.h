@@ -46,6 +46,7 @@ USING_NS_CC;
 		Sprite * _background_1;
 		Sprite * _background_2;
 		Sprite * _background_3;
+		Sprite * _background_3_enable;
 
 		Sprite * _background_1_white;
 		Sprite * _background_2_white;
@@ -113,6 +114,10 @@ USING_NS_CC;
 		Sprite * EnBar;
 		Sprite * AtkBar;
 		Sprite * SpdBar;
+
+		MenuItemImage * _background_3_white_1;
+		MenuItemImage * _background_3_white_2;
+		MenuItemImage * _background_3_white_3;
 
 		UserInfo user;
 
