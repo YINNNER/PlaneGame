@@ -1,51 +1,60 @@
 #include "Equip.h"
 void Equip::setType(int  type) {
-	this->type;
+	this->type=type;
 	switch (type) {
 	case 1:
 		_ImpAtk = 0;
 		_ImpHp = 10;
 		_ImpSpd = 0;
+		this->setEquipImg("res/SpaceShooterRedux/PNG/Parts/wingBlue_0.png");
 		break;
 	case 2:
 		_ImpAtk = 0;
 		_ImpHp = 50;
 		_ImpSpd = 0;
+		this->setEquipImg("res/SpaceShooterRedux/PNG/Parts/wingBlue_0.png");
 		break;
 	case 3:
 		_ImpAtk = 0;
 		_ImpHp = 100;
 		_ImpSpd = 0;
+		this->setEquipImg("res/SpaceShooterRedux/PNG/Parts/wingBlue_0.png");
 		break;
 	case 4:
 		_ImpAtk = 10;
 		_ImpHp = 0;
 		_ImpSpd = 0;
+		this->setEquipImg("res/SpaceShooterRedux/PNG/Parts/wingBlue_0.png");
 		break;
 	case 5:
 		_ImpAtk = 50;
 		_ImpHp = 0;
 		_ImpSpd = 0;
+		this->setEquipImg("res/SpaceShooterRedux/PNG/Parts/wingBlue_0.png");
 		break;
 	case 6:
 		_ImpAtk = 100;
 		_ImpHp = 0;
 		_ImpSpd = 0;
+		this->setEquipImg("res/SpaceShooterRedux/PNG/Parts/wingBlue_0.png");
 		break;
 	case 7:
 		_ImpAtk = 0;
 		_ImpHp = 0;
 		_ImpSpd = 10;
+		this->setEquipImg("res/SpaceShooterRedux/PNG/Parts/wingBlue_0.png");
 		break;
 	case 8:
 		_ImpAtk = 0;
 		_ImpHp = 0;
 		_ImpSpd = 50;
+		this->setEquipImg("res/SpaceShooterRedux/PNG/Parts/wingBlue_0.png");
 		break;
 	case 9:
 		_ImpAtk = 0;
 		_ImpHp = 0;
 		_ImpSpd = 100;
+		this->setEquipImg("res/SpaceShooterRedux/PNG/Parts/wingBlue_0.png");
 		break;
 	}
 }

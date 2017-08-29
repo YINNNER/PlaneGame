@@ -13,27 +13,20 @@ public:
 	//初始化敌机
 	void initEnemy1(std::string name = "enemy1", int level = 1);
 	void initEnemy2(std::string name = "enemy1", int level = 1);
-	//敌机爆炸
-	void enemyBlowUp();
-	//敌机移动
-	void enemyMoveY(float dt);     //纵轴
-	void enemyRemove(float dt);
+	void initEnemyBoss(std::string name = "enemy3", int level = 5);
+
+	void enemyBossMove(float dt);
 	//场景切换
 	void onEnterTransitionDidFinish();
-	void removePlane(float dt);
-	void plane_death();
+	//boss技能
+	void initBossSkill_1(std::string name);
+	void initEnemyBoss_1Little(std::string name);
 private:
-	//敌机名字
-	std::string enemyName;
 	//获得随机数
 	int getRandomNumber(int a, int b);
-	//敌机偏移
-	const int OFFSET = 1;
 	//血量
-	int HP;
-	//护甲
-	int armor;
-	//等级
-	int Level;
+	int enemyHP;
+	//攻击
+	int enemyAttack;
 };
 
