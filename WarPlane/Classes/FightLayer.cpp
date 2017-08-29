@@ -79,10 +79,20 @@ void FightLayer::addEnemyPlane(int playerLevel) {
 
 bool FightLayer::init() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto winSize = Director::getInstance()->getWinSize();
+
 	fightImg = Sprite::create("res/star.png");
 	fightImg->setAnchorPoint(Point::ZERO);
 	fightImg->setPosition(Vec2(Point::ZERO));
-	this->addChild(fightImg,1);
+	fightImg->getTexture()->setAliasTexParameters();
+	this->addChild(fightImg, 1);
+	fightImg2 = Sprite::create("res/star.png");
+	fightImg2->setAnchorPoint(Point::ZERO);
+	fightImg2->setPosition(Point(fightImg->getPositionX(), fightImg->getPositionY() + fightImg->getContentSize().width - 2));
+	fightImg2->getTexture()->setAliasTexParameters();
+	this->addChild(fightImg2,1);
+	this->schedule(schedule_selector(FightLayer::backMove));
+	
 	auto skillBar = Sprite::create("res/skillBar.png");
 	this->addChild(skillBar, 1);
 	skill_1 = Sprite::create("res/skill_1.png");
@@ -153,6 +163,23 @@ bool FightLayer::init() {
 void FightLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	key = keyCode;
+}
+
+//背景滚动
+void FightLayer::backMove(float)
+{
+	//通过不断改变背景y轴的位置来实现背景滚动  
+	fightImg->setPositionY(fightImg->getPositionY()-2);
+	fightImg2->setPositionY(fightImg2->getPositionY()-2);
+	//判断条件，当背景一滚出屏幕的时候让背景二接在背景一后面，背景二同理  
+	if (fightImg->getPositionY() == -fightImg->getContentSize().height-2)
+	{
+		fightImg->setPositionY(fightImg2->getPositionY() + fightImg2->getContentSize().height);
+	}
+	else if (fightImg2->getPositionY() == -fightImg2->getContentSize().height-2)
+	{
+		fightImg2->setPositionY(fightImg->getPositionY() + fightImg->getContentSize().height);
+	}
 }
 
 void FightLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)

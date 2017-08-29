@@ -13,6 +13,7 @@ public:
 	CREATE_FUNC(FightLayer);
 	virtual bool init();
 	void setPlayer(int cType);
+	void backMove(float dt);
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void update(float dt);
@@ -48,6 +49,7 @@ public:
 	UserInfo user;
 private:
 	Sprite * fightImg;
+	Sprite * fightImg2;
 	CCPlane * player_1;
 	EventKeyboard::KeyCode key;
 	int scoreValue;
