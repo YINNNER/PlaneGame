@@ -172,11 +172,16 @@ void FightLayer::backMove(float)
 	{
 		fightImg2->setPositionY(fightImg->getPositionY() + fightImg->getContentSize().height);
 	}
+
 }
+
+//增加障碍物
+
 void FightLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	key = keyCode;
 }
+
 
 void FightLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {

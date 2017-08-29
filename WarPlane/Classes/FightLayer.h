@@ -4,8 +4,7 @@
 #include"Bullet.h"
 #include"Enemy.h"
 USING_NS_CC;
-class FightLayer :
-	public Layer
+class FightLayer :public Layer
 {
 public:
 	FightLayer();
@@ -54,6 +53,7 @@ public:
 private:
 	Sprite * fightImg;
 	Sprite * fightImg2;
+	//Sprite * barri;
 	CCPlane * player_1;
 	EventKeyboard::KeyCode key;
 	int scoreValue;
