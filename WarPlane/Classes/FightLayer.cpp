@@ -417,15 +417,16 @@ void FightLayer::is_crash(float dt)
 				}
 				skill_1->removeSkill();
 				break;
-				if (player_1->getHp() <= 0)
-				{
-					this->goToGameOver(2);
-				}
-				score->setString(CCString::createWithFormat("score:%d", scoreValue)->getCString());
+				
 				//grade->setString(CCString::createWithFormat("LV::%d", player_1->getGrade())->getCString());
 			}
 		}
 	}
+	if (player_1->getHp() <= 0)
+	{
+		this->goToGameOver(2);
+	}
+	score->setString(CCString::createWithFormat("score:%d", scoreValue)->getCString());
 }
 void FightLayer::removeAnimation(float dt)
 {
