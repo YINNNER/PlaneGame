@@ -64,7 +64,23 @@ void SceneManager::goCreateLayer(int tag) {
 void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto mapScene = Scene::create();
 	auto layer = MapLayer::create();
-	layer->user = userInfo;
+    //判断战机类型，并根据不同类型再次初始化战机属性
+    if (userInfo.getPlaneType()==2) {
+        userInfo.setAtk(150);
+        userInfo.setSpd(50);
+        userInfo.setHp(300);
+        userInfo.setMp(100);
+
+    }
+    else if(userInfo.getPlaneType()==3){
+        userInfo.setAtk(130);
+        userInfo.setSpd(60);
+        userInfo.setHp(300);
+        userInfo.setMp(400);
+
+    }
+    else ;
+    layer->user = userInfo;
 	auto action=FadeIn::create(1.0f);
 	
 	switch (layer->user.getGameLevel())
@@ -149,7 +165,7 @@ void SceneManager::goHelpLayer(int tag) {
 	}
 }
 
-//�Ӳ˵���һ�ν���ʱ����setScene��֮�󲻹ܴ�������붼����popScene(),setScene�����κγ�������pushScene()
+//¥”≤Àµ•µ⁄“ª¥ŒΩ¯»Î ±¥¥Ω®setScene£¨÷Æ∫Û≤ªπ‹¥”ƒƒ¿ÔΩ¯»Î∂º «”√popScene(),setSceneΩ¯»Î»Œ∫Œ≥°æ∞∂º «pushScene()
 void SceneManager::goSetLayer(int tag) {
 	auto setScene = Scene::create();
 	auto layer = SetLayer::create();

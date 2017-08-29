@@ -1,6 +1,6 @@
 //
 //  SaveLayer.h
-//  MyCppGame
+//  WarPlane
 //
 //  Created by yiner on 24/08/2017.
 //

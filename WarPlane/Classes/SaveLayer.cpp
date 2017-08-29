@@ -1,6 +1,6 @@
 //
 //  SaveLayer.cpp
-//  MyCppGame
+//  WarPlane
 //
 //  Created by yiner on 24/08/2017.
 //
@@ -286,7 +286,7 @@ void SaveLayer::setInfoLabel(float py){
 	else {
 		//1.add plane image
 		std::stringstream picName;
-		picName << "res/SpaceShooterRedux/PNG/Planes/playerShip" << user.getPlaneType() << "_blue.png";
+		picName << "res/SpaceShooterRedux/PNG/Planes/playerShip" << user.getPlaneType() << "_green.png";
 		auto planeImg = Sprite::create(picName.str());
 		planeImg->setPosition(Vec2(origin.x + winSize.width / 2 - planeImg->getContentSize().width*1.2, origin.y + winSize.height *py));
 		planeImg->setTag(101);

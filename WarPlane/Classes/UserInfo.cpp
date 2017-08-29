@@ -1,6 +1,6 @@
 //
 //  UserInfo.cpp
-//  MyCppGame
+//  WarPlane
 //
 //  Created by yiner on 24/08/2017.
 //
@@ -275,10 +275,12 @@ UserInfo UserInfo::createUser(std::string planeName,int planeType){
 }
 
 
-
+//给外部的接口api
+//get
 std::string UserInfo::getSaveTime(){return saveTime;}
 std::string UserInfo::getSaveDay(){return saveDay;}
 std::string UserInfo::getUserName(){return userName;}
+
 int UserInfo::getPlaneType(){return planeType;}
 int UserInfo::getAtk(){return atk;}
 int UserInfo::getSpd(){return spd;}
@@ -286,6 +288,7 @@ int UserInfo::getGameLevel(){return gameLevel;}
 int UserInfo::getHp(){return hp;}
 int UserInfo::getMp(){return mp;}
 int UserInfo::getPlaneLevel(){return planeLevel;}
+
 bool UserInfo::get_equip_head_have(){return _equip_head_have;}
 bool UserInfo::get_equip_head_b_have(){return _equip_head_b_have;}
 bool UserInfo::get_equip_head_c_have(){return _equip_head_c_have;}
@@ -304,4 +307,34 @@ bool UserInfo::get_equip_arm_c_load(){return _equip_arm_c_load;}
 bool UserInfo::get_equip_tail_load(){return _equip_tail_load;}
 bool UserInfo::get_equip_tail_b_load(){return _equip_tail_b_load;}
 bool UserInfo::get_equip_tail_c_load(){return _equip_tail_c_load;}
+
+//set
+void UserInfo::setPlaneType(int planeType){this->planeType=planeType;}
+void UserInfo::setAtk(int atk){this->atk=atk;}
+void UserInfo::setSpd(int spd){this->spd=spd;}
+void UserInfo::setGameLevel(int gameLevel){this->gameLevel=gameLevel;}
+void UserInfo::setHp(int hp){this->hp=hp;}
+void UserInfo::setMp(int mp){this->mp=mp;}
+void UserInfo::setPlaneLevel(int planeLevel){this->planeLevel=planeLevel;}
+
+void UserInfo::set_equip_head_have(bool _equip_head_have){this->_equip_head_have=_equip_head_have;}
+void UserInfo::set_equip_head_b_have(bool _equip_head_b_have){this->_equip_head_b_have=_equip_head_b_have;}
+void UserInfo::set_equip_head_c_have(bool _equip_head_c_have){this->_equip_head_b_have=_equip_head_c_have;}
+void UserInfo::set_equip_arm_have(bool _equip_arm_have){this->_equip_arm_have=_equip_arm_have;}
+void UserInfo::set_equip_arm_b_have(bool _equip_arm_b_have){this->_equip_arm_b_have=_equip_arm_b_have;}
+void UserInfo::set_equip_arm_c_have(bool _equip_arm_c_have){this->_equip_arm_c_have=_equip_arm_c_have;}
+void UserInfo::set_equip_tail_have(bool _equip_tail_have){this->_equip_tail_have=_equip_tail_have;}
+void UserInfo::set_equip_tail_b_have(bool _equip_tail_b_have){this->_equip_tail_b_have=_equip_tail_b_have;}
+void UserInfo::set_equip_tail_c_have(bool _equip_tail_c_have){this->_equip_tail_c_have=_equip_tail_c_have;}
+void UserInfo::set_equip_head_load(bool _equip_head_load){this->_equip_head_load=_equip_head_load;}
+void UserInfo::set_equip_head_b_load(bool _equip_head_b_load){this->_equip_head_b_load=_equip_head_b_load;}
+void UserInfo::set_equip_head_c_load(bool _equip_head_c_load){this->_equip_head_c_load=_equip_head_c_load;}
+void UserInfo::set_equip_arm_load(bool _equip_arm_load){this->_equip_arm_load=_equip_arm_load;}
+void UserInfo::set_equip_arm_b_load(bool _equip_arm_b_load){this->_equip_arm_b_load=_equip_arm_b_load;}
+void UserInfo::set_equip_arm_c_load(bool _equip_arm_c_load){this->_equip_arm_c_load=_equip_arm_c_load;}
+void UserInfo::set_equip_tail_load(bool _equip_tail_load){this->_equip_tail_load=_equip_tail_load;}
+void UserInfo::set_equip_tail_b_load(bool _equip_tail_b_load){this->_equip_tail_b_load=_equip_tail_b_load;}
+void UserInfo::set_equip_tail_c_load(bool _equip_tail_c_load){this->_equip_tail_c_load=_equip_tail_c_load;}
+
+
 

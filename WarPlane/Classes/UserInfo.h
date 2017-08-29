@@ -1,6 +1,6 @@
 //
 //  UserInfo.h
-//  MyCppGame
+//  WarPlane
 //
 //  Created by yiner on 24/08/2017.
 //
@@ -16,6 +16,11 @@ USING_NS_CC;
 class UserInfo
 {
 public:
+    
+    UserInfo();
+    //拷贝构造函数
+    UserInfo(UserInfo const & userInfo);
+    
     std::string userName;
     std::string saveTime;
     std::string saveDay;
@@ -60,11 +65,12 @@ public:
     //读取plist文件
     ValueMap readPlist();
 
-    UserInfo();
+    //获得系统时间
+    std::string getSysTime();
+    std::string getSysDay();
     
-    UserInfo(UserInfo const & userInfo);
-
     //外部调用得到数据的接口
+    //get
     std::string getSaveTime();
     std::string getSaveDay();
     std::string getUserName();
@@ -75,9 +81,7 @@ public:
     int getHp();
     int getMp();
     int getPlaneLevel();
-	std::string getSysTime();
-	std::string getSysDay();
-    //equip
+    //get_equip
     bool get_equip_head_have();
     bool get_equip_head_b_have();
     bool get_equip_head_c_have();
@@ -96,6 +100,37 @@ public:
     bool get_equip_tail_load();
     bool get_equip_tail_b_load();
     bool get_equip_tail_c_load();
+    
+	
+    //set
+    void setPlaneType(int planeType);
+    void setAtk(int atk);
+    void setSpd(int spd);
+    void setGameLevel(int gameLevel);
+    void setHp(int hp);
+    void setMp(int mp);
+    void setPlaneLevel(int planeLevel);
+    //set_equip
+    void set_equip_head_have(bool _equip_head_have);
+    void set_equip_head_b_have(bool _equip_head_b_have);
+    void set_equip_head_c_have(bool _equip_head_c_have);
+    void set_equip_arm_have(bool _equip_arm_have);
+    void set_equip_arm_b_have(bool _equip_arm_b_have);
+    void set_equip_arm_c_have(bool _equip_arm_c_have);
+    void set_equip_tail_have(bool _equip_tail_have);
+    void set_equip_tail_b_have(bool _equip_tail_b_have);
+    void set_equip_tail_c_have(bool _equip_tail_c_have);
+    void set_equip_head_load(bool _equip_head_load);
+    void set_equip_head_b_load(bool _equip_head_b_load);
+    void set_equip_head_c_load(bool _equip_head_c_load);
+    void set_equip_arm_load(bool _equip_arm_load);
+    void set_equip_arm_b_load(bool _equip_arm_b_load);
+    void set_equip_arm_c_load(bool _equip_arm_c_load);
+    void set_equip_tail_load(bool _equip_tail_load);
+    void set_equip_tail_b_load(bool _equip_tail_b_load);
+    void set_equip_tail_c_load(bool _equip_tail_c_load);
+    
+   
 };
 
 #endif /* UserInfo_h */
