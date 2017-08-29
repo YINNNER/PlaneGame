@@ -454,7 +454,7 @@ void CreateLayer::addWords(std::string temp) {
 		setWord->setPosition(vec);
 		setWord->setColor(Color3B(0, 0, 0));
 		this->addChild(setWord,1);
-		auto cursorMove = MoveTo::create(1/60, Vec2(vec.x+10, vec.y+8.5));
+		auto cursorMove = MoveTo::create(0.1f, Vec2(vec.x + 10, vec.y + 8.5));
 		cursor->runAction(cursorMove);
 		
 		if (selected_1->isVisible() || selected_2->isVisible() || selected_3->isVisible()) {

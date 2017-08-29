@@ -83,7 +83,7 @@ void SaveLayer::createInfo(){
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        writablePath = "res/";
+        writablePath = "./res/";
         
         
     }
@@ -207,7 +207,7 @@ void SaveLayer::initInfo(){
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        writablePath = "res/";
+        writablePath = "./res/";
     }
     else if(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     {

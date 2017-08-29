@@ -31,17 +31,26 @@ private:
     int planeLevel;
     //equip
     //1.head
-    Vec2 _equip_head;
-    Vec2 _equip_head_b;
-    Vec2 _equip_head_c;
+    bool _equip_head_have;
+    bool _equip_head_b_have;
+    bool _equip_head_c_have;
+    bool _equip_head_load;
+    bool _equip_head_b_load;
+    bool _equip_head_c_load;
     //2.arm
-    Vec2 _equip_arm;
-    Vec2 _equip_arm_b;
-    Vec2 _equip_arm_c;
+    bool _equip_arm_have;
+    bool _equip_arm_b_have;
+    bool _equip_arm_c_have;
+    bool _equip_arm_load;
+    bool _equip_arm_b_load;
+    bool _equip_arm_c_load;
     //3.tail
-    Vec2 _equip_tail;
-    Vec2 _equip_tail_b;
-    Vec2 _equip_tail_c;
+    bool _equip_tail_have;
+    bool _equip_tail_b_have;
+    bool _equip_tail_c_have;
+    bool _equip_tail_load;
+    bool _equip_tail_b_load;
+    bool _equip_tail_c_load;
     
 public:
     void setInfo(int tag);
@@ -71,16 +80,24 @@ public:
 	std::string getSysTime();
 	std::string getSysDay();
     //equip
-    Vec2 get_equip_head();
-    Vec2 get_equip_head_b();
-    Vec2 get_equip_head_c();
-    Vec2 get_equip_arm();
-    Vec2 get_equip_arm_b();
-    Vec2 get_equip_arm_c();
-    Vec2 get_equip_tail();
-    Vec2 get_equip_tail_b();
-    Vec2 get_equip_tail_c();
-    
+    bool get_equip_head_have();
+    bool get_equip_head_b_have();
+    bool get_equip_head_c_have();
+    bool get_equip_arm_have();
+    bool get_equip_arm_b_have();
+    bool get_equip_arm_c_have();
+    bool get_equip_tail_have();
+    bool get_equip_tail_b_have();
+    bool get_equip_tail_c_have();
+    bool get_equip_head_load();
+    bool get_equip_head_b_load();
+    bool get_equip_head_c_load();
+    bool get_equip_arm_load();
+    bool get_equip_arm_b_load();
+    bool get_equip_arm_c_load();
+    bool get_equip_tail_load();
+    bool get_equip_tail_b_load();
+    bool get_equip_tail_c_load();
 };
 
 #endif /* UserInfo_h */
