@@ -16,12 +16,16 @@ public:
 	
 	static int getEffectState();
 	static int effectState;//ÒôÐ§¿ª¹Ø×´Ì¬
+	static int backState;
 
 private:
 	Sprite *backCir;
 	Sprite *effectCir;
 	Sprite *backBar;
 	Sprite *effectBar;
+	Menu *menu;
+	MenuItemToggle *backToggle;
+	MenuItemToggle *effectToggle;
 
 };
 
