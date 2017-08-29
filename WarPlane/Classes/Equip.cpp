@@ -56,16 +56,13 @@ bool Equip::init() {
 	return true;
 }
 int Equip::getEAtk() {
-	
-	return  _ImpAtk;
+	return _ImpAtk;
 }
 int Equip::getEHp() {
-
-	return  _ImpHp;
+	return _ImpHp;
 }
 int Equip::getESpd() {
-
-	return  _ImpSpd;
+	return _ImpSpd;
 }
 int Equip::getEquipType() {
 	return type;
@@ -74,11 +71,3 @@ void Equip::setEquipImg(const char * filename) {
 	equipImg = Sprite::create(filename);
 	this->addChild(equipImg);
 }
-
-
-
-
-
-
-
-

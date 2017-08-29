@@ -62,3 +62,15 @@ void GameManager::setPlane(enemyPlane * plane)
 {
 	plane_list.pushBack(plane);
 }
+void GameManager::setSkill(Bullet * skill)
+{
+	skill_list.pushBack(skill);
+}
+void GameManager::removeSkill(Bullet * skill)
+{
+	skill_list.eraseObject(skill);
+}
+Vector<Bullet*>& GameManager::getSkillList()
+{
+	return this->skill_list;
+}

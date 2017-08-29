@@ -11,6 +11,13 @@ public:
 	void setBulletImg(const char * filename);
 	void update(float dt);
 	void removeBullet();
+	void removeSkill();
+	void setSkillImg(int type);
+
+
+	void skillMove(float dt);
+	Sprite * skillImg_1;
+	Sprite * skillImg_2;
 private:
 	Sprite * bulletImg;
 };

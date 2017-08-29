@@ -24,6 +24,11 @@ void Supply::setSpt(int type)
 		this->spyImg = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png");
 		this->addChild(spyImg);
 		break;
+	case 3:
+		this->sType = type;
+		this->spyImg = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png");
+		this->addChild(spyImg);
+		break;
 	default:
 		break;
 	}
@@ -41,7 +46,7 @@ int Supply::getType()
 }
 void Supply::update(float dt)
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
+	static VISIBLESIZE;
 	if (sType == 1) {  //ฒนธ๘
 		this->setPositionY(this->getPositionY() - 3);
 		if (this->getPositionY()<0)

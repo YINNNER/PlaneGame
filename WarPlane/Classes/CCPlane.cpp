@@ -3,14 +3,11 @@
 bool CCPlane::init() {
 	attack = 0;
 	hp = 0;
-	armor = 0;
 	exp = 0;
 	speed = 0;
 	grade = 1;
 	type = 0;
-	planeArms = Arms::create();
-	planeFlg = Flg::create();
-	planeFuel = Fuel::create();
+	planeEquip = Equip::create();
 	return true;
 }
 void CCPlane::setImg(const char * filename) {
@@ -21,10 +18,9 @@ void CCPlane::setImg(const char * filename) {
 	this->setAnchorPoint(Vec2(0.5, 0.5));
 }
 void CCPlane::setAttri(int attack, int hp, int armor, int speed,int grade) {
-	this->attack = attack+planeArms->getAtk();
-	this->hp = hp+planeFlg->getHp();
-	this->armor = armor+planeFlg->getArmor();
-	this->speed = speed+planeFuel->getSpd();
+	this->attack = attack + planeEquip->getEAtk();
+	this->hp = hp + planeEquip->getEHp();
+	this->speed = speed + planeEquip->getESpd();
 	this->grade = grade;
 }
 void CCPlane::changeAtk(int atk) {
@@ -32,9 +28,6 @@ void CCPlane::changeAtk(int atk) {
 }
 void CCPlane::changeHp(int hp) {
 	this->hp += hp;
-}
-void CCPlane::changeAr(int armor) {
-	this->armor += armor;
 }
 void CCPlane::changeSpd(int spd) {
 	this->speed += spd;
@@ -48,6 +41,24 @@ void CCPlane::changeExp(int exp)
 		this->exp = 0;
 	}
 }
+int CCPlane::getMaxHp()
+{
+	switch (type)
+	{
+	case 1:
+		return 160 * grade;
+		break;
+	case 2:
+		return 200 * grade;
+		break;
+	case 3:
+		return 240 * grade;
+		break;
+	default:
+		return 0;
+		break;
+	}
+}
 int CCPlane::getAtk() {
 	
 	return attack;
@@ -55,10 +66,6 @@ int CCPlane::getAtk() {
 int CCPlane::getHp() {
 
 	return hp;
-}
-int CCPlane::getAr() {
-
-	return armor;
 }
 int CCPlane::getSpd() {
 
