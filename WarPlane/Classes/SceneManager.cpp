@@ -164,18 +164,18 @@ void SceneManager::goSetLayer(int tag) {
 		Director::getInstance()->replaceScene(transition);
 	}
 	*/
-	static int times = 1;
-	if (times == 1) {
-		auto setScene = Scene::create();
-		auto layer = SetLayer::create();
-		setScene->addChild(layer);
-		auto transition = TransitionMoveInR::create(0.2f, setScene);
-		Director::getInstance()->replaceScene(transition);
-		times++;
+	/*static int times = 1;
+	if (times == 1) {*/
+	/*Scene* setScene = Scene::create();
+	SetLayer * layer = SetLayer::create();
+	setScene->addChild(layer);*/
+	auto transition = TransitionMoveInR::create(0.2f, setScene);
+	Director::getInstance()->replaceScene(transition);
+	/*	times++;
 	}
 	else {
 		Director::getInstance()->popScene();
-	}
+	}*/
 
 }
 

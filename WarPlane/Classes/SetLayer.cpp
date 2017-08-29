@@ -5,7 +5,7 @@ using namespace CocosDenshion;
 using namespace cocos2d::ui;
 
 int SetLayer::effectState = 1;
-
+int SetLayer::backState = 1;
 bool SetLayer::init()
 {	
 	auto winSize = Director::getInstance()->getWinSize();
@@ -17,6 +17,7 @@ bool SetLayer::init()
 	_background->setScale(scale);
 	this->addChild(_background);
 
+	
 	auto music = Label::createWithSystemFont("Background", "/fonts/AdobeHeitiStd-Regular.ttf", 30);
 	music->setPosition(Vec2(winSize.width*0.4, winSize.height*0.6));
 	this->addChild(music);
@@ -29,22 +30,38 @@ bool SetLayer::init()
 	openBackCir->setUserData((void *)"on");
 	auto closeBackCir = MenuItemImage::create("res/UI/2Option/close.png", "res/UI/2Option/open.png");
 	closeBackCir->setUserData((void *)"off");
-	auto backToggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::CallBack, this),
-		openBackCir, closeBackCir, NULL);
-	backToggle->setPosition(Vec2(winSize.width*0.6, winSize.height*0.6));
-	backToggle->setTag(3);
+	if (backState == true) {
+		backToggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::CallBack, this),
+			openBackCir, closeBackCir, NULL);
+		backToggle->setPosition(Vec2(winSize.width*0.6, winSize.height*0.6));
+		backToggle->setTag(3);
+	}
+	else {
+		backToggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::CallBack, this),
+			closeBackCir, openBackCir, NULL);
+		backToggle->setPosition(Vec2(winSize.width*0.6, winSize.height*0.6));
+		backToggle->setTag(3);
+	}
+	
 
 	auto openEffectCir = MenuItemImage::create("res/UI/2Option/open.png", "res/UI/2Option/close.png");
 	openEffectCir->setUserData((void *)"on");
 	auto closeEffectCir = MenuItemImage::create("res/UI/2Option/close.png", "res/UI/2Option/open.png");
 	closeEffectCir->setUserData((void *)"off");
 
-	auto effectToggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::CallBack, this),
-		openEffectCir, closeEffectCir, NULL);
-	effectToggle->setPosition(Vec2(winSize.width*0.6, winSize.height*0.5));
-	effectToggle->setTag(4);
-
-
+	if (effectState == true) {
+		effectToggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::CallBack, this),
+			openEffectCir, closeEffectCir, NULL);
+		effectToggle->setPosition(Vec2(winSize.width*0.6, winSize.height*0.5));
+		effectToggle->setTag(4);
+		
+	}
+	else {
+		effectToggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::CallBack, this),
+			closeEffectCir, openEffectCir, NULL);
+		effectToggle->setPosition(Vec2(winSize.width*0.6, winSize.height*0.5));
+		effectToggle->setTag(4);
+	}
 	auto menuItem_1 = MenuItemImage::create("res/UI/2Option/back.png", "res/UI/2Option/backS.png", CC_CALLBACK_1(SetLayer::CallBack, this));
 	menuItem_1->setTag(2);
 	menuItem_1->setPosition(Vec2(origin.x + winSize.width *0.15, origin.y + winSize.height*0.9));
@@ -53,7 +70,9 @@ bool SetLayer::init()
 	menuItem_2->setTag(1);
 	menuItem_2->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height*0.2));
 
-	auto menu = Menu::create(backToggle, effectToggle, menuItem_1, menuItem_2, NULL);
+	
+
+	menu = Menu::create(backToggle, effectToggle, menuItem_1, menuItem_2, NULL);
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu);
 
@@ -91,10 +110,16 @@ void SetLayer::CallBack(Ref *pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/switch01.wav");
 		}
 		
-		if (SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying())
+		if (SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
 			SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
-		else
+			backState = 0;
+		}
+			
+		else {
 			SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+			backState = 1;
+		}
+			
 		break;
 	case 4:
 		if (effectState == 0) {
