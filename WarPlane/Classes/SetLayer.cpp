@@ -103,7 +103,8 @@ void SetLayer::CallBack(Ref *pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
 		
-		SceneManager::goMenuLayer(tag,transiTimes);
+		//SceneManager::goMenuLayer(tag,transiTimes);
+		Director::getInstance()->popScene();
 		break;
 	case 3:
 		if (effectState == 1) {
