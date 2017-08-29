@@ -128,7 +128,10 @@ bool CreateLayer::init() {
     }
     else ;
 
-	
+	listenerKeyboard = EventListenerKeyboard::create();
+	listenerKeyboard->onKeyPressed = CC_CALLBACK_2(CreateLayer::onKeyPressed, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyboard, this);
+	listenerKeyboard->setEnabled(false);
         
 	return true;
         
@@ -144,15 +147,17 @@ bool CreateLayer::onTouchBegan(Touch *touch, Event *unused_event) {
 	Size s = target->getContentSize();
 	Rect rect = Rect(0, 0, s.width, s.height);
 
-	auto listenerKeyboard = EventListenerKeyboard::create();
-	listenerKeyboard->onKeyPressed = CC_CALLBACK_2(CreateLayer::onKeyPressed, this);
-
+	
 	if (rect.containsPoint(locationInNode))
 	{
 		cursor->setVisible(true);
+		listenerKeyboard->setEnabled(true);
 		
-		_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyboard, this);
 		return true;
+	}
+	else {
+		listenerKeyboard->setEnabled(false);
+		cursor->setVisible(false);
 	}
 	return false;
 }

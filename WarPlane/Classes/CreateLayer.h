@@ -45,5 +45,5 @@ private:
 	int addTimes;//输入框中增加字符的个数
 	static bool capslock;//标记大小写状态
 	Label *warning;
-
+	EventListenerKeyboard *listenerKeyboard;
 };
