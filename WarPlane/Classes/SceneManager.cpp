@@ -4,6 +4,7 @@
 #include "LoadLayer.h"
 #include "MenuLayer.h"
 #include "RepoLayer.h"
+#include "FightLayer.h"
 using namespace experimental;
 
 USING_NS_CC;
@@ -197,4 +198,10 @@ void SceneManager::goRepoLayer(int tag,UserInfo &userInfo) {
 
 }
 
+void SceneManager::goFightLayer(UserInfo &userInfo) {
+	auto scene = Scene::create();
+	FightLayer *layer = FightLayer::create();
+	layer->user = userInfo;
+	scene->addChild(layer);
 
+}

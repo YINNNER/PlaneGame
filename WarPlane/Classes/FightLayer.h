@@ -2,7 +2,7 @@
 #include "cocos2d.h"
 #include"CCPlane.h"
 #include"Bullet.h"
-
+#include "UserInfo.h"
 USING_NS_CC;
 class FightLayer :
 	public Layer
@@ -45,6 +45,7 @@ public:
 	void removeAnimation(float dt);
 	void closeWhite(float dt);
 	void addHp(float dt);
+	UserInfo user;
 private:
 	Sprite * fightImg;
 	CCPlane * player_1;
