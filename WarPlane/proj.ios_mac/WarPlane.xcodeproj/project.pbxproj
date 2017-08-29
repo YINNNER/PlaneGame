@@ -13,13 +13,10 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D0D631D0D56D500F7F5D4 /* CoreText.framework */; };
-		3E9608041F5017790065E1DC /* Arms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607DF1F50150D0065E1DC /* Arms.cpp */; };
 		3E9608051F5017790065E1DC /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E11F50150D0065E1DC /* Bullet.cpp */; };
 		3E9608061F5017790065E1DC /* CCPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E31F50150D0065E1DC /* CCPlane.cpp */; };
 		3E9608071F5017790065E1DC /* Equip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E51F50150D0065E1DC /* Equip.cpp */; };
 		3E9608081F5017790065E1DC /* FightLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E71F50150D0065E1DC /* FightLayer.cpp */; };
-		3E9608091F5017790065E1DC /* Flg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E91F50150D0065E1DC /* Flg.cpp */; };
-		3E96080A1F5017790065E1DC /* Fuel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607EB1F50150D0065E1DC /* Fuel.cpp */; };
 		3E96080B1F5017790065E1DC /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607ED1F50150D0065E1DC /* GameManager.cpp */; };
 		3E96080C1F5017790065E1DC /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607EF1F50150D0065E1DC /* HelloWorldScene.cpp */; };
 		3E96080D1F5017790065E1DC /* Supply.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607F21F50150D0065E1DC /* Supply.cpp */; };
@@ -34,13 +31,10 @@
 		3E9608161F5017790065E1DC /* SaveLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E96078E1F4EA4910065E1DC /* SaveLayer.cpp */; };
 		3E9608171F5017790065E1DC /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607901F4EA4910065E1DC /* SceneManager.cpp */; };
 		3E9608181F5017790065E1DC /* SetLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607921F4EA4910065E1DC /* SetLayer.cpp */; };
-		3E9608191F501AD90065E1DC /* Arms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607DF1F50150D0065E1DC /* Arms.cpp */; };
 		3E96081A1F501AD90065E1DC /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E11F50150D0065E1DC /* Bullet.cpp */; };
 		3E96081B1F501AD90065E1DC /* CCPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E31F50150D0065E1DC /* CCPlane.cpp */; };
 		3E96081C1F501AD90065E1DC /* Equip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E51F50150D0065E1DC /* Equip.cpp */; };
 		3E96081D1F501AD90065E1DC /* FightLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E71F50150D0065E1DC /* FightLayer.cpp */; };
-		3E96081E1F501AD90065E1DC /* Flg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607E91F50150D0065E1DC /* Flg.cpp */; };
-		3E96081F1F501AD90065E1DC /* Fuel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607EB1F50150D0065E1DC /* Fuel.cpp */; };
 		3E9608201F501AD90065E1DC /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607ED1F50150D0065E1DC /* GameManager.cpp */; };
 		3E9608211F501AD90065E1DC /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607EF1F50150D0065E1DC /* HelloWorldScene.cpp */; };
 		3E9608221F501AD90065E1DC /* Supply.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607F21F50150D0065E1DC /* Supply.cpp */; };
@@ -59,10 +53,7 @@
 		3E9608331F5022CA0065E1DC /* music in Resources */ = {isa = PBXBuildFile; fileRef = 3E96082E1F501BAF0065E1DC /* music */; };
 		3E9608571F5176D80065E1DC /* enemyPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608551F5176D80065E1DC /* enemyPlane.cpp */; };
 		3E9608591F5177040065E1DC /* enemyPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608551F5176D80065E1DC /* enemyPlane.cpp */; };
-		3E9608601F51EC370065E1DC /* GameFin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E96085E1F51EC370065E1DC /* GameFin.cpp */; };
-		3E9608621F51EC4B0065E1DC /* GameFin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E96085E1F51EC370065E1DC /* GameFin.cpp */; };
 		3E9608691F52B64A0065E1DC /* GamePause.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608671F52B64A0065E1DC /* GamePause.cpp */; };
-		3E96086A1F52B64A0065E1DC /* GamePause.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608671F52B64A0065E1DC /* GamePause.cpp */; };
 		3EACC98F19EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
@@ -181,8 +172,6 @@
 		3E9607931F4EA4910065E1DC /* SetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetLayer.h; sourceTree = "<group>"; };
 		3E9607A21F4EA66E0065E1DC /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		3E9607A31F4EA66E0065E1DC /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3E9607DF1F50150D0065E1DC /* Arms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arms.cpp; sourceTree = "<group>"; };
-		3E9607E01F50150D0065E1DC /* Arms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arms.h; sourceTree = "<group>"; };
 		3E9607E11F50150D0065E1DC /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
 		3E9607E21F50150D0065E1DC /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		3E9607E31F50150D0065E1DC /* CCPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCPlane.cpp; sourceTree = "<group>"; };
@@ -191,10 +180,6 @@
 		3E9607E61F50150D0065E1DC /* Equip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equip.h; sourceTree = "<group>"; };
 		3E9607E71F50150D0065E1DC /* FightLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FightLayer.cpp; sourceTree = "<group>"; };
 		3E9607E81F50150D0065E1DC /* FightLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightLayer.h; sourceTree = "<group>"; };
-		3E9607E91F50150D0065E1DC /* Flg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flg.cpp; sourceTree = "<group>"; };
-		3E9607EA1F50150D0065E1DC /* Flg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flg.h; sourceTree = "<group>"; };
-		3E9607EB1F50150D0065E1DC /* Fuel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fuel.cpp; sourceTree = "<group>"; };
-		3E9607EC1F50150D0065E1DC /* Fuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fuel.h; sourceTree = "<group>"; };
 		3E9607ED1F50150D0065E1DC /* GameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
 		3E9607EE1F50150D0065E1DC /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		3E9607EF1F50150D0065E1DC /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorldScene.cpp; sourceTree = "<group>"; };
@@ -207,8 +192,6 @@
 		3E96082E1F501BAF0065E1DC /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = music; sourceTree = "<group>"; };
 		3E9608551F5176D80065E1DC /* enemyPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = enemyPlane.cpp; sourceTree = "<group>"; };
 		3E9608561F5176D80065E1DC /* enemyPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enemyPlane.h; sourceTree = "<group>"; };
-		3E96085E1F51EC370065E1DC /* GameFin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameFin.cpp; sourceTree = "<group>"; };
-		3E96085F1F51EC370065E1DC /* GameFin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameFin.h; sourceTree = "<group>"; };
 		3E9608671F52B64A0065E1DC /* GamePause.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GamePause.cpp; sourceTree = "<group>"; };
 		3E9608681F52B64A0065E1DC /* GamePause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePause.h; sourceTree = "<group>"; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
@@ -399,12 +382,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3E96085E1F51EC370065E1DC /* GameFin.cpp */,
-				3E96085F1F51EC370065E1DC /* GameFin.h */,
 				3E9608551F5176D80065E1DC /* enemyPlane.cpp */,
 				3E9608561F5176D80065E1DC /* enemyPlane.h */,
-				3E9607DF1F50150D0065E1DC /* Arms.cpp */,
-				3E9607E01F50150D0065E1DC /* Arms.h */,
 				3E9607E11F50150D0065E1DC /* Bullet.cpp */,
 				3E9607E21F50150D0065E1DC /* Bullet.h */,
 				3E9607E31F50150D0065E1DC /* CCPlane.cpp */,
@@ -413,10 +392,6 @@
 				3E9607E61F50150D0065E1DC /* Equip.h */,
 				3E9607E71F50150D0065E1DC /* FightLayer.cpp */,
 				3E9607E81F50150D0065E1DC /* FightLayer.h */,
-				3E9607E91F50150D0065E1DC /* Flg.cpp */,
-				3E9607EA1F50150D0065E1DC /* Flg.h */,
-				3E9607EB1F50150D0065E1DC /* Fuel.cpp */,
-				3E9607EC1F50150D0065E1DC /* Fuel.h */,
 				3E9607ED1F50150D0065E1DC /* GameManager.cpp */,
 				3E9607EE1F50150D0065E1DC /* GameManager.h */,
 				3E9607EF1F50150D0065E1DC /* HelloWorldScene.cpp */,
@@ -650,13 +625,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E9608041F5017790065E1DC /* Arms.cpp in Sources */,
 				3E9608051F5017790065E1DC /* Bullet.cpp in Sources */,
 				3E9608061F5017790065E1DC /* CCPlane.cpp in Sources */,
 				3E9608071F5017790065E1DC /* Equip.cpp in Sources */,
 				3E9608081F5017790065E1DC /* FightLayer.cpp in Sources */,
-				3E9608091F5017790065E1DC /* Flg.cpp in Sources */,
-				3E96080A1F5017790065E1DC /* Fuel.cpp in Sources */,
 				3E96080B1F5017790065E1DC /* GameManager.cpp in Sources */,
 				3E96080C1F5017790065E1DC /* HelloWorldScene.cpp in Sources */,
 				3E96080D1F5017790065E1DC /* Supply.cpp in Sources */,
@@ -665,7 +637,6 @@
 				3E9608101F5017790065E1DC /* CreateLayer.cpp in Sources */,
 				3E9608571F5176D80065E1DC /* enemyPlane.cpp in Sources */,
 				3E9608111F5017790065E1DC /* HelpLayer.cpp in Sources */,
-				3E9608601F51EC370065E1DC /* GameFin.cpp in Sources */,
 				3E9608121F5017790065E1DC /* LoadLayer.cpp in Sources */,
 				3E9608131F5017790065E1DC /* MapLayer.cpp in Sources */,
 				3E9608141F5017790065E1DC /* MenuLayer.cpp in Sources */,
@@ -681,16 +652,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E9608621F51EC4B0065E1DC /* GameFin.cpp in Sources */,
 				3E9608591F5177040065E1DC /* enemyPlane.cpp in Sources */,
-				3E9608191F501AD90065E1DC /* Arms.cpp in Sources */,
-				3E96086A1F52B64A0065E1DC /* GamePause.cpp in Sources */,
 				3E96081A1F501AD90065E1DC /* Bullet.cpp in Sources */,
 				3E96081B1F501AD90065E1DC /* CCPlane.cpp in Sources */,
 				3E96081C1F501AD90065E1DC /* Equip.cpp in Sources */,
 				3E96081D1F501AD90065E1DC /* FightLayer.cpp in Sources */,
-				3E96081E1F501AD90065E1DC /* Flg.cpp in Sources */,
-				3E96081F1F501AD90065E1DC /* Fuel.cpp in Sources */,
 				3E9608201F501AD90065E1DC /* GameManager.cpp in Sources */,
 				3E9608211F501AD90065E1DC /* HelloWorldScene.cpp in Sources */,
 				3E9608221F501AD90065E1DC /* Supply.cpp in Sources */,
