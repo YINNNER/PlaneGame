@@ -65,40 +65,46 @@ bool RepoLayer::init() {
 	setEquipImg(user.getPlaneType());
 	//飞机进度条
 	BaseBarHp = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
-	BaseBarHp->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.8));
-	BaseBarHp->setScale(0.25, 0.5);
+	BaseBarHp->setPosition(Vec2(origin.x + winSize.width *0.73, origin.y + winSize.height *0.8));
+	BaseBarHp->setScale(0.35, 0.5);
 	this->addChild(BaseBarHp, 2);
 
 	BaseBarEn = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
-	BaseBarEn->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.76));
-	BaseBarEn->setScale(0.25, 0.5);
+	BaseBarEn->setPosition(Vec2(origin.x + winSize.width *0.73, origin.y + winSize.height *0.76));
+	BaseBarEn->setScale(0.35, 0.5);
 	this->addChild(BaseBarEn, 2);
 
 	BaseBarAtk = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
-	BaseBarAtk->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.72));
-	BaseBarAtk->setScale(0.25, 0.5);
+	BaseBarAtk->setPosition(Vec2(origin.x + winSize.width *0.73, origin.y + winSize.height *0.72));
+	BaseBarAtk->setScale(0.35, 0.5);
 	this->addChild(BaseBarAtk, 2);
 
 	BaseBarSpd = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
-	BaseBarSpd->setPosition(Vec2(origin.x + winSize.width *0.71, origin.y + winSize.height *0.68));
-	BaseBarSpd->setScale(0.25, 0.5);
+	BaseBarSpd->setPosition(Vec2(origin.x + winSize.width *0.73, origin.y + winSize.height *0.68));
+	BaseBarSpd->setScale(0.35, 0.5);
 	this->addChild(BaseBarSpd, 2);
 
 	HpBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
-	HpBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.798));
-	HpBar->setScale(0.25*(user.getHp()) / 1000, 0.5);
+	HpBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.798));
+	HpBar->setScale(0.35*(user.getHp()) / 300, 0.5);
 	HpBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(HpBar, 2);
 
+	EnBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
+	EnBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.758));
+	EnBar->setScale(0.35, 0.5);
+	EnBar->setAnchorPoint(Vec2(0, 0));
+	this->addChild(EnBar, 2);
+
 	AtkBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
-	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.64, origin.y + winSize.height *0.718));
-	AtkBar->setScale(0.25*(user.getAtk()) / 200, 0.5);
+	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.718));
+	AtkBar->setScale(0.35*(user.getAtk()) / 200, 0.5);
 	AtkBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(AtkBar, 2);
 
 	SpdBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
-	SpdBar->setPosition(Vec2(origin.x + winSize.width *0.641, origin.y + winSize.height *0.678));
-	SpdBar->setScale(0.25*(user.getSpd()) / 100, 0.5);
+	SpdBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.678));
+	SpdBar->setScale(0.35*(user.getSpd()) / 100, 0.5);
 	SpdBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(SpdBar, 2);
 
@@ -310,21 +316,21 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		_body_1 = Sprite::create(filename1.str().c_str());
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1, 2);
-		HpBar->setScale(0.25*(user.getHp()+10) / 1000, 0.5);
+		HpBar->setScale(0.25*(user.getHp()+10) / 300, 0.5);
 		user. set_equip_head_load(1); 
 	}
 	else if (_equip_1_b->getPositionX()==120 && user.get_equip_head_b_have() == 1) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
-		HpBar->setScale(0.25*(user.getHp() + 50) / 1000, 0.5);
+		HpBar->setScale(0.25*(user.getHp() + 50) / 300, 0.5);
 		user.set_equip_head_b_load(1);
 	}
 	else if (_equip_1_c->getPositionX()==120 && user.get_equip_head_c_have() == 1) {
 		_body_1_c = Sprite::create(filename3.str().c_str());
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1_c, 2);
-		HpBar->setScale(0.25*(user.getHp() + 100) / 1000, 0.5);
+		HpBar->setScale(0.25*(user.getHp() + 100) / 300, 0.5);
 		user.set_equip_head_c_load(1);
 	}
 
