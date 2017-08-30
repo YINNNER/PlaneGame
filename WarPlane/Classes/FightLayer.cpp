@@ -81,37 +81,17 @@ void FightLayer::addEnemyPlane() {
 */
 bool FightLayer::init() {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	fightImg = Sprite::create("res/UI/a3Game/backGround1.png");
+	fightImg = Sprite::create("res/star.png");
 	fightImg->setAnchorPoint(Point::ZERO);
 	fightImg->setPosition(Vec2(Point::ZERO));
 	fightImg->getTexture()->setAliasTexParameters();
 	this->addChild(fightImg, 1);
-	fightImg2 = Sprite::create("res/UI/a3Game/backGround1.png");
+	fightImg2 = Sprite::create("res/star.png");
 	fightImg2->setAnchorPoint(Point::ZERO);
 	fightImg2->setPosition(Point(fightImg->getPositionX(), fightImg->getPositionY() + fightImg->getContentSize().width - 2));
 	fightImg2->getTexture()->setAliasTexParameters();
 	this->addChild(fightImg2, 1);
 	this->schedule(schedule_selector(FightLayer::backMove));
-	//障碍物
-	/*barri_1 = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_big1.png");
-	barri_1->setAnchorPoint(Point::ZERO);
-	barri_1->setPosition(Vec2(Point::ZERO));
-	this->addChild(barri_1, 1);
-	barri_2= Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorGrey_big1.png");
-	barri_2->setAnchorPoint(Point::ZERO);
-	barri_2->setPosition(Vec2(Point::ZERO));
-	this->addChild(barri_2, 1);
-	this->schedule(schedule_selector(FightLayer::equipMove),3.0f);*/
-	//添加刚体
-/*	auto body = PhysicsBody::create();
-	body->setDynamic(false);
-	body->addShape(PhysicsShapeBox::create(barri_1->getContentSize(), PHYSICSSHAPE_MATERIAL_DEFAULT, Point(0, 0)));
-	//body->addShape(PhysicsShapeBox::create(barri_2->getContentSize(), PHYSICSSHAPE_MATERIAL_DEFAULT, Point(0, 0)));
-	body->setCategoryBitmask(1);    // 0001  
-	body->setCollisionBitmask(1);   // 0001  
-	body->setContactTestBitmask(1); // 0001  
-	this->setPhysicsBody(body);*/
-
 
 
 	auto skillBar = Sprite::create("res/skillBar.png");
@@ -178,33 +158,6 @@ bool FightLayer::init() {
 	this->schedule(schedule_selector(FightLayer::timeSche),1.0f);
 	return true;
 }
-
-/*void FightLayer::equipMove(float) {
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	barri_1->setPositionY(fightImg->getPositionY() - 10);
-	barri_2->setPositionY(fightImg2->getPositionY() - 10);
-	//for (int i = 0; i < 2; i++) {
-		barri_1 = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_big1.png");
-		barri_2 = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorGrey_big1.png");
-		barri_1->setPosition(Point(this->getRandomWidth(), this->getRandomHeight()));
-		barri_2->setPosition(Point(this->getRandomWidth(), this->getRandomHeight()));
-		this->addChild(barri_1, 4);
-		this->addChild(barri_2, 4);
-	
-
-}*/
-//获得随机高度
-/*int FightLayer::getRandomHeight() {
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	return rand() % (int)(2 * 5 + 5 - visibleSize.height);
-}
-//获得随机宽度
-int FightLayer::getRandomWidth() {
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	return rand() % (int)(2 * 5 + 5 - visibleSize.width);
-}*/
-
-//背景滚动
 void FightLayer::backMove(float)
 {
 	//通过不断改变背景y轴的位置来实现背景滚动  
@@ -219,16 +172,55 @@ void FightLayer::backMove(float)
 	{
 		fightImg2->setPositionY(fightImg->getPositionY() + fightImg->getContentSize().height);
 	}
-
-
 }
-
-
+void FightLayer::bossSkill(float)
+{
+	Bullet * bullet_1 = Bullet::create();
+	bullet_1->setPosition(boss->getPosition());
+	bullet_1->setType(2);
+	bullet_1->setBulletImg("res/bomb.png");
+	this->addChild(bullet_1, 3);
+	GameManager::getInstance()->setBullet(bullet_1);
+	if (player_1->getGrade()<10)
+	{
+		this->schedule(schedule_selector(FightLayer::bossSkill_1), 10.0f);
+	}
+	else if (player_1->getGrade()<15)
+	{
+		this->schedule(schedule_selector(FightLayer::bossSkill_2), 10.0f);
+	}
+	else {
+		this->schedule(schedule_selector(FightLayer::bossSkill_3), 10.0f);
+	}
+}
+void FightLayer::bossSkill_1(float)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		Bullet * bullet_1 = Bullet::create();
+		bullet_1->setPosition(boss->getPositionX()*i/10,boss->getPositionY());
+		bullet_1->setType(2);
+		bullet_1->setBulletImg("res/bomb.png");
+		this->addChild(bullet_1, 3);
+		GameManager::getInstance()->setBullet(bullet_1);
+	}	
+}
+void FightLayer::bossSkill_2(float)
+{
+	player_1->changeHp(-player_1->getHp() / 3);
+}
+void FightLayer::bossSkill_3(float)
+{
+	Enemy * enemy_1 = Enemy::create();
+	enemy_1->setType(3);
+	enemy_1->setGrade(player_1->getGrade());
+	GameManager::getInstance()->setPlane(enemy_1);
+	this->addChild(enemy_1, 3);
+}
 void FightLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	key = keyCode;
 }
-
 
 void FightLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
@@ -375,6 +367,7 @@ void FightLayer::is_crash(float dt)
 		for (int j = bullet_list_1.size() - 1; j >= 0; j--) {
 			if (bullet_list_1.at(j)->getType()==1)
 			{
+				
 				if (enemy_size.containsPoint(bullet_list_1.at(j)->getPosition()))
 				{
 					bullet_list_1.at(j)->removeBullet();
@@ -391,12 +384,22 @@ void FightLayer::is_crash(float dt)
 						scoreValue++;
 					}
 				}
+				if (boss->getBoundingBox().containsPoint(bullet_list_1.at(j)->getPosition()))
+				{
+					CCLOG("11");
+					boss->changeHp(player_1->getAtk());
+					if (boss->getHp()<=0)
+					{
+						boss->removeFromParent();
+						this->goToGameOver(2);
+					}
+				}
 			}
 			else
 			{
 				if (player_1->getBoundingBox().containsPoint(bullet_list_1.at(j)->getPosition()))
 				{
-					player_1->changeHp(-plane_list_1.at(0)->getAtk());
+					player_1->changeHp(-(10*player_1->getGrade()+50));
 					bullet_list_1.at(j)->removeBullet();
 					this->hpChange();
 				}
@@ -404,7 +407,6 @@ void FightLayer::is_crash(float dt)
 			
 		}
 	}
-
 	//补给、陨石碰撞计算
 	if (supply_list_1.size() > 0) {
 		for (int i = supply_list_1.size() - 1; i >= 0; i--)
@@ -509,15 +511,15 @@ void FightLayer::setPlayer(int cType) {
 	switch (cType)
 	{
 	case 1:
-		player_1->setAttri(100,500,40,1);	//坦克
+		player_1->setAttri(100, player_1->getMaxHp(),40,1);	//坦克
 		player_1->setImg("res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
 		break;
 	case 2:
-		player_1->setAttri(150, 300,60,1);//刺客
+		player_1->setAttri(150, player_1->getMaxHp(),60,1);//刺客
 		player_1->setImg("res/SpaceShooterRedux/PNG/Planes/playerShip2_green.png");
 		break;
 	case 3:
-		player_1->setAttri(130, 400,50,1);//战士
+		player_1->setAttri(130, player_1->getMaxHp(),50,1);//战士
 		player_1->setImg("res/SpaceShooterRedux/PNG/Planes/playerShip3_green.png");
 		break;
 	}
@@ -537,7 +539,7 @@ void FightLayer::setPlayer(int cType) {
 	attarkLabel->setColor(Color3B::RED);
 	attarkLabel->setPosition(Vec2(50,20));
 	this->addChild(attarkLabel, 3);
-	this->schedule(schedule_selector(FightLayer::addEnemy),2.0f);
+	this->scheduleOnce(schedule_selector(FightLayer::addEnemy),5.0f);
 }
 
 void FightLayer::hpChange()
@@ -642,7 +644,6 @@ void FightLayer::timeSche(float dt)
 		this->addChild(bullet_1, 3);
 		GameManager::getInstance()->setBullet(bullet_1);
 	}
-
 }
 
 void FightLayer::goToSave(Ref * psender)
@@ -669,7 +670,9 @@ void FightLayer::gamePause()
 	this->unschedule(schedule_selector(FightLayer::is_crash));
 	this->unschedule(schedule_selector(FightLayer::timeSche));
 	this->unschedule(schedule_selector(FightLayer::addEnemy));
-	//this->unschedule(SEL_SCHEDULE(&FightLayer::addEnemyPlane));
+	boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
+	boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));
+
 	auto bullet_list_1 = GameManager::getInstance()->getBulletList();
 	auto plane_list_1 = GameManager::getInstance()->getPlaneList();
 	auto supply_list_1 = GameManager::getInstance()->getSupplyList();
@@ -679,7 +682,7 @@ void FightLayer::gamePause()
 	}
 	for (int i = plane_list_1.size() - 1; i >= 0; i--)
 	{
-		
+	
 		plane_list_1.at(i)->pause();
 	}
 	for (int i = supply_list_1.size() - 1; i >= 0; i--)
@@ -715,6 +718,7 @@ void FightLayer::goToBack(Ref * psender)
 	this->schedule(schedule_selector(FightLayer::is_crash));
 	this->schedule(schedule_selector(FightLayer::timeSche), 1.0f);
 	this->schedule(schedule_selector(FightLayer::addEnemy), 2.0f);
+	boss->schedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
 	//this->schedule(SEL_SCHEDULE(&FightLayer::addEnemyPlane), 2.0f);
 	auto bullet_list_1 = GameManager::getInstance()->getBulletList();
 	auto plane_list_1 = GameManager::getInstance()->getPlaneList();
@@ -725,7 +729,7 @@ void FightLayer::goToBack(Ref * psender)
 	}
 	for (int i = plane_list_1.size() - 1; i >= 0; i--)
 	{
-		
+		plane_list_1.at(i)->resume();
 	}
 	for (int i = supply_list_1.size() - 1; i >= 0; i--)
 	{
@@ -903,6 +907,7 @@ void FightLayer::addEnemy(float dt)
 	Enemy * enemy_1 = Enemy::create();
 	enemy_1->setType(3);
 	enemy_1->setGrade(player_1->getGrade());
+	addBoss();
 	for (int i = player_1->getGrade(); i >0; i--)
 	{
 		enemy_1->changeAttri();
@@ -918,7 +923,7 @@ void FightLayer::addEnemy(float dt)
 	}
 	GameManager::getInstance()->setPlane(enemy_1);
 	this->addChild(enemy_1,3);
-	/*
+	
 	if (player_1->getGrade()==15)
 	{
 		this->addBoss();
@@ -927,17 +932,21 @@ void FightLayer::addEnemy(float dt)
 	{
 		this->addBoss();
 	}
-	else if (player_1->getGrade()== 5)
+	else if (player_1->getGrade()== 1)
 	{
 		this->addBoss();
-	}*/
+	}
 }
 
 void FightLayer::addBoss()
 {
 	boss = Enemy::create();
 	int lv = player_1->getGrade();
-	boss->setAttri(50 * lv, 100 * lv, 50, lv);
+	boss->setAttri(50 * lv, 200, 50, lv);
 	boss->setImg("res/SpaceShooterRedux/PNG/Enemies/enemyRed5.png");
 	boss->setScale(2);
+	boss->bossMove();
+	this->addChild(boss, 3);
+
+	this->schedule(schedule_selector(FightLayer::bossSkill),3.0f);
 }

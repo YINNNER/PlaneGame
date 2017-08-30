@@ -12,6 +12,10 @@ public:
 	void setEnemyImg();
 	void plane_death();
 	void removePlane(float dt);
+	void bossMove();
+	void enemyBossMove(float dt);
+	void enemyBossMove_1(float dt);
+	void boss_death();
 public:
 	Enemy();
 	~Enemy();

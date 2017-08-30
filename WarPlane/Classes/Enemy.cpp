@@ -58,6 +58,49 @@ void Enemy::removePlane(float dt)
 	this->unschedule(schedule_selector(Enemy::removePlane));
 	this->removeFromParentAndCleanup(true);
 }
+void Enemy::bossMove()
+{
+	auto size = Director::getInstance()->getWinSize();
+	auto point = Point(size.width / 2, size.height);
+	this->setPosition(point);
+	schedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
+}
+void Enemy::enemyBossMove(float dt) {
+	this->setPositionX(this->getPositionX() + 3);
+	if (this->getPositionX()>600)
+	{
+		this->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
+		this->schedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));
+	}
+}
+void Enemy::enemyBossMove_1(float dt)
+{
+	this->setPositionX(this->getPositionX() - 3);
+	if (this->getPositionX()<0)
+	{
+		this->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));
+		this->schedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
+	}
+}
+void Enemy::boss_death()
+{
+	Sprite * Anim = Sprite::create("res/skill1.png");
+	this->addChild(Anim, 3);
+	Anim->setPosition(this->getPosition());
+	auto animation = Animation::create();
+
+	char str[20] = { 0 };
+	for (int i = 1; i <= 9; i++)
+	{
+		sprintf(str, "res/skill%d.png", i);
+		animation->addSpriteFrameWithFile(str);
+	}
+	animation->setDelayPerUnit(0.05f);
+	animation->setLoops(1);
+	animation->setRestoreOriginalFrame(false);
+	auto action = Animate::create(animation);
+	Anim->runAction(action);
+}
 Enemy::Enemy()
 {
 }
