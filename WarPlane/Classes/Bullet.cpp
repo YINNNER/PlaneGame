@@ -50,7 +50,7 @@ void Bullet::removeBullet()
 void Bullet::skillMove(float dt)
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	this->setPositionY(this->getPositionY() + 30);
+	this->setPositionY(this->getPositionY() + 8);
 	if (this->getPositionY() > visibleSize.height)
 	{
 		GameManager::getInstance()->removeSkill(this);
@@ -70,7 +70,7 @@ void Bullet::setSkillImg(int type)
 	{
 	case 1:
 		this->skillImg_1 = Sprite::create("res/shit.png");
-		this->skillImg_1->setScale(0.3);
+		this->skillImg_1->setScale(1.0);
 		break;
 	case 2:
 		this->skillImg_2 = Sprite::create("res/plii_green.png");
@@ -78,7 +78,7 @@ void Bullet::setSkillImg(int type)
 	case 3:
 		break;
 	}
-	schedule(schedule_selector(Bullet::skillMove), 0.1f);
+	schedule(schedule_selector(Bullet::skillMove));
 }
 
 int Bullet::getType()

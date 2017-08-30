@@ -80,18 +80,27 @@ void FightLayer::addEnemyPlane() {
 }
 */
 bool FightLayer::init() {
+
+	skill2_1 = false;
+	skill1_1 = false;
+	skill3_1 = false;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	fightImg = Sprite::create("res/star.png");
+	SpriteBatchNode *batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
+	this->addChild(batchNode);
+	fightImg = Sprite::createWithTexture(batchNode->getTexture());
+	//fightImg->setScale(1.1);
 	fightImg->setAnchorPoint(Point::ZERO);
 	fightImg->setPosition(Vec2(Point::ZERO));
-	fightImg->getTexture()->setAliasTexParameters();
+	//fightImg->getTexture()->setAliasTexParameters();
 	this->addChild(fightImg, 1);
-	fightImg2 = Sprite::create("res/star.png");
+	fightImg2 = Sprite::createWithTexture(batchNode->getTexture());
+	//fightImg2->setScale(1.1);
 	fightImg2->setAnchorPoint(Point::ZERO);
-	fightImg2->setPosition(Point(fightImg->getPositionX(), fightImg->getPositionY() + fightImg->getContentSize().width - 2));
-	fightImg2->getTexture()->setAliasTexParameters();
+	fightImg2->setPosition(Point(fightImg->getPositionX(), fightImg->getPositionY() + fightImg->getContentSize().height));
+	//fightImg2->getTexture()->setAliasTexParameters();
 	this->addChild(fightImg2, 1);
 	this->schedule(schedule_selector(FightLayer::backMove));
+
 
 
 	auto skillBar = Sprite::create("res/skillBar.png");
@@ -164,11 +173,11 @@ void FightLayer::backMove(float)
 	fightImg->setPositionY(fightImg->getPositionY() - 2);
 	fightImg2->setPositionY(fightImg2->getPositionY() - 2);
 	//判断条件，当背景一滚出屏幕的时候让背景二接在背景一后面，背景二同理  
-	if (fightImg->getPositionY() == -fightImg->getContentSize().height - 2)
+	if (fightImg->getPositionY() == -fightImg->getContentSize().height)
 	{
 		fightImg->setPositionY(fightImg2->getPositionY() + fightImg2->getContentSize().height);
 	}
-	else if (fightImg2->getPositionY() == -fightImg2->getContentSize().height - 2)
+	else if (fightImg2->getPositionY() == -fightImg2->getContentSize().height)
 	{
 		fightImg2->setPositionY(fightImg->getPositionY() + fightImg->getContentSize().height);
 	}
@@ -316,13 +325,22 @@ void FightLayer::update(float dt)
 		}
 		else
 		{
-			this->addBullet(1);
+			if (skill2_1)
+			{
+				this->addBullet(1);
+				this->addBullet(1);
+				this->addBullet(1);
+			}
+			else
+			{
+				this->addBullet(1);
+			}
 			interval = this->getCurrentTime();
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_U:
 		static long interval_1 = this->getCurrentTime();
-		if ((this->getCurrentTime() - interval_1)<2000)
+		if ((this->getCurrentTime() - interval_1)<4000)
 		{
 			break;
 		}
@@ -402,10 +420,18 @@ void FightLayer::is_crash(float dt)
 	for (int i = plane_list_1.size() - 1; i >= 0; i--) {
 		auto enemy_plane = plane_list_1.at(i);
 		auto enemy_size = enemy_plane->getBoundingBox();
-		if (enemy_size.intersectsRect(player_1->getBoundingBox())) {
-			plane_list_1.at(i)->plane_death();
-			player_1->changeHp(-100);
-			this->hpChange();
+		if (enemy_size.intersectsRect(player_1->getBoundingBox())) 
+		{
+			if (skill3_1)
+			{
+				break;
+			}
+			else
+			{
+				plane_list_1.at(i)->plane_death();
+			    player_1->changeHp(-100);
+			    this->hpChange();
+			}
 		}
 		for (int j = bullet_list_1.size() - 1; j >= 0; j--) {
 			if (bullet_list_1.at(j)->getType()==1)
@@ -458,9 +484,22 @@ void FightLayer::is_crash(float dt)
 			{
 				if (player_1->getBoundingBox().containsPoint(bullet_list_1.at(j)->getPosition()))
 				{
-					player_1->changeHp(-(10*player_1->getGrade()+50));
-					bullet_list_1.at(j)->removeBullet();
-					this->hpChange();
+					if (skill1_1)
+					{
+						bullet_list_1.at(j)->removeBullet();
+						break;
+					}
+					else if (skill3_1)
+					{
+						break;
+					}
+					else 
+					{
+						player_1->changeHp(-(10*player_1->getGrade()+50));
+						bullet_list_1.at(j)->removeBullet();
+					    this->hpChange();
+					}
+					
 				}
 			}
 			
@@ -484,9 +523,16 @@ void FightLayer::is_crash(float dt)
 				}
 				else if (supply_1->getType() == 2 || supply_1->getType() == 3)
 				{
-					player_1->changeHp(-50);
-					this->hpChange();
-					supply_1->removeSupply();
+					if (skill3_1)
+					{
+						break;
+					}
+					else
+					{	
+						player_1->changeHp(-50);
+					    this->hpChange();
+					    supply_1->removeSupply();
+					}
 				}
 			}
 		}
@@ -501,6 +547,7 @@ void FightLayer::is_crash(float dt)
 			if (enemy_1->getBoundingBox().containsPoint(skill_1->getPosition()))
 			{
 				Anim = Sprite::create("res/skill1.png");
+				Anim->setScale(3);
 				this->addChild(Anim,3);
 				Anim->setPosition(skill_1->getPosition());
 				auto animation = Animation::create();
@@ -519,7 +566,7 @@ void FightLayer::is_crash(float dt)
 
 				this->scheduleOnce(schedule_selector(FightLayer::removeAnimation), 0.5f);
 
-				Rect rect = Rect::Rect(enemy_1->getPositionX() - 100, enemy_1->getPositionY() - 100, 200, 200);
+				Rect rect = Rect::Rect(enemy_1->getPositionX() - 160, enemy_1->getPositionY() - 160, 320, 320);
 				for (int j = 0; j <= plane_list_1.size() - 1; j++)
 				{
 					auto enemy_2 = plane_list_1.at(j);
@@ -851,22 +898,23 @@ void FightLayer::openSkillU()
 	switch (player_1->getType())
 	{
 	case 1:
-		addBullet(1);
-		addBullet(1);
-		addBullet(1);
-		player_1->changeSpd(player_1->getSpd() * 0.3);
+		skill2_1 = true;
+		player_1->changeSpd(player_1->getSpd() * 0.5);
 		this->scheduleOnce(schedule_selector(FightLayer::closeSkillU), 5.0f);
 		break;
 	case 2:
+		skill1_1 = true;
 		shield = Sprite::create("res/shield1.png");
 		shield->setAnchorPoint(Vec2(0.1, 0));
 		shield->setPosition(player_1->getAnchorPoint());
 		player_1->addChild(shield, 3);
-		this->scheduleOnce(schedule_selector(FightLayer::closeSkillU), 4.0f);
+		this->scheduleOnce(schedule_selector(FightLayer::closeSkillU), 3.0f);
 		break;
 	case 3:
-		player_1->setOpacity(100);
-		this->schedule(schedule_selector(FightLayer::closeSkillU), 2.0f);
+		skill3_1 = true;
+		player_1->setCascadeOpacityEnabled(true);
+		player_1->setOpacity(50);
+		this->scheduleOnce(schedule_selector(FightLayer::closeSkillU), 3.0f);
 		break;
 	}
 	skill_1->setColor(ccc3(119, 136, 153));
@@ -878,12 +926,15 @@ void FightLayer::closeSkillU(float dt)
 	switch (player_1->getType())
 	{
 	case 1:
+		skill2_1 = false;
 		player_1->changeSpd((int)player_1->getSpd() / 1.3);
 		break;
 	case 2:
+		skill1_1 = false;
 		shield->removeFromParentAndCleanup(true);
 		break;
 	case 3:
+		skill3_1 = false;
 		player_1->setOpacity(255);
 		break;
 	}

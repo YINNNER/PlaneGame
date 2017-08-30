@@ -83,6 +83,9 @@ private:
 	Sprite * white;
 	Enemy * boss;
 	int bossExist;
+	bool skill2_1;
+	bool skill1_1;
+	bool skill3_1;
 };
 
 
