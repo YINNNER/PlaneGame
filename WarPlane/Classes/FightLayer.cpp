@@ -670,8 +670,8 @@ void FightLayer::gamePause()
 	this->unschedule(schedule_selector(FightLayer::is_crash));
 	this->unschedule(schedule_selector(FightLayer::timeSche));
 	this->unschedule(schedule_selector(FightLayer::addEnemy));
-	boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
-	boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));
+	//boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
+	//boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));
 
 	auto bullet_list_1 = GameManager::getInstance()->getBulletList();
 	auto plane_list_1 = GameManager::getInstance()->getPlaneList();
@@ -739,18 +739,20 @@ void FightLayer::goToBack(Ref * psender)
 
 void FightLayer::goToHelp(Ref * psender)
 {
-	auto scene = Scene::create();
+	/*auto scene = Scene::create();
 	HelpLayer * layer = HelpLayer::create();
 	scene->addChild(layer);
-	Director::getInstance()->replaceScene(scene);
+	Director::getInstance()->replaceScene(scene);*/
+	SceneManager::goHelpLayer(1);
 }
 
 void FightLayer::goToOption(Ref * psender)
 {
-	auto scene = Scene::create();
+	/*auto scene = Scene::create();
 	SetLayer * layer = SetLayer::create();
 	scene->addChild(layer);
-	Director::getInstance()->replaceScene(scene);
+	Director::getInstance()->replaceScene(scene);*/
+	SceneManager::goSetLayer(1);
 }
 
 void FightLayer::exitGame(Ref * psender)
