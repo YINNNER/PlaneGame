@@ -95,7 +95,7 @@ void SaveLayer::createInfo(){
     if(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        writablePath = "res/";
+        writablePath = "./res/";
         
         
     }
@@ -148,13 +148,15 @@ void SaveLayer::initInfoDetail( __Dictionary * user){
     userInfo->saveDay=getSysDay();
     user->setObject(__String::create(userInfo->saveTime), "saveTime");
     user->setObject(__String::create(userInfo->saveDay), "saveDay");
-    user->setObject(__Integer::create(10), "atk");
-    user->setObject(__Integer::create(0), "spd");
+    user->setObject(__Integer::create(100), "atk");
+    user->setObject(__Integer::create(40), "spd");
     user->setObject(__Integer::create(1), "gameLevel");
     user->setObject(__Integer::create(500), "hp");
-    user->setObject(__Integer::create(500), "mp");
-    user->setObject(__Integer::create(10), "planeLevel");
+    user->setObject(__Integer::create(100), "mp");
+    user->setObject(__Integer::create(1), "planeLevel");
     user->setObject(__Integer::create(1), "planeType");
+    user->setObject(__Integer::create(0), "exp");
+
     //equip
     user->setObject(__Bool::create(0),"_equip_head_have" );
     user->setObject(__Bool::create(0),"_equip_head_load" );

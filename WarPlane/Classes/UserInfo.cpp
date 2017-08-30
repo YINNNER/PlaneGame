@@ -20,6 +20,7 @@ UserInfo::UserInfo(){
     hp=500;
     mp=100;
     planeLevel=1;
+    exp=0;
     //equip
     //1.head
     _equip_head_have=0;
@@ -59,6 +60,7 @@ UserInfo::UserInfo(UserInfo const & userInfo){
     hp=userInfo.hp;
     mp=userInfo.mp;
     planeLevel=userInfo.planeLevel;
+    exp=userInfo.exp;
     //equip
     //1.head
     _equip_head_have=userInfo._equip_head_have;
@@ -92,6 +94,13 @@ ValueMap UserInfo::readPlist(){
         path = "res/userInfo.plist";
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
         CCLOG("read the plist file at %s \n", _fullPath.c_str());
+        
+        if(FileUtils::getInstance()->isFileExist(_fullPath)){
+            
+            log("123");
+        }else{
+            log("111");
+        }
 
     }
     else if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -132,6 +141,7 @@ void UserInfo::setInfo(int tag){
     hp=dict["hp"].asInt();
     mp=dict["mp"].asInt();
     planeLevel=dict["planeLevel"].asInt();
+    exp=dict["exp"].asInt();
     //equip
     _equip_head_have=dict["_equip_head_have"].asBool();
     _equip_head_load=dict["_equip_head_load"].asBool();
@@ -191,7 +201,7 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 	{
 		//是MAC平台
-		path = "res/userInfo.plist";
+		path = "./res/userInfo.plist";
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
         CCLOG("see the plist file at %s \n", _fullPath.c_str());
 
@@ -227,6 +237,7 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	user->setObject(__Integer::create(userInfo.mp), "mp");
 	user->setObject(__Integer::create(userInfo.planeLevel), "planeLevel");
 	user->setObject(__Integer::create(userInfo.planeType), "planeType");
+    user->setObject(__Integer::create(userInfo.exp), "exp");
     //equip
     user->setObject(__Bool::create(userInfo._equip_head_have),"_equip_head_have" );
     user->setObject(__Bool::create(userInfo._equip_head_load),"_equip_head_load" );
@@ -288,7 +299,7 @@ int UserInfo::getGameLevel(){return gameLevel;}
 int UserInfo::getHp(){return hp;}
 int UserInfo::getMp(){return mp;}
 int UserInfo::getPlaneLevel(){return planeLevel;}
-
+int UserInfo::getExp(){return exp;}
 bool UserInfo::get_equip_head_have(){return _equip_head_have;}
 bool UserInfo::get_equip_head_b_have(){return _equip_head_b_have;}
 bool UserInfo::get_equip_head_c_have(){return _equip_head_c_have;}
@@ -316,7 +327,7 @@ void UserInfo::setGameLevel(int gameLevel){this->gameLevel=gameLevel;}
 void UserInfo::setHp(int hp){this->hp=hp;}
 void UserInfo::setMp(int mp){this->mp=mp;}
 void UserInfo::setPlaneLevel(int planeLevel){this->planeLevel=planeLevel;}
-
+void UserInfo::setExp(int exp){this->exp=exp;}
 void UserInfo::set_equip_head_have(bool _equip_head_have){this->_equip_head_have=_equip_head_have;}
 void UserInfo::set_equip_head_b_have(bool _equip_head_b_have){this->_equip_head_b_have=_equip_head_b_have;}
 void UserInfo::set_equip_head_c_have(bool _equip_head_c_have){this->_equip_head_b_have=_equip_head_c_have;}

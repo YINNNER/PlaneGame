@@ -33,6 +33,7 @@ private:
     int hp;
     int mp;
     int planeLevel;
+    int exp;
     //equip
     //1.head
     bool _equip_head_have;
@@ -81,6 +82,7 @@ public:
     int getHp();
     int getMp();
     int getPlaneLevel();
+    int getExp();
     //get_equip
     bool get_equip_head_have();
     bool get_equip_head_b_have();
@@ -110,6 +112,7 @@ public:
     void setHp(int hp);
     void setMp(int mp);
     void setPlaneLevel(int planeLevel);
+    void setExp(int exp);
     //set_equip
     void set_equip_head_have(bool _equip_head_have);
     void set_equip_head_b_have(bool _equip_head_b_have);
