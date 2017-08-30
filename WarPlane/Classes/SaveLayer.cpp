@@ -80,6 +80,7 @@ void SaveLayer::saveMenuItem(Ref * pSender,int tag){
 	else{
 	
 	saveInfo(tag);
+    times=1;
 
 	}
 
