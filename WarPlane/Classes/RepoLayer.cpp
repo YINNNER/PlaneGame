@@ -323,19 +323,21 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1, 2);
 		HpBar->setScale(0.25*(user.getHp()+10) / 1000, 0.5);
-		//user.atk = 1;
+		user. set_equip_head_load(1); 
 	}
 	else if (_equip_1_b->getPositionX()==120 && user.get_equip_head_b_have() == 1) {
 		_body_1_b = Sprite::create(filename2.str().c_str());
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		this->addChild(_body_1_b, 2);
 		HpBar->setScale(0.25*(user.getHp() + 50) / 1000, 0.5);
+		user.set_equip_head_b_load(1);
 	}
 	else if (_equip_1_c->getPositionX()==120 && user.get_equip_head_c_have() == 1) {
 		_body_1_c = Sprite::create(filename3.str().c_str());
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		this->addChild(_body_1_c, 2);
 		HpBar->setScale(0.25*(user.getHp() + 100) / 1000, 0.5);
+		user.set_equip_head_c_load(1);
 	}
 
 	
@@ -361,6 +363,7 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_1 = Sprite::create(filename1.str().c_str());
 		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1, 2);
+		user.set_equip_arm_load(1);
 
 		AtkBar->setScale(0.25*(user.getAtk()+10) / 100, 0.5);
 	}
@@ -368,6 +371,7 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_1_b = Sprite::create(filename2.str().c_str());
 		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_b, 2);
+		user.set_equip_arm_b_load(1);
 
 		AtkBar->setScale(0.25*(user.getAtk()+50) / 100, 0.5);
 	}
@@ -375,6 +379,7 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_1_c = Sprite::create(filename3.str().c_str());
 		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		this->addChild(_wing_1_c, 2);
+		user.set_equip_arm_c_load(1);
 
 		AtkBar->setScale(0.25*(user.getAtk()+100) / 100, 0.5);
 	}
@@ -425,20 +430,26 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 	if (_equip_1->getPositionX() == 120 && user.get_equip_tail_have() == 1) {
 		_tail_1 = Sprite::create(filename1.str().c_str());
 		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		user.set_equip_tail_load(1);
 
 		this->addChild(_tail_1, 2);
+		SpdBar->setScale(0.25*(user.getSpd() + 10) / 100, 0.5);
 	}
 	else if (_equip_1_b->getPositionX() == 120 && user.get_equip_tail_b_have() == 1) {
 		_tail_1_b = Sprite::create(filename2.str().c_str());
 		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		user.set_equip_tail_b_load(1);
 
 		this->addChild(_tail_1_b, 2);
+		SpdBar->setScale(0.25*(user.getSpd() + 50) / 100, 0.5);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_tail_c_have() == 1) {
 		_tail_1_c = Sprite::create(filename3.str().c_str());
 		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		user.set_equip_tail_c_load(1);
 	
 		this->addChild(_tail_1_c, 2);
+		SpdBar->setScale(0.25*(user.getSpd() + 100) / 100, 0.5);
 	}
 }
 
@@ -542,7 +553,7 @@ void RepoLayer::setEquipImg(int type) {
 
 }
 
-
+//设置飞机栏图片包括已经穿上的装备
 void RepoLayer::setPlaneImg(int type) {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
@@ -646,7 +657,7 @@ void RepoLayer::setPlaneImg(int type) {
 }
 
 
-//监听键盘修改RepoLayer::Offset
+//监听键盘按下
 void RepoLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 {
 	key = keyCode;
@@ -663,6 +674,7 @@ void RepoLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * event)
 	}
 }
 
+//装备栏翻页刷新
 void RepoLayer::equipUpdate(float dt)
 {
 	Size winSize = Director::getInstance()->getWinSize();
@@ -671,7 +683,11 @@ void RepoLayer::equipUpdate(float dt)
 	switch (key) {
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
 		if (_equip_1->getPositionX() > -1080) {
-			//判断黑白框
+			//机身
+			_equip_1->setPositionX(_equip_1->getPositionX() - winSize.width);
+			_equip_1_b->setPositionX(_equip_1_b->getPositionX() - winSize.width);
+			_equip_1_c->setPositionX(_equip_1_c->getPositionX() - winSize.width);
+			//判断第一行黑白框
 			if (_equip_1->getPositionX() == 120 && user.get_equip_head_have() == 0) {
 				_background_3_white_1->setEnabled(false);
 			}
@@ -684,51 +700,50 @@ void RepoLayer::equipUpdate(float dt)
 			else {
 				_background_3_white_1->setEnabled(true);
 			}
-			_equip_1->setPositionX(_equip_1->getPositionX() - winSize.width);
-			_equip_1_b->setPositionX(_equip_1_b->getPositionX() - winSize.width);
-			_equip_1_c->setPositionX(_equip_1_c->getPositionX() - winSize.width);
+			
 			equipNum_1_1->setPositionX(equipNum_1_1->getPositionX() - winSize.width);
 			equipNum_1_2->setPositionX(equipNum_1_2->getPositionX() - winSize.width);
 			equipNum_1_3->setPositionX(equipNum_1_3->getPositionX() - winSize.width);
 
-				//判断黑白框
+			//机翼
+			_equip_2->setPositionX(_equip_2->getPositionX() - winSize.width);
+			_equip_2_b->setPositionX(_equip_2_b->getPositionX() - winSize.width);
+			_equip_2_c->setPositionX(_equip_2_c->getPositionX() - winSize.width);
+				//判断第二行黑白框
 				if (_equip_2->getPositionX() == 120 && user.get_equip_arm_have() == 0) {
 					_background_3_white_2->setEnabled(false);
 				}
-				else if (_equip_2_b->getPositionX() == 120 && user.get_equip_arm_have() == 0) {
+				else if (_equip_2_b->getPositionX() == 120 && user.get_equip_arm_b_have() == 0) {
 					_background_3_white_2->setEnabled(false);
 				}
-				else if (_equip_2_c->getPositionX() == 120 && user.get_equip_arm_have() == 0) {
+				else if (_equip_2_c->getPositionX() == 120 && user.get_equip_arm_c_have() == 0) {
 					_background_3_white_2->setEnabled(false);
 				}
 				else {
 					_background_3_white_2->setEnabled(true);
 				}
-
-			_equip_2->setPositionX(_equip_2->getPositionX() - winSize.width);
-			_equip_2_b->setPositionX(_equip_2_b->getPositionX() - winSize.width);
-			_equip_2_c->setPositionX(_equip_2_c->getPositionX() - winSize.width);
 			equipNum_2_1->setPositionX(equipNum_2_1->getPositionX() - winSize.width);
 			equipNum_2_2->setPositionX(equipNum_2_2->getPositionX() - winSize.width);
 			equipNum_2_3->setPositionX(equipNum_2_3->getPositionX() - winSize.width);
 
-			//判断黑白框
+
+			//机尾
+			_equip_3->setPositionX(_equip_3->getPositionX() - winSize.width);
+			_equip_3_b->setPositionX(_equip_3_b->getPositionX() - winSize.width);
+			_equip_3_c->setPositionX(_equip_3_c->getPositionX() - winSize.width);
+			//判断第三行黑白框
 			if (_equip_3->getPositionX() == 120 && user.get_equip_tail_have() == 0) {
 				_background_3_white_3->setEnabled(false);
 			}
-			else if (_equip_3_b->getPositionX() == 120 && user.get_equip_tail_have() == 0) {
+			else if (_equip_3_b->getPositionX() == 120 && user.get_equip_tail_b_have() == 0) {
 				_background_3_white_3->setEnabled(false);
 			}
-			else if (_equip_3_c->getPositionX() == 120 && user.get_equip_tail_have() == 0) {
+			else if (_equip_3_c->getPositionX() == 120 && user.get_equip_tail_c_have() == 0) {
 				_background_3_white_3->setEnabled(false);
 			}
 			else {
 				_background_3_white_3->setEnabled(true);
 			}
-
-			_equip_3->setPositionX(_equip_3->getPositionX() - winSize.width);
-			_equip_3_b->setPositionX(_equip_3_b->getPositionX() - winSize.width);
-			_equip_3_c->setPositionX(_equip_3_c->getPositionX() - winSize.width);
 			equipNum_3_1->setPositionX(equipNum_3_1->getPositionX() - winSize.width);
 			equipNum_3_2->setPositionX(equipNum_3_2->getPositionX() - winSize.width);
 			equipNum_3_3->setPositionX(equipNum_3_3->getPositionX() - winSize.width);
@@ -737,15 +752,61 @@ void RepoLayer::equipUpdate(float dt)
 			CCLOG("%f \n", _equip_1_b->getPositionX());
 		}
 		else {
+			//机身
 			_equip_1->setPosition(Vec2(winSize.width *0.2, winSize.height *0.5));
 			_equip_1_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.5));
 			_equip_1_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.5));
+
+			//判断第一行黑白框
+			if (_equip_1->getPositionX() == 120 && user.get_equip_head_have() == 0) {
+				_background_3_white_1->setEnabled(false);
+			}
+			else if (_equip_1_b->getPositionX() == 120 && user.get_equip_head_b_have() == 0) {
+				_background_3_white_1->setEnabled(false);
+			}
+			else if (_equip_1_c->getPositionX() == 120 && user.get_equip_head_c_have() == 0) {
+				_background_3_white_1->setEnabled(false);
+			}
+			else {
+				_background_3_white_1->setEnabled(true);
+			}
+
+			//机翼
 			_equip_2->setPosition(Vec2(winSize.width *0.2, winSize.height *0.3));
 			_equip_2_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.3));
 			_equip_2_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.3));
+
+			//判断第二行黑白框
+			if (_equip_2->getPositionX() == 120 && user.get_equip_arm_have() == 0) {
+				_background_3_white_2->setEnabled(false);
+			}
+			else if (_equip_2_b->getPositionX() == 120 && user.get_equip_arm_b_have() == 0) {
+				_background_3_white_2->setEnabled(false);
+			}
+			else if (_equip_2_c->getPositionX() == 120 && user.get_equip_arm_c_have() == 0) {
+				_background_3_white_2->setEnabled(false);
+			}
+			else {
+				_background_3_white_2->setEnabled(true);
+			}
+
 			_equip_3->setPosition(Vec2(winSize.width *0.2, winSize.height *0.1));
 			_equip_3_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.1));
 			_equip_3_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.1));
+
+			//判断第三行黑白框
+			if (_equip_3->getPositionX() == 120 && user.get_equip_tail_have() == 0) {
+				_background_3_white_3->setEnabled(false);
+			}
+			else if (_equip_3_b->getPositionX() == 120 && user.get_equip_tail_b_have() == 0) {
+				_background_3_white_3->setEnabled(false);
+			}
+			else if (_equip_3_c->getPositionX() == 120 && user.get_equip_tail_c_have() == 0) {
+				_background_3_white_3->setEnabled(false);
+			}
+			else {
+				_background_3_white_3->setEnabled(true);
+			}
 
 			equipNum_1_1->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.5));
 			equipNum_1_2->setPosition(Vec2(origin.x + winSize.width * 1.5, origin.y + winSize.height * 0.5));
@@ -793,103 +854,3 @@ void RepoLayer::equipUpdate(float dt)
 	}
 
 }
-/*setTouchEnable(true);
-setTouchMode(Touch::DispatchMode::ONE_BY_ONE);
-/*
-auto listener = EventListenerMouse::create();
-listener->onMouseDown = [](Event * event){
-EventMouse * e = (EventMouse * )event;
-}
-*/
-/*MenuItemLabel * menuItem = MenuItemLabel::create(Label::createWithSystemFont(" / res / SpaceShooterRedux / PNG / Parts / cockpitBlue_1.png", "", ), CC_CALLBACK_1(OpenLayer::menuCallBack, this));
-//使用1进行标记
-menuItem->set1(101);
-menuItem->setPosition(Vec2(origin.x+winSize.width / 2, origin.y+winSize.height*0.3));
-static MenuItemSprite * create(Node * normalSprite, Node * normalSprite, Node * normalSprite, );
-MenuItemImage * equip_1 = MenuItemImage::create("res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png", "res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
-MenuItemImage * equip_2 = MenuItemImage::create("res/SpaceShooterRedux/PNG/Planes/playerShip1_blue.png", "res/SpaceShooterRedux/PNG/Planes/playerShip1_blue.png");
-MenuItemToggle* equip = MenuItemToggle::createWithTarget(this,menu_selector(RepoLayer::changeEquip),equip_1,equip_2,NULL);
-
-Menu * equipMenu = Menu::create(equip,NULL);
-equip->setPosition(Vec2(origin.x+winSize.width / 2, origin.y+winSize.height*0.3));
-equipMenu->setPosition(Vec2::ZERO);
-this->addChild(equip);*/
-
-
-
-/*void RepoLayer::onEnter() {
-Layer::onEnter();
-//创建监听器对象
-
-auto listener = EventListenerTouchOneByOne::create();
-//是够吞没事件,true则事件不会传递给下一个对象
-listener->setSwallowTouches(true);
-//设置回调函数
-listener->onTouchBegan = CC_CALLBACK_2(RepoLayer::touchBegan, this);
-//注册监听器
-auto eventDispatcher = Director::getInstance()->getEventDispatcher();
-eventDispatcher->addEventListenerWithSceneGraphPriority(listener, getChildBy1(kEquip_1_1));
-eventDispatcher->addEventListenerWithSceneGraphPriority(listener->clone(), getChildBy1(kEquip_2_1));
-eventDispatcher->addEventListenerWithSceneGraphPriority(listener->clone(), getChildBy1(kEquip_3_1));
-
-}*/
-
-
-/*bool RepoLayer::onTouchBegan(Touch * touch, Event * event) {
-//获得事件绑定的target
-auto target = static_cast<Sprite *>(event->getCurrentTarget());//强制转换为sprite对象
-Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());//获取触摸点相对于target对象的模型坐标
-Size s = target->getContentSize();//获得target对象尺寸
-Rect rect = Rect(0, 0, s.width, s.height);//放大target对象
-
-//单击范围判断检测
-if (rect.containsPoint(locationInNode)) {
-target->runAction(ScaleBy::create(0.06f, 1.06f));
-Size winSize = Director::getInstance()->getWinSize();
-_plane_2 = Sprite::create("res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
-_plane_2->setPosition(Vec2(origin.x+winSize.width*0.3, origin.y+winSize.height * 3 / 4));
-//_plane->setScale(0.9);
-this->addChild(_plane_2);
-return true;
-}
-return false;
-}*/
-/*
-//注销所有监听事件
-void RepoLayer::onExit() {
-Layer::onExit();
-Director::getInstance()->getEventDispatcher()->removeAllEventListeners();
-}
-*/
-
-
-/*void RepoLayer::menuCallBack_4(Ref * pSender) {
-	Size winSize = Director::getInstance()->getWinSize();
-	auto origin = Director::getInstance()->getVisibleOrigin();
-
-	_equip_1Img = Sprite::create("res/UI/plane_parts/planeType1/playerShip1_blue_01.png");
-	_equip_1Img->setPosition(Vec2(origin.x + winSize.width *0.2, origin.y + winSize.height *0.5));
-	//_equip_1Img->setScale(0.95);//缩放0.5倍
-	this->addChild(_equip_1Img, 0, 1);
-
-}*/
-/*int RepoLayer::getHpBarLength(int life)
-{
-	//获得飞机现在生命值+_EquipNum*(Equip::getImpHp)
-	return 0;
-}*/
-
-/*
-void RepoLayer::hpUpdate(int dt) {
-
-}
-
-bool RepoLayer::onTouchBegan(Touch * touch, Event * event) {
-	auto _equip_1 = this->getChildBy1e(equip_1_1);
-	if (this->isTap(_equip_1, touch)) {
-		//更换飞机图片
-		_plane
-	}
-	return true；
-}
-*/

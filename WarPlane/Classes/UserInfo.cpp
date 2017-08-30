@@ -89,7 +89,7 @@ ValueMap UserInfo::readPlist(){
     if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        path = "./res/userInfo.plist";
+        path = "res/userInfo.plist";
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
         CCLOG("read the plist file at %s \n", _fullPath.c_str());
 
@@ -153,8 +153,6 @@ void UserInfo::setInfo(int tag){
     _equip_tail_b_load=dict["_equip_tail_b_load"].asBool();
     _equip_tail_c_have=dict["_equip_tail_c_have"].asBool();
     _equip_tail_c_load=dict["_equip_tail_c_load"].asBool();
-
-    
     
     //用CCLOG做调试语句
     //CCLOG("plane_type = %s", (dict["planeType"].asString()).c_str());
@@ -193,7 +191,7 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 	{
 		//是MAC平台
-		path = "./res/userInfo.plist";
+		path = "res/userInfo.plist";
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
         CCLOG("see the plist file at %s \n", _fullPath.c_str());
 
@@ -254,6 +252,8 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	if (root->writeToFile(path.c_str())) 
 	{
 		log("save the plist file at %s \n", path.c_str());
+        std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
+        CCLOG("save the plist file at %s \n", _fullPath.c_str());
 		
 	}
 	else
