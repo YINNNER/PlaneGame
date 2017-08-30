@@ -17,7 +17,7 @@ UserInfo::UserInfo(){
     atk=100;
     spd=40;
     gameLevel=1;
-    hp=500;
+    hp=120;
     mp=100;
     planeLevel=1;
     exp=0;

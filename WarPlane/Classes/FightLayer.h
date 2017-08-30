@@ -3,6 +3,7 @@
 #include"CCPlane.h"
 #include"Bullet.h"
 #include"Enemy.h"
+#include"UserInfo.h"
 USING_NS_CC;
 class FightLayer :
 	public Layer
@@ -12,13 +13,12 @@ public:
 	~FightLayer();
 	CREATE_FUNC(FightLayer);
 	virtual bool init();
-	void setPlayer(int cType);
+	void setPlayer(UserInfo &user);
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void update(float dt);
 	void addSupply(float dt);
 	void addBullet(int bType);
-	void addEnemyPlane();
 	void is_crash(float dt);
 	long getCurrentTime();
 
@@ -56,6 +56,7 @@ public:
 	void bossSkill_2(float);
 	void bossSkill_3(float);
 	void onExit();
+	UserInfo user;
 private:
 	Sprite * fightImg;
 	Sprite * fightImg2;

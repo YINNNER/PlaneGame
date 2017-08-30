@@ -12,73 +12,6 @@ FightLayer::~FightLayer()
 {
 
 }
-
-/*
-void FightLayer::addEnemyPlane() {
-
-
-	auto enemy = enemyPlane::create();
-	
-	int enemyLevel = 5;
-
-	//根据等级改变生成飞机频率
-	int enemy_x = CCRANDOM_0_1() * 9 + 1;
-	if (enemyLevel <= 2) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemyPlane), 1.0f);
-	}
-	else if (enemyLevel <= 4) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemyPlane), 0.9f);
-	}
-	else if (enemyLevel <= 7) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemyPlane), 0.8f);
-	}
-	else if (enemyLevel <= 9) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemyPlane), 0.7f);
-	}
-	else if (enemyLevel <= 12) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemyPlane), 0.6f);
-	}
-	else if (enemyLevel <= 14) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemyPlane), 0.5f);
-	}
-
-	//根据随机数来出现不同的敌机
-	if (enemyLevel <= 4) {
-		if (enemy_x > 0 && enemy_x < 8) {
-			enemy_x = 1;
-		}
-		else {
-			enemy_x = 2;
-		}
-	}
-	else if (enemyLevel <= 9) {
-		if (enemy_x > 0 && enemy_x < 6) {
-			enemy_x = 4;
-		}
-		else {
-			enemy_x = 5;
-		}
-	}
-	else {
-		if (enemy_x > 0 && enemy_x < 4) {
-			enemy_x = 7;
-		}
-		else {
-			enemy_x = 8;
-		}
-	}
-
-	//生成不同飞行方式的敌机
-	auto str = String::createWithFormat("enemy%d", enemy_x);
-	if (CCRANDOM_0_1() > 0.8) {
-		enemy->initEnemy1(str->getCString(), enemyLevel);
-	}
-	else {
-		enemy->initEnemy2(str->getCString(), enemyLevel);
-	}
-	this->addChild(enemy);
-}
-*/
 bool FightLayer::init() {
 
 	skill2_1 = false;
@@ -412,6 +345,7 @@ void FightLayer::addBullet(int bType)
 
 void FightLayer::is_crash(float dt)
 {
+	auto Ebullet_list_1 = GameManager::getInstance()->getEBulletList();
 	auto bullet_list_1 = GameManager::getInstance()->getBulletList();
 	auto plane_list_1 = GameManager::getInstance()->getPlaneList();
 	auto supply_list_1 = GameManager::getInstance()->getSupplyList();
@@ -420,7 +354,7 @@ void FightLayer::is_crash(float dt)
 	for (int i = plane_list_1.size() - 1; i >= 0; i--) {
 		auto enemy_plane = plane_list_1.at(i);
 		auto enemy_size = enemy_plane->getBoundingBox();
-		if (enemy_size.intersectsRect(player_1->getBoundingBox())) 
+		if (enemy_size.intersectsRect(player_1->getBoundingBox()))
 		{
 			if (skill3_1)
 			{
@@ -429,172 +363,165 @@ void FightLayer::is_crash(float dt)
 			else
 			{
 				plane_list_1.at(i)->plane_death();
-			    player_1->changeHp(-100);
-			    this->hpChange();
+				player_1->changeHp(-100);
+				this->hpChange();
 			}
 		}
 		for (int j = bullet_list_1.size() - 1; j >= 0; j--) {
-			if (bullet_list_1.at(j)->getType()==1)
+			if (bossExist == 1)
 			{
-				if (bossExist==1)
+				if (boss->getBoundingBox().containsPoint(bullet_list_1.at(j)->getPosition()))
 				{
-					if (boss->getBoundingBox().containsPoint(bullet_list_1.at(j)->getPosition()))
-					{
-						boss->changeHp(-player_1->getAtk());
-						bullet_list_1.at(j)->removeBullet();
-						if (boss->getHp() <= 0)
-						{
-							bossExist = 0;
-							this->unschedule(schedule_selector(FightLayer::bossSkill));
-							boss->removeFromParent();
-							if (player_1->getGrade()<10)
-							{
-								this->unschedule(schedule_selector(FightLayer::bossSkill_1));
-							}
-							else if (player_1->getGrade()<15)
-							{
-								this->unschedule(schedule_selector(FightLayer::bossSkill_2));
-							}
-							else {
-								this->unschedule(schedule_selector(FightLayer::bossSkill_3));
-							}
-							this->goToGameOver(2);
-						}
-					}
-				}
-				
-				if (enemy_size.containsPoint(bullet_list_1.at(j)->getPosition()))
-				{
+					boss->changeHp(-player_1->getAtk());
 					bullet_list_1.at(j)->removeBullet();
-					enemy_plane->changeHp(-(player_1->getAtk()));
-					if (enemy_plane->getHp() <= 0)
+					if (boss->getHp() <= 0)
 					{
-						if (rand() % 15>13)
+						bossExist = 0;
+						this->unschedule(schedule_selector(FightLayer::bossSkill));
+						boss->removeFromParent();
+						if (player_1->getGrade() < 10)
 						{
-							this->dropEquip(plane_list_1.at(i));
+							this->unschedule(schedule_selector(FightLayer::bossSkill_1));
 						}
-						plane_list_1.at(i)->plane_death();
-						player_1->changeExp(player_1->getGrade());
-						this->expChange();
-						scoreValue++;
+						else if (player_1->getGrade() < 15)
+						{
+							this->unschedule(schedule_selector(FightLayer::bossSkill_2));
+						}
+						else {
+							this->unschedule(schedule_selector(FightLayer::bossSkill_3));
+						}
+						this->goToGameOver(2);
 					}
-				}				
-			}
-			else
-			{
-				if (player_1->getBoundingBox().containsPoint(bullet_list_1.at(j)->getPosition()))
-				{
-					if (skill1_1)
-					{
-						bullet_list_1.at(j)->removeBullet();
-						break;
-					}
-					else if (skill3_1)
-					{
-						break;
-					}
-					else 
-					{
-						player_1->changeHp(-(10*player_1->getGrade()+50));
-						bullet_list_1.at(j)->removeBullet();
-					    this->hpChange();
-					}
-					
 				}
 			}
-			
-		}
-	}
-	//补给、陨石碰撞计算
-	if (supply_list_1.size() > 0) {
-		for (int i = supply_list_1.size() - 1; i >= 0; i--)
-		{
-			auto supply_1 = supply_list_1.at(i);
-			if (player_1->getBoundingBox().containsPoint(supply_1->getPosition())) {
-				if (supply_1->getType() == 1)
+			if (enemy_size.containsPoint(bullet_list_1.at(j)->getPosition()))
+			{
+				bullet_list_1.at(j)->removeBullet();
+				enemy_plane->changeHp(-(player_1->getAtk()));
+				if (enemy_plane->getHp() <= 0)
 				{
-					if (player_1->getMaxHp() > player_1->getHp())
+					if (rand() % 15 > 13)
 					{
-						player_1->changeHp(50);
-						this->hpChange();
+						this->dropEquip(plane_list_1.at(i));
 					}
+					plane_list_1.at(i)->plane_death();
+					player_1->changeExp(player_1->getGrade());
+					this->expChange();
 					scoreValue++;
-					supply_1->removeSupply();
-				}
-				else if (supply_1->getType() == 2 || supply_1->getType() == 3)
-				{
-					if (skill3_1)
-					{
-						break;
-					}
-					else
-					{	
-						player_1->changeHp(-50);
-					    this->hpChange();
-					    supply_1->removeSupply();
-					}
 				}
 			}
 		}
 	}
-	if (skill_list_1.size() > 0)
-	{
-		auto skill_1 = skill_list_1.at(0);
-		for (int i = 0; i <= plane_list_1.size() - 1; i++)
+		for (int i = Ebullet_list_1.size() - 1; i >= 0; i--)
 		{
-			auto enemy_1 = plane_list_1.at(i);
-
-			if (enemy_1->getBoundingBox().containsPoint(skill_1->getPosition()))
+			if (skill1_1)
 			{
-				Anim = Sprite::create("res/skill1.png");
-				Anim->setScale(3);
-				this->addChild(Anim,3);
-				Anim->setPosition(skill_1->getPosition());
-				auto animation = Animation::create();
-
-				char str[20] = { 0 };
-				for (int i = 1; i <= 9; i++)
-				{
-					sprintf(str, "res/skill%d.png", i);
-					animation->addSpriteFrameWithFile(str);
-				}
-				animation->setDelayPerUnit(0.05f);
-				animation->setLoops(1);
-				animation->setRestoreOriginalFrame(false);
-				auto action = Animate::create(animation);
-				Anim->runAction(action);
-
-				this->scheduleOnce(schedule_selector(FightLayer::removeAnimation), 0.5f);
-
-				Rect rect = Rect::Rect(enemy_1->getPositionX() - 160, enemy_1->getPositionY() - 160, 320, 320);
-				for (int j = 0; j <= plane_list_1.size() - 1; j++)
-				{
-					auto enemy_2 = plane_list_1.at(j);
-					if (rect.containsPoint(enemy_2->getPosition()))
-					{
-						enemy_2->changeHp(-500);
-						if (enemy_2->getHp() <= 0)
-						{
-							this->dropEquip(enemy_2);
-							enemy_2->plane_death();							
-						}
-					}
-				}
-				skill_1->removeSkill();
+				bullet_list_1.at(i)->removeBullet();
 				break;
 			}
+			else if (skill3_1)
+			{
+				break;
+			}
+			else {
+				if (player_1->getBoundingBox().containsPoint(Ebullet_list_1.at(i)->getPosition())) {
+					player_1->changeHp(-10);
+					Ebullet_list_1.at(i)->removeBullet();
+					this->hpChange();
+				}
+			}
 		}
-	}
-	if (player_1->getHp() <= 0)
-	{
-		this->goToGameOver(2);
-	}
-	score->setString(CCString::createWithFormat("score:%d", scoreValue)->getCString());
-	grade->setString(CCString::createWithFormat("LV:%d", player_1->getGrade())->getCString());
-	hpLabel->setString(CCString::createWithFormat("%d", player_1->getHp())->getCString());
-	attarkLabel->setString(CCString::createWithFormat("%d", player_1->getAtk())->getCString());
-}
+		//补给、陨石碰撞计算
+		if (supply_list_1.size() > 0) {
+			for (int i = supply_list_1.size() - 1; i >= 0; i--)
+			{
+				auto supply_1 = supply_list_1.at(i);
+				if (player_1->getBoundingBox().containsPoint(supply_1->getPosition())) {
+					if (supply_1->getType() == 1)
+					{
+						if (player_1->getMaxHp() > player_1->getHp())
+						{
+							player_1->changeHp(50);
+							this->hpChange();
+						}
+						scoreValue++;
+						supply_1->removeSupply();
+					}
+					else if (supply_1->getType() == 2 || supply_1->getType() == 3)
+					{
+						if (skill3_1)
+						{
+							break;
+						}
+						else
+						{
+							player_1->changeHp(-50);
+							this->hpChange();
+							supply_1->removeSupply();
+						}
+					}
+				}
+			}
+		}
+		if (skill_list_1.size() > 0)
+		{
+			auto skill_1 = skill_list_1.at(0);
+			for (int i = 0; i <= plane_list_1.size() - 1; i++)
+			{
+				auto enemy_1 = plane_list_1.at(i);
 
+				if (enemy_1->getBoundingBox().containsPoint(skill_1->getPosition()))
+				{
+					Anim = Sprite::create("res/skill1.png");
+					Anim->setScale(3);
+					this->addChild(Anim, 3);
+					Anim->setPosition(skill_1->getPosition());
+					auto animation = Animation::create();
+
+					char str[20] = { 0 };
+					for (int i = 1; i <= 9; i++)
+					{
+						sprintf(str, "res/skill%d.png", i);
+						animation->addSpriteFrameWithFile(str);
+					}
+					animation->setDelayPerUnit(0.05f);
+					animation->setLoops(1);
+					animation->setRestoreOriginalFrame(false);
+					auto action = Animate::create(animation);
+					Anim->runAction(action);
+
+					this->scheduleOnce(schedule_selector(FightLayer::removeAnimation), 0.5f);
+
+					Rect rect = Rect::Rect(enemy_1->getPositionX() - 160, enemy_1->getPositionY() - 160, 320, 320);
+					for (int j = 0; j <= plane_list_1.size() - 1; j++)
+					{
+						auto enemy_2 = plane_list_1.at(j);
+						if (rect.containsPoint(enemy_2->getPosition()))
+						{
+							enemy_2->changeHp(-500);
+							if (enemy_2->getHp() <= 0)
+							{
+								this->dropEquip(enemy_2);
+								enemy_2->plane_death();
+							}
+						}
+					}
+					skill_1->removeSkill();
+					break;
+				}
+			}
+		}
+		if (player_1->getHp() <= 0)
+		{
+			this->goToGameOver(2);
+		}
+		score->setString(CCString::createWithFormat("score:%d", scoreValue)->getCString());
+		grade->setString(CCString::createWithFormat("LV:%d", player_1->getGrade())->getCString());
+		hpLabel->setString(CCString::createWithFormat("%d", player_1->getHp())->getCString());
+		attarkLabel->setString(CCString::createWithFormat("%d", player_1->getAtk())->getCString());
+
+	
+}
 void FightLayer::removeAnimation(float dt)
 {
 	Anim->removeFromParentAndCleanup(true);
@@ -607,28 +534,15 @@ long FightLayer::getCurrentTime()
 	return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 
-void FightLayer::setPlayer(int cType) {
+void FightLayer::setPlayer(UserInfo &user) {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	player_1 = CCPlane::create();
 	player_1->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	player_1->setType(cType);
-	//auto user = new userInfo();
-	//user->getInfo();
-	switch (cType)
-	{
-	case 1:
-		player_1->setAttri(100, player_1->getMaxHp(),40,1);	//坦克
-		player_1->setImg("res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
-		break;
-	case 2:
-		player_1->setAttri(150, player_1->getMaxHp(),60,1);//刺客
-		player_1->setImg("res/SpaceShooterRedux/PNG/Planes/playerShip2_green.png");
-		break;
-	case 3:
-		player_1->setAttri(130, player_1->getMaxHp(),50,1);//战士
-		player_1->setImg("res/SpaceShooterRedux/PNG/Planes/playerShip3_green.png");
-		break;
-	}
+	player_1->setType(user.getPlaneType());
+	player_1->setExp(user.getExp());
+	player_1->setAttri(user.getAtk(),user.getHp(),user.getSpd(),user.getGameLevel());	//坦克
+	player_1->setImg(CCString::createWithFormat("res/SpaceShooterRedux/PNG/Planes/playerShip%d_green.png", user.getPlaneType())->getCString());
+
 	this->addChild(player_1, 3);
 	TTFConfig ttfConfig("fonts/Marker Felt.ttf", 24);
 	grade = Label::createWithTTF(ttfConfig, CCString::createWithFormat("LV:%d", player_1->getGrade())->getCString());
@@ -749,25 +663,90 @@ void FightLayer::timeSche(float dt)
 		bullet_1->setBulletImg("res/SpaceShooterRedux/PNG/Effects/fire07.png");
 		bullet_1->setScale(0.5);
 		this->addChild(bullet_1, 3);
-		GameManager::getInstance()->setBullet(bullet_1);
+		GameManager::getInstance()->setEBullet(bullet_1);
 	}
 }
 
 void FightLayer::goToSave(Ref * psender)
 {
-	auto scene = Scene::create();
-	SaveLayer * layer = SaveLayer::create();
-	scene->addChild(layer);
-	Director::getInstance()->replaceScene(scene);
-
+	for (int i = player_1->equip_list.size()-1; i >=0; i--)
+	{
+		switch (player_1->equip_list.at(i)->getEquipType())
+		{
+		case 1:
+			user.set_equip_head_have(1);
+			break;
+		case 2 :
+			user.set_equip_head_b_have(1);
+			break;
+		case 3:
+			user.set_equip_head_c_have(1);
+			break;
+		case 4:
+			user.set_equip_arm_have(1);
+			break;
+		case 5:
+			user.set_equip_arm_b_have(1);
+			break;
+		case 6:
+			user.set_equip_arm_c_have(1);
+			break;
+		case 7:
+			user.set_equip_tail_have(1);
+			break;
+		case 8:
+			user.set_equip_tail_b_have(1);
+			break;
+		case 9:
+			user.set_equip_tail_c_have(1);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	SceneManager::goSaveLayer(2, user);
 }
 
 void FightLayer::goToMap(Ref * psender)
 {
-	auto scene = Scene::create();
-	MapLayer * layer = MapLayer::create();
-	scene->addChild(layer);
-	Director::getInstance()->replaceScene(scene);
+	for (int i = player_1->equip_list.size() - 1; i >= 0; i--)
+	{
+		switch (player_1->equip_list.at(i)->getEquipType())
+		{
+		case 1:
+			user.set_equip_head_have(1);
+			break;
+		case 2:
+			user.set_equip_head_b_have(1);
+			break;
+		case 3:
+			user.set_equip_head_c_have(1);
+			break;
+		case 4:
+			user.set_equip_arm_have(1);
+			break;
+		case 5:
+			user.set_equip_arm_b_have(1);
+			break;
+		case 6:
+			user.set_equip_arm_c_have(1);
+			break;
+		case 7:
+			user.set_equip_tail_have(1);
+			break;
+		case 8:
+			user.set_equip_tail_b_have(1);
+			break;
+		case 9:
+			user.set_equip_tail_c_have(1);
+			break;
+		default:
+			break;
+		}
+
+	}
+	SceneManager::goMapLayer(2, user);
 }
 
 void FightLayer::gamePause()
