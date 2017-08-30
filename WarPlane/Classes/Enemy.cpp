@@ -3,6 +3,8 @@
 bool Enemy::init()
 {
 	this->CCPlane::init();
+	this->hp = 0;
+	this->is_boss = 0;
 	return true;
 }
 
@@ -98,6 +100,14 @@ void Enemy::boss_death()
 	animation->setRestoreOriginalFrame(false);
 	auto action = Animate::create(animation);
 	Anim->runAction(action);
+}
+void Enemy::setIs_boss(int i)
+{
+	this->is_boss = i;
+}
+int Enemy::getIsBoss()
+{
+	return is_boss;
 }
 Enemy::Enemy()
 {

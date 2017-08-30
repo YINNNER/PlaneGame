@@ -7,6 +7,7 @@ public:
 	CREATE_FUNC(CCPlane);
 	virtual bool init();
 	void setImg(const char * filename);
+	void setImg_2();
 	void setAttri(int attack, int hp,  int speed,int grade);
 	void changeAttri();
 	void changeAtk(int atk);
@@ -27,6 +28,7 @@ public:
 	void plane_death();
 	void hero_death();
 	void removeHero(float dt);
+	void removeMetors(float);
 	void setEquip(Equip * _equip);
 	void removeEquip(Equip * _equip);
 	Vector<Equip *>equip_list;
@@ -37,5 +39,6 @@ protected:
 	int speed;
 	int grade;
 	Sprite * planeImg;
+	Sprite * metors;
 	int type;
 };

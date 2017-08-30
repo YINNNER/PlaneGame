@@ -15,9 +15,11 @@ public:
 	void enemyBossMove(float dt);
 	void enemyBossMove_1(float dt);
 	void boss_death();
+	void setIs_boss(int i);
+	int getIsBoss();
 public:
 	Enemy();
 	~Enemy();
 private:
-
+	int is_boss;
 };
