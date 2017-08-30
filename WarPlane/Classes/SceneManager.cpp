@@ -247,6 +247,7 @@ void SceneManager::goFightLayer(UserInfo &userInfo) {
 	auto gameScene = Scene::create();
 	FightLayer * fightLayer_1 = FightLayer::create();
 	fightLayer_1->setPlayer(userInfo);
+	fightLayer_1->user = userInfo;
 	gameScene->addChild(fightLayer_1);
 	auto transit = TransitionSlideInR::create(0.5f, gameScene);
 	Director::getInstance()->replaceScene(transit);

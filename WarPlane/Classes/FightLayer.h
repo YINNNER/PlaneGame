@@ -41,7 +41,8 @@ public:
 	void exitGame(Ref * psender);
 	void addSkill(int i);
 
-	void removeAnimation(float dt);
+	void removeAnimation1(float dt);
+	void removeAnimation2(float dt);
 	void closeWhite(float dt);
 	void addHp(float dt);
 
@@ -56,6 +57,7 @@ public:
 	void bossSkill_2(float);
 	void bossSkill_3(float);
 	void onExit();
+	void plane_death(Enemy * enemy);
 	UserInfo user;
 private:
 	Sprite * fightImg;
@@ -78,7 +80,8 @@ private:
 	Sprite * expSprite;
 	Sprite * gameOver;
 	Bullet * skillImg;
-	Sprite * Anim;
+	Sprite * Anim1;
+	Sprite * Anim2;
 	Sprite * skill_1;
 	Sprite * skill_2;
 	Sprite * white;

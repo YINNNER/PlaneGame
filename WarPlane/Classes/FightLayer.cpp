@@ -273,7 +273,7 @@ void FightLayer::update(float dt)
 		break;
 	case EventKeyboard::KeyCode::KEY_U:
 		static long interval_1 = this->getCurrentTime();
-		if ((this->getCurrentTime() - interval_1)<4000)
+		if ((this->getCurrentTime() - interval_1)<10000)
 		{
 			break;
 		}
@@ -285,7 +285,7 @@ void FightLayer::update(float dt)
 		break;
 	case EventKeyboard::KeyCode::KEY_I:
 		static long interval_2 = this->getCurrentTime();
-		if ((this->getCurrentTime() - interval_2)<2000)
+		if ((this->getCurrentTime() - interval_2)<20000)
 		{
 			break;
 		}
@@ -362,7 +362,7 @@ void FightLayer::is_crash(float dt)
 			}
 			else
 			{
-				plane_list_1.at(i)->plane_death();
+				plane_death(plane_list_1.at(i));
 				player_1->changeHp(-100);
 				this->hpChange();
 			}
@@ -404,7 +404,7 @@ void FightLayer::is_crash(float dt)
 					{
 						this->dropEquip(plane_list_1.at(i));
 					}
-					plane_list_1.at(i)->plane_death();
+					plane_death(plane_list_1.at(i));
 					player_1->changeExp(player_1->getGrade());
 					this->expChange();
 					scoreValue++;
@@ -472,10 +472,10 @@ void FightLayer::is_crash(float dt)
 
 				if (enemy_1->getBoundingBox().containsPoint(skill_1->getPosition()))
 				{
-					Anim = Sprite::create("res/skill1.png");
-					Anim->setScale(3);
-					this->addChild(Anim, 3);
-					Anim->setPosition(skill_1->getPosition());
+					Anim1 = Sprite::create("res/skill1.png");
+					Anim1->setScale(3);
+					this->addChild(Anim1, 3);
+					Anim1->setPosition(skill_1->getPosition());
 					auto animation = Animation::create();
 
 					char str[20] = { 0 };
@@ -488,9 +488,9 @@ void FightLayer::is_crash(float dt)
 					animation->setLoops(1);
 					animation->setRestoreOriginalFrame(false);
 					auto action = Animate::create(animation);
-					Anim->runAction(action);
+					Anim1->runAction(action);
 
-					this->scheduleOnce(schedule_selector(FightLayer::removeAnimation), 0.5f);
+					this->scheduleOnce(schedule_selector(FightLayer::removeAnimation1), 0.5f);
 
 					Rect rect = Rect::Rect(enemy_1->getPositionX() - 160, enemy_1->getPositionY() - 160, 320, 320);
 					for (int j = 0; j <= plane_list_1.size() - 1; j++)
@@ -502,7 +502,7 @@ void FightLayer::is_crash(float dt)
 							if (enemy_2->getHp() <= 0)
 							{
 								this->dropEquip(enemy_2);
-								enemy_2->plane_death();
+								plane_death(enemy_2);
 							}
 						}
 					}
@@ -522,9 +522,14 @@ void FightLayer::is_crash(float dt)
 
 	
 }
-void FightLayer::removeAnimation(float dt)
+void FightLayer::removeAnimation1(float dt)
 {
-	Anim->removeFromParentAndCleanup(true);
+	Anim1->removeFromParentAndCleanup(true);
+}
+
+void FightLayer::removeAnimation2(float dt)
+{
+	Anim2->removeFromParentAndCleanup(true);
 }
 
 long FightLayer::getCurrentTime()
@@ -992,7 +997,16 @@ void FightLayer::addSkill(int i)
 
 void FightLayer::addHp(float dt)
 {
-	player_1->changeHp(50);
+	if (player_1->getHp() + 50 <= player_1->getMaxHp())
+	{
+		player_1->changeHp(50);
+		this->hpChange();
+	}
+	else
+	{
+		player_1->changeHp(player_1->getMaxHp() - player_1->getHp());
+		this->hpChange();
+	}
 }
 
 void FightLayer::dropEquip(Enemy * plane)
@@ -1039,18 +1053,20 @@ void FightLayer::addEnemy(float dt)
 	}
 	GameManager::getInstance()->setPlane(enemy_1);
 	this->addChild(enemy_1,3);
-	
-	if (player_1->getGrade()==15)
+	if (bossExist==0)
 	{
-		this->addBoss();
-	}
-	else if (player_1->getGrade() == 10)
-	{
-		this->addBoss();
-	}
-	else if (player_1->getGrade()== 5)
-	{
-		this->addBoss();
+		if (player_1->getGrade() == 15)
+		{
+			this->addBoss();
+		}
+		else if (player_1->getGrade() == 10)
+		{
+			this->addBoss();
+		}
+		else if (player_1->getGrade() == 5)
+		{
+			this->addBoss();
+		}
 	}
 }
 
@@ -1066,4 +1082,29 @@ void FightLayer::addBoss()
 	this->addChild(boss, 3);
 
 	this->schedule(schedule_selector(FightLayer::bossSkill),3.0f);
+}
+
+
+void FightLayer::plane_death(Enemy * enemy)
+{
+	Anim2 = Sprite::create("res/crash1.png");
+	Anim2->setScale(1.0);
+	this->addChild(Anim2, 3);
+	Anim2->setPosition(enemy->getPosition());
+	auto animation = Animation::create();
+
+	char str[20] = { 0 };
+	for (int i = 1; i <= 9; i++)
+	{
+		sprintf(str, "res/crash%d.png", i);
+		animation->addSpriteFrameWithFile(str);
+	}
+	animation->setDelayPerUnit(0.04f);
+	animation->setLoops(1);
+	animation->setRestoreOriginalFrame(false);
+	auto action = Animate::create(animation);
+	Anim2->runAction(action);
+	scheduleOnce(schedule_selector(FightLayer::removeAnimation2), 0.4f);
+	GameManager::getInstance()->removePlane(enemy);
+	enemy->removePlane();
 }

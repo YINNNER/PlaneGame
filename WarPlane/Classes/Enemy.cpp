@@ -52,10 +52,8 @@ void Enemy::setEnemyImg()
 		this->setImg("res/enemyBlue5.png");
 	}
 }
-void Enemy::removePlane(float dt)
+void Enemy::removePlane()
 {
-
-	this->unschedule(schedule_selector(Enemy::removePlane));
 	this->removeFromParentAndCleanup(true);
 }
 void Enemy::bossMove()
@@ -106,10 +104,4 @@ Enemy::Enemy()
 }
 Enemy::~Enemy()
 {
-}
-void Enemy::plane_death()
-{
-	this->setImg("res/playerShip3_damage3.png");
-	GameManager::getInstance()->removePlane(this);
-	this->scheduleOnce(schedule_selector(Enemy::removePlane), 0.5f);
 }

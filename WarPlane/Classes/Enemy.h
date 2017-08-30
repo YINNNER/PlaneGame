@@ -10,8 +10,7 @@ public:
 	void planeMove_2();
 	int getRandomNumber(int a, int b);
 	void setEnemyImg();
-	void plane_death();
-	void removePlane(float dt);
+	void removePlane();
 	void bossMove();
 	void enemyBossMove(float dt);
 	void enemyBossMove_1(float dt);
