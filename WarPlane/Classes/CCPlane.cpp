@@ -111,6 +111,11 @@ void CCPlane::setGrade(int grade)
 	this->grade = grade;
 }
 
+void CCPlane::setExp(int exp)
+{
+	this->exp = exp;
+}
+
 void CCPlane::hero_death()
 {
 	this->setImg("res/playerShip3_damage3.png");

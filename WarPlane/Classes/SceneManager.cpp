@@ -66,23 +66,27 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto layer = MapLayer::create();
 
     //鍒ゆ柇鎴樻満绫诲瀷锛屽苟鏍规嵁涓嶅悓绫诲瀷鍐嶆鍒濆鍖栨垬鏈哄睘鎬?
+	if (userInfo.getExp()==0&&userInfo.getGameLevel()==1)
+	{
+
+
     if (userInfo.getPlaneType()==2) {
         userInfo.setAtk(150);
         userInfo.setSpd(50);
-        userInfo.setHp(300);
+        userInfo.setHp(80);
         userInfo.setMp(100);
 
     }
     else if(userInfo.getPlaneType()==3){
         userInfo.setAtk(130);
         userInfo.setSpd(60);
-        userInfo.setHp(300);
-        userInfo.setMp(400);
-
+        userInfo.setHp(100);
+        userInfo.setMp(100);
     }
     else ;
+	}
     layer->user = userInfo;
-
+	
 	auto action=FadeIn::create(1.0f);//星球渐变出现的特效
 	auto planeAction = MoveTo::create(1.0f, Vec2(layer->level_2->getPosition().x+layer->level_2->getContentSize().width*0.25,
 		layer->level_2->getPosition().y));//飞机从第一关移动到第二关
@@ -240,9 +244,11 @@ void SceneManager::goRepoLayer(int tag,UserInfo &userInfo) {
 }
 
 void SceneManager::goFightLayer(UserInfo &userInfo) {
-	auto scene = Scene::create();
-	FightLayer *layer = FightLayer::create();
-
-	scene->addChild(layer);
+	auto gameScene = Scene::create();
+	FightLayer * fightLayer_1 = FightLayer::create();
+	fightLayer_1->setPlayer(userInfo);
+	gameScene->addChild(fightLayer_1);
+	auto transit = TransitionSlideInR::create(0.5f, gameScene);
+	Director::getInstance()->replaceScene(transit);
 
 }

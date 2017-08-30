@@ -22,6 +22,7 @@ public:
 	int getType();
 	void setType(int type);
 	void setGrade(int grade);
+	void setExp(int exp);
 	void removePlane(float dt);
 	void plane_death();
 	void hero_death();

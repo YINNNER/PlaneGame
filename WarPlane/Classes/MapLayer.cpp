@@ -127,12 +127,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
-		auto gameScene = Scene::create();
-		FightLayer * fightLayer_1 = FightLayer::create();
-		fightLayer_1->setPlayer(3);
-		gameScene->addChild(fightLayer_1);
-		auto transit = TransitionSlideInR::create(0.5f, gameScene);
-		Director::getInstance()->replaceScene(transit);
+		SceneManager::goFightLayer(user);
 	}break;
 	case 32:
 	{
@@ -140,24 +135,14 @@ void MapLayer::CallMenu(Ref * pSender) {
 			
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
-		auto gameScene = Scene::create();
-		FightLayer * fightLayer_1 = FightLayer::create();
-		fightLayer_1->setPlayer(3);
-		gameScene->addChild(fightLayer_1);
-		auto transit = TransitionSlideInR::create(0.5f, gameScene);
-		Director::getInstance()->replaceScene(transit);
+		SceneManager::goFightLayer(user);
 	}break;
 	case 33:
 	{
 		if (SetLayer::getEffectState() == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
-		auto gameScene = Scene::create();
-		FightLayer * fightLayer_1 = FightLayer::create();
-		fightLayer_1->setPlayer(3);
-		gameScene->addChild(fightLayer_1);
-		auto transit= TransitionSlideInR::create(0.5f, gameScene);
-		Director::getInstance()->replaceScene(transit);
+		SceneManager::goFightLayer(user);
 	}break;
 	case 4:
 	{

@@ -44,8 +44,15 @@ void Bullet::update(float dt) {
 
 void Bullet::removeBullet()
 {
-	GameManager::getInstance()->removeBullet(this);
-	this->removeAllChildrenWithCleanup(true);
+	if (this->type==1)
+	{
+		GameManager::getInstance()->removeBullet(this);
+	}
+	else
+	{
+		GameManager::getInstance()->removeEBullet(this);
+	}
+	this->removeFromParentAndCleanup(true);
 }
 void Bullet::skillMove(float dt)
 {
