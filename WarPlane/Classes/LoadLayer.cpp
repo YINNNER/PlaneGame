@@ -45,7 +45,8 @@ bool LoadLayer::init() {
 	m_numSp = 19;
 	loading();
 */
-
+	loadedImage = 0;
+	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a2SelectLevel/mapScene.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/a1CreatePlayer/createScene.plist");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/background1.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/trans1.wav");
@@ -67,4 +68,14 @@ void LoadLayer::onScheduleOnce(float dt){
 	int transiTime = 1;
 	SceneManager::goMenuLayer(tag,transiTime);
 
+}
+
+void LoadLayer::loadingCallback(Ref * pSender)
+{
+	switch (loadedImage) {
+	case 0:
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/a2SelectLevel/mapScene.plist");
+		log("planet1.png already exist");
+
+	}
 }

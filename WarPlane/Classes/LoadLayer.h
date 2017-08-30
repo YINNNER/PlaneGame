@@ -16,7 +16,9 @@ public:
 
 	Sprite* _background;
 	Sprite* _logo;
+	int loadedImage;
 
+	void loadingCallback(Ref *pSender);
 	
 
 
