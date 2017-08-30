@@ -56,6 +56,7 @@ public:
 	void bossSkill_1(float);
 	void bossSkill_2(float);
 	void bossSkill_3(float);
+
 	void onExit();
 	void plane_death(Enemy * enemy);
 	UserInfo user;
@@ -74,6 +75,7 @@ private:
 	Label * time;
 	Label * pause;
 	Label * attarkLabel;
+	Label * bosshp;
 	Menu * menu;
 	Sprite * shield;
 	Sprite * hpSprite;
