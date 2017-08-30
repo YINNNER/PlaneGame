@@ -222,7 +222,7 @@ void CreateLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 			temp = "T";
 		}
 		else {
-			temp = "q";
+			temp = "t";
 		}
 		addWords(temp);
 		break;
