@@ -46,7 +46,7 @@ int Supply::getType()
 }
 void Supply::update(float dt)
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
+	static VISIBLESIZE;
 	if (sType == 1) {  //ฒนธ๘
 		this->setPositionY(this->getPositionY() - 3);
 		if (this->getPositionY()<0)

@@ -55,11 +55,13 @@ public:
 	void bossSkill_1(float);
 	void bossSkill_2(float);
 	void bossSkill_3(float);
+	void onExit();
 private:
 	Sprite * fightImg;
 	Sprite * fightImg2;
 	CCPlane * player_1;
 	EventKeyboard::KeyCode key;
+	EventKeyboard::KeyCode atkKey;
 	int scoreValue;
 	time_t secTime;
 	int minTime;
@@ -80,6 +82,7 @@ private:
 	Sprite * skill_2;
 	Sprite * white;
 	Enemy * boss;
+	int bossExist;
 };
 
 

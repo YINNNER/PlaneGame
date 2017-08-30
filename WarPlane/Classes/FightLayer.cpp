@@ -179,6 +179,7 @@ void FightLayer::bossSkill(float)
 	bullet_1->setPosition(boss->getPosition());
 	bullet_1->setType(2);
 	bullet_1->setBulletImg("res/bomb.png");
+	bullet_1->setScale(0.5);
 	this->addChild(bullet_1, 3);
 	GameManager::getInstance()->setBullet(bullet_1);
 	if (player_1->getGrade()<10)
@@ -201,6 +202,7 @@ void FightLayer::bossSkill_1(float)
 		bullet_1->setPosition(boss->getPositionX()*i/10,boss->getPositionY());
 		bullet_1->setType(2);
 		bullet_1->setBulletImg("res/bomb.png");
+		bullet_1->setScale(0.5);
 		this->addChild(bullet_1, 3);
 		GameManager::getInstance()->setBullet(bullet_1);
 	}	
@@ -217,9 +219,41 @@ void FightLayer::bossSkill_3(float)
 	GameManager::getInstance()->setPlane(enemy_1);
 	this->addChild(enemy_1, 3);
 }
+void FightLayer::onExit()
+{
+	auto bullet_list_1 = GameManager::getInstance()->getBulletList();
+	auto plane_list_1 = GameManager::getInstance()->getPlaneList();
+	auto supply_list_1 = GameManager::getInstance()->getSupplyList();
+	auto skill_list_1 = GameManager::getInstance()->getSkillList();
+	Layer::onExit();
+	for (int i = bullet_list_1.size()-1; i >=0; i--)
+	{
+		GameManager::getInstance()->removeBullet(bullet_list_1.at(i));
+	}
+	for (int i = plane_list_1.size() - 1; i >= 0; i--)
+	{
+		GameManager::getInstance()->removePlane(plane_list_1.at(i));
+	}
+	for (int i = supply_list_1.size() - 1; i >= 0; i--)
+	{
+		GameManager::getInstance()->removeSupply(supply_list_1.at(i));
+	}
+	for (int i = skill_list_1.size() - 1; i >= 0; i--)
+	{
+		GameManager::getInstance()->removeSkill(skill_list_1.at(i));
+	}
+}
 void FightLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
-	key = keyCode;
+	if (keyCode== EventKeyboard::KeyCode::KEY_W||keyCode== EventKeyboard::KeyCode::KEY_A||keyCode== EventKeyboard::KeyCode::KEY_S||keyCode== EventKeyboard::KeyCode::KEY_D)
+	{
+		key = keyCode;
+	}
+	else
+	{
+		atkKey = keyCode;
+	}
+	
 }
 
 void FightLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
@@ -228,6 +262,10 @@ void FightLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 	{
 		key = EventKeyboard::KeyCode::KEY_NONE;
 	}
+	else if (atkKey==keyCode)
+	{
+		atkKey = EventKeyboard::KeyCode::KEY_NONE;
+	}
 }
 
 void FightLayer::update(float dt)
@@ -235,15 +273,15 @@ void FightLayer::update(float dt)
 	static Size visibleSize = Director::getInstance()->getVisibleSize();
 	switch (key) {
 	case EventKeyboard::KeyCode::KEY_W:
-		if(visibleSize.height-player_1->getPositionY()<player_1->getContentSize().height/2){			
+		if (visibleSize.height - player_1->getPositionY() < player_1->getContentSize().height / 2) {
 		}
 		else
 		{
 			player_1->setPositionY(player_1->getPositionY() + 5);
-		}		
+		}
 		break;
 	case EventKeyboard::KeyCode::KEY_S:
-		if (player_1->getPositionY()<player_1->getContentSize().height / 2)
+		if (player_1->getPositionY() < player_1->getContentSize().height / 2)
 		{
 
 		}
@@ -252,14 +290,14 @@ void FightLayer::update(float dt)
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_A:
-		if (player_1->getPositionX()<player_1->getContentSize().width / 2){
+		if (player_1->getPositionX() < player_1->getContentSize().width / 2) {
 		}
 		else {
 			player_1->setPositionX(player_1->getPositionX() - 5);
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_D:
-		if (visibleSize.width-player_1->getPositionX()<player_1->getContentSize().width / 2)
+		if (visibleSize.width - player_1->getPositionX() < player_1->getContentSize().width / 2)
 		{
 
 		}
@@ -267,9 +305,12 @@ void FightLayer::update(float dt)
 			player_1->setPositionX(player_1->getPositionX() + 5);
 		}
 		break;
+	}
+	switch (atkKey)
+	{
 	case EventKeyboard::KeyCode::KEY_J:
 		static long interval = this->getCurrentTime();
-		if ((this->getCurrentTime()-interval)<250)
+		if ((this->getCurrentTime() - interval)<250)
 		{
 			break;
 		}
@@ -305,6 +346,8 @@ void FightLayer::update(float dt)
 		break;
 	case EventKeyboard::KeyCode::KEY_ESCAPE:
 		this->gamePause();
+		break;
+	default:
 		break;
 	}
 }
@@ -367,6 +410,32 @@ void FightLayer::is_crash(float dt)
 		for (int j = bullet_list_1.size() - 1; j >= 0; j--) {
 			if (bullet_list_1.at(j)->getType()==1)
 			{
+				if (bossExist==1)
+				{
+					if (boss->getBoundingBox().containsPoint(bullet_list_1.at(j)->getPosition()))
+					{
+						boss->changeHp(-player_1->getAtk());
+						bullet_list_1.at(j)->removeBullet();
+						if (boss->getHp() <= 0)
+						{
+							bossExist = 0;
+							this->unschedule(schedule_selector(FightLayer::bossSkill));
+							boss->removeFromParent();
+							if (player_1->getGrade()<10)
+							{
+								this->unschedule(schedule_selector(FightLayer::bossSkill_1));
+							}
+							else if (player_1->getGrade()<15)
+							{
+								this->unschedule(schedule_selector(FightLayer::bossSkill_2));
+							}
+							else {
+								this->unschedule(schedule_selector(FightLayer::bossSkill_3));
+							}
+							this->goToGameOver(2);
+						}
+					}
+				}
 				
 				if (enemy_size.containsPoint(bullet_list_1.at(j)->getPosition()))
 				{
@@ -383,17 +452,7 @@ void FightLayer::is_crash(float dt)
 						this->expChange();
 						scoreValue++;
 					}
-				}
-				if (boss->getBoundingBox().containsPoint(bullet_list_1.at(j)->getPosition()))
-				{
-					CCLOG("11");
-					boss->changeHp(player_1->getAtk());
-					if (boss->getHp()<=0)
-					{
-						boss->removeFromParent();
-						this->goToGameOver(2);
-					}
-				}
+				}				
 			}
 			else
 			{
@@ -539,7 +598,7 @@ void FightLayer::setPlayer(int cType) {
 	attarkLabel->setColor(Color3B::RED);
 	attarkLabel->setPosition(Vec2(50,20));
 	this->addChild(attarkLabel, 3);
-	this->scheduleOnce(schedule_selector(FightLayer::addEnemy),5.0f);
+	this->schedule(schedule_selector(FightLayer::addEnemy),2.0f);
 }
 
 void FightLayer::hpChange()
@@ -641,6 +700,7 @@ void FightLayer::timeSche(float dt)
 		bullet_1->setPosition(plane_list_1.at(i)->getPosition());
 		bullet_1->setType(2);
 		bullet_1->setBulletImg("res/SpaceShooterRedux/PNG/Effects/fire07.png");
+		bullet_1->setScale(0.5);
 		this->addChild(bullet_1, 3);
 		GameManager::getInstance()->setBullet(bullet_1);
 	}
@@ -670,8 +730,24 @@ void FightLayer::gamePause()
 	this->unschedule(schedule_selector(FightLayer::is_crash));
 	this->unschedule(schedule_selector(FightLayer::timeSche));
 	this->unschedule(schedule_selector(FightLayer::addEnemy));
-	//boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
-	//boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));
+	this->unschedule(schedule_selector(FightLayer::backMove));
+	if (bossExist==1)
+	{
+		this->unschedule(schedule_selector(FightLayer::bossSkill));
+		boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
+		boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));
+	}
+	if (player_1->getGrade()<10)
+	{
+		this->unschedule(schedule_selector(FightLayer::bossSkill_1));
+	}
+	else if (player_1->getGrade()<15)
+	{
+		this->unschedule(schedule_selector(FightLayer::bossSkill_2));
+	}
+	else {
+		this->unschedule(schedule_selector(FightLayer::bossSkill_3));
+	}
 
 	auto bullet_list_1 = GameManager::getInstance()->getBulletList();
 	auto plane_list_1 = GameManager::getInstance()->getPlaneList();
@@ -714,11 +790,28 @@ void FightLayer::goToBack(Ref * psender)
 
 	this->resume();
 	this->scheduleUpdate();
-	this->schedule(schedule_selector(FightLayer::addSupply), 5.0f);
+	this->schedule(schedule_selector(FightLayer::addSupply),5.0f);
 	this->schedule(schedule_selector(FightLayer::is_crash));
-	this->schedule(schedule_selector(FightLayer::timeSche), 1.0f);
-	this->schedule(schedule_selector(FightLayer::addEnemy), 2.0f);
-	boss->schedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
+	this->schedule(schedule_selector(FightLayer::timeSche),1.0f);
+	this->schedule(schedule_selector(FightLayer::addEnemy),2.0f);
+	this->schedule(schedule_selector(FightLayer::backMove));
+	if (bossExist==1)
+	{
+		this->schedule(schedule_selector(FightLayer::bossSkill), 1.0);
+		boss->schedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
+		boss->schedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));
+	}
+	if (player_1->getGrade()<10)
+	{
+		this->schedule(schedule_selector(FightLayer::bossSkill_1),10.0f);
+	}
+	else if (player_1->getGrade()<15)
+	{
+		this->schedule(schedule_selector(FightLayer::bossSkill_2),10.0f);
+	}
+	else {
+		this->schedule(schedule_selector(FightLayer::bossSkill_3),10.0f);
+	}
 	//this->schedule(SEL_SCHEDULE(&FightLayer::addEnemyPlane), 2.0f);
 	auto bullet_list_1 = GameManager::getInstance()->getBulletList();
 	auto plane_list_1 = GameManager::getInstance()->getPlaneList();
@@ -739,19 +832,11 @@ void FightLayer::goToBack(Ref * psender)
 
 void FightLayer::goToHelp(Ref * psender)
 {
-	/*auto scene = Scene::create();
-	HelpLayer * layer = HelpLayer::create();
-	scene->addChild(layer);
-	Director::getInstance()->replaceScene(scene);*/
 	SceneManager::goHelpLayer(1);
 }
 
 void FightLayer::goToOption(Ref * psender)
 {
-	/*auto scene = Scene::create();
-	SetLayer * layer = SetLayer::create();
-	scene->addChild(layer);
-	Director::getInstance()->replaceScene(scene);*/
 	SceneManager::goSetLayer(1);
 }
 
@@ -909,7 +994,6 @@ void FightLayer::addEnemy(float dt)
 	Enemy * enemy_1 = Enemy::create();
 	enemy_1->setType(3);
 	enemy_1->setGrade(player_1->getGrade());
-	addBoss();
 	for (int i = player_1->getGrade(); i >0; i--)
 	{
 		enemy_1->changeAttri();
@@ -934,7 +1018,7 @@ void FightLayer::addEnemy(float dt)
 	{
 		this->addBoss();
 	}
-	else if (player_1->getGrade()== 1)
+	else if (player_1->getGrade()== 5)
 	{
 		this->addBoss();
 	}
@@ -942,11 +1026,12 @@ void FightLayer::addEnemy(float dt)
 
 void FightLayer::addBoss()
 {
+	bossExist = 1;
 	boss = Enemy::create();
 	int lv = player_1->getGrade();
-	boss->setAttri(50 * lv, 200, 50, lv);
+	boss->setAttri(50 , 200, 50, lv);
 	boss->setImg("res/SpaceShooterRedux/PNG/Enemies/enemyRed5.png");
-	boss->setScale(2);
+	//boss->setScale(2);
 	boss->bossMove();
 	this->addChild(boss, 3);
 
