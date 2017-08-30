@@ -9,12 +9,6 @@ USING_NS_CC;
 	public:
 
 		virtual bool init();
-		//在该函数中注册监听器和初始化设置
-		//virtual void onEnter();
-		//注销监听器、释放资源
-		//virtual void onExit();
-		//声明单点触摸回调函数
-		//bool touchBegan(Touch * touch, Event * event);
 		void setEquipImg(int type);
 		void setPlaneImg(int type);
 
@@ -31,28 +25,26 @@ USING_NS_CC;
 	
 		//返回关卡选择
 		void CallMenu(Ref *pSender, UserInfo &userInfo);
+		//保存装备
 		void SaveEquip(Ref *pSender, UserInfo &userInfo);
 		SceneManager * tsm;
 
 		//鼠标监听
 		//virtual bool onTouchBegan(Touch *touch, Event *event);
 	public:
+		//存档信息
+		UserInfo user;
 
-		/*void hpUpdate(int dt);
-		void spdUpdate(int dt);
-		void atkUpdate(int dt);
-	*/
+	private:
 		Sprite * _background;
 		Sprite * _background_1;
 		Sprite * _background_2;
 		Sprite * _background_3;
-		Sprite * _background_3_enable;
-
+		
 		Sprite * _background_1_white;
 		Sprite * _background_2_white;
-		Sprite * _background_3_white;
-
-		Sprite * _plane;//plane photo
+		//飞机显示栏
+		Sprite * _plane;
 		//装备栏图片
 		Sprite * _equip_1;
 		Sprite * _equip_1_b;
@@ -77,7 +69,7 @@ USING_NS_CC;
 		Equip * _equip_tail_c;
 
 		
-
+		//标签
 		Label * equipNum_1_1;
 		Label * equipNum_1_2;
 		Label * equipNum_1_3;
@@ -91,7 +83,7 @@ USING_NS_CC;
 		Label * equipNum_3_3;
 		
 
-//装备部件
+		//装备部件
 		Sprite * _body_1;
 		Sprite * _body_1_b;
 		Sprite * _body_1_c;
@@ -104,39 +96,23 @@ USING_NS_CC;
 		Sprite * _wing_2;
 		Sprite * _wing_2_b;
 		Sprite * _wing_2_c;
-
+		//白色进度条
 		Sprite * BaseBarHp;
 		Sprite * BaseBarEn;
 		Sprite * BaseBarAtk;
 		Sprite * BaseBarSpd;
-
+		//蓝色进度条
 		Sprite * HpBar;
 		Sprite * EnBar;
 		Sprite * AtkBar;
 		Sprite * SpdBar;
-
+		//安装装备按钮
 		MenuItemImage * _background_3_white_1;
 		MenuItemImage * _background_3_white_2;
 		MenuItemImage * _background_3_white_3;
-
-		UserInfo user;
-
-
-	private:
-		float Offset;
-		int Tag;
+	
+		//键盘监听
 		EventKeyboard::KeyCode key;
 		
-	
-    
-    // a selector callback
-    
-		/*_plane = Sprite::create("/res/SpaceShooterRedux/PNG/Planes/playerShip1_green.png");
-		_plane->setPosition(Vec2(winSize.width * 1 / 4, winSize.height * 3 / 4));
-		_plane->setScale(0.5);
-		this->addChild(_plane);*/
-	
-
-    // implement the "static create()" method manually*/
 };
 
