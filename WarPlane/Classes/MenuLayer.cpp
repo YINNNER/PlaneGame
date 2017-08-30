@@ -9,15 +9,15 @@ bool MenuLayer::init(){
 	auto origin = Director::getInstance()->getVisibleOrigin();
 
 	
-	_background = Sprite::create("res/UI/1Menu/background.png");
+	_background = Sprite::create("res/UI/1Menu/background@3x.png");
 	_background->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height / 2));
 	auto scale = winSize.width / _background->getContentSize().width;
 	_background->setScale(scale);
 	this->addChild(_background);
 	
-	Sprite *title = Sprite::create("res/UI/1Menu/title.png");
+	Sprite *title = Sprite::create("res/UI/1Menu/title@3x.png");
 	title->setPosition(Vec2(winSize.width / 2, winSize.height*0.8));
-	title->setScale(1.2);
+	title->setScale(scale);
 	this->addChild(title);
 
 	
