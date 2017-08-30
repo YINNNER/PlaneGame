@@ -21,7 +21,7 @@ void Bullet::setBulletImg(const char * filename) {
 	
 }
 void Bullet::update(float dt) {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
+	static VISIBLESIZE;
 	if (type==1)
 	{
 		this->setPositionY(this->getPositionY() + 5);
@@ -49,7 +49,7 @@ void Bullet::removeBullet()
 }
 void Bullet::skillMove(float dt)
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
+	static VISIBLESIZE;
 	this->setPositionY(this->getPositionY() + 30);
 	if (this->getPositionY() > visibleSize.height)
 	{
