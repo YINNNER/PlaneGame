@@ -53,9 +53,10 @@ bool LoadLayer::init() {
 	SimpleAudioEngine::getInstance()->preloadEffect("music/click8.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/click2.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/switch01.wav");
-	SimpleAudioEngine::getInstance()->preloadEffect("music/fight09.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight05.mp3");
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3",true);
 	
+
 	
 	scheduleOnce(CC_SCHEDULE_SELECTOR(LoadLayer::onScheduleOnce),3.0f);
 
