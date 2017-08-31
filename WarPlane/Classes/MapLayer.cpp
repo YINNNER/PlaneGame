@@ -2,7 +2,6 @@
 #include "SimpleAudioEngine.h"
 #include"FightLayer.h"
 using namespace CocosDenshion;
-int MapLayer::chooseLevel = 1;
 
 bool MapLayer::init() {
 
@@ -128,7 +127,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
 		chooseLevel = 1;
-		SceneManager::goFightLayer(user);
+		SceneManager::goFightLayer(chooseLevel,user);
 	}break;
 	case 32:
 	{
@@ -137,7 +136,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
 		chooseLevel = 2;
-		SceneManager::goFightLayer(user);
+		SceneManager::goFightLayer(chooseLevel,user);
 	}break;
 	case 33:
 	{
@@ -145,7 +144,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
 		chooseLevel = 3;
-		SceneManager::goFightLayer(user);
+		SceneManager::goFightLayer(chooseLevel,user);
 	}break;
 	case 4:
 	{

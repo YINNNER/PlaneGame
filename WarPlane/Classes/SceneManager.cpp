@@ -224,7 +224,7 @@ void SceneManager::goRepoLayer(int tag,UserInfo &userInfo) {
 
 }
 
-void SceneManager::goFightLayer(UserInfo &userInfo) {
+void SceneManager::goFightLayer(int level,UserInfo &userInfo) {
 	auto gameScene = Scene::create();
 	FightLayer * fightLayer_1 = FightLayer::create();
 	fightLayer_1->setPlayer(userInfo);
