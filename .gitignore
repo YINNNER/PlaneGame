@@ -184,3 +184,8 @@ out/
 .project
 .cproject
 cocos2d/
+
+
+F:\cocos\plane\PlaneGame\WarPlane\proj.win32\plane.vcxproj
+F:\cocos\plane\PlaneGame\WarPlane\proj.win32\plane.vcxproj.filters
+*.vcxproj
