@@ -4,6 +4,8 @@
 #include"Bullet.h"
 #include"SaveLayer.h"
 #include"MapLayer.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 FightLayer::FightLayer()
 {
 }
@@ -259,6 +261,7 @@ void FightLayer::update(float dt)
 		}
 		interval = this->getCurrentTime();
 	}
+	
 	break; }
 	case EventKeyboard::KeyCode::KEY_U:
 	{static long interval_1 = 0;
@@ -324,12 +327,16 @@ void FightLayer::addSupply(float dt)
 
 void FightLayer::addBullet(int bType)
 {
+	if (SetLayer::effectState == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/bullet3.mp3");
+	}
 	Bullet * bullet_1 = Bullet::create();
 	bullet_1->setType(1);
 	bullet_1->setPosition(player_1->getPosition());
 	bullet_1->setBulletImg("res/fire01.png");
 	this->addChild(bullet_1, 3);
 	GameManager::getInstance()->setBullet(bullet_1);
+	
 }
 
 void FightLayer::is_crash(float dt)
@@ -391,8 +398,16 @@ void FightLayer::is_crash(float dt)
 			{
 				bullet_list_1.at(j)->removeBullet();
 				enemy_plane->changeHp(-(player_1->getAtk()));
+				if (SetLayer::effectState == 1) {
+					SimpleAudioEngine::getInstance()->playEffect("music/hited2.wav");
+				}
+				
 				if (enemy_plane->getHp() <= 0)
 				{
+					if (SetLayer::effectState == 1) {
+						SimpleAudioEngine::getInstance()->playEffect("music/bomb4.wav");
+					}
+					
 					if (enemy_plane->getIsBoss()==1)
 					{
 						bosshp->setString("0");
@@ -460,6 +475,10 @@ void FightLayer::is_crash(float dt)
 						}
 						scoreValue++;
 						supply_1->removeSupply();
+						if (SetLayer::effectState == 1) {
+							SimpleAudioEngine::getInstance()->playEffect("music/getSupply03.wav");
+						}
+						
 					}
 					else if (supply_1->getType() == 2 || supply_1->getType() == 3)
 					{
@@ -469,6 +488,10 @@ void FightLayer::is_crash(float dt)
 						}
 						else
 						{
+							if (SetLayer::effectState == 1) {
+								SimpleAudioEngine::getInstance()->playEffect("music/stone1.wav");
+							}
+							
 							player_1->changeHp(-50);
 							this->hpChange();
 							supply_1->removeSupply();
@@ -1207,30 +1230,38 @@ void FightLayer::onEnter()
 	if (gameLevel == 1)
 	{
 		batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
+		if (SetLayer::backState == 1) {
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3",true);
+		}
 	}
 	else if (gameLevel == 2)
 	{
 		batchNode = SpriteBatchNode::create("res/UI/a3Game/05.png");
+		if (SetLayer::backState == 1) {
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight08.mp3",true);
+		}
 	}
 	else
 	{
 		batchNode = SpriteBatchNode::create("res/UI/a3Game/081.png");
+		if (SetLayer::backState == 1) {
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight02.mp3",true);
+		}
 	}
 
 
 
 	this->addChild(batchNode);
 	fightImg = Sprite::createWithTexture(batchNode->getTexture());
-	fightImg->setScale(1.1);
+
 	fightImg->setAnchorPoint(Point::ZERO);
 	fightImg->setPosition(Vec2(Point::ZERO));
-	//fightImg->getTexture()->setAliasTexParameters();
+
 	this->addChild(fightImg, 1);
 	fightImg2 = Sprite::createWithTexture(batchNode->getTexture());
-	fightImg2->setScale(1.1);
 	fightImg2->setAnchorPoint(Point::ZERO);
 	fightImg2->setPosition(Point(fightImg->getPositionX(), fightImg->getPositionY() + fightImg->getContentSize().height));
-	//fightImg2->getTexture()->setAliasTexParameters();
+
 	this->addChild(fightImg2, 1);
 	this->schedule(schedule_selector(FightLayer::backMove));
 	auto plane_list_1 = GameManager::getInstance()->getPlaneList();
