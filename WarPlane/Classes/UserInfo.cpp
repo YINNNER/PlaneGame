@@ -91,7 +91,7 @@ ValueMap UserInfo::readPlist(){
     if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     {
         //是MAC平台
-        path = "res/userInfo.plist";
+        path = "./res/userInfo.plist";
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
         CCLOG("read the plist file at %s \n", _fullPath.c_str());
         
@@ -201,7 +201,7 @@ void UserInfo::saveInfoToPlist(UserInfo & userInfo,int tag){
 	if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 	{
 		//是MAC平台
-		path = "res/userInfo.plist";
+		path = "./res/userInfo.plist";
         std::string _fullPath=FileUtils::getInstance()->fullPathForFilename(path);
         CCLOG("see the plist file at %s \n", _fullPath.c_str());
 
