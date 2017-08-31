@@ -6,13 +6,13 @@ bool LoadLayer::init() {
 	auto winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 
-	_background = Sprite::create("res/UI/0aStart/background@3x.png");
+	_background = Sprite::create("res/UI/0aStart/background.png");
 	_background->setPosition(Vec2(origin.x + winSize.width/2, origin.y + winSize.height/2));
 	auto scale = winSize.width / _background->getContentSize().width;
 	_background->setScale(scale);
 	this->addChild(_background);
 
-	_logo = Sprite::create("res/UI/0aStart/logo@3x.png");
+	_logo = Sprite::create("res/UI/0aStart/logo.png");
 	_logo->setPosition(Vec2(origin.x + winSize.width /2, origin.y + winSize.height *3/5));
 	_logo->setScale(scale);
 	//this->addChild(_logo);
@@ -46,7 +46,8 @@ bool LoadLayer::init() {
 	loading();
 */
 	loadedImage = 0;
-	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a2SelectLevel/mapScene.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
+	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a2SelectLevel/MapScene.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
+	Director::getInstance()->getTextureCache()->addImageAsync("res/game.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/a1CreatePlayer/createScene.plist");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/background1.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/trans1.wav");
@@ -81,8 +82,14 @@ void LoadLayer::loadingCallback(Ref * pSender)
 {
 	switch (loadedImage) {
 	case 0:
-		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/a2SelectLevel/mapScene.plist");
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/a2SelectLevel/MapScene.plist");
 		log("planet1.png already exist");
-
+		loadedImage++;
+		break;
+	case 1:
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/game.plist");
+		log("game.png already exist");
+		loadedImage++;
+		break;
 	}
 }
