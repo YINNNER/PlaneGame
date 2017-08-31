@@ -156,7 +156,7 @@ void SaveLayer::initInfoDetail( __Dictionary * user){
     userInfo->saveDay=getSysDay();
     user->setObject(__String::create(userInfo->saveTime), "saveTime");
     user->setObject(__String::create(userInfo->saveDay), "saveDay");
-    user->setObject(__Integer::create(5), "atk");
+    user->setObject(__Integer::create(10), "atk");
     user->setObject(__Integer::create(4), "spd");
     user->setObject(__Integer::create(1), "gameLevel");
     user->setObject(__Integer::create(12), "hp");

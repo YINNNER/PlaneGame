@@ -1287,12 +1287,12 @@ void FightLayer::addBoss()
 	bossExist = 1;
 	
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Sprite * bossBar = Sprite::create("res/EmptyBar.png");
+	Sprite * bossBar = Sprite::create("res/EnemyEmptyBar1.png");
 	bossBar->setAnchorPoint(Point::ZERO);
 	bossBar->setPosition(10, visibleSize.height - 20);
 	this->addChild(bossBar, 3);
 
-	bossHp = Sprite::create("res/RedBar.png");
+	bossHp = Sprite::create("res/EnemyRedBar1.png");
 	bossHp->setAnchorPoint(Point::ZERO);
 	bossHp->setPosition(Vec2(10, visibleSize.height - 20));
 	this->addChild(bossHp, 4);
