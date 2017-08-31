@@ -1266,16 +1266,7 @@ void FightLayer::addEnemy(float dt)
 	//判断等级，是否生成boss
 	if (bossExist==0)
 	{
-        if (player_1->getGrade() == 3&&gameLevel==3)
-        {
-            this->addBoss();
-        }
-        else if (player_1->getGrade() == 2&&gameLevel==2)
-        {
-            this->addBoss();
-        }
-        else if (player_1->getGrade() == 1&&gameLevel == 1)
-		{
+		if (minTime == 1) {
 			this->addBoss();
 		}
 	}
@@ -1286,13 +1277,13 @@ void FightLayer::addBoss()
 		//初始化属性
 	boss = Enemy::create();
 	int lv = player_1->getGrade();
-	boss->setAttri(5*gameLevel, 20*gameLevel, 5, 1);
+	boss->setAttri(5*gameLevel, 200*gameLevel, 5, 1);
 	boss->setImg("res/SpaceShooterRedux/PNG/Enemies/enemyRed5.png");
 	boss->setScale(2);
 	boss->setIs_boss(1);
 	boss->bossMove();
 	this->addChild(boss, 3);	
-	bossMaxHp = 200;
+	bossMaxHp = 200*gameLevel;
 	GameManager::getInstance()->setPlane(boss);
 	bossExist = 1;
 	
@@ -1420,6 +1411,7 @@ void FightLayer::onEnter()
 	}
 }
                            
+
 
 
 void FightLayer::getGameLevel(int l)
