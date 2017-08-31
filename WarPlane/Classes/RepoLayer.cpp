@@ -85,7 +85,7 @@ bool RepoLayer::init() {
 
 	HpBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	HpBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.798));
-	HpBar->setScale(0.35*(user.getHp()) / 70, 0.5);
+	HpBar->setScale(0.35*(user.getHp()) / 280, 0.5);
 	HpBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(HpBar, 2);
 
@@ -97,7 +97,7 @@ bool RepoLayer::init() {
 
 	AtkBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.718));
-	AtkBar->setScale(0.35*(user.getAtk()) / 50, 0.5);
+	AtkBar->setScale(0.35*(user.getAtk()) / 100, 0.5);
 	AtkBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(AtkBar, 2);
 
@@ -309,7 +309,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		auto menu = Menu::create(_body_1, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		HpBar->setScale(0.35*(user.getHp()+1) / 70, 0.5);
+		HpBar->setScale(0.35*(user.getHp()+1) / 280, 0.5);
 		user. set_equip_head_load(1); 
 		user.set_equip_head_have(0);
 		user.setHp(user.getHp() + 1);
@@ -334,7 +334,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		auto menu = Menu::create(_body_1_b, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		HpBar->setScale(0.35*(user.getHp() + 5) / 70, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 5) / 280, 0.5);
 		user.set_equip_head_b_load(1);
 		user.set_equip_head_b_have(0);
 		user.setHp(user.getHp() + 5);
@@ -357,7 +357,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		auto menu = Menu::create(_body_1_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		HpBar->setScale(0.35*(user.getHp() + 10) / 70, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 10) / 280, 0.5);
 		user.set_equip_head_c_load(1);
 		user.set_equip_head_c_have(0);
 		user.setHp(user.getHp() + 10);
@@ -407,7 +407,7 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		_wing_2 = MenuItemImage::create(filename4.str().c_str(), filename4.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1, this, user));
 		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_2, 2);
-		AtkBar->setScale(0.35*(user.getAtk()+1) / 50, 0.5);
+		AtkBar->setScale(0.35*(user.getAtk()+1) / 100, 0.5);
 		auto menu = Menu::create(_wing_1, _wing_2, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
@@ -439,7 +439,7 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		auto menu = Menu::create(_wing_1_b, _wing_2_b, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		AtkBar->setScale(0.35*(user.getAtk() + 5) / 50, 0.5);
+		AtkBar->setScale(0.35*(user.getAtk() + 5) / 100, 0.5);
 		user.set_equip_arm_b_load(1);
 		user.set_equip_arm_b_have(0);
 		user.setAtk(user.getAtk() + 5);
@@ -467,7 +467,7 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		auto menu = Menu::create(_wing_1_c, _wing_2_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		AtkBar->setScale(0.35*(user.getAtk() + 10) / 50, 0.5);
+		AtkBar->setScale(0.35*(user.getAtk() + 10) / 100, 0.5);
 		user.set_equip_arm_c_load(1);		
 		user.set_equip_arm_c_have(0);
 		user.setAtk(user.getAtk() + 10);
@@ -565,7 +565,7 @@ void RepoLayer::UnBody_1(Ref * pSender, UserInfo & userInfo)
 {
 	_body_1->removeFromParent();
 	//恢复原始属性值
-	HpBar->setScale(0.35*(user.getHp()-1)/ 70, 0.5);
+	HpBar->setScale(0.35*(user.getHp()-1)/ 280, 0.5);
 	//恢复装备load状态
 	user.set_equip_head_load(0);
 	user.set_equip_head_have(1);
@@ -575,7 +575,7 @@ void RepoLayer::UnBody_1(Ref * pSender, UserInfo & userInfo)
 void RepoLayer::UnBody_1_b(Ref * pSender, UserInfo & userInfo)
 {
 	_body_1_b->removeFromParent();
-	HpBar->setScale(0.35*(user.getHp()-5) / 70, 0.5);
+	HpBar->setScale(0.35*(user.getHp()-5) / 280, 0.5);
 	user.set_equip_head_b_load(0);
 	user.set_equip_head_b_have(1);
 	user.setHp(user.getHp() - 5);
@@ -583,7 +583,7 @@ void RepoLayer::UnBody_1_b(Ref * pSender, UserInfo & userInfo)
 void RepoLayer::UnBody_1_c(Ref * pSender, UserInfo & userInfo)
 {
 	_body_1_c->removeFromParent();
-	HpBar->setScale(0.35*(user.getHp()-10) / 70, 0.5);
+	HpBar->setScale(0.35*(user.getHp()-10) / 280, 0.5);
 	user.set_equip_head_c_load(0);
 	user.set_equip_head_c_have(1);
 	user.setHp(user.getHp() - 10);
@@ -593,7 +593,7 @@ void RepoLayer::UnWing_1(Ref * pSender, UserInfo & userInfo)
 {
 	_wing_1->removeFromParent();
 	_wing_2->removeFromParent();
-	AtkBar->setScale(0.35*(user.getAtk()-1) / 50, 0.5);
+	AtkBar->setScale(0.35*(user.getAtk()-1) / 100, 0.5);
 	user.set_equip_arm_load(0);
 	user.set_equip_arm_have(1);
 	user.setAtk(user.getAtk() - 1);
@@ -602,7 +602,7 @@ void RepoLayer::UnWing_1_b(Ref * pSender, UserInfo & userInfo)
 {
 	_wing_1_b->removeFromParent();
 	_wing_2_b->removeFromParent();
-	AtkBar->setScale(0.35*(user.getAtk()-5) / 50, 0.5);
+	AtkBar->setScale(0.35*(user.getAtk()-5) / 100, 0.5);
 	user.set_equip_arm_b_load(0);
 	user.set_equip_arm_b_have(1);
 	user.setAtk(user.getAtk() - 5);
@@ -611,7 +611,7 @@ void RepoLayer::UnWing_1_c(Ref * pSender, UserInfo & userInfo)
 {
 	_wing_1_c->removeFromParent();
 	_wing_2_c->removeFromParent();
-	AtkBar->setScale(0.35*(user.getAtk()-10) / 50, 0.5);
+	AtkBar->setScale(0.35*(user.getAtk()-10) / 100, 0.5);
 	user.set_equip_arm_c_load(0);
 	user.set_equip_arm_c_have(1);
 	user.setAtk(user.getAtk() - 10);
