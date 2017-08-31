@@ -138,6 +138,7 @@ void CCPlane::setEquip(Equip * _equip)
 	}
 	else if (_equip->getEquipType()>3)
 	{
+		CCLOG("55555");
 		this->attack += _equip->getEAtk();
 	}
 	else {

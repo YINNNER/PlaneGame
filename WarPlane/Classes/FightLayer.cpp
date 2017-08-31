@@ -835,9 +835,7 @@ void FightLayer::gamePause()
 	{
 		this->unschedule(schedule_selector(FightLayer::bossSkill));
 		boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
-		boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));
-	
-    
+		boss->unschedule(SEL_SCHEDULE(&Enemy::enemyBossMove_1));    
 	if (player_1->getGrade()<10)
 	{
 		this->unschedule(schedule_selector(FightLayer::bossSkill_1));
@@ -1174,9 +1172,8 @@ void FightLayer::dropEquip(Enemy * plane)
 	}else{
     for (int i =player_1->equip_list.size()-1; i >=0; i--)
     {
-        if (player_1->equip_list.at(i)->getEquipType() != equip_1->getEquipType()) {
-            player_1->setEquip(equip_1);
-			
+        if (player_1->equip_list.at(i)->getEquipType() == equip_1->getEquipType()) {	
+			player_1->setEquip(equip_1);			
         }
         else
         {
