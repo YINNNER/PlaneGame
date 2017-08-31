@@ -23,6 +23,7 @@ public:
 	void setType(int type);
 	void setGrade(int grade);
 	void setExp(int exp);
+	void onEquip(Equip * _equip);
 	void hero_death();
 	void removeHero(float dt);
 	void setEquip(Equip * _equip);

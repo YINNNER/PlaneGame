@@ -14,10 +14,10 @@ UserInfo::UserInfo(){
     saveTime="";
     saveDay="";
     planeType=1;
-    atk=5;
+    atk=10;
     spd=4;
     gameLevel=1;
-    hp=12;
+    hp=24;
     mp=10;
     planeLevel=1;
     exp=0;

@@ -1013,7 +1013,7 @@ void FightLayer::openSkillU()
 
 	case 2:
         skill2_1 = true;
-        player_1->changeSpd(player_1->getSpd() * 0.5);
+        player_1->changeSpd(2 );
         this->scheduleOnce(schedule_selector(FightLayer::closeSkillU), 5.0f);
         break;
     
@@ -1058,7 +1058,7 @@ void FightLayer::closeSkillU(float dt)
 	case 2:
 		
         skill2_1 = false;
-        player_1->changeSpd((int)player_1->getSpd() / 1.3);
+        player_1->changeSpd(-2);
         break;
 	case 3:
 		skill3_1 = false;
@@ -1082,7 +1082,6 @@ void FightLayer::openSkillI()
             auto Ebullet_list_1 = GameManager::getInstance()->getEBulletList();
             for (int i = Ebullet_list_1.size() - 1; i >= 0; i--)
             {
-                
                 auto Ebullet = Ebullet_list_1.at(i);
                 Ebullet->removeBullet();
             }
@@ -1095,7 +1094,7 @@ void FightLayer::openSkillI()
         break;
     case 3:
 		player_1->changeAtk(player_1->getAtk());
-		player_1->changeSpd(player_1->getSpd());
+		player_1->changeSpd(3);
 		this->schedule(schedule_selector(FightLayer::addHp), 1.0f);
 		this->scheduleOnce(schedule_selector(FightLayer::closeSkillI), 8.0f);
 		break;
@@ -1130,7 +1129,7 @@ void FightLayer::closeSkillI(float dt)
 	{
 	case 3:
 		player_1->changeAtk(-player_1->getAtk() / 2);
-		player_1->changeSpd((int)player_1->getSpd() / 1.3);
+		player_1->changeSpd(-3);
 		this->unschedule(schedule_selector(FightLayer::addHp));
 		break;
 	default:
@@ -1288,12 +1287,12 @@ void FightLayer::addBoss()
 	bossExist = 1;
 	
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Sprite * bossBar = Sprite::create("res/EmptyBar.png");
+	Sprite * bossBar = Sprite::create("res/EnemyEmptyBar1.png");
 	bossBar->setAnchorPoint(Point::ZERO);
 	bossBar->setPosition(10, visibleSize.height - 20);
 	this->addChild(bossBar, 3);
 
-	bossHp = Sprite::create("res/RedBar.png");
+	bossHp = Sprite::create("res/EnemyRedBar1.png");
 	bossHp->setAnchorPoint(Point::ZERO);
 	bossHp->setPosition(Vec2(10, visibleSize.height - 20));
 	this->addChild(bossHp, 4);
@@ -1369,14 +1368,14 @@ void FightLayer::onEnter()
 	{
 		batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
 		if (SetLayer::backState == 1) {
-			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight08.mp3", true);
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
 		}
 	}
 	else
 	{
 		batchNode = SpriteBatchNode::create("res/UI/a3Game/081.png");
 		if (SetLayer::backState == 1) {
-			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight02.mp3", true);
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
 		}
 	}
 

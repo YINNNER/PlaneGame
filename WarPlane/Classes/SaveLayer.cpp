@@ -156,11 +156,11 @@ void SaveLayer::initInfoDetail( __Dictionary * user){
     userInfo->saveDay=getSysDay();
     user->setObject(__String::create(userInfo->saveTime), "saveTime");
     user->setObject(__String::create(userInfo->saveDay), "saveDay");
-    user->setObject(__Integer::create(100), "atk");
-    user->setObject(__Integer::create(40), "spd");
+    user->setObject(__Integer::create(10), "atk");
+    user->setObject(__Integer::create(4), "spd");
     user->setObject(__Integer::create(1), "gameLevel");
-    user->setObject(__Integer::create(500), "hp");
-    user->setObject(__Integer::create(100), "mp");
+    user->setObject(__Integer::create(12), "hp");
+    user->setObject(__Integer::create(10), "mp");
     user->setObject(__Integer::create(1), "planeLevel");
     user->setObject(__Integer::create(1), "planeType");
     user->setObject(__Integer::create(0), "exp");
