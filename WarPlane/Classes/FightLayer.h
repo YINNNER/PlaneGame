@@ -67,6 +67,7 @@ public:
     void removeMetor(float);
     void onEnter();
     void getGameLevel(int l);
+	void bossHpChange();
 	Vector<Sprite *>ani;
 private:
 	Sprite * fightImg;
@@ -83,7 +84,6 @@ private:
 	Label * time;
 	Label * pause;
 	Label * attarkLabel;
-	Label * bosshp;
 	Menu * menu;
 	Sprite * shield;
 	Sprite * hpSprite;
@@ -96,6 +96,7 @@ private:
 	Sprite * skill_22;
 	Sprite * white;
     Sprite * metors;
+	Sprite * bossHp;
     
 	Enemy * boss;
 	int bossExist;
@@ -105,6 +106,7 @@ private:
     Sprite * CD1;
     Sprite * CD2;
     int gameLevel;
+	int bossMaxHp;
 };
 
 
