@@ -22,6 +22,13 @@ bool SaveLayer::init() {
     {
         return false;
     }
+
+	if (SetLayer::backState == 1) {
+		CCLOG("%d", SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying());
+		if (!SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3", true);
+		}
+	}
    
     //set background
     auto _background = Sprite::create("res/UI/1Menu/background.png");
@@ -31,7 +38,7 @@ bool SaveLayer::init() {
     this->addChild(_background);
     
     //set title
-    auto title = Label::createWithTTF("载入游戏存档","fonts/simhei.ttf",30);
+    auto title = Label::createWithTTF("游戏存档","fonts/simhei.ttf",30);
     title->setPosition(Vec2(origin.x + winSize.width /2, origin.y + winSize.height *0.9));
     this->addChild(title);
     
