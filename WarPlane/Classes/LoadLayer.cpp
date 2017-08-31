@@ -39,6 +39,7 @@ bool LoadLayer::init() {
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight08.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight02.mp3");
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3",true);
+
 	
 
 	
@@ -72,6 +73,6 @@ void LoadLayer::loadingCallback(Ref * pSender)
 		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/plane_parts/planeParts.plist");
 		log("planeParts.png already exist");
 		loadedImage++;
-		break;
+	
 	}
 }
