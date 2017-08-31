@@ -14,7 +14,7 @@ UserInfo::UserInfo(){
     saveTime="";
     saveDay="";
     planeType=1;
-    atk=5;
+    atk=10;
     spd=4;
     gameLevel=1;
     hp=12;
