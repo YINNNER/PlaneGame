@@ -48,6 +48,7 @@ bool LoadLayer::init() {
 	loadedImage = 0;
 	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a2SelectLevel/MapScene.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
 	Director::getInstance()->getTextureCache()->addImageAsync("res/game.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
+	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/plane_parts/planeParts.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/a1CreatePlayer/createScene.plist");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/background1.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/trans1.wav");
@@ -89,6 +90,11 @@ void LoadLayer::loadingCallback(Ref * pSender)
 	case 1:
 		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/game.plist");
 		log("game.png already exist");
+		loadedImage++;
+		break;
+	case 2:
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/plane_parts/planeParts.plist");
+		log("planeParts.png already exist");
 		loadedImage++;
 		break;
 	}

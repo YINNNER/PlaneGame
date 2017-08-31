@@ -619,55 +619,55 @@ void RepoLayer::setEquipImg(int type) {
 	stringstream filename8;
 	stringstream filename9;
 	//机身
-	filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_02.png";
-	filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_02.png";
-	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_02.png";
+	filename1 << "playerShip" << type << "_blue_02.png";
+	filename2 << "playerShip" << type << "_orange_02.png";
+	filename3 << "playerShip" << type << "_red_02.png";
 	//机翼
-	filename4 << "res/UI/plane_parts/playerShip" << type << "_blue_01.png";
-	filename5 << "res/UI/plane_parts/playerShip" << type << "_orange_01.png";
-	filename6 << "res/UI/plane_parts/playerShip" << type << "_red_01.png";
+	filename4 << "playerShip" << type << "_blue_01.png";
+	filename5 << "playerShip" << type << "_orange_01.png";
+	filename6 << "playerShip" << type << "_red_01.png";
 	//机尾
-	filename7 << "res/UI/plane_parts/playerShip" << type << "_blue_04.png";
-	filename8 << "res/UI/plane_parts/playerShip" << type << "_orange_04.png";
-	filename9 << "res/UI/plane_parts/playerShip" << type << "_red_04.png";
+	filename7 << "playerShip" << type << "_blue_04.png";
+	filename8 << "playerShip" << type << "_orange_04.png";
+	filename9 << "playerShip" << type << "_red_04.png";
 
 	//机身
-	_equip_1 = Sprite::create(filename1.str().c_str());
+	_equip_1 = Sprite::createWithSpriteFrameName(filename1.str().c_str());
 	_equip_1->setPosition(Vec2(winSize.width *0.2, winSize.height *0.5));
 	this->addChild(_equip_1, 2);
 
-	_equip_1_b = Sprite::create(filename2.str().c_str());
+	_equip_1_b = Sprite::createWithSpriteFrameName(filename2.str().c_str());
 	_equip_1_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.5));
 	this->addChild(_equip_1_b, 2);
 	//CCLOG("%f \n", Vec2(_equip_1_b->getPosition()).x);
 
-	_equip_1_c = Sprite::create(filename3.str().c_str());
+	_equip_1_c = Sprite::createWithSpriteFrameName(filename3.str().c_str());
 	_equip_1_c->setPosition(Vec2(winSize.width *2.2, origin.y + winSize.height *0.5));
 	this->addChild(_equip_1_c, 2);
 
 	//机翼
-	_equip_2 = Sprite::create(filename4.str().c_str());
+	_equip_2 = Sprite::createWithSpriteFrameName(filename4.str().c_str());
 	_equip_2->setPosition(Vec2(winSize.width *0.2, winSize.height *0.3));
 	this->addChild(_equip_2, 2);
 
-	_equip_2_b = Sprite::create(filename5.str().c_str());
+	_equip_2_b = Sprite::createWithSpriteFrameName(filename5.str().c_str());
 	_equip_2_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.3));
 	this->addChild(_equip_2_b, 2);
 
-	_equip_2_c = Sprite::create(filename6.str().c_str());
+	_equip_2_c = Sprite::createWithSpriteFrameName(filename6.str().c_str());
 	_equip_2_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.3));
 	this->addChild(_equip_2_c, 2);
 
 	//机尾
-	_equip_3 = Sprite::create(filename7.str().c_str());
+	_equip_3 = Sprite::createWithSpriteFrameName(filename7.str().c_str());
 	_equip_3->setPosition(Vec2(winSize.width *0.2, winSize.height *0.1));
 	this->addChild(_equip_3, 2);
 
-	_equip_3_b = Sprite::create(filename8.str().c_str());
+	_equip_3_b = Sprite::createWithSpriteFrameName(filename8.str().c_str());
 	_equip_3_b->setPosition(Vec2(winSize.width *1.2, winSize.height *0.1));
 	this->addChild(_equip_3_b, 2);
 
-	_equip_3_c = Sprite::create(filename9.str().c_str());
+	_equip_3_c = Sprite::createWithSpriteFrameName(filename9.str().c_str());
 	_equip_3_c->setPosition(Vec2(winSize.width *2.2, winSize.height *0.1));
 	this->addChild(_equip_3_c, 2);
 
@@ -696,8 +696,8 @@ void RepoLayer::setPlaneImg(int type) {
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	stringstream filename;
 	//显示对应飞机图片
-	filename << "res/UI/plane_parts/playerShip" << type << "_green.png";
-	_plane = Sprite::create(filename.str().c_str());
+	filename << "playerShip" << type << "_green.png";
+	_plane = Sprite::createWithSpriteFrameName(filename.str().c_str());
 	_plane->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 3 / 4));
 	this->addChild(_plane, 2);
 	CCLOG("%f /n", user.get_equip_head_load());
