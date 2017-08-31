@@ -16,13 +16,7 @@ void CCPlane::setImg(const char * filename) {
 	this->addChild(planeImg);
 	this->setAnchorPoint(Vec2(0.5, 0.5));
 }
-void CCPlane::setImg_2()
-{
-	metors = Sprite::create("res/SpaceShooterRedux/PNG/Damage/playerShip3_damage3.png");
-	metors->setAnchorPoint(Vec2(0, 0));
-	this->addChild(metors,1);
-	this->setAnchorPoint(Vec2(0.5, 0.5));
-}
+
 void CCPlane::setAttri(int attack, int hp,  int speed,int grade) {
 	this->attack = attack;
 	this->hp = hp;
@@ -168,7 +162,13 @@ void CCPlane::removeEquip(Equip * _equip)
 	}
 	equip_list.eraseObject(_equip);
 }
-void CCPlane::removeMetors(float)
+
+void CCPlane::setEquip_2(Equip * _equip)
 {
-	metors->removeFromParentAndCleanup(true);
+	equip_list_2.pushBack(_equip);
+}
+
+void CCPlane::removeEquip_2(Equip * _equip)
+{
+	equip_list_2.eraseObject(_equip);
 }

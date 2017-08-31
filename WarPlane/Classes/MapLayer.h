@@ -21,5 +21,6 @@ public:
 	MenuItemImage *level_2;//第二关按钮
 	MenuItemImage *level_3;//第三关按钮
 	Sprite *plane;//移动的小飞机
+	int chooseLevel;
 };
 
