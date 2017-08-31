@@ -101,7 +101,7 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	
 
 	
-
+	//ÅÐ¶Ïµã»÷µÄ¹Ø¿¨
 	switch (layer->user.getGameLevel())
 	{
 	case 1:

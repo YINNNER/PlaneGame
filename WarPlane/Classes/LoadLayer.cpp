@@ -20,31 +20,7 @@ bool LoadLayer::init() {
     _logo->runAction(FadeIn::create(2.0f));
     this->addChild(_logo);
    
-	/*
-	loadLabel = LabelTTF::create("Loading", "fonts/Anklepan.ttf", 20);
-	loadLabel->setPosition(Vec2(winSize.width*0.5, winSize.height*0.5));
-	this->addChild(loadLabel);
-
-	percentLabel = LabelTTF::create("0%", "fonts/Anklepan.ttf", 15);
-	percentLabel->setPosition(Vec2(winSize.width*0.5, winSize.height*0.45));
-	this->addChild(percentLabel);
-
-	auto loadBg = Sprite::create("res/UI/0Loading/loadingBarEmpty.png");
-	loadBg->setPosition(Vec2(winSize.width*0.5, winSize.height*0.4));
-	this->addChild(loadBg, 1);
 	
-	loadProgress = ProgressTimer::create(Sprite::
-		create("res/UI/0Loading/loadingBarFull.png"));//创建进度条
-	loadProgress->setBarChangeRate(Point(1, 0));//设置变化速率
-	loadProgress->setType(ProgressTimer::Type::BAR);//设置进度条的类型
-	loadProgress->setMidpoint(Point(0, 1));//设置进度的运动方向
-	loadProgress->setPosition(Vec2(winSize.width*0.5, winSize.height*0.4));
-	loadProgress->setPercentage(0.0f);//设置初始值为0
-	this->addChild(loadProgress, 2);
-
-	m_numSp = 19;
-	loading();
-*/
 	loadedImage = 0;
 	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a2SelectLevel/MapScene.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
 	Director::getInstance()->getTextureCache()->addImageAsync("res/game.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
