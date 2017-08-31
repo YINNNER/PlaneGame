@@ -46,7 +46,10 @@ bool MapLayer::init() {
 	level_1_label->setPosition(Vec2(winSize.width*0.7, winSize.height*0.1));
 	this->addChild(level_1_label);
 	
-	level_1 = MenuItemImage::create("res/UI/a2SelectLevel/planet1.png", "res/UI/a2SelectLevel/planet1.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
+	level_1Normal = Sprite::createWithSpriteFrameName("planet1.png");
+	level_1Selected = Sprite::createWithSpriteFrameName("planet1.png");
+
+	level_1 = MenuItemSprite::create(level_1Normal, level_1Selected,CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_1->setScale(0.5);
 	level_1->setAnchorPoint(Vec2(0,0));
 	level_1->setPosition(Vec2(winSize.width*0.5, winSize.height*0.15));
@@ -58,8 +61,11 @@ bool MapLayer::init() {
 	this->addChild(level_2_label);
 	
 	
+	level_2Normal = Sprite::createWithSpriteFrameName("planet2.png");
+	level_2Selected = Sprite::createWithSpriteFrameName("planet2.png");
+	level_2Forbidden = Sprite::createWithSpriteFrameName("planet2Forbidden.png");
 
-	level_2 = MenuItemImage::create("res/UI/a2SelectLevel/planet2.png", "res/UI/a2SelectLevel/planet2.png", "res/UI/a2SelectLevel/planet2Forbidden.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
+	level_2 = MenuItemSprite::create(level_2Normal, level_2Selected, level_2Forbidden, CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_2->setScale(0.5);
 	level_2->setPosition(Vec2(winSize.width*0.2, winSize.height*0.5));
 	level_2->setTag(32);
@@ -69,8 +75,11 @@ bool MapLayer::init() {
 	level_3_label->setPosition(Vec2(winSize.width*0.7, winSize.height*0.55));
 	this->addChild(level_3_label);
 	
-	
-	level_3 = MenuItemImage::create("res/UI/a2SelectLevel/planet3.png", "res/UI/a2SelectLevel/planet3.png", "res/UI/a2SelectLevel/planet3Forbidden.png",CC_CALLBACK_1(MapLayer::CallMenu, this));
+	level_3Normal = Sprite::createWithSpriteFrameName("planet3.png");
+	level_1Selected = Sprite::createWithSpriteFrameName("planet1.png");
+	level_3Forbidden = Sprite::createWithSpriteFrameName("planet3Forbidden.png");
+
+	level_3 = MenuItemSprite::create(level_3Normal, level_3Selected, level_3Forbidden, CC_CALLBACK_1(MapLayer::CallMenu, this));
 	level_3->setScale(0.5);
 	level_3->setPosition(Vec2(winSize.width*0.7, winSize.height*0.7));
 	level_3->setTag(33);
@@ -80,7 +89,7 @@ bool MapLayer::init() {
 	this->addChild(menu, 1);
 	
 	//移动的小飞机
-	plane = Sprite::create("res/UI/a2SelectLevel/plane01.png");
+	plane = Sprite::createWithSpriteFrameName("plane01.png");
 	plane->setPosition(Vec2(level_1->getPosition().x,level_1->getPosition().y));
 	plane->setScale(0.5);
 	plane->setRotation(60);

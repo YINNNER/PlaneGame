@@ -84,13 +84,13 @@ bool RepoLayer::init() {
 
 	HpBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	HpBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.798));
-	HpBar->setScale(0.35*(user.getHp()) / 300, 0.5);
+	HpBar->setScale(0.35*(user.getHp()) / 500, 0.5);
 	HpBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(HpBar, 2);
 
 	EnBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	EnBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.758));
-	EnBar->setScale(0.35, 0.5);
+	EnBar->setScale(0.35*(user.getMp())/200, 0.5);
 	EnBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(EnBar, 2);
 
@@ -158,7 +158,7 @@ bool RepoLayer::init() {
 	speed->setPosition(Vec2(origin.x + winSize.width * 0.57, origin.y + winSize.height * 0.68));
 	this->addChild(speed, 2);
 	//装备栏
-   //机身
+    //机身
 	_equip_head = Equip::create();
 	_equip_head->setType(1);
 	std::stringstream hp;
@@ -193,14 +193,6 @@ bool RepoLayer::init() {
 	equipNum_1_3 = Label::createWithTTF(hp_c.str().c_str(), "fonts/simhei.ttf", 18);
 	equipNum_1_3->setPosition(Vec2(origin.x + winSize.width * 2.5, origin.y + winSize.height * 0.5));
 	this->addChild(equipNum_1_3, 1);
-
-	/*Label * equipName_1_2 = Label::createWithTTF("数量", "fonts/simhei.ttf", 18);
-	equipName_1_2->setPosition(Vec2(origin.x + winSize.width * 0.7, origin.y + winSize.height * 0.5 ));
-	this->addChild(equipName_1_2, 1);
-
-	Label * equipNum_1_2 = Label::createWithTTF(b.str().c_str(), "fonts/simhei.ttf", 18);
-	equipNum_1_2->setPosition(Vec2(origin.x + winSize.width * 0.8, origin.y + winSize.height * 0.5 ));
-	this->addChild(equipNum_1_2, 1);*/
 
 	//机翼
 	_equip_arm = Equip::create();
@@ -239,14 +231,6 @@ bool RepoLayer::init() {
 	equipNum_2_3->setPosition(Vec2(origin.x + winSize.width * 2.5, origin.y + winSize.height * 0.3));
 	this->addChild(equipNum_2_3, 1);
 
-	/*Label * equipName_2_2 = Label::createWithTTF("数量", "fonts/simhei.ttf", 18);
-	equipName_2_2->setPosition(Vec2(origin.x + winSize.width * 0.7, origin.y + winSize.height * 0.3 ));
-	this->addChild(equipName_2_2, 1);
-
-	Label * equipNum_2_2 = Label::createWithTTF(d.str().c_str(), "fonts/simhei.ttf", 18);
-	equipNum_2_2->setPosition(Vec2(origin.x + winSize.width * 0.8, origin.y + winSize.height * 0.3 ));
-	this->addChild(equipNum_2_2, 1);*/
-
 	//机尾
 	_equip_tail = Equip::create();
 	_equip_tail->setType(7);
@@ -284,19 +268,13 @@ bool RepoLayer::init() {
 	equipNum_3_3->setPosition(Vec2(origin.x + winSize.width * 2.5, origin.y + winSize.height * 0.1));
 	this->addChild(equipNum_3_3, 1);
 
-	/*Label * equipName_3_2 = Label::createWithTTF("数量", "fonts/simhei.ttf", 18);
-	equipName_3_2->setPosition(Vec2(origin.x + winSize.width * 0.7, origin.y + winSize.height * 0.1 ));
-	this->addChild(equipName_3_2, 1);
-
-	Label * equipNum_3_2 = Label::createWithTTF(f.str().c_str(), "fonts/simhei.ttf", 18);
-	equipNum_3_2->setPosition(Vec2(origin.x + winSize.width * 0.8, origin.y + winSize.height * 0.1 ));
-	this->addChild(equipNum_3_2, 1);*/
 	return true;
 
 }
 
 //第一栏装备按钮
 void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
+	//音效
 	if (SetLayer::getEffectState() == 1) {
 		
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
@@ -309,8 +287,9 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 	filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_02.png";
 	filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_02.png";
 	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_02.png";
-	
+	//判断用户选择的是那个装备，当前装备位置为120
 	if (_equip_1->getPositionX()==120 && user.get_equip_head_have()==1) {
+		//一个部位的装备只允许穿一件，因此卸下其余装备
 		if (user.get_equip_head_b_load() == 1) {
 			_body_1_b->removeFromParent();
 			user.set_equip_head_b_load(0);
@@ -319,17 +298,19 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 			_body_1_c->removeFromParent();
 			user.set_equip_head_c_load(0);
 		}
+		//添加该位置装备
 		_body_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1, this, user)); 
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		//this->addChild(_body_1, 2);
 		auto menu = Menu::create(_body_1, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		HpBar->setScale(0.35*(user.getHp()+10) / 300, 0.5);
+		HpBar->setScale(0.35*(user.getHp()+10) / 500, 0.5);
 		user. set_equip_head_load(1); 
 		
 		
 	}
+	
 	else if (_equip_1_b->getPositionX()==120 && user.get_equip_head_b_have() == 1) {
 		if (user.get_equip_head_load() == 1) {
 			_body_1->removeFromParent();
@@ -345,7 +326,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		auto menu = Menu::create(_body_1_b, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		HpBar->setScale(0.35*(user.getHp() + 50) / 300, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 50) / 500, 0.5);
 		user.set_equip_head_b_load(1);
 		
 	}
@@ -364,7 +345,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		auto menu = Menu::create(_body_1_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		HpBar->setScale(0.35*(user.getHp() + 100) / 300, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 100) / 500, 0.5);
 		user.set_equip_head_c_load(1);
 	}
 
@@ -375,6 +356,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
+	//音效
 	if (SetLayer::getEffectState() == 1) {
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}
@@ -539,26 +521,29 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 	}
 }
 
-//卸装备
+//卸机身装备
 void RepoLayer::UnBody_1(Ref * pSender, UserInfo & userInfo)
 {
 	_body_1->removeFromParent();
-	HpBar->setScale(0.35*(user.getHp())/ 300, 0.5);
+	//恢复原始属性值
+	HpBar->setScale(0.35*(user.getHp())/ 500, 0.5);
+	//恢复装备load状态
 	user.set_equip_head_load(0);
 }
 
 void RepoLayer::UnBody_1_b(Ref * pSender, UserInfo & userInfo)
 {
 	_body_1_b->removeFromParent();
-	HpBar->setScale(0.35*(user.getHp()) / 300, 0.5);
+	HpBar->setScale(0.35*(user.getHp()) / 500, 0.5);
 	user.set_equip_head_b_load(0);
 }
 void RepoLayer::UnBody_1_c(Ref * pSender, UserInfo & userInfo)
 {
 	_body_1_c->removeFromParent();
-	HpBar->setScale(0.35*(user.getHp()) / 300, 0.5);
+	HpBar->setScale(0.35*(user.getHp()) / 500, 0.5);
 	user.set_equip_head_c_load(0);
 }
+//卸载机翼装备
 void RepoLayer::UnWing_1(Ref * pSender, UserInfo & userInfo)
 {
 	_wing_1->removeFromParent();
@@ -580,6 +565,7 @@ void RepoLayer::UnWing_1_c(Ref * pSender, UserInfo & userInfo)
 	AtkBar->setScale(0.35*(user.getAtk()) / 300, 0.5);
 	user.set_equip_arm_c_load(0);
 }
+//卸载机尾装备
 void RepoLayer::UnTail_1(Ref * pSender, UserInfo & userInfo)
 {
 	_tail_1->removeFromParent();
@@ -709,12 +695,14 @@ void RepoLayer::setPlaneImg(int type) {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	stringstream filename;
-
+	//显示对应飞机图片
 	filename << "res/UI/plane_parts/playerShip" << type << "_green.png";
 	_plane = Sprite::create(filename.str().c_str());
 	_plane->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 3 / 4));
 	this->addChild(_plane, 2);
 	CCLOG("%f /n", user.get_equip_head_load());
+	//判断是否有被穿上的部件
+	//头部
 	if (user.get_equip_head_load() == 1) {
 		stringstream filename1;
 		filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_02.png";
@@ -725,7 +713,7 @@ void RepoLayer::setPlaneImg(int type) {
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
 		CCLOG("%f /n", user.getHp());
-		HpBar->setScale(0.35*(user.getHp() + 10) / 300, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 10) / 500, 0.5);
 	}
 	else if (user.get_equip_head_b_load() == 1) {
 		stringstream filename2;
@@ -737,7 +725,7 @@ void RepoLayer::setPlaneImg(int type) {
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
 		CCLOG("%f /n", user.getHp());
-		HpBar->setScale(0.35*(user.getHp() + 50) / 300, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 50) / 500, 0.5);
 	}
 	else if (user.get_equip_head_c_load() == 1) {
 		stringstream filename3;
@@ -748,9 +736,9 @@ void RepoLayer::setPlaneImg(int type) {
 		auto menu = Menu::create(_body_1_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		HpBar->setScale(0.35*(user.getHp() + 100) / 300, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 100) / 500, 0.5);
 	}
-
+	//机翼
 	if (user.get_equip_arm_load() == 1) {
 		stringstream filename4;
 		stringstream filename7;
@@ -799,6 +787,7 @@ void RepoLayer::setPlaneImg(int type) {
 		this->addChild(menu, 3);
 		AtkBar->setScale(0.35*(user.getAtk()+100) / 300, 0.5);
 	}
+	//机尾
 	if (user.get_equip_tail_load() == 1) {
 		stringstream filename1;
 		filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_04.png";
@@ -839,8 +828,6 @@ void RepoLayer::setPlaneImg(int type) {
 void RepoLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 {
 	key = keyCode;
-
-
 }
 
 
