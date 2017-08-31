@@ -361,6 +361,7 @@ void FightLayer::is_crash(float dt)
 			}
 			else
 			{
+				SimpleAudioEngine::getInstance()->playEffect("music/bomb4.wav");
 				plane_death(plane_list_1.at(i));
 				player_1->changeHp(-10);
 				this->hpChange();
@@ -460,6 +461,7 @@ void FightLayer::is_crash(float dt)
 			}
 			else {
 				if (player_1->getBoundingBox().containsPoint(Ebullet_list_1.at(i)->getPosition())) {
+					SimpleAudioEngine::getInstance()->playEffect("music/hited2.wav");
 					player_1->changeHp(-player_1->getGrade());
 					Ebullet_list_1.at(i)->removeBullet();
 					this->hpChange();
@@ -516,6 +518,9 @@ void FightLayer::is_crash(float dt)
 
 				if (enemy_1->getBoundingBox().containsPoint(skill_1->getPosition()))
 				{
+					if (SetLayer::effectState == 1) {
+						SimpleAudioEngine::getInstance()->playEffect("music/bomb3.wav");
+					}
 					Anim1 = Sprite::create("res/skill1.png");
 					Anim1->setScale(3);
 					this->addChild(Anim1, 3);
@@ -1013,6 +1018,10 @@ void FightLayer::openSkillU()
         shield->setAnchorPoint(Vec2(0.1, 0));
         shield->setPosition(player_1->getAnchorPoint());
         player_1->addChild(shield, 3);
+		if (SetLayer::effectState == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/hiding1.mp3");
+		}//技能音效
+		
         this->scheduleOnce(schedule_selector(FightLayer::closeSkillU), 3.0f);
         break;
 
@@ -1024,6 +1033,9 @@ void FightLayer::openSkillU()
     
     case 3:
 		skill3_1 = true;
+		if (SetLayer::effectState == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/skill5.wav");
+		}
 		player_1->setCascadeOpacityEnabled(true);
 		player_1->setOpacity(50);
 		this->scheduleOnce(schedule_selector(FightLayer::closeSkillU), 3.0f);
@@ -1083,6 +1095,9 @@ void FightLayer::openSkillI()
             white->setVisible(true);
             white->setScale(10);
             this->addChild(white,4);
+			if (SetLayer::effectState == 1) {
+				SimpleAudioEngine::getInstance()->playEffect("music/bomb3.wav");
+			}
             this->scheduleOnce(schedule_selector(FightLayer::closeWhite), 0.01f);
             auto Ebullet_list_1 = GameManager::getInstance()->getEBulletList();
             for (int i = Ebullet_list_1.size() - 1; i >= 0; i--)
@@ -1095,9 +1110,14 @@ void FightLayer::openSkillI()
 
 		
 	case 2:
+		if (SetLayer::effectState == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/skill2.wav");
+		}
         addSkill(1);
+
         break;
     case 3:
+		
 		player_1->changeAtk(player_1->getAtk());
 		player_1->changeSpd(3);
 		this->schedule(schedule_selector(FightLayer::addHp), 1.0f);
@@ -1161,6 +1181,9 @@ void FightLayer::addSkill(int i)
 
 void FightLayer::addHp(float dt)
 {
+	if (SetLayer::effectState == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/skill4.wav");
+	}
 	if (player_1->getHp() + 5 <= player_1->getMaxHp())
 	{
 		player_1->changeHp(5);
