@@ -1,4 +1,4 @@
-﻿#include "FightLayer.h"
+#include "FightLayer.h"
 #include"Supply.h"
 #include"GameManager.h"
 #include"Bullet.h"
@@ -776,9 +776,9 @@ void FightLayer::goToGameOver(int value)
 	gameOver->addChild(score);
 	gameOver->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 
-	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/save.png", CC_CALLBACK_1(FightLayer::goToSave, this));
+	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/saveS.png", CC_CALLBACK_1(FightLayer::goToSave, this));
 	save->setPosition(Vec2(gameOverSize.width *0.14, gameOverSize.height *0.2));
-	MenuItemImage * map = MenuItemImage::create("res/UI/a5GameFin/selectLevel.png", "res/UI/a5GameFin/selectLevel.png", CC_CALLBACK_1(FightLayer::goToMap, this));
+	MenuItemImage * map = MenuItemImage::create("res/UI/a5GameFin/selectLevel.png", "res/UI/a5GameFin/selectLevelS.png", CC_CALLBACK_1(FightLayer::goToMap, this));
 	map->setPosition(Vec2(gameOverSize.width * 0.86, gameOverSize.height *0.2));
 	Menu * menu = Menu::create(save, map, NULL);
 	menu->setPosition(Vec2(0, 0));

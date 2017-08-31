@@ -13,6 +13,12 @@ bool MapLayer::init() {
 	_background->setScale(scale);
 	this->addChild(_background);
 
+	if (SetLayer::backState == 1) {
+		if (!SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3", true);
+		}
+	}
+
 	//小飞机移动动画
 	auto animation = Animation::create();
 	for (int i = 1; i <= 3; i++) {
