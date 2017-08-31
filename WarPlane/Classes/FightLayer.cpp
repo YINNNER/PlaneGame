@@ -1358,14 +1358,14 @@ void FightLayer::onEnter()
 	SpriteBatchNode *batchNode;
 	if (gameLevel == 1)
 	{
-		batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
+		batchNode = SpriteBatchNode::create("res/UI/a3Game/01.png");
 		if (SetLayer::backState == 1) {
 			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
 		}
 	}
 	else if (gameLevel == 2)
 	{
-		batchNode = SpriteBatchNode::create("res/UI/a3Game/05.png");
+		batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
 		if (SetLayer::backState == 1) {
 			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight08.mp3", true);
 		}
