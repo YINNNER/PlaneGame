@@ -1328,94 +1328,85 @@ void FightLayer::showSkillCD2(float dt)
 	CD2->removeFromParentAndCleanup(true);
 }
                            
-<<<<<<< HEAD
-   void FightLayer::showDamage(Supply * spy)
-=======
+
 void FightLayer::showDamage(Supply * spy)
->>>>>>> 02f4a8117d9c632938b74b1f9af3e577a2e5afb2
-            {
-                metors = Sprite::create("res/SpaceShooterRedux/PNG/Damage/playerShip3_damage3.png");
-                metors->setPosition(spy->getPosition());
-                this->addChild(metors,3);
-                this->scheduleOnce(schedule_selector(FightLayer::removeMetor), 0.5f);
+{
+     metors = Sprite::create("res/SpaceShooterRedux/PNG/Damage/playerShip3_damage3.png");
+     metors->setPosition(spy->getPosition());
+     this->addChild(metors,3);
+     this->scheduleOnce(schedule_selector(FightLayer::removeMetor), 0.5f);
             }
                            
-<<<<<<< HEAD
-   void FightLayer::removeMetor(float)
-=======
+
+
 void FightLayer::removeMetor(float)
->>>>>>> 02f4a8117d9c632938b74b1f9af3e577a2e5afb2
-            {
-                metors->removeFromParentAndCleanup(true);
-            }
-                           
-<<<<<<< HEAD
-   void FightLayer::onEnter()
-=======
+
+{
+	metors->removeFromParentAndCleanup(true);
+}
+
 void FightLayer::onEnter()
->>>>>>> 02f4a8117d9c632938b74b1f9af3e577a2e5afb2
-            {
-                Layer::onEnter();
-                SpriteBatchNode *batchNode;
-                if (gameLevel == 1)
-                {
-                    batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
-                    if (SetLayer::backState == 1) {
-                        SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3",true);
-                    }
-                }
-                else if (gameLevel == 2)
-                {
-                    batchNode = SpriteBatchNode::create("res/UI/a3Game/05.png");
-                    if (SetLayer::backState == 1) {
-                        SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight08.mp3",true);
-                    }
-                }
-                else
-                {
-                    batchNode = SpriteBatchNode::create("res/UI/a3Game/081.png");
-                    if (SetLayer::backState == 1) {
-                        SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight02.mp3",true);
-                    }
-                }
-                
-                
-                
-                this->addChild(batchNode);
-                fightImg = Sprite::createWithTexture(batchNode->getTexture());
-                
-                fightImg->setAnchorPoint(Point::ZERO);
-                fightImg->setPosition(Vec2(Point::ZERO));
-                
-                this->addChild(fightImg, 1);
-                fightImg2 = Sprite::createWithTexture(batchNode->getTexture());
-                fightImg2->setAnchorPoint(Point::ZERO);
-                fightImg2->setPosition(Point(fightImg->getPositionX(), fightImg->getPositionY() + fightImg->getContentSize().height));
-                
-                this->addChild(fightImg2, 1);
-                this->schedule(schedule_selector(FightLayer::backMove));
-                auto plane_list_1 = GameManager::getInstance()->getPlaneList();
-                auto Ebullet_list_1 = GameManager::getInstance()->getEBulletList();
-                for (int i = plane_list_1.size() - 1; i >= 0; i--)
-                {
-                    plane_list_1.at(i)->pause();
-                }
-                for (int i = Ebullet_list_1.size() - 1; i >= 0; i--)
-                {
-                    if (Ebullet_list_1.at(i)->getType() == 3)
-                    {
-                        Ebullet_list_1.at(i)->pause();
-                    }
-                    
-                }
-            }
+
+{
+	Layer::onEnter();
+	SpriteBatchNode *batchNode;
+	if (gameLevel == 1)
+	{
+		batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
+		if (SetLayer::backState == 1) {
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
+		}
+	}
+	else if (gameLevel == 2)
+	{
+		batchNode = SpriteBatchNode::create("res/UI/a3Game/05.png");
+		if (SetLayer::backState == 1) {
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight08.mp3", true);
+		}
+	}
+	else
+	{
+		batchNode = SpriteBatchNode::create("res/UI/a3Game/081.png");
+		if (SetLayer::backState == 1) {
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight02.mp3", true);
+		}
+	}
+
+
+
+	this->addChild(batchNode);
+	fightImg = Sprite::createWithTexture(batchNode->getTexture());
+
+	fightImg->setAnchorPoint(Point::ZERO);
+	fightImg->setPosition(Vec2(Point::ZERO));
+
+	this->addChild(fightImg, 1);
+	fightImg2 = Sprite::createWithTexture(batchNode->getTexture());
+	fightImg2->setAnchorPoint(Point::ZERO);
+	fightImg2->setPosition(Point(fightImg->getPositionX(), fightImg->getPositionY() + fightImg->getContentSize().height));
+
+	this->addChild(fightImg2, 1);
+	this->schedule(schedule_selector(FightLayer::backMove));
+	auto plane_list_1 = GameManager::getInstance()->getPlaneList();
+	auto Ebullet_list_1 = GameManager::getInstance()->getEBulletList();
+	for (int i = plane_list_1.size() - 1; i >= 0; i--)
+	{
+		plane_list_1.at(i)->pause();
+	}
+	for (int i = Ebullet_list_1.size() - 1; i >= 0; i--)
+	{
+		if (Ebullet_list_1.at(i)->getType() == 3)
+		{
+			Ebullet_list_1.at(i)->pause();
+		}
+
+	}
+}
                            
-<<<<<<< HEAD
-   void FightLayer::getGameLevel(int l)
-=======
+
+
 void FightLayer::getGameLevel(int l)
->>>>>>> 02f4a8117d9c632938b74b1f9af3e577a2e5afb2
-            {
-                gameLevel = l;
-            }
+{
+	gameLevel = l;
+}
 
