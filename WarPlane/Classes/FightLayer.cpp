@@ -558,8 +558,13 @@ void FightLayer::removeAnimation1(float dt)
 
 void FightLayer::removeAnimation2(float dt)
 {
+	/*
     Anim2->setScale(100);
-	Anim2->removeFromParentAndCleanup(true);
+	Anim2->removeFromParentAndCleanup(true);*/
+	for (int i = ani.size()-1; i >=0; i--)
+	{
+		ani.at(i)->removeFromParentAndCleanup(true);
+	}
 }
 
 long FightLayer::getCurrentTime()
@@ -671,24 +676,30 @@ void FightLayer::goToGameOver(int value)
 	{
 	case 1:
         gameOver->addChild(result_1);
-        player_1->hero_death();
-        break;
-	case 2:
-            gameOver->addChild(result_2);
 		if (scoreValue > 30)
 		{
-		gameOver->addChild(star_1);
-		gameOver->addChild(star_2);
-		gameOver->addChild(star_3);
+			gameOver->addChild(star_1);
+			gameOver->addChild(star_2);
+			gameOver->addChild(star_3);
 		}
 		else if (scoreValue > 20)
 		{
-		gameOver->addChild(star_1);
-		gameOver->addChild(star_2);
+			gameOver->addChild(star_1);
+			gameOver->addChild(star_2);
 		}
 		else {
-		gameOver->addChild(star_1);
+			gameOver->addChild(star_1);
 		}
+        player_1->hero_death();
+        break;
+	case 2:
+           gameOver->addChild(result_2);
+		 gameOver->addChild(star_1);
+			   gameOver->addChild(star_2);
+			   gameOver->addChild(star_3);
+			   gameLevel++;
+
+
 		break;
 	}
     user.setAtk(player_1->getAtk());
@@ -704,7 +715,7 @@ void FightLayer::goToGameOver(int value)
     }
 
     user.setSpd(player_1->getSpd());
-    user.setGameLevel(++gameLevel);
+    user.setGameLevel(gameLevel);
    
     for (int i = player_1->equip_list.size() - 1; i >= 0; i--)
     {
@@ -1150,27 +1161,36 @@ void FightLayer::dropEquip(Enemy * plane)
 	equip_1->setType(type);
 	this->addChild(equip_1,3);
 	scheduleOnce(schedule_selector(FightLayer::drawEquip),2.0f);
+	if (player_1->equip_list.size()==0)
+	{
+		player_1->setEquip(equip_1);
+	}else{
     for (int i =player_1->equip_list.size()-1; i >=0; i--)
     {
-        if (!player_1->equip_list.at(i)->getEquipType() == equip_1->getEquipType()) {
+        if (player_1->equip_list.at(i)->getEquipType() != equip_1->getEquipType()) {
             player_1->setEquip(equip_1);
+			
         }
         else
         {
             player_1->setEquip_2(equip_1);
+			
         }
     }
-    
+	}
 }
 
 void FightLayer::drawEquip(float dt)
 {
+	
 	for (int i=player_1->equip_list.size()-1;i>=0;i-- )
 	{
+		
 		player_1->equip_list.at(i)->removeFromParent();
     }
     for (int i = player_1->equip_list_2.size() - 1; i >= 0; i--)
     {
+		
         player_1->equip_list_2.at(i)->removeFromParentAndCleanup(true);
 	}
 }
@@ -1266,7 +1286,7 @@ void FightLayer::addBoss()
 
 void FightLayer::plane_death(Enemy * enemy)
 {
-	Anim2 = Sprite::create("res/crash1.png");
+	Sprite * Anim2 = Sprite::create("res/crash1.png");
 	Anim2->setScale(1.0);
 	this->addChild(Anim2, 3);
 	Anim2->setPosition(enemy->getPosition());
@@ -1283,6 +1303,7 @@ void FightLayer::plane_death(Enemy * enemy)
 	animation->setRestoreOriginalFrame(false);
 	auto action = Animate::create(animation);
 	Anim2->runAction(action);
+	ani.pushBack(Anim2);
 	scheduleOnce(schedule_selector(FightLayer::removeAnimation2), 0.4f);
 	GameManager::getInstance()->removePlane(enemy);
 	enemy->removePlane();
@@ -1298,7 +1319,7 @@ void FightLayer::showSkillCD2(float dt)
 	CD2->removeFromParentAndCleanup(true);
 }
                            
-                           void FightLayer::showDamage(Supply * spy)
+   void FightLayer::showDamage(Supply * spy)
             {
                 metors = Sprite::create("res/SpaceShooterRedux/PNG/Damage/playerShip3_damage3.png");
                 metors->setPosition(spy->getPosition());
@@ -1306,12 +1327,12 @@ void FightLayer::showSkillCD2(float dt)
                 this->scheduleOnce(schedule_selector(FightLayer::removeMetor), 0.5f);
             }
                            
-                           void FightLayer::removeMetor(float)
+   void FightLayer::removeMetor(float)
             {
                 metors->removeFromParentAndCleanup(true);
             }
                            
-                           void FightLayer::onEnter()
+   void FightLayer::onEnter()
             {
                 Layer::onEnter();
                 SpriteBatchNode *batchNode;
@@ -1368,7 +1389,7 @@ void FightLayer::showSkillCD2(float dt)
                 }
             }
                            
-                           void FightLayer::getGameLevel(int l)
+   void FightLayer::getGameLevel(int l)
             {
                 gameLevel = l;
             }

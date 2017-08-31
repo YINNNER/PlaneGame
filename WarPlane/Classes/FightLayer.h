@@ -67,6 +67,7 @@ public:
     void removeMetor(float);
     void onEnter();
     void getGameLevel(int l);
+	Vector<Sprite *>ani;
 private:
 	Sprite * fightImg;
 	Sprite * fightImg2;
