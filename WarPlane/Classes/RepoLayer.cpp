@@ -96,7 +96,7 @@ bool RepoLayer::init() {
 
 	AtkBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.718));
-	AtkBar->setScale(0.35*(user.getAtk()) / 200, 0.5);
+	AtkBar->setScale(0.35*(user.getAtk()) / 300, 0.5);
 	AtkBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(AtkBar, 2);
 
@@ -319,10 +319,13 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 			_body_1_c->removeFromParent();
 			user.set_equip_head_c_load(0);
 		}
-		_body_1 = Sprite::create(filename1.str().c_str());
+		_body_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1, this, user)); 
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
-		this->addChild(_body_1, 2);
-		HpBar->setScale(0.25*(user.getHp()+10) / 300, 0.5);
+		//this->addChild(_body_1, 2);
+		auto menu = Menu::create(_body_1, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		HpBar->setScale(0.35*(user.getHp()+10) / 300, 0.5);
 		user. set_equip_head_load(1); 
 		
 		
@@ -336,10 +339,13 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 			_body_1_c->removeFromParent();
 			user.set_equip_head_c_load(0);
 		}
-		_body_1_b = Sprite::create(filename2.str().c_str());
+		_body_1_b = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1_b, this, user));
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
-		this->addChild(_body_1_b, 2);
-		HpBar->setScale(0.25*(user.getHp() + 50) / 300, 0.5);
+		//this->addChild(_body_1_b, 2);
+		auto menu = Menu::create(_body_1_b, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		HpBar->setScale(0.35*(user.getHp() + 50) / 300, 0.5);
 		user.set_equip_head_b_load(1);
 		
 	}
@@ -352,10 +358,13 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 			_body_1_b->removeFromParent();
 			user.set_equip_head_b_load(0);
 		}
-		_body_1_c = Sprite::create(filename3.str().c_str());
+		_body_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1_c, this, user));
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
-		this->addChild(_body_1_c, 2);
-		HpBar->setScale(0.25*(user.getHp() + 100) / 300, 0.5);
+		//this->addChild(_body_1_c, 2);
+		auto menu = Menu::create(_body_1_c, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		HpBar->setScale(0.35*(user.getHp() + 100) / 300, 0.5);
 		user.set_equip_head_c_load(1);
 	}
 
@@ -393,13 +402,16 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 			_wing_2_c->removeFromParent();
 			user.set_equip_arm_c_load(0);
 		}
-		_wing_1 = Sprite::create(filename1.str().c_str());
+		_wing_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1, this, user));
 		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_1, 2);
-		_wing_2 = Sprite::create(filename4.str().c_str());
+		//this->addChild(_wing_1, 2);
+		_wing_2 = MenuItemImage::create(filename4.str().c_str(), filename4.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1, this, user));
 		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_2, 2);
-		AtkBar->setScale(0.25*(user.getAtk()+10) / 200, 0.5);
+		//this->addChild(_wing_2, 2);
+		AtkBar->setScale(0.35*(user.getAtk()+10) / 300, 0.5);
+		auto menu = Menu::create(_wing_1, _wing_2, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
 		user.set_equip_arm_load(1);
 		
 		
@@ -415,13 +427,16 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 			_wing_2_c->removeFromParent();
 			user.set_equip_arm_c_load(0);
 		}
-		_wing_1_b = Sprite::create(filename2.str().c_str());
+		_wing_1_b = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_b, this, user));
 		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_1_b, 2);
-		_wing_2_b = Sprite::create(filename5.str().c_str());
+		//this->addChild(_wing_1_b, 2);
+		_wing_2_b = MenuItemImage::create(filename5.str().c_str(), filename5.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_b, this, user));
 		_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_2_b, 2);
-		AtkBar->setScale(0.25*(user.getAtk() + 50) / 200, 0.5);
+		//this->addChild(_wing_2_b, 2);
+		auto menu = Menu::create(_wing_1_b, _wing_2_b, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		AtkBar->setScale(0.35*(user.getAtk() + 50) / 300, 0.5);
 		user.set_equip_arm_b_load(1);
 		
 	}
@@ -436,13 +451,16 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 			_wing_2_b->removeFromParent();
 			user.set_equip_arm_b_load(0);
 		}
-		_wing_1_c = Sprite::create(filename3.str().c_str());
+		_wing_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_c, this, user));
 		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_1_c, 2);
-		_wing_2_c = Sprite::create(filename6.str().c_str());
+		//this->addChild(_wing_1_c, 2);
+		_wing_2_c = MenuItemImage::create(filename6.str().c_str(), filename6.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_c, this, user));
 		_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_2_c, 2);
-		AtkBar->setScale(0.25*(user.getAtk() + 100) / 200, 0.5);
+		//this->addChild(_wing_2_c, 2);
+		auto menu = Menu::create(_wing_1_c, _wing_2_c, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		AtkBar->setScale(0.35*(user.getAtk() + 100) / 300, 0.5);
 		user.set_equip_arm_c_load(1);		
 	}
 
@@ -472,10 +490,13 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 			_tail_1_c->removeFromParent();
 			user.set_equip_tail_c_load(0);
 		}
-		_tail_1 = Sprite::create(filename1.str().c_str());
+		_tail_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1, this, user));
 		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
-		this->addChild(_tail_1, 2);
-		SpdBar->setScale(0.25*(user.getSpd() + 10) / 200, 0.5);
+		//this->addChild(_tail_1, 2);
+		auto menu = Menu::create(_tail_1, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		SpdBar->setScale(0.35*(user.getSpd() + 10) / 200, 0.5);
 		user.set_equip_tail_load(1);
 
 	}
@@ -488,10 +509,13 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 			_tail_1_c->removeFromParent();
 			user.set_equip_tail_c_load(0);
 		}
-		_tail_1_b = Sprite::create(filename2.str().c_str());
+		_tail_1_b = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1_b, this, user));
 		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
-		this->addChild(_tail_1_b, 2);
-		SpdBar->setScale(0.25*(user.getSpd() + 50) / 200, 0.5);
+		//this->addChild(_tail_1_b, 2);
+		auto menu = Menu::create(_tail_1_b, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		SpdBar->setScale(0.35*(user.getSpd() + 50) / 200, 0.5);
 		user.set_equip_tail_b_load(1);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_tail_c_have() == 1) {
@@ -503,13 +527,76 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 			_tail_1_b->removeFromParent();
 			user.set_equip_tail_b_load(0);
 		}
-		_tail_1_c = Sprite::create(filename3.str().c_str());
+		_tail_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1_c, this, user));
 		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
-		this->addChild(_tail_1_c, 2);
-		SpdBar->setScale(0.25*(user.getSpd() + 100) / 200, 0.5);
+		//this->addChild(_tail_1_c, 2);
+		auto menu = Menu::create(_tail_1_c, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		SpdBar->setScale(0.35*(user.getSpd() + 100) / 200, 0.5);
 		user.set_equip_tail_c_load(1);
 		
 	}
+}
+
+//卸装备
+void RepoLayer::UnBody_1(Ref * pSender, UserInfo & userInfo)
+{
+	_body_1->removeFromParent();
+	HpBar->setScale(0.35*(user.getHp())/ 300, 0.5);
+	user.set_equip_head_load(0);
+}
+
+void RepoLayer::UnBody_1_b(Ref * pSender, UserInfo & userInfo)
+{
+	_body_1_b->removeFromParent();
+	HpBar->setScale(0.35*(user.getHp()) / 300, 0.5);
+	user.set_equip_head_b_load(0);
+}
+void RepoLayer::UnBody_1_c(Ref * pSender, UserInfo & userInfo)
+{
+	_body_1_c->removeFromParent();
+	HpBar->setScale(0.35*(user.getHp()) / 300, 0.5);
+	user.set_equip_head_c_load(0);
+}
+void RepoLayer::UnWing_1(Ref * pSender, UserInfo & userInfo)
+{
+	_wing_1->removeFromParent();
+	_wing_2->removeFromParent();
+	AtkBar->setScale(0.35*(user.getAtk()) / 300, 0.5);
+	user.set_equip_arm_load(0);
+}
+void RepoLayer::UnWing_1_b(Ref * pSender, UserInfo & userInfo)
+{
+	_wing_1_b->removeFromParent();
+	_wing_2_b->removeFromParent();
+	AtkBar->setScale(0.35*(user.getAtk()) / 300, 0.5);
+	user.set_equip_arm_b_load(0);
+}
+void RepoLayer::UnWing_1_c(Ref * pSender, UserInfo & userInfo)
+{
+	_wing_1_c->removeFromParent();
+	_wing_2_c->removeFromParent();
+	AtkBar->setScale(0.35*(user.getAtk()) / 300, 0.5);
+	user.set_equip_arm_c_load(0);
+}
+void RepoLayer::UnTail_1(Ref * pSender, UserInfo & userInfo)
+{
+	_tail_1->removeFromParent();
+	SpdBar->setScale(0.35*(user.getSpd()) / 300, 0.5);
+	user.set_equip_tail_load(0);
+}
+void RepoLayer::UnTail_1_b(Ref * pSender, UserInfo & userInfo)
+{
+	_tail_1_b->removeFromParent();
+	SpdBar->setScale(0.35*(user.getSpd()) / 300, 0.5);
+	user.set_equip_tail_b_load(0);
+}
+void RepoLayer::UnTail_1_c(Ref * pSender, UserInfo & userInfo)
+{
+	_tail_1_c->removeFromParent();
+	SpdBar->setScale(0.35*(user.getSpd()) / 300, 0.5);
+	user.set_equip_tail_c_load(0);
 }
 
 
@@ -631,28 +718,37 @@ void RepoLayer::setPlaneImg(int type) {
 	if (user.get_equip_head_load() == 1) {
 		stringstream filename1;
 		filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_02.png";
-		_body_1 = Sprite::create(filename1.str().c_str());
+		_body_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1, this, user));
 		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
-		this->addChild(_body_1, 2);
+		//this->addChild(_body_1, 2);
+		auto menu = Menu::create(_body_1, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
 		CCLOG("%f /n", user.getHp());
-		HpBar->setScale(0.25*(user.getHp() + 10) / 300, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 10) / 300, 0.5);
 	}
 	else if (user.get_equip_head_b_load() == 1) {
 		stringstream filename2;
 		filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_02.png";
-		_body_1_b = Sprite::create(filename2.str().c_str());
+		_body_1 = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1_b, this, user));
 		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
-		this->addChild(_body_1_b, 2);
+		//this->addChild(_body_1_b, 2);
+		auto menu = Menu::create(_body_1_b, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
 		CCLOG("%f /n", user.getHp());
-		HpBar->setScale(0.25*(user.getHp() + 50) / 300, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 50) / 300, 0.5);
 	}
 	else if (user.get_equip_head_c_load() == 1) {
 		stringstream filename3;
 		filename3 << "res/UI/plane_parts/playerShip" << type << "_red_02.png";
-		_body_1_c = Sprite::create(filename3.str().c_str());
+		_body_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1_c, this, user));
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
-		this->addChild(_body_1_c, 2);
-		HpBar->setScale(0.25*(user.getHp() + 100) / 300, 0.5);
+		//this->addChild(_body_1_c, 2);
+		auto menu = Menu::create(_body_1_c, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		HpBar->setScale(0.35*(user.getHp() + 100) / 300, 0.5);
 	}
 
 	if (user.get_equip_arm_load() == 1) {
@@ -660,63 +756,81 @@ void RepoLayer::setPlaneImg(int type) {
 		stringstream filename7;
 		filename4 << "res/UI/plane_parts/playerShip" << type << "_blue_01.png";
 		filename7 << "res/UI/plane_parts/playerShip" << type << "_blue_03.png";
-		_wing_1 = Sprite::create(filename4.str().c_str());
+		_wing_1 = MenuItemImage::create(filename4.str().c_str(), filename4.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1, this, user));
 		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_1, 2);
-		_wing_2 = Sprite::create(filename7.str().c_str());
+		//this->addChild(_wing_1, 2);
+		_wing_2 = MenuItemImage::create(filename7.str().c_str(), filename7.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1, this, user));
 		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_2, 2);
-		AtkBar->setScale(0.25*(user.getAtk()+10) / 200, 0.5);
+		//this->addChild(_wing_2, 2);
+		auto menu = Menu::create(_wing_1, _wing_2, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		AtkBar->setScale(0.35*(user.getAtk()+10) / 300, 0.5);
 	}
 	else if (user.get_equip_arm_b_load() == 1) {
 		stringstream filename5;
 		stringstream filename8;
 		filename5 << "res/UI/plane_parts/playerShip" << type << "_orange_01.png";
 		filename8 << "res/UI/plane_parts/playerShip" << type << "_orange_03.png";
-		_wing_1_b = Sprite::create(filename5.str().c_str());
+		_wing_1_b = MenuItemImage::create(filename5.str().c_str(), filename5.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_b, this, user));
 		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_1_b, 2);
-		_wing_2_b = Sprite::create(filename8.str().c_str());
+		//this->addChild(_wing_1_b, 2);
+		_wing_2_b = MenuItemImage::create(filename8.str().c_str(), filename8.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_b, this, user));
 		_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_2_b, 2);
-		AtkBar->setScale(0.25*(user.getAtk()+50) / 200, 0.5);
+		//this->addChild(_wing_2_b, 2);
+		auto menu = Menu::create(_wing_1_b, _wing_2_b, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		AtkBar->setScale(0.35*(user.getAtk()+50) / 300, 0.5);
 	}
 	else if (user.get_equip_arm_c_load() == 1) {
 		stringstream filename6;
 		stringstream filename9;
 		filename6 << "res/UI/plane_parts/playerShip" << type << "_red_01.png";
 		filename9 << "res/UI/plane_parts/playerShip" << type << "_red_03.png";
-		_wing_1_c = Sprite::create(filename6.str().c_str());
+		_wing_1_c = MenuItemImage::create(filename6.str().c_str(), filename6.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_c, this, user));
 		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_1_c, 2);
-		_wing_2_c = Sprite::create(filename9.str().c_str());
+		//this->addChild(_wing_1_c, 2);
+		_wing_2_c = MenuItemImage::create(filename9.str().c_str(), filename9.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_c, this, user));
 		_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
-		this->addChild(_wing_2_c, 2);
-		AtkBar->setScale(0.25*(user.getAtk()+100) / 200, 0.5);
+		//this->addChild(_wing_2_c, 2);
+		auto menu = Menu::create(_wing_1_c, _wing_2_c, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		AtkBar->setScale(0.35*(user.getAtk()+100) / 300, 0.5);
 	}
 	if (user.get_equip_tail_load() == 1) {
 		stringstream filename1;
 		filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_04.png";
-		_tail_1 = Sprite::create(filename1.str().c_str());
+		_tail_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1, this, user));
 		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
-		this->addChild(_tail_1, 2);
-		SpdBar->setScale(0.25*(user.getSpd()+10) / 200, 0.5);
+		//this->addChild(_tail_1, 2);
+		auto menu = Menu::create(_tail_1, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		SpdBar->setScale(0.35*(user.getSpd()+10) / 200, 0.5);
 	}
 	else if (user.get_equip_tail_b_load() == 1) {
 		stringstream filename2;
 		filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_04.png";
-		_tail_1_b = Sprite::create(filename2.str().c_str());
+		_tail_1_b = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1_b, this, user));
 		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
-		this->addChild(_tail_1_b, 2);
-		SpdBar->setScale(0.25*(user.getSpd()+50) / 200, 0.5);
+		//this->addChild(_tail_1_b, 2);
+		auto menu = Menu::create(_tail_1_b,  NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		SpdBar->setScale(0.35*(user.getSpd()+50) / 200, 0.5);
 	}
 	else if (user.get_equip_tail_c_load() == 1) {
 		stringstream filename3;
 		filename3 << "res/UI/plane_parts/playerShip" << type << "_red_04.png";
-		_tail_1_c = Sprite::create(filename3.str().c_str());
+		_tail_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1_c, this, user));
 		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
-		this->addChild(_tail_1_c, 2);
-		SpdBar->setScale(0.25*(user.getSpd()+100) / 200, 0.5);
+		//this->addChild(_tail_1_c, 2);
+		auto menu = Menu::create(_tail_1_c, NULL);
+		menu->setPosition(Vec2(Point::ZERO));
+		this->addChild(menu, 3);
+		SpdBar->setScale(0.35*(user.getSpd()+100) / 200, 0.5);
 	}
 }
 
