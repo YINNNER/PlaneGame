@@ -220,6 +220,7 @@ void SceneManager::goRepoLayer(int tag,UserInfo &userInfo) {
 }
 
 void SceneManager::goFightLayer(int level,UserInfo &userInfo) {
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	auto gameScene = Scene::create();
 	FightLayer * fightLayer_1 = FightLayer::create();
 	fightLayer_1->setPlayer(userInfo);
@@ -227,7 +228,6 @@ void SceneManager::goFightLayer(int level,UserInfo &userInfo) {
 	fightLayer_1->getGameLevel(level);
 	gameScene->addChild(fightLayer_1);
 	auto transit = TransitionSlideInR::create(0.5f, gameScene);
-	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	Director::getInstance()->replaceScene(transit);
 
 }
