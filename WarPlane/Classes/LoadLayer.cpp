@@ -37,7 +37,7 @@ bool LoadLayer::init() {
 	SimpleAudioEngine::getInstance()->preloadEffect("music/switch01.wav");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight05.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight08.mp3");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight02.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight04.mp3");
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3",true);
 
 	

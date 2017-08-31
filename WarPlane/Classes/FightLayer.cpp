@@ -1373,14 +1373,14 @@ void FightLayer::onEnter()
 	{
 		batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
 		if (SetLayer::backState == 1) {
-			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight04.mp3", true);
 		}
 	}
 	else
 	{
 		batchNode = SpriteBatchNode::create("res/UI/a3Game/081.png");
 		if (SetLayer::backState == 1) {
-			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight06.mp3", true);
 		}
 	}
 

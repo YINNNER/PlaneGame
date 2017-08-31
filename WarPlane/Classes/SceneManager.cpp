@@ -5,6 +5,8 @@
 #include "MenuLayer.h"
 #include "RepoLayer.h"
 #include "FightLayer.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 using namespace experimental;
 
 USING_NS_CC;
@@ -225,6 +227,7 @@ void SceneManager::goFightLayer(int level,UserInfo &userInfo) {
 	fightLayer_1->getGameLevel(level);
 	gameScene->addChild(fightLayer_1);
 	auto transit = TransitionSlideInR::create(0.5f, gameScene);
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	Director::getInstance()->replaceScene(transit);
 
 }
