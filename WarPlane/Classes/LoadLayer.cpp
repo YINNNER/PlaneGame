@@ -53,6 +53,9 @@ bool LoadLayer::init() {
 	SimpleAudioEngine::getInstance()->preloadEffect("music/click8.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/click2.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/switch01.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/stone1.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/getSupply03.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/switch01.wav");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight05.mp3");
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3",true);
 	
