@@ -30,6 +30,8 @@ void Bullet::update(float dt) {
 			removeBullet();
 		}
 	}
+
+
 	else
 	{
 		this->setPositionY(this->getPositionY() - 5);
@@ -40,6 +42,22 @@ void Bullet::update(float dt) {
 	}
  	
 
+}
+
+void Bullet::move_1()
+{
+		 
+			auto size = Director::getInstance()->getWinSize();
+			auto contentsize = this->getContentSize();
+			ccBezierConfig bezier;
+			bezier.controlPoint_1 = CCPoint(getRandomNumber(contentsize.width / 2, size.width - contentsize.width / 2), getRandomNumber(contentsize.height / 2, size.height - contentsize.height / 2));
+			bezier.controlPoint_2 = CCPoint(getRandomNumber(contentsize.width / 2, size.width - contentsize.width / 2), getRandomNumber(contentsize.height / 2, size.height - contentsize.height / 2));
+			bezier.endPosition = CCPoint(getRandomNumber(contentsize.width / 2, size.width - contentsize.width / 2), -contentsize.height);
+			auto bezierAction = BezierTo::create(8.0f, bezier);
+			auto removeAction = RemoveSelf::create();
+			auto action = Sequence::create(bezierAction, removeAction, NULL);
+			this->runAction(action);
+		
 }
 
 void Bullet::removeBullet()
@@ -96,4 +114,7 @@ int Bullet::getType()
 void Bullet::setType(int t)
 {
 	this->type = t;
+}
+int Bullet::getRandomNumber(int a, int b) {
+	return CCRANDOM_0_1()*(b - a) + a;
 }

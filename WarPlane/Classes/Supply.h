@@ -12,6 +12,8 @@ public:
 	int getType();
 	void update(float dt);
 	void removeSupply();
+	void removeSupply_2(float);
+	void replaceImg();
 private:
 	Sprite * spyImg;
 	int sType;

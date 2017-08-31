@@ -194,33 +194,14 @@ void SceneManager::goHelpLayer(int tag) {
 	}
 }
 
-//¥”≤Àµ•µ⁄“ª¥ŒΩ¯»Î ±¥¥Ω®setScene£¨÷Æ∫Û≤ªπ‹¥”ƒƒ¿ÔΩ¯»Î∂º «”√popScene(),setSceneΩ¯»Î»Œ∫Œ≥°æ∞∂º «pushScene()
 void SceneManager::goSetLayer(int tag) {
 	auto setScene = Scene::create();
 	auto layer = SetLayer::create();
 	setScene->addChild(layer);
-	/*
-	if (tag == 1) {
-		auto transition = TransitionMoveInR::create(0.2f, setScene);
-		Director::getInstance()->replaceScene(transition);
-	}
-	else {
-		auto transition = TransitionMoveInL::create(0.2f, setScene);
-		Director::getInstance()->replaceScene(transition);
-	}
-	*/
-	/*static int times = 1;
-	if (times == 1) {*/
-	/*Scene* setScene = Scene::create();
-	SetLayer * layer = SetLayer::create();
-	setScene->addChild(layer);*/
+	
 	auto transition = TransitionMoveInR::create(0.2f, setScene);
 	Director::getInstance()->pushScene(transition);
-	/*	times++;
-	}
-	else {
-		Director::getInstance()->popScene();
-	}*/
+
 
 }
 
@@ -243,11 +224,12 @@ void SceneManager::goRepoLayer(int tag,UserInfo &userInfo) {
 
 }
 
-void SceneManager::goFightLayer(UserInfo &userInfo) {
+void SceneManager::goFightLayer(int level,UserInfo &userInfo) {
 	auto gameScene = Scene::create();
 	FightLayer * fightLayer_1 = FightLayer::create();
 	fightLayer_1->setPlayer(userInfo);
 	fightLayer_1->user = userInfo;
+	fightLayer_1->getGameLevel(level);
 	gameScene->addChild(fightLayer_1);
 	auto transit = TransitionSlideInR::create(0.5f, gameScene);
 	Director::getInstance()->replaceScene(transit);

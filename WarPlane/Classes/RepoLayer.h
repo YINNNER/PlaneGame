@@ -7,7 +7,6 @@ USING_NS_CC;
 
 	class RepoLayer :public Layer{
 	public:
-
 		virtual bool init();
 		void setEquipImg(int type);
 		void setPlaneImg(int type);
@@ -15,6 +14,7 @@ USING_NS_CC;
 		void menuCallBack_1(Ref * psender,int type);//传递被点击的菜单的对象
 		void menuCallBack_2(Ref * psender,int type);//传递被点击的菜单的对象
 		void menuCallBack_3(Ref * psender,int type);//传递被点击的菜单的对象
+
 	
 
 		//监听键盘事件
@@ -25,6 +25,17 @@ USING_NS_CC;
 	
 		//返回关卡选择
 		void CallMenu(Ref *pSender, UserInfo &userInfo);
+		void UnBody_1(Ref *pSender, UserInfo &userInfo);
+		void UnBody_1_b(Ref *pSender, UserInfo &userInfo);
+		void UnBody_1_c(Ref *pSender, UserInfo &userInfo);
+		void UnWing_1(Ref *pSender, UserInfo &userInfo);
+		void UnWing_1_b(Ref *pSender, UserInfo &userInfo);
+		void UnWing_1_c(Ref *pSender, UserInfo &userInfo);
+		void UnTail_1(Ref *pSender, UserInfo &userInfo);
+		void UnTail_1_b(Ref *pSender, UserInfo &userInfo);
+		void UnTail_1_c(Ref *pSender, UserInfo &userInfo);
+
+
 		//保存装备
 		void SaveEquip(Ref *pSender, UserInfo &userInfo);
 		SceneManager * tsm;
@@ -84,18 +95,18 @@ USING_NS_CC;
 		
 
 		//装备部件
-		Sprite * _body_1;
-		Sprite * _body_1_b;
-		Sprite * _body_1_c;
-		Sprite * _tail_1;
-		Sprite * _tail_1_b;
-		Sprite * _tail_1_c;
-		Sprite * _wing_1;
-		Sprite * _wing_1_b;
-		Sprite * _wing_1_c;
-		Sprite * _wing_2;
-		Sprite * _wing_2_b;
-		Sprite * _wing_2_c;
+		MenuItemImage * _body_1;
+		MenuItemImage * _body_1_b;
+		MenuItemImage * _body_1_c;
+		MenuItemImage * _tail_1;
+		MenuItemImage * _tail_1_b;
+		MenuItemImage * _tail_1_c;
+		MenuItemImage * _wing_1;
+		MenuItemImage * _wing_1_b;
+		MenuItemImage * _wing_1_c;
+		MenuItemImage * _wing_2;
+		MenuItemImage * _wing_2_b;
+		MenuItemImage * _wing_2_c;
 		//白色进度条
 		Sprite * BaseBarHp;
 		Sprite * BaseBarEn;

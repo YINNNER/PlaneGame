@@ -42,16 +42,30 @@ int Enemy::getRandomNumber(int a, int b) {
 void Enemy::setEnemyImg()
 {
 	int level = this->getGrade();
-	if (level<5)
-	{
-		this->setImg("res/enemy1.png");
+	int enemy_x = getRandomNumber(0, 10);
+	if (level <= 4) {
+		if (enemy_x > 0 && enemy_x < 8) {
+			this->setImg("res/enemy1.png");
+		}
+		else {
+			this->setImg("res/enemy2.png");
+		}
 	}
-	else if (level<10)
-	{
-		this->setImg("res/enemy3.png");
+	else if (level <= 9) {
+		if (enemy_x > 0 && enemy_x < 6) {
+			this->setImg("res/enemy3.png");
+		}
+		else {
+			this->setImg("res/enemy4.png");
+		}
 	}
 	else {
-		this->setImg("res/enemyBlue5.png");
+		if (enemy_x > 0 && enemy_x < 4) {
+			this->setImg("res/enemy5.png");
+		}
+		else {
+			this->setImg("res/enemy6.png");
+		}
 	}
 }
 void Enemy::removePlane()

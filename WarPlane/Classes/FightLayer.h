@@ -4,6 +4,7 @@
 #include"Bullet.h"
 #include"Enemy.h"
 #include"UserInfo.h"
+#include"Supply.h"
 USING_NS_CC;
 class FightLayer :
 	public Layer
@@ -57,11 +58,15 @@ public:
 	void bossSkill_2(float);
 	void bossSkill_3(float);
 
-	void onExit();
+
 	void plane_death(Enemy * enemy);
 	UserInfo user;
 	void showSkillCD1(float dt);
 	void showSkillCD2(float dt);
+	void showDamage(Supply * spy);
+	void removeMetor(float);
+	void onEnter();
+	void getGameLevel(int l);
 private:
 	Sprite * fightImg;
 	Sprite * fightImg2;
@@ -89,11 +94,14 @@ private:
 	Sprite * skill_1;
 	Sprite * skill_2;
 	Sprite * white;
+	Sprite * metors;
+	
 	Enemy * boss;
 	int bossExist;
 	bool skill2_1;
 	bool skill1_1;
 	bool skill3_1;
+	int gameLevel;
 };
 
 
