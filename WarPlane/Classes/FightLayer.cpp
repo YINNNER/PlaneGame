@@ -1,4 +1,4 @@
-#include "FightLayer.h"
+﻿#include "FightLayer.h"
 #include"Supply.h"
 #include"GameManager.h"
 #include"Bullet.h"
@@ -818,19 +818,22 @@ void FightLayer::timeSche(float dt)
 
 void FightLayer::goToSave(Ref * psender)
 {
-    if (SetLayer::getEffectState() == 1) {
+    if (SetLayer::effectState == 1) {
         SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
         SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
     }
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	SceneManager::goSaveLayer(2, user);
+
 }
 
 void FightLayer::goToMap(Ref * psender)
 {
-    if (SetLayer::getEffectState() == 1) {
+    if (SetLayer::effectState == 1) {
         SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
         SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
     }
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
     SceneManager::goMapLayer(2, user);
 }
 
@@ -842,6 +845,7 @@ void FightLayer::gamePause()
 	this->unschedule(schedule_selector(FightLayer::timeSche));
 	this->unschedule(schedule_selector(FightLayer::addEnemy));
 	this->unschedule(schedule_selector(FightLayer::backMove));
+	SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 	if (bossExist==1)
 	{
 		this->unschedule(schedule_selector(FightLayer::bossSkill));
@@ -912,6 +916,7 @@ void FightLayer::goToBack(Ref * psender)
 {
 	menu->removeFromParentAndCleanup(true);
 	pause->removeFromParentAndCleanup(true);
+	SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 
 	this->resume();
 	this->scheduleUpdate();
@@ -967,7 +972,7 @@ void FightLayer::goToBack(Ref * psender)
 	{
 		supply_list_1.at(i)->scheduleUpdate();
 	}
-    if (SetLayer::getEffectState() == 1) {
+    if (SetLayer::effectState == 1) {
         SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
         SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
     }
@@ -976,7 +981,7 @@ void FightLayer::goToBack(Ref * psender)
 
 void FightLayer::goToHelp(Ref * psender)
 {
-    if (SetLayer::getEffectState() == 1) {
+    if (SetLayer::effectState == 1) {
         SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
         SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
     }
@@ -990,7 +995,7 @@ void FightLayer::goToOption(Ref * psender)
 
 void FightLayer::exitGame(Ref * psender)
 {
-    if (SetLayer::getEffectState() == 1) {
+    if (SetLayer::effectState == 1) {
         SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
         SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
     }

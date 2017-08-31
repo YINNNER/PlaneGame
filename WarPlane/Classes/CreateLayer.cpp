@@ -106,9 +106,9 @@ bool CreateLayer::init() {
 	editBox->setScale(1.3, 0.9);
 	this->addChild(editBox,0);
 
-	defaultLabel = Label::createWithSystemFont("支持十个以内大小写字母以及0至9", "", 15);
+	defaultLabel = Label::createWithSystemFont("支持十个以内大小写字母以及零至九", "", 15);
 	defaultLabel->setColor(Color3B(72, 72, 72));
-	defaultLabel->setPosition(Vec2(winSize.width*0.56, winSize.height*0.25));
+	defaultLabel->setPosition(Vec2(winSize.width*0.6, winSize.height*0.25));
 	this->addChild(defaultLabel, 1);
 	
 	//编辑框中的光标
