@@ -47,6 +47,7 @@ USING_NS_CC;
 		UserInfo user;
 
 	private:
+		//背景
 		Sprite * _background;
 		Sprite * _background_1;
 		Sprite * _background_2;
@@ -94,7 +95,7 @@ USING_NS_CC;
 		Label * equipNum_3_3;
 		
 
-		//装备部件
+		//被装上的装备部件，点击可卸下装备
 		MenuItemImage * _body_1;
 		MenuItemImage * _body_1_b;
 		MenuItemImage * _body_1_c;
