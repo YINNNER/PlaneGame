@@ -1013,7 +1013,7 @@ void FightLayer::openSkillU()
 
 	case 2:
         skill2_1 = true;
-        player_1->changeSpd(player_1->getSpd() );
+        player_1->changeSpd(2 );
         this->scheduleOnce(schedule_selector(FightLayer::closeSkillU), 5.0f);
         break;
     
@@ -1058,7 +1058,7 @@ void FightLayer::closeSkillU(float dt)
 	case 2:
 		
         skill2_1 = false;
-        player_1->changeSpd(-(player_1->getSpd()/2));
+        player_1->changeSpd(-2);
         break;
 	case 3:
 		skill3_1 = false;
@@ -1082,7 +1082,6 @@ void FightLayer::openSkillI()
             auto Ebullet_list_1 = GameManager::getInstance()->getEBulletList();
             for (int i = Ebullet_list_1.size() - 1; i >= 0; i--)
             {
-                
                 auto Ebullet = Ebullet_list_1.at(i);
                 Ebullet->removeBullet();
             }
@@ -1095,7 +1094,7 @@ void FightLayer::openSkillI()
         break;
     case 3:
 		player_1->changeAtk(player_1->getAtk());
-		player_1->changeSpd(player_1->getSpd());
+		player_1->changeSpd(3);
 		this->schedule(schedule_selector(FightLayer::addHp), 1.0f);
 		this->scheduleOnce(schedule_selector(FightLayer::closeSkillI), 8.0f);
 		break;
@@ -1130,7 +1129,7 @@ void FightLayer::closeSkillI(float dt)
 	{
 	case 3:
 		player_1->changeAtk(-player_1->getAtk() / 2);
-		player_1->changeSpd(-player_1->getSpd() / 2);
+		player_1->changeSpd(-3);
 		this->unschedule(schedule_selector(FightLayer::addHp));
 		break;
 	default:

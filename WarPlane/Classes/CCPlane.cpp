@@ -54,9 +54,12 @@ void CCPlane::changeExp(int exp)
 	this->exp += exp;
 	if (this->exp>(10*grade))
 	{
-		grade++;
-		this->changeAttri();
-		this->exp = 0;
+		if (grade<15)
+		{
+			grade++;
+			this->changeAttri();
+			this->exp = 0;
+		}
 	}
 }
 int CCPlane::getMaxHp()
@@ -117,6 +120,21 @@ void CCPlane::setGrade(int grade)
 void CCPlane::setExp(int exp)
 {
 	this->exp = exp;
+}
+
+void CCPlane::onEquip(Equip * _equip)
+{
+	if (_equip->getEquipType()>6)
+	{
+		this->speed += _equip->getESpd();
+	}
+	else if (_equip->getEquipType()>3)
+	{
+		this->attack += _equip->getEAtk();
+	}
+	else {
+		this->hp += _equip->getEHp();
+	}
 }
 
 void CCPlane::hero_death()
