@@ -245,9 +245,9 @@ void FightLayer::update(float dt)
 	{
 		if (skill2_1)
 		{
-			this->addBullet(1);
-			this->addBullet(1);
-			this->addBullet(1);
+			this->addBullet(2);
+			this->addBullet(2);
+			this->addBullet(2);
 		}
 		else
 		{
@@ -327,7 +327,16 @@ void FightLayer::addBullet(int bType)
 	Bullet * bullet_1 = Bullet::create();
 	bullet_1->setType(1);
 	bullet_1->setPosition(player_1->getPosition());
-	bullet_1->setBulletImg("res/fire01.png");
+    switch(bType)
+    {
+        case 1:
+            bullet_1->setBulletImg("res/fire01.png");
+            break;
+        case 2:
+            bullet_1->setBulletImg("res/fire02.png");
+            break;
+    }
+	
 	this->addChild(bullet_1, 3);
 	GameManager::getInstance()->setBullet(bullet_1);
     
@@ -766,10 +775,10 @@ void FightLayer::goToGameOver(int value)
 	gameOver->addChild(score);
 	gameOver->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 
-	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/saveS.png", CC_CALLBACK_1(FightLayer::goToSave, this));
-	save->setPosition(Vec2(gameOverSize.width / 4, 50));
-	MenuItemImage * map = MenuItemImage::create("res/UI/a5GameFin/selectLevel.png", "res/UI/a5GameFin/selectLevelS.png", CC_CALLBACK_1(FightLayer::goToMap, this));
-	map->setPosition(Vec2(gameOverSize.width * 3 / 4, 50));
+	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/save.png", CC_CALLBACK_1(FightLayer::goToSave, this));
+	save->setPosition(Vec2(gameOverSize.width *0.14, gameOverSize.height *0.2));
+	MenuItemImage * map = MenuItemImage::create("res/UI/a5GameFin/selectLevel.png", "res/UI/a5GameFin/selectLevel.png", CC_CALLBACK_1(FightLayer::goToMap, this));
+	map->setPosition(Vec2(gameOverSize.width * 0.86, gameOverSize.height *0.2));
 	Menu * menu = Menu::create(save, map, NULL);
 	menu->setPosition(Vec2(0, 0));
 	menu->setAnchorPoint(Vec2(0, 0));
