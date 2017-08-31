@@ -45,7 +45,7 @@ bool FightLayer::init() {
 
     //set score label
     scoreValue = 0;
-    score = Label::createWithTTF(ttfConfig, CCString::createWithFormat("score:%d", scoreValue)->getCString());
+    score = Label::createWithTTF(ttfConfig, CCString::createWithFormat("score:%d0", scoreValue)->getCString());
     score->setColor(Color3B::WHITE);
     score->setPosition(visibleSize.width -90, visibleSize.height -40);
     this->addChild(score, 3);
@@ -204,7 +204,7 @@ void FightLayer::update(float dt)
 		}
 		else
 		{
-			player_1->setPositionY(player_1->getPositionY() + 5);
+			player_1->setPositionY(player_1->getPositionY() + player_1->getSpd() );
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_S:
@@ -213,14 +213,14 @@ void FightLayer::update(float dt)
 
 		}
 		else {
-			player_1->setPositionY(player_1->getPositionY() - 5);
+			player_1->setPositionY(player_1->getPositionY() - player_1->getSpd() );
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_A:
 		if (player_1->getPositionX() < player_1->getContentSize().width / 2) {
 		}
 		else {
-			player_1->setPositionX(player_1->getPositionX() - 5);
+			player_1->setPositionX(player_1->getPositionX() - player_1->getSpd() );
 		}
 		break;
 	case EventKeyboard::KeyCode::KEY_D:
@@ -229,7 +229,7 @@ void FightLayer::update(float dt)
 
 		}
 		else {
-			player_1->setPositionX(player_1->getPositionX() + 5);
+			player_1->setPositionX(player_1->getPositionX() + player_1->getSpd() );
 		}
 		break;
 	}
@@ -362,7 +362,7 @@ void FightLayer::is_crash(float dt)
 			else
 			{
 				plane_death(plane_list_1.at(i));
-				player_1->changeHp(-100);
+				player_1->changeHp(-10);
 				this->hpChange();
 			}
 		}
@@ -460,7 +460,7 @@ void FightLayer::is_crash(float dt)
 			}
 			else {
 				if (player_1->getBoundingBox().containsPoint(Ebullet_list_1.at(i)->getPosition())) {
-					player_1->changeHp(-10);
+					player_1->changeHp(-player_1->getGrade());
 					Ebullet_list_1.at(i)->removeBullet();
 					this->hpChange();
 				}
@@ -476,7 +476,7 @@ void FightLayer::is_crash(float dt)
 					{
 						if (player_1->getMaxHp() > player_1->getHp())
 						{
-							player_1->changeHp(50);
+							player_1->changeHp(5);
 							this->hpChange();
 						}
 						scoreValue++;
@@ -498,7 +498,7 @@ void FightLayer::is_crash(float dt)
                                 SimpleAudioEngine::getInstance()->playEffect("music/stone1.wav");
                             }
                             
-							player_1->changeHp(-50);
+							player_1->changeHp(-5);
 							this->hpChange();
 							supply_1->removeSupply();
                             showDamage(supply_1);
@@ -542,7 +542,7 @@ void FightLayer::is_crash(float dt)
 						auto enemy_2 = plane_list_1.at(j);
 						if (rect.containsPoint(enemy_2->getPosition()))
 						{
-							enemy_2->changeHp(-500);
+							enemy_2->changeHp(-50);
 							if (enemy_2->getHp() <= 0)
 							{
 								this->dropEquip(enemy_2);
@@ -561,8 +561,8 @@ void FightLayer::is_crash(float dt)
 		}
 		score->setString(CCString::createWithFormat("score:%d", scoreValue)->getCString());
 		grade->setString(CCString::createWithFormat("LV:%d", player_1->getGrade())->getCString());
-		hpLabel->setString(CCString::createWithFormat("%d", player_1->getHp())->getCString());
-		attarkLabel->setString(CCString::createWithFormat("%d", player_1->getAtk())->getCString());				
+		hpLabel->setString(CCString::createWithFormat("%d0", player_1->getHp())->getCString());
+		attarkLabel->setString(CCString::createWithFormat("%d0", player_1->getAtk())->getCString());				
 }
 		
 void FightLayer::removeAnimation1(float dt)
@@ -635,13 +635,13 @@ void FightLayer::setPlayer(UserInfo &user) {
     this->addChild(grade, 3);
     
     //set hp
-    hpLabel = Label::createWithTTF(ttfConfig, CCString::createWithFormat("%d", player_1->getHp())->getCString());
+    hpLabel = Label::createWithTTF(ttfConfig, CCString::createWithFormat("%d0", player_1->getHp())->getCString());
     hpLabel->setColor(Color3B::WHITE);
     hpLabel->setPosition(Vec2(hpSprite->getPositionX()-hpSprite->getContentSize().width-hpLabel->getContentSize().width, hpSprite->getPositionY()));
     this->addChild(hpLabel, 3);
     
     //set atk
-    attarkLabel = Label::createWithTTF(ttfConfig, CCString::createWithFormat("ATK:%d", player_1->getAtk())->getCString());
+    attarkLabel = Label::createWithTTF(ttfConfig, CCString::createWithFormat("ATK:%d0", player_1->getAtk())->getCString());
     attarkLabel->setColor(Color3B::WHITE);
     attarkLabel->setPosition(Vec2(30,45));
     this->addChild(attarkLabel, 3);
@@ -664,7 +664,7 @@ void FightLayer::hpChange()
 
 void FightLayer::expChange()
 {
-	expSprite->setScaleX(((float)player_1->getExp()) / (10.0*player_1->getGrade()));
+	expSprite->setScaleX(((float)player_1->getExp()) / (1.0*player_1->getGrade()));
 }
 
 void FightLayer::goToGameOver(int value)
@@ -688,6 +688,42 @@ void FightLayer::goToGameOver(int value)
 	Label * result_2 = Label::createWithTTF("通关成功", "fonts/simhei.ttf", 28);
     result_1->setTextColor(Color4B::BLACK);
 	result_2->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 4 / 5));
+	CCLOG("%d1111", player_1->equip_list.size());
+	for (int i = player_1->equip_list.size() - 1; i >= 0; i--)
+	{
+		switch (player_1->equip_list.at(i)->getEquipType())
+		{
+		case 1:
+			user.set_equip_head_have(1);
+			break;
+		case 2:
+			user.set_equip_head_b_have(1);
+			break;
+		case 3:
+			user.set_equip_head_c_have(1);
+			break;
+		case 4:
+			user.set_equip_arm_have(1);
+			break;
+		case 5:
+			user.set_equip_arm_b_have(1);
+			break;
+		case 6:
+			user.set_equip_arm_c_have(1);
+			break;
+		case 7:
+			user.set_equip_tail_have(1);
+			break;
+		case 8:
+			user.set_equip_tail_b_have(1);
+			break;
+		case 9:
+			user.set_equip_tail_c_have(1);
+			break;
+		default:
+			break;
+		}
+	}
 	switch (value)
 	{
 	case 1:
@@ -732,42 +768,8 @@ void FightLayer::goToGameOver(int value)
 
     user.setSpd(player_1->getSpd());
     user.setGameLevel(gameLevel);
-   
-    for (int i = player_1->equip_list.size() - 1; i >= 0; i--)
-    {
-        switch (player_1->equip_list.at(i)->getEquipType())
-        {
-            case 1:
-                user.set_equip_head_have(1);
-                break;
-            case 2:
-                user.set_equip_head_b_have(1);
-                break;
-            case 3:
-                user.set_equip_head_c_have(1);
-                break;
-            case 4:
-                user.set_equip_arm_have(1);
-                break;
-            case 5:
-                user.set_equip_arm_b_have(1);
-                break;
-            case 6:
-                user.set_equip_arm_c_have(1);
-                break;
-            case 7:
-                user.set_equip_tail_have(1);
-                break;
-            case 8:
-                user.set_equip_tail_b_have(1);
-                break;
-            case 9:
-                user.set_equip_tail_c_have(1);
-                break;
-            default:
-                break;
-       }
-   }
+	
+  
 
 	Label * score = Label::createWithTTF(CCString::createWithFormat("score:%d", scoreValue)->getCString(), "fonts/Marker Felt.ttf", 18);
 	score->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height / 2));
@@ -1154,9 +1156,9 @@ void FightLayer::addSkill(int i)
 
 void FightLayer::addHp(float dt)
 {
-	if (player_1->getHp() + 50 <= player_1->getMaxHp())
+	if (player_1->getHp() + 5 <= player_1->getMaxHp())
 	{
-		player_1->changeHp(50);
+		player_1->changeHp(5);
 		this->hpChange();
 	}
 	else
@@ -1178,17 +1180,22 @@ void FightLayer::dropEquip(Enemy * plane)
 	{
 		player_1->setEquip(equip_1);
 	}else{
+	int temp = 0;
     for (int i =player_1->equip_list.size()-1; i >=0; i--)
     {
         if (player_1->equip_list.at(i)->getEquipType() == equip_1->getEquipType()) {	
-			player_1->setEquip(equip_1);			
+			player_1->setEquip_2(equip_1);
+			break;
         }
         else
         {
-            player_1->setEquip_2(equip_1);
-			
+			temp++;
         }
     }
+	if (temp==player_1->equip_list.size())
+	{
+		player_1->setEquip(equip_1);
+	}
 	}
 }
 
@@ -1278,13 +1285,13 @@ void FightLayer::addBoss()
 		//初始化属性
 	boss = Enemy::create();
 	int lv = player_1->getGrade();
-	boss->setAttri(50, 2000, 50, 1);
+	boss->setAttri(5*gameLevel, 200*gameLevel, 5, 1);
 	boss->setImg("res/SpaceShooterRedux/PNG/Enemies/enemyRed5.png");
 	boss->setScale(2);
 	boss->setIs_boss(1);
 	boss->bossMove();
 	this->addChild(boss, 3);	
-	bossMaxHp = 2000;
+	bossMaxHp = 200;
 	GameManager::getInstance()->setPlane(boss);
 	bossExist = 1;
 	
@@ -1344,7 +1351,7 @@ void FightLayer::showDamage(Supply * spy)
      metors->setPosition(spy->getPosition());
      this->addChild(metors,3);
      this->scheduleOnce(schedule_selector(FightLayer::removeMetor), 0.5f);
-            }
+}
                            
 
 

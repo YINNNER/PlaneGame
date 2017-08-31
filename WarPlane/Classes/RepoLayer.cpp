@@ -84,25 +84,25 @@ bool RepoLayer::init() {
 
 	HpBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	HpBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.798));
-	HpBar->setScale(0.35*(user.getHp()) / 500, 0.5);
+	HpBar->setScale(0.35*(user.getHp()) / 50, 0.5);
 	HpBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(HpBar, 2);
 
 	EnBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	EnBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.758));
-	EnBar->setScale(0.35*(user.getMp())/200, 0.5);
+	EnBar->setScale(0.35*(user.getMp())/20, 0.5);
 	EnBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(EnBar, 2);
 
 	AtkBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	AtkBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.718));
-	AtkBar->setScale(0.35*(user.getAtk()) / 300, 0.5);
+	AtkBar->setScale(0.35*(user.getAtk()) / 30, 0.5);
 	AtkBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(AtkBar, 2);
 
 	SpdBar = Sprite::create("res/UI/0Loading/loadingBarFull.png");
 	SpdBar->setPosition(Vec2(origin.x + winSize.width *0.6335, origin.y + winSize.height *0.678));
-	SpdBar->setScale(0.35*(user.getSpd()) / 200, 0.5);
+	SpdBar->setScale(0.35*(user.getSpd()) / 20, 0.5);
 	SpdBar->setAnchorPoint(Vec2(0, 0));
 	this->addChild(SpdBar, 2);
 
@@ -162,17 +162,17 @@ bool RepoLayer::init() {
 	_equip_head = Equip::create();
 	_equip_head->setType(1);
 	std::stringstream hp;
-	hp << (_equip_head->getEHp());
+	hp << (_equip_head->getEHp()*10);
 
 	_equip_head_b = Equip::create();
 	_equip_head_b->setType(2);
 	std::stringstream hp_b;
-	hp_b << (_equip_head_b->getEHp());
+	hp_b << (_equip_head_b->getEHp()*10);
 
 	 _equip_head_c = Equip::create();
 	 _equip_head_c->setType(3);
 	std::stringstream hp_c;
-	hp_c << (_equip_head_c->getEHp());
+	hp_c << (_equip_head_c->getEHp()*10);
 
 	Label * equipName_1 = Label::createWithTTF("部件名称    机身", "fonts/simhei.ttf", 18);
 	equipName_1->setPosition(Vec2(origin.x + winSize.width * 0.5, origin.y + winSize.height * 0.55 ));
@@ -198,17 +198,17 @@ bool RepoLayer::init() {
 	_equip_arm = Equip::create();
 	_equip_arm->setType(4);
 	std::stringstream atk;
-	atk << (_equip_arm->getEAtk());
+	atk << (_equip_arm->getEAtk()*10);
 
 	_equip_arm_b = Equip::create();
 	_equip_arm_b->setType(5);
 	std::stringstream atk_b;
-	atk_b << (_equip_arm_b->getEAtk());
+	atk_b << (_equip_arm_b->getEAtk()*10);
 
 	_equip_arm_c = Equip::create();
 	_equip_arm_c->setType(6);
 	std::stringstream atk_c;
-	atk_c << (_equip_arm_c->getEAtk());
+	atk_c << (_equip_arm_c->getEAtk()*10);
 	//d << (_equip_2->getEquipNum());
 
 	Label * equipName_2 = Label::createWithTTF("部件名称    机翼", "fonts/simhei.ttf", 18);
@@ -235,17 +235,17 @@ bool RepoLayer::init() {
 	_equip_tail = Equip::create();
 	_equip_tail->setType(7);
 	std::stringstream spd;
-	spd << (_equip_tail->getESpd());
+	spd << (_equip_tail->getESpd()*10);
 
 	_equip_tail_b = Equip::create();
 	_equip_tail_b->setType(8);
 	std::stringstream spd_b;
-	spd_b << (_equip_tail_b->getESpd());
+	spd_b << (_equip_tail_b->getESpd()*10);
 
 	_equip_tail_c = Equip::create();
 	_equip_tail_c->setType(9);
 	std::stringstream spd_c;
-	spd_c << (_equip_tail_c->getESpd());
+	spd_c << (_equip_tail_c->getESpd()*10);
 	//num << (_equip_3->getEquipNum());
 
 	Label * equipName_3 = Label::createWithTTF("部件名称    机尾", "fonts/simhei.ttf", 18);

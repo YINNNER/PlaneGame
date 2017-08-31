@@ -27,16 +27,16 @@ void CCPlane::changeAttri()
 {
 	switch (this->getType()) {
 	case 1:							//·À
-		this->attack += 30;
-		this->hp += 120;
+		this->attack += 3;
+		this->hp += 12;
 		break;
 	case 2:							//¹¥
-		this->attack += 50;
-		this->hp += 80;
+		this->attack += 5;
+		this->hp += 8;
 		break;
 	case 3:
-		this->attack += 40;
-		this->hp += 100;
+		this->attack += 4;
+		this->hp += 10;
 		break;
 	}
 }
@@ -64,13 +64,13 @@ int CCPlane::getMaxHp()
 	switch (type)
 	{
 	case 1:
-		return 160 * grade;
+		return 16 * grade;
 		break;
 	case 2:
-		return 200 * grade;
+		return 20 * grade;
 		break;
 	case 3:
-		return 240 * grade;
+		return 24 * grade;
 		break;
 	default:
 		return 0;
@@ -140,7 +140,6 @@ void CCPlane::setEquip(Equip * _equip)
 	}
 	else if (_equip->getEquipType()>3)
 	{
-		CCLOG("55555");
 		this->attack += _equip->getEAtk();
 	}
 	else {

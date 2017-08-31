@@ -71,17 +71,17 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 
 
     if (userInfo.getPlaneType()==2) {
-        userInfo.setAtk(150);
-        userInfo.setSpd(50);
-        userInfo.setHp(80);
-        userInfo.setMp(100);
-
+        userInfo.setAtk(15);
+        userInfo.setSpd(5);
+        userInfo.setHp(8);
+        userInfo.setMp(10);
+		
     }
     else if(userInfo.getPlaneType()==3){
-        userInfo.setAtk(130);
-        userInfo.setSpd(60);
-        userInfo.setHp(100);
-        userInfo.setMp(100);
+        userInfo.setAtk(13);
+        userInfo.setSpd(6);
+        userInfo.setHp(10);
+        userInfo.setMp(10);
     }
     else ;
 	}
