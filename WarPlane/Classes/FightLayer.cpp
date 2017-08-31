@@ -685,10 +685,11 @@ void FightLayer::goToGameOver(int value)
 	Label * result_1 = Label::createWithTTF("通关失败", "fonts/simhei.ttf", 28);
     result_1->setTextColor(Color4B::BLACK);
 	result_1->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 4 / 5));
+	
 	Label * result_2 = Label::createWithTTF("通关成功", "fonts/simhei.ttf", 28);
-    result_1->setTextColor(Color4B::BLACK);
+    result_2->setTextColor(Color4B::BLACK);
 	result_2->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 4 / 5));
-	CCLOG("%d1111", player_1->equip_list.size());
+
 	for (int i = player_1->equip_list.size() - 1; i >= 0; i--)
 	{
 		switch (player_1->equip_list.at(i)->getEquipType())
@@ -746,7 +747,7 @@ void FightLayer::goToGameOver(int value)
         break;
 	case 2:
            gameOver->addChild(result_2);
-		 gameOver->addChild(star_1);
+			gameOver->addChild(star_1);
 			   gameOver->addChild(star_2);
 			   gameOver->addChild(star_3);
 			   gameLevel++;
@@ -1265,15 +1266,15 @@ void FightLayer::addEnemy(float dt)
 	//判断等级，是否生成boss
 	if (bossExist==0)
 	{
-        if (player_1->getGrade() == 15&&gameLevel==3)
+        if (player_1->getGrade() == 3&&gameLevel==3)
         {
             this->addBoss();
         }
-        else if (player_1->getGrade() == 10&&gameLevel==2)
+        else if (player_1->getGrade() == 2&&gameLevel==2)
         {
             this->addBoss();
         }
-        else if (player_1->getGrade() == 2&&gameLevel == 1)
+        else if (player_1->getGrade() == 1&&gameLevel == 1)
 		{
 			this->addBoss();
 		}
@@ -1285,7 +1286,7 @@ void FightLayer::addBoss()
 		//初始化属性
 	boss = Enemy::create();
 	int lv = player_1->getGrade();
-	boss->setAttri(5*gameLevel, 200*gameLevel, 5, 1);
+	boss->setAttri(5*gameLevel, 20*gameLevel, 5, 1);
 	boss->setImg("res/SpaceShooterRedux/PNG/Enemies/enemyRed5.png");
 	boss->setScale(2);
 	boss->setIs_boss(1);

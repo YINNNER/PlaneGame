@@ -133,18 +133,6 @@ void CCPlane::removeHero(float dt)
 
 void CCPlane::setEquip(Equip * _equip)
 {
-	if (_equip->getEquipType()>6)
-	{
-		this->speed += _equip->getESpd();
-		
-	}
-	else if (_equip->getEquipType()>3)
-	{
-		this->attack += _equip->getEAtk();
-	}
-	else {
-		this->hp += _equip->getEHp();
-	}
 	equip_list.pushBack(_equip);
 }
 
