@@ -84,3 +84,15 @@ void Supply::removeSupply()
 	this->removeFromParentAndCleanup(true);
 
 }
+
+void Supply::removeSupply_2(float)
+{
+	this->removeFromParentAndCleanup(true);
+}
+
+void Supply::replaceImg()
+{
+	spyImg->removeFromParent();
+	spyImg->Sprite::create("res/SpaceShooterRedux/PNG/Damage/playerShip3_damage3.png");
+	this->addChild(spyImg);
+}
