@@ -107,6 +107,8 @@ void CCPlane::setType(int type)
 	this->type = type;
 }
 
+
+
 void CCPlane::setGrade(int grade)
 {
 	this->grade = grade;

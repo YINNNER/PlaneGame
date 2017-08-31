@@ -366,7 +366,7 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 	stringstream filename4;
 	stringstream filename5;
 	stringstream filename6;
-	filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_01.png";
+	filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_01.png";//atk
 	filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_01.png";
 	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_01.png";
 	filename4 << "res/UI/plane_parts/playerShip" << type << "_blue_03.png";
@@ -459,7 +459,7 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 	stringstream filename1;
 	stringstream filename2;
 	stringstream filename3;
-	filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_04.png";
+	filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_04.png";//spd
 	filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_04.png";
 	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_04.png";
 

@@ -404,7 +404,10 @@ void FightLayer::is_crash(float dt)
                 if (SetLayer::effectState == 1) {
                     SimpleAudioEngine::getInstance()->playEffect("music/hited2.wav");
                 }
-                
+				if (enemy_plane->getIsBoss() == 1)
+				{
+					this->bossHpChange();
+				}
 
 				if (enemy_plane->getHp() <= 0)
 				{
@@ -559,11 +562,7 @@ void FightLayer::is_crash(float dt)
 		score->setString(CCString::createWithFormat("score:%d", scoreValue)->getCString());
 		grade->setString(CCString::createWithFormat("LV:%d", player_1->getGrade())->getCString());
 		hpLabel->setString(CCString::createWithFormat("%d", player_1->getHp())->getCString());
-		attarkLabel->setString(CCString::createWithFormat("%d", player_1->getAtk())->getCString());		
-		if (bossExist==1)
-		{
-			bosshp->setString(CCString::createWithFormat("%d", boss->getHp())->getCString());
-		}
+		attarkLabel->setString(CCString::createWithFormat("%d", player_1->getAtk())->getCString());				
 }
 		
 void FightLayer::removeAnimation1(float dt)
@@ -1267,7 +1266,7 @@ void FightLayer::addEnemy(float dt)
         {
             this->addBoss();
         }
-        else if (player_1->getGrade() == 5&&gameLevel == 1)
+        else if (player_1->getGrade() == 2&&gameLevel == 1)
 		{
 			this->addBoss();
 		}
@@ -1276,9 +1275,7 @@ void FightLayer::addEnemy(float dt)
 //boss生成方式
 void FightLayer::addBoss()
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	TTFConfig ttfConfig("fonts/Marker Felt.ttf", 24);
-	//初始化属性
+		//初始化属性
 	boss = Enemy::create();
 	int lv = player_1->getGrade();
 	boss->setAttri(50, 2000, 50, 1);
@@ -1286,15 +1283,21 @@ void FightLayer::addBoss()
 	boss->setScale(2);
 	boss->setIs_boss(1);
 	boss->bossMove();
-	this->addChild(boss, 3);
-	//显示bossHP
-	bosshp = Label::createWithTTF(ttfConfig, CCString::createWithFormat("boss:%d", boss->getHp())->getCString());
-	bosshp->setColor(Color3B::RED);
-	bosshp->setPosition(100, visibleSize.height - 20);
-	this->addChild(bosshp, 4);
+	this->addChild(boss, 3);	
+	bossMaxHp = 2000;
 	GameManager::getInstance()->setPlane(boss);
 	bossExist = 1;
 	
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	Sprite * bossBar = Sprite::create("res/EmptyBar.png");
+	bossBar->setAnchorPoint(Point::ZERO);
+	bossBar->setPosition(10, visibleSize.height - 20);
+	this->addChild(bossBar, 3);
+
+	bossHp = Sprite::create("res/RedBar.png");
+	bossHp->setAnchorPoint(Point::ZERO);
+	bossHp->setPosition(Vec2(10, visibleSize.height - 20));
+	this->addChild(bossHp, 4);
 	//计时器调用boss技能
 	this->schedule(schedule_selector(FightLayer::bossSkill),5.0f);
 }
@@ -1414,5 +1417,18 @@ void FightLayer::onEnter()
 void FightLayer::getGameLevel(int l)
 {
 	gameLevel = l;
+}
+
+void FightLayer::bossHpChange()
+{
+	float scalex = ((float)(boss->getHp())) / bossMaxHp;
+	if (scalex > 0)
+	{
+		bossHp->setScaleX(scalex);
+	}
+	else
+	{
+		bossHp->setScaleX(0);
+	}
 }
 

@@ -23,11 +23,8 @@ public:
 	void setType(int type);
 	void setGrade(int grade);
 	void setExp(int exp);
-	void removePlane(float dt);
-	void plane_death();
 	void hero_death();
 	void removeHero(float dt);
-	void removeMetors(float);
 	void setEquip(Equip * _equip);
 	void removeEquip(Equip * _equip);
 	void setEquip_2(Equip * _equip);
