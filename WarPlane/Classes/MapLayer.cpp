@@ -17,8 +17,8 @@ bool MapLayer::init() {
 	auto animation = Animation::create();
 	for (int i = 1; i <= 3; i++) {
 		char szName[100] = { 0 };
-		sprintf(szName, "res/UI/a2SelectLevel/%d.png", i);
-		animation->addSpriteFrameWithFile(szName);
+		sprintf(szName, "%d.png", i);
+		animation->addSpriteFrameWithFileName(szName);
 	}
 	animation->setDelayPerUnit(0.1f);
 	animation->setRestoreOriginalFrame(true);
