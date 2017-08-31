@@ -21,6 +21,7 @@ UserInfo::UserInfo(){
     mp=10;
     planeLevel=1;
     exp=0;
+
     //equip
     //1.head
     _equip_head_have=0;

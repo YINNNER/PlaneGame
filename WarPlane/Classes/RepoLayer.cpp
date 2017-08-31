@@ -134,6 +134,7 @@ bool RepoLayer::init() {
 	planeName->setPosition(Vec2(origin.x + winSize.width * 0.57, origin.y + winSize.height * 0.84));
 	this->addChild(planeName, 2);
 
+
 	//传入等级值将int转换为char*
 	std::stringstream Level;
 	Level << "Lv."<<user.getPlaneLevel();

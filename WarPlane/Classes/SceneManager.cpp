@@ -83,6 +83,7 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
         userInfo.setHp(10);
         userInfo.setMp(10);
     }
+
     else ;
 	}
     layer->user = userInfo;

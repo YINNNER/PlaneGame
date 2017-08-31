@@ -1,5 +1,6 @@
 #include "Equip.h"
 void Equip::setType(int  type) {
+	
 	this->type=type;
 	switch (type) {
 	case 1:

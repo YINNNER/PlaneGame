@@ -45,7 +45,7 @@ bool FightLayer::init() {
 
     //set score label
     scoreValue = 0;
-    score = Label::createWithTTF(ttfConfig, CCString::createWithFormat("score:%d0", scoreValue)->getCString());
+    score = Label::createWithTTF(ttfConfig, CCString::createWithFormat("score:%d", scoreValue)->getCString());
     score->setColor(Color3B::WHITE);
     score->setPosition(visibleSize.width -90, visibleSize.height -40);
     this->addChild(score, 3);

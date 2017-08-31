@@ -165,6 +165,7 @@ void CCPlane::removeEquip(Equip * _equip)
 	equip_list.eraseObject(_equip);
 }
 
+
 void CCPlane::setEquip_2(Equip * _equip)
 {
 	equip_list_2.pushBack(_equip);
