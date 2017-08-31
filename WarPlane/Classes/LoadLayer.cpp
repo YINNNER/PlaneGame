@@ -20,7 +20,7 @@ bool LoadLayer::init() {
     _logo->runAction(FadeIn::create(2.0f));
     this->addChild(_logo);
    
-	
+	//Ô¤¼ÓÔØ×ÊÔ´
 	loadedImage = 0;
 	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/a2SelectLevel/MapScene.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
 	Director::getInstance()->getTextureCache()->addImageAsync("res/game.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
@@ -52,7 +52,7 @@ void LoadLayer::onScheduleOnce(float dt){
 
 	int tag = 1;
 	int transiTime = 1;
-	SceneManager::goMenuLayer(tag,transiTime);
+	SceneManager::goMenuLayer(tag);
 
 }
 

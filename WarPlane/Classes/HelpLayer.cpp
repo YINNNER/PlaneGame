@@ -30,7 +30,7 @@ bool HelpLayer::init() {
 }
 void HelpLayer::CallBack(Ref *pSender) {
 	int tag = 1;
-	if (SetLayer::getEffectState() == 1) {
+	if (SetLayer::effectState == 1) {
 		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}

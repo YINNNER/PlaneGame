@@ -24,7 +24,6 @@ bool CreateLayer::init() {
 	auto scale = winSize.width / _background->getContentSize().width;
 	_background->setScale(scale);
 	this->addChild(_background);
-	//SpriteBatchNode*batchNode = SpriteBatchNode::create("res/UI/a1CreatePlayer/createScene.png");
 	
 	MenuItemImage* show1 = MenuItemImage::create("res/UI/a1CreatePlayer/plane1U.png","res/UI/a1CreatePlayer/plane1U.png", CC_CALLBACK_1(CreateLayer::CallBack, this));
 	show1->setPosition(Vec2(winSize.width *0.18, winSize.height*0.6));
@@ -37,7 +36,6 @@ bool CreateLayer::init() {
 
 	auto show2 = MenuItemImage::create("res/UI/a1CreatePlayer/plane2U.png", "res/UI/a1CreatePlayer/plane2U.png", CC_CALLBACK_1(CreateLayer::CallBack, this));
 	show2->setPosition(Vec2(winSize.width *0.5, winSize.height*0.6));
-	//show2->setScale(1.2);
 	show2->setTag(11);
 	selected_2 = Sprite::create("res/UI/a1CreatePlayer/plane2.png");
 	selected_2->setPosition(Vec2(winSize.width *0.51, winSize.height*0.61));
@@ -63,22 +61,23 @@ bool CreateLayer::init() {
 	username->setPosition(Vec2(winSize.width*0.3, winSize.height*0.25));
 	this->addChild(username);
 
+	//创建角色按钮
 	menuItem_1 = MenuItemImage::create("res/UI/a1CreatePlayer/createButton.png", "res/UI/a1CreatePlayer/createButtonS.png", "res/UI/a1CreatePlayer/createButtonForbidden.png",CC_CALLBACK_1(CreateLayer::CallBack, this));
 	menuItem_1->setTag(1);
 	menuItem_1->setEnabled(false);
 	menuItem_1->setPosition(Vec2(origin.x + winSize.width / 2, origin.y + winSize.height*0.1));
 
-
+	//返回上层
 	auto back = MenuItemImage::create("res/UI/b1Help/back.png", "res/UI/b1Help/backS.png", CC_CALLBACK_1(CreateLayer::CallBack, this));
 	back->setTag(2);
 	back->setPosition(Vec2(winSize.width*0.15, winSize.height*0.9));
-
+	
 	auto menu2 = Menu::create(menuItem_1, back, NULL);
 	menu2->setPosition(Point::ZERO);
 	this->addChild(menu2);
 	
 	
-
+	//输入的字符太多会弹出的提示
 	warning = Label::createWithSystemFont("太多字啦", "fonts/simhei.ttf", 20);
 	warning->setPosition(Vec2(winSize.width*0.9, winSize.height*0.25));
 	warning->setVisible(false);
@@ -107,12 +106,12 @@ bool CreateLayer::init() {
 	editBox->setScale(1.3, 0.9);
 	this->addChild(editBox,0);
 
-	defaultLabel = Label::createWithSystemFont("请输10个以内字母支持大小写", "", 15);
+	defaultLabel = Label::createWithSystemFont("支持十个以内大小写字母以及0至9", "", 15);
 	defaultLabel->setColor(Color3B(72, 72, 72));
 	defaultLabel->setPosition(Vec2(winSize.width*0.56, winSize.height*0.25));
 	this->addChild(defaultLabel, 1);
 	
-	//this->schedule(schedule_selector(CreateLayer::addWords),1.0f);
+	//编辑框中的光标
 	cursor = Sprite::create("res/UI/a1CreatePlayer/cursor.png");
 	cursor->setPosition(Vec2(winSize.width*0.4, winSize.height*0.25));
 	cursor->setVisible(false);
@@ -120,11 +119,12 @@ bool CreateLayer::init() {
 	auto cursorBlink = RepeatForever::create(Sequence::create(FadeOut::create(0.4f), FadeIn::create(0.4f), NULL));
 	cursor->runAction(cursorBlink);
 
+	//用于判断当玩家点击编辑框才可以进行输入
 	auto cursorListener = EventListenerTouchOneByOne::create();
 	cursorListener->setSwallowTouches(true);
 	cursorListener->onTouchBegan = CC_CALLBACK_2(CreateLayer::onTouchBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(cursorListener, editBox);
-
+	//检测输入的字母
 	listenerKeyboard = EventListenerKeyboard::create();
 	listenerKeyboard->onKeyPressed = CC_CALLBACK_2(CreateLayer::onKeyPressed, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerKeyboard, this);
@@ -480,7 +480,7 @@ void CreateLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 	}
 }
 
-
+//在编辑框中增加字母或数字
 void CreateLayer::addWords(std::string temp) {
 	
 	auto winSize = Director::getInstance()->getWinSize();
@@ -514,6 +514,7 @@ void CreateLayer::addWords(std::string temp) {
 	}
 }
 
+//点BACKSPACE删除
 void CreateLayer::minusWords(std::string temp) {
 	auto winSize = Director::getInstance()->getWinSize();
 	warning->setVisible(false);
@@ -539,27 +540,26 @@ void CreateLayer::CallBack(Ref *pSender) {
 	{
 	case 1:
 	{
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
-		auto file = new UserInfo();
+		auto file = new UserInfo();//创建一个角色类对象用于暂时存储数据
 		UserInfo user = file->createUser(planeName, planeType);
-		//CCLOG(user.getUserName().c_str());
 		delete file;
 		SceneManager::goMapLayer(tag, user);
 
 	}break;
 	case 2: {
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
-		int transiTimes = 1;
-		SceneManager::goMenuLayer(tag,transiTimes);
+
+		SceneManager::goMenuLayer(tag);
 	}break;
 	case 10: {
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			
 			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
@@ -574,7 +574,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 		planeType = 1;
 	}break;
 	case 11: {
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			
 			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
@@ -589,7 +589,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 		planeType = 2;
 	}break;
 	case 12: {
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			
 			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}

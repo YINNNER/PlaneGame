@@ -103,14 +103,6 @@ bool MapLayer::init() {
 	plane->runAction(sprayForever);
 	this->addChild(plane,2);
 
-
-
-	
-	/*
-	auto listener = EventListenerMouse::create();//´´½¨Êó±ê¼àÌý
-	listener->onMouseMove = CC_CALLBACK_1(MapLayer::mouseMove, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, level_1);
-	*/
 	return true;
 }
 
@@ -121,7 +113,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 	{
 	case 1:
 
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
@@ -129,16 +121,16 @@ void MapLayer::CallMenu(Ref * pSender) {
 
 		break;
 	case 2:
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
 		
-		SceneManager::goMenuLayer(tag,times);
+		SceneManager::goMenuLayer(tag);
 		break;
 	case 31:
 	{
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
 		chooseLevel = 1;
@@ -146,7 +138,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 	}break;
 	case 32:
 	{
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
@@ -155,7 +147,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 	}break;
 	case 33:
 	{
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
 		chooseLevel = 3;
@@ -163,7 +155,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 	}break;
 	case 4:
 	{
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
@@ -171,20 +163,3 @@ void MapLayer::CallMenu(Ref * pSender) {
 	}
 	}
 }
-/*
-void MapLayer::mouseMove(Event *event) {
-	auto winSize = Director::getInstance()->getWinSize();
-	auto origin = Director::getInstance()->getVisibleOrigin();
-	EventMouse *e = (EventMouse *)event;
-	CCLOG("%f", e->getCursorY());
-	auto locationInNode = level_1->convertToNodeSpace(e->getLocation());
-	//Rect rect = Rect(level_1->getAnchorPoint(), level_1->getContentSize());
-	Rect rect = Rect(level_1->getPositionX() - level_1->getContentSize().width * level_1->getAnchorPoint().x,
-		level_1->getPositionY() - level_1->getContentSize().height * level_1->getAnchorPoint().y,
-		getContentSize().width, getContentSize().height);
-	if (level_1->getBoundingBox().containsPoint(locationInNode)) {
-		level_1->setScale(0.7);
-		return;
-	}
-	level_1->setScale(0.5);
-}*/

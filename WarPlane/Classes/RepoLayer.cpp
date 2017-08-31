@@ -277,7 +277,7 @@ bool RepoLayer::init() {
 //第一栏装备按钮
 void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 	//音效
-	if (SetLayer::getEffectState() == 1) {
+	if (SetLayer::effectState == 1) {
 		
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}
@@ -365,7 +365,7 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 	//音效
-	if (SetLayer::getEffectState() == 1) {
+	if (SetLayer::effectState == 1) {
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}
 	stringstream filename1;
@@ -468,7 +468,7 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 
-	if (SetLayer::getEffectState() == 1) {
+	if (SetLayer::effectState == 1) {
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}
 	stringstream filename1;
@@ -619,7 +619,7 @@ void RepoLayer::UnTail_1_c(Ref * pSender, UserInfo & userInfo)
 //返回关卡选择
 void RepoLayer::CallMenu(Ref * pSender,UserInfo & userInfo)
 {
-	if (SetLayer::getEffectState() == 1) {
+	if (SetLayer::effectState == 1) {
 		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}
@@ -628,7 +628,7 @@ void RepoLayer::CallMenu(Ref * pSender,UserInfo & userInfo)
 //保存装备
 void RepoLayer::SaveEquip(Ref * pSender, UserInfo & userInfo)
 {
-	if (SetLayer::getEffectState() == 1) {
+	if (SetLayer::effectState == 1) {
 		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}

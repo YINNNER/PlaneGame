@@ -14,9 +14,8 @@ public:
 	
 	void CallBack(Ref *pSender);
 	
-	static int getEffectState();
 	static int effectState;//音效开关状态
-	static int backState;
+	static int backState;//bgm开关状态
 
 private:
 	Sprite *backCir;

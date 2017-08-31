@@ -11,7 +11,7 @@ class SceneManager
 public:
 	void CreateLoadScene();
     //tag为1表示首次进入，2表示返回至该界面（除goSaveLayer）
-	static void goMenuLayer(int tag,int transiTimes);
+	static void goMenuLayer(int tag);
 	static void goCreateLayer(int tag);
 	static void goMapLayer(int tag,UserInfo &userInfo);
 	static void goSaveLayer(int tag,UserInfo &userInfo);//进行存储，tag=2，表示存储

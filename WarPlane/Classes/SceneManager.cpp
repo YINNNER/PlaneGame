@@ -19,30 +19,22 @@ void SceneManager::CreateLoadScene() {
 
 
 }
-void SceneManager::goMenuLayer(int tag,int times) {
-	//static int times = 1;
-	
+void SceneManager::goMenuLayer(int tag) {
+
 	auto menuScene = Scene::create();
 	MenuLayer *layer = MenuLayer::create();
 	menuScene->addChild(layer);
-	if (times == 1) {
-		//times++;
-		if (tag == 1) {
-			
-			auto transition = TransitionFade::create(2.0f, menuScene);
-			Director::getInstance()->replaceScene(transition);
-			
-		}
-		else {
-			auto transition = TransitionMoveInL::create(0.2f, menuScene);
-			Director::getInstance()->replaceScene(transition);
-		}
+	if (tag == 1) {
+
+		auto transition = TransitionFade::create(2.0f, menuScene);
+		Director::getInstance()->replaceScene(transition);
 
 	}
 	else {
-		Director::getInstance()->pushScene(menuScene);
+		auto transition = TransitionMoveInL::create(0.2f, menuScene);
+		Director::getInstance()->replaceScene(transition);
 	}
-	
+
 }
 
 void SceneManager::goCreateLayer(int tag) {
@@ -65,7 +57,7 @@ void SceneManager::goMapLayer(int tag, UserInfo &userInfo) {
 	auto mapScene = Scene::create();
 	auto layer = MapLayer::create();
 
-    //鍒ゆ柇鎴樻満绫诲瀷锛屽苟鏍规嵁涓嶅悓绫诲瀷鍐嶆鍒濆鍖栨垬鏈哄睘鎬?
+    //判断是否是从创建角色进入，若是飞机类型为2或3，则需改变初始值
 	if (userInfo.getExp()==0&&userInfo.getGameLevel()==1)
 	{
 

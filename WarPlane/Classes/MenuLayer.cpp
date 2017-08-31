@@ -56,7 +56,7 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	switch (((MenuItem *)pSender)->getTag()) {
 	case 1:
 	{
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
@@ -66,7 +66,7 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	}
 	break;
 	case 2:
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
@@ -75,7 +75,7 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	break;
 	case 3:
 	{
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}
@@ -85,7 +85,7 @@ void  MenuLayer::CallMenu(Ref* pSender) {
 	break;
 	case 4:
 	{
-		if (SetLayer::getEffectState() == 1) {
+		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 		}

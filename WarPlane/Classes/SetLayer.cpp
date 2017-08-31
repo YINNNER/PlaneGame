@@ -26,10 +26,12 @@ bool SetLayer::init()
 	effect->setPosition(Vec2(winSize.width*0.45, winSize.height*0.5));
 	this->addChild(effect);
 
+	
 	auto openBackCir = MenuItemImage::create("res/UI/2Option/open.png", "res/UI/2Option/close.png");
-	openBackCir->setUserData((void *)"on");
+	openBackCir->setUserData((void *)"on");//bgm开启
 	auto closeBackCir = MenuItemImage::create("res/UI/2Option/close.png", "res/UI/2Option/open.png");
-	closeBackCir->setUserData((void *)"off");
+	closeBackCir->setUserData((void *)"off");//bgm关闭
+	//若当前bgm开关状态是打开的，则界面呈现的是打开的图片，音效同理
 	if (backState == true) {
 		backToggle = MenuItemToggle::createWithCallback(CC_CALLBACK_1(SetLayer::CallBack, this),
 			openBackCir, closeBackCir, NULL);
@@ -79,15 +81,13 @@ bool SetLayer::init()
 	return true;
 }
 
-int SetLayer::getEffectState() {
-	return effectState;
-}
 void SetLayer::CallBack(Ref *pSender) {
 	int tag = ((MenuItem*)pSender)->getTag();
 	int transiTimes = 2;
 	switch (tag)
 	{
 	case 1:
+		//音效状态为开时，才播放音效，以此控制音效开关，各个界面的音效控制皆如此
 		if (effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
@@ -102,8 +102,7 @@ void SetLayer::CallBack(Ref *pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 			SimpleAudioEngine::getInstance()->playEffect("music/click8.wav");
 		}
-		
-		//SceneManager::goMenuLayer(tag,transiTimes);
+
 		Director::getInstance()->popScene();
 		break;
 	case 3:
@@ -130,7 +129,7 @@ void SetLayer::CallBack(Ref *pSender) {
 		char* musicState = (char*)item->getUserData();
 		if (musicState == "off")
 			
-			effectState = 0;
+			effectState = 0;//音效关闭则修改effectState为0，否则则为1
 		else {
 			
 			effectState = 1;

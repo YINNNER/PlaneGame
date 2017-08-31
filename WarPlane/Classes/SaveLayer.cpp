@@ -64,18 +64,18 @@ bool SaveLayer::init() {
 
 
 void SaveLayer::callBack(Ref * pSender){
-	if (SetLayer::getEffectState() == 1) {
+	if (SetLayer::effectState == 1) {
 		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}
     int back=2;
     int transiTime=1;
-    SceneManager::goMenuLayer(back, transiTime);
+    SceneManager::goMenuLayer(back);
 }
 
 
 void SaveLayer::saveMenuItem(Ref * pSender,int tag){
-	if (SetLayer::getEffectState() == 1) {
+	if (SetLayer::effectState == 1) {
 		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
 		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
 	}
