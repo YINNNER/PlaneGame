@@ -194,33 +194,14 @@ void SceneManager::goHelpLayer(int tag) {
 	}
 }
 
-//¥”≤Àµ•µ⁄“ª¥ŒΩ¯»Î ±¥¥Ω®setScene£¨÷Æ∫Û≤ªπ‹¥”ƒƒ¿ÔΩ¯»Î∂º «”√popScene(),setSceneΩ¯»Î»Œ∫Œ≥°æ∞∂º «pushScene()
 void SceneManager::goSetLayer(int tag) {
 	auto setScene = Scene::create();
 	auto layer = SetLayer::create();
 	setScene->addChild(layer);
-	/*
-	if (tag == 1) {
-		auto transition = TransitionMoveInR::create(0.2f, setScene);
-		Director::getInstance()->replaceScene(transition);
-	}
-	else {
-		auto transition = TransitionMoveInL::create(0.2f, setScene);
-		Director::getInstance()->replaceScene(transition);
-	}
-	*/
-	/*static int times = 1;
-	if (times == 1) {*/
-	/*Scene* setScene = Scene::create();
-	SetLayer * layer = SetLayer::create();
-	setScene->addChild(layer);*/
+	
 	auto transition = TransitionMoveInR::create(0.2f, setScene);
 	Director::getInstance()->pushScene(transition);
-	/*	times++;
-	}
-	else {
-		Director::getInstance()->popScene();
-	}*/
+
 
 }
 
