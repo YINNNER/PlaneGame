@@ -14,13 +14,7 @@ FightLayer::~FightLayer()
 }
 bool FightLayer::init() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	boss = Enemy::create();
-	boss->setAttri(50, 2000, 50, 1);
 	TTFConfig ttfConfig("fonts/Marker Felt.ttf", 24);
-	bosshp = Label::createWithTTF(ttfConfig, CCString::createWithFormat("boss:%d", boss->getHp())->getCString());
-	bosshp->setColor(Color3B::RED);
-	bosshp->setPosition(100, visibleSize.height - 20);
-	this->addChild(bosshp, 4);
 	bossExist = 0;
 	skill2_1 = false;
 	skill1_1 = false;
@@ -262,53 +256,53 @@ void FightLayer::update(float dt)
 	switch (atkKey)
 	{
 	case EventKeyboard::KeyCode::KEY_J:
-		static long interval = this->getCurrentTime();
-		if ((this->getCurrentTime() - interval)<250)
+	{static long interval = 0;
+	if ((this->getCurrentTime() - interval) < 250)
+	{
+		break;
+	}
+	else
+	{
+		if (skill2_1)
 		{
-			break;
+			this->addBullet(1);
+			this->addBullet(1);
+			this->addBullet(1);
 		}
 		else
 		{
-			if (skill2_1)
-			{
-				this->addBullet(1);
-				this->addBullet(1);
-				this->addBullet(1);
-			}
-			else
-			{
-				this->addBullet(1);
-			}
-			interval = this->getCurrentTime();
+			this->addBullet(1);
 		}
-		break;
+		interval = this->getCurrentTime();
+	}
+	break; }
 	case EventKeyboard::KeyCode::KEY_U:
-		static long interval_1 = this->getCurrentTime();
-		if ((this->getCurrentTime() - interval_1)<10000)
-		{
-			break;
-		}
-		else
-		{
-			openSkillU();
-			interval_1 = this->getCurrentTime();
-		}
+	{static long interval_1 = 0;
+	if ((this->getCurrentTime() - interval_1) < 10000)
+	{
 		break;
+	}
+	else
+	{
+		openSkillU();
+		interval_1 = this->getCurrentTime();
+	}
+	break; }
 	case EventKeyboard::KeyCode::KEY_I:
-		static long interval_2 = this->getCurrentTime();
-		if ((this->getCurrentTime() - interval_2)<20000)
-		{
-			break;
-		}
-		else
-		{
-			openSkillI();
-			interval_2 = this->getCurrentTime();
-		}
+	{static long interval_2 = 0;
+	if ((this->getCurrentTime() - interval_2) < 20000)
+	{
 		break;
+	}
+	else
+	{
+		openSkillI();
+		interval_2 = this->getCurrentTime();
+	}
+	break; }
 	case EventKeyboard::KeyCode::KEY_ESCAPE:
-		this->gamePause();
-		break;
+	{this->gamePause();
+	break; }
 	default:
 		break;
 	}
@@ -417,9 +411,11 @@ void FightLayer::is_crash(float dt)
 				{
 					if (enemy_plane->getIsBoss()==1)
 					{
-						bossExist = 0;
+						bossExist = 2;
 						this->unschedule(schedule_selector(FightLayer::bossSkill));
+						this->unschedule(schedule_selector(FightLayer::bossSkill_1));
 						boss->removeFromParent();
+						
 						if (player_1->getGrade() < 10)
 						{
 							this->unschedule(schedule_selector(FightLayer::bossSkill_1));
@@ -449,7 +445,7 @@ void FightLayer::is_crash(float dt)
 		{
 			if (skill1_1)
 			{
-				bullet_list_1.at(i)->removeBullet();
+				Ebullet_list_1.at(i)->removeBullet();
 				break;
 			}
 			else if (skill3_1)
@@ -554,8 +550,12 @@ void FightLayer::is_crash(float dt)
 		grade->setString(CCString::createWithFormat("LV:%d", player_1->getGrade())->getCString());
 		hpLabel->setString(CCString::createWithFormat("%d", player_1->getHp())->getCString());
 		attarkLabel->setString(CCString::createWithFormat("%d", player_1->getAtk())->getCString());		
-		bosshp->setString(CCString::createWithFormat("%d", boss->getHp())->getCString());
+		if (bossExist==1)
+		{
+			bosshp->setString(CCString::createWithFormat("%d", boss->getHp())->getCString());
+		}
 }
+		
 void FightLayer::removeAnimation1(float dt)
 {
 	Anim1->removeFromParentAndCleanup(true);
@@ -598,7 +598,7 @@ void FightLayer::setPlayer(UserInfo &user) {
 	attarkLabel->setColor(Color3B::RED);
 	attarkLabel->setPosition(Vec2(50,20));
 	this->addChild(attarkLabel, 3);
-	this->schedule(schedule_selector(FightLayer::addEnemy),2.0f);
+	this->schedule(schedule_selector(FightLayer::addEnemy),1.0f);
 }
 
 void FightLayer::hpChange()
@@ -936,6 +936,7 @@ void FightLayer::openSkillU()
 		break;
 	}
 	skill_1->setColor(ccc3(119, 136, 153));
+	this->scheduleOnce(schedule_selector(FightLayer::showSkillCD1), 10.0f);
 }
 
 //关闭U键触发的技能
@@ -956,7 +957,6 @@ void FightLayer::closeSkillU(float dt)
 		player_1->setOpacity(255);
 		break;
 	}
-	skill_1->setColor(ccc3(255, 255, 255));
 }
 
 //I键触发的技能
@@ -966,7 +966,6 @@ void FightLayer::openSkillI()
 	{
 	case 1:
 		addSkill(1);
-		this->scheduleOnce(schedule_selector(FightLayer::closeSkillI), 2.0f);
 		break;
 	case 2:
 	{
@@ -975,14 +974,13 @@ void FightLayer::openSkillI()
 		white->setScale(10);
 		this->addChild(white,4);
 		this->scheduleOnce(schedule_selector(FightLayer::closeWhite), 0.01f);
-		auto bullet_list_1 = GameManager::getInstance()->getBulletList();
-		for (int i = bullet_list_1.size() - 1; i >= 0; i--)
+		auto Ebullet_list_1 = GameManager::getInstance()->getEBulletList();
+		for (int i = Ebullet_list_1.size() - 1; i >= 0; i--)
 		{
 
-			auto bullet = bullet_list_1.at(i);
-			bullet->removeBullet();
+			auto Ebullet = Ebullet_list_1.at(i);
+			Ebullet->removeBullet();
 		}
-		this->scheduleOnce(schedule_selector(FightLayer::closeSkillI), 8.0f);
 		break;
 	}
 	case 3:
@@ -993,6 +991,7 @@ void FightLayer::openSkillI()
 		break;
 	}
 	skill_2->setColor(ccc3(119, 136, 153));
+	this->scheduleOnce(schedule_selector(FightLayer::showSkillCD2), 20.0f);
 }
 
 //关闭I键触发的技能
@@ -1008,7 +1007,6 @@ void FightLayer::closeSkillI(float dt)
 	default:
 		break;
 	}
-	skill_2->setColor(ccc3(255, 255, 255));
 }
 
 void FightLayer::addSkill(int i)
@@ -1069,6 +1067,28 @@ void  FightLayer::closeWhite(float dt)
 
 void FightLayer::addEnemy(float dt)
 {
+	int playerLevel = player_1->getGrade();
+	if (playerLevel <= 2) {
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 1.0f);
+	}
+	else if (playerLevel <= 4) {
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.9f);
+	}
+	else if (playerLevel <= 7) {
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.8f);
+	}
+	else if (playerLevel <= 9) {
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.7f);
+	}
+	else if (playerLevel <= 12) {
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.6f);
+	}
+	else if (playerLevel <= 14) {
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.5f);
+	}
+
+
+
 	Enemy * enemy_1 = Enemy::create();
 	enemy_1->setType(3);
 	enemy_1->setGrade(player_1->getGrade());
@@ -1106,22 +1126,28 @@ void FightLayer::addEnemy(float dt)
 
 void FightLayer::addBoss()
 {
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	TTFConfig ttfConfig("fonts/Marker Felt.ttf", 24);
 	
-	bossExist = 1;
 	boss = Enemy::create();
 	int lv = player_1->getGrade();
-	boss->setAttri(50 , 2000, 50, lv);
+	boss->setAttri(50, 200, 50, 1);
 	boss->setImg("res/SpaceShooterRedux/PNG/Enemies/enemyRed5.png");
 	boss->setScale(2);
+	boss->setIs_boss(1);
 	boss->bossMove();
 	this->addChild(boss, 3);
+
+	bosshp = Label::createWithTTF(ttfConfig, CCString::createWithFormat("boss:%d", boss->getHp())->getCString());
+	bosshp->setColor(Color3B::RED);
+	bosshp->setPosition(100, visibleSize.height - 20);
+	this->addChild(bosshp, 4);
 	GameManager::getInstance()->setPlane(boss);
-	
+	bossExist = 1;
 	
 
 	this->schedule(schedule_selector(FightLayer::bossSkill),3.0f);
 }
-
 
 void FightLayer::plane_death(Enemy * enemy)
 {
@@ -1145,4 +1171,14 @@ void FightLayer::plane_death(Enemy * enemy)
 	scheduleOnce(schedule_selector(FightLayer::removeAnimation2), 0.4f);
 	GameManager::getInstance()->removePlane(enemy);
 	enemy->removePlane();
+}
+
+void FightLayer::showSkillCD1(float dt)
+{
+	skill_1->setColor(ccc3(255, 255, 255));
+}
+
+void FightLayer::showSkillCD2(float dt)
+{
+	skill_2->setColor(ccc3(255, 255, 255));
 }
