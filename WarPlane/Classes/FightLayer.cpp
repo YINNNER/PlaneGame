@@ -766,11 +766,19 @@ void FightLayer::timeSche(float dt)
 
 void FightLayer::goToSave(Ref * psender)
 {
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	SceneManager::goSaveLayer(2, user);
 }
 
 void FightLayer::goToMap(Ref * psender)
 {
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	SceneManager::goMapLayer(2, user);
 }
 
@@ -906,20 +914,36 @@ void FightLayer::goToBack(Ref * psender)
 	{
 		supply_list_1.at(i)->scheduleUpdate();
 	}
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 }
 
 void FightLayer::goToHelp(Ref * psender)
 {
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	SceneManager::goHelpLayer(1);
 }
 
 void FightLayer::goToOption(Ref * psender)
 {
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	SceneManager::goSetLayer(1);
 }
 
 void FightLayer::exitGame(Ref * psender)
 {
+	if (SetLayer::getEffectState() == 1) {
+		SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	Director::getInstance()->end();
 }
 
