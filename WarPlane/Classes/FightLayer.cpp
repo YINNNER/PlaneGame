@@ -1298,7 +1298,7 @@ void FightLayer::showSkillCD2(float dt)
 	CD2->removeFromParentAndCleanup(true);
 }
                            
-                           void FightLayer::showDamage(Supply * spy)
+void FightLayer::showDamage(Supply * spy)
             {
                 metors = Sprite::create("res/SpaceShooterRedux/PNG/Damage/playerShip3_damage3.png");
                 metors->setPosition(spy->getPosition());
@@ -1306,12 +1306,12 @@ void FightLayer::showSkillCD2(float dt)
                 this->scheduleOnce(schedule_selector(FightLayer::removeMetor), 0.5f);
             }
                            
-                           void FightLayer::removeMetor(float)
+void FightLayer::removeMetor(float)
             {
                 metors->removeFromParentAndCleanup(true);
             }
                            
-                           void FightLayer::onEnter()
+void FightLayer::onEnter()
             {
                 Layer::onEnter();
                 SpriteBatchNode *batchNode;
@@ -1368,7 +1368,7 @@ void FightLayer::showSkillCD2(float dt)
                 }
             }
                            
-                           void FightLayer::getGameLevel(int l)
+void FightLayer::getGameLevel(int l)
             {
                 gameLevel = l;
             }
