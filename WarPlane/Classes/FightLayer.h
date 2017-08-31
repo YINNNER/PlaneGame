@@ -63,10 +63,10 @@ public:
 	UserInfo user;
 	void showSkillCD1(float dt);
 	void showSkillCD2(float dt);
-	void showDamage(Supply * spy);
-	void removeMetor(float);
-	void onEnter();
-	void getGameLevel(int l);
+    void showDamage(Supply * spy);
+    void removeMetor(float);
+    void onEnter();
+    void getGameLevel(int l);
 private:
 	Sprite * fightImg;
 	Sprite * fightImg2;
@@ -91,17 +91,19 @@ private:
 	Bullet * skillImg;
 	Sprite * Anim1;
 	Sprite * Anim2;
-	Sprite * skill_1;
-	Sprite * skill_2;
+	Sprite * skill_11;
+	Sprite * skill_22;
 	Sprite * white;
-	Sprite * metors;
-	
+    Sprite * metors;
+    
 	Enemy * boss;
 	int bossExist;
 	bool skill2_1;
 	bool skill1_1;
 	bool skill3_1;
-	int gameLevel;
+    Sprite * CD1;
+    Sprite * CD2;
+    int gameLevel;
 };
 
 
