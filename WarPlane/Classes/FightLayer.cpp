@@ -107,8 +107,10 @@ void FightLayer::backMove(float)
 		fightImg2->setPositionY(fightImg->getPositionY() + fightImg->getContentSize().height);
 	}
 }
+//boss技能
 void FightLayer::bossSkill(float)
 {
+	//boss通用技能
 	Bullet * bullet_1 = Bullet::create();
 	bullet_1->setPosition(boss->getPosition());
     bullet_1->setType(3);
@@ -116,6 +118,7 @@ void FightLayer::bossSkill(float)
 	bullet_1->setBulletImg("res/bomb.png");
 	bullet_1->setScale(0.5);
 	this->addChild(bullet_1, 3);
+	//各boss特性技能
 	GameManager::getInstance()->setEBullet(bullet_1);
 	if (player_1->getGrade()<10)
 	{
@@ -129,6 +132,7 @@ void FightLayer::bossSkill(float)
 		this->schedule(schedule_selector(FightLayer::bossSkill_3), 10.0f);
 	}
 }
+//boss1技能，冲撞
 void FightLayer::bossSkill_1(float)
 {
     for (int i = 1; i <= 2; i++) {
@@ -144,6 +148,7 @@ void FightLayer::bossSkill_1(float)
 
 	}	
 }
+//boss2技能，导弹群
 void FightLayer::bossSkill_2(float)
 {
     for (int i = 0; i < 10; i++)
@@ -157,6 +162,7 @@ void FightLayer::bossSkill_2(float)
         GameManager::getInstance()->setEBullet(bullet_1);
     }
 }
+//boss3技能，百分比扣血
 void FightLayer::bossSkill_3(float)
 {
 	player_1->changeHp(-player_1->getHp() / 3);
@@ -626,7 +632,9 @@ void FightLayer::setPlayer(UserInfo &user) {
     attarkLabel->setColor(Color3B::WHITE);
     attarkLabel->setPosition(Vec2(30,45));
     this->addChild(attarkLabel, 3);
-    this->schedule(schedule_selector(FightLayer::addEnemy),1.0f);}
+	//生成敌机的频率
+    this->schedule(schedule_selector(FightLayer::addEnemy),1.0f);
+}
 
 void FightLayer::hpChange()
 {
@@ -1109,7 +1117,6 @@ void FightLayer::closeSkillI(float dt)
 		break;
 	}
 }
-
 void FightLayer::addSkill(int i)
 {
 	skillImg = Bullet::create();
@@ -1179,10 +1186,11 @@ void  FightLayer::closeWhite(float dt)
 {
 	white->setVisible(false);
 }
-
+//敌机生成方式
 void FightLayer::addEnemy(float dt)
 {
 	int playerLevel = player_1->getGrade();
+	//随玩家等级改变生成频率
 	if (playerLevel <= 2) {
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 1.0f);
 	}
@@ -1203,7 +1211,7 @@ void FightLayer::addEnemy(float dt)
 	}
 
 
-
+	//随机判断飞行方式
 	Enemy * enemy_1 = Enemy::create();
 	enemy_1->setType(3);
 	enemy_1->setGrade(player_1->getGrade());
@@ -1222,6 +1230,7 @@ void FightLayer::addEnemy(float dt)
 	}
 	GameManager::getInstance()->setPlane(enemy_1);
 	this->addChild(enemy_1,3);
+	//判断等级，是否生成boss
 	if (bossExist==0)
 	{
         if (player_1->getGrade() == 15&&gameLevel==3)
@@ -1238,12 +1247,12 @@ void FightLayer::addEnemy(float dt)
 		}
 	}
 }
-
+//boss生成方式
 void FightLayer::addBoss()
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	TTFConfig ttfConfig("fonts/Marker Felt.ttf", 24);
-	
+	//初始化属性
 	boss = Enemy::create();
 	int lv = player_1->getGrade();
 	boss->setAttri(50, 2000, 50, 1);
@@ -1252,7 +1261,7 @@ void FightLayer::addBoss()
 	boss->setIs_boss(1);
 	boss->bossMove();
 	this->addChild(boss, 3);
-
+	//显示bossHP
 	bosshp = Label::createWithTTF(ttfConfig, CCString::createWithFormat("boss:%d", boss->getHp())->getCString());
 	bosshp->setColor(Color3B::RED);
 	bosshp->setPosition(100, visibleSize.height - 20);
@@ -1260,7 +1269,7 @@ void FightLayer::addBoss()
 	GameManager::getInstance()->setPlane(boss);
 	bossExist = 1;
 	
-
+	//计时器调用boss技能
 	this->schedule(schedule_selector(FightLayer::bossSkill),5.0f);
 }
 

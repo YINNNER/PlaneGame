@@ -43,7 +43,7 @@ void Bullet::update(float dt) {
  	
 
 }
-
+//boss飞弹运行方法
 void Bullet::move_1()
 {
 		 

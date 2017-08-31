@@ -7,7 +7,7 @@ bool Enemy::init()
 	this->is_boss = 0;
 	return true;
 }
-
+//敌机飞行方式1：直线飞行
 void Enemy::planeMove_1()
 {
 	auto size = Director::getInstance()->getWinSize();
@@ -19,7 +19,7 @@ void Enemy::planeMove_1()
 		this->removeFromParentAndCleanup(true);
 	}
 }
-
+//敌机飞行方式2：贝塞尔飞行
 void Enemy::planeMove_2()
 {
 	auto size = Director::getInstance()->getWinSize();
@@ -35,14 +35,16 @@ void Enemy::planeMove_2()
 	auto action = Sequence::create(bezierAction, removeAction, NULL);
 	this->runAction(action);
 }
+//得到随机数
 int Enemy::getRandomNumber(int a, int b) {
 	return CCRANDOM_0_1()*(b - a) + a;
 }
-
+//生成敌机
 void Enemy::setEnemyImg()
 {
 	int level = this->getGrade();
 	int enemy_x = getRandomNumber(0, 10);
+	//根据等级调整不同敌机出现的比例
 	if (level <= 4) {
 		if (enemy_x > 0 && enemy_x < 8) {
 			this->setImg("res/enemy1.png");
@@ -68,10 +70,12 @@ void Enemy::setEnemyImg()
 		}
 	}
 }
+//回收敌机
 void Enemy::removePlane()
 {
 	this->removeFromParentAndCleanup(true);
 }
+//boss出现位置
 void Enemy::bossMove()
 {
 	auto size = Director::getInstance()->getWinSize();
@@ -79,6 +83,7 @@ void Enemy::bossMove()
 	this->setPosition(point);
 	schedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
 }
+//boss移动方法
 void Enemy::enemyBossMove(float dt) {
 	this->setPositionX(this->getPositionX() + 3);
 	if (this->getPositionX()>600)
@@ -96,6 +101,7 @@ void Enemy::enemyBossMove_1(float dt)
 		this->schedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
 	}
 }
+//boss死亡帧动画
 void Enemy::boss_death()
 {
 	Sprite * Anim = Sprite::create("res/skill1.png");
