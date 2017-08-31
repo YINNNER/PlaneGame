@@ -245,9 +245,9 @@ void FightLayer::update(float dt)
 	{
 		if (skill2_1)
 		{
-			this->addBullet(1);
-			this->addBullet(1);
-			this->addBullet(1);
+			this->addBullet(2);
+			this->addBullet(2);
+			this->addBullet(2);
 		}
 		else
 		{
@@ -327,7 +327,16 @@ void FightLayer::addBullet(int bType)
 	Bullet * bullet_1 = Bullet::create();
 	bullet_1->setType(1);
 	bullet_1->setPosition(player_1->getPosition());
-	bullet_1->setBulletImg("res/fire01.png");
+    switch(bType)
+    {
+        case 1:
+            bullet_1->setBulletImg("res/fire01.png");
+            break;
+        case 2:
+            bullet_1->setBulletImg("res/fire02.png");
+            break;
+    }
+	
 	this->addChild(bullet_1, 3);
 	GameManager::getInstance()->setBullet(bullet_1);
     
