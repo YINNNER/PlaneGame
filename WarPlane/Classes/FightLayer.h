@@ -60,6 +60,8 @@ public:
 	void onExit();
 	void plane_death(Enemy * enemy);
 	UserInfo user;
+	void showSkillCD1(float dt);
+	void showSkillCD2(float dt);
 private:
 	Sprite * fightImg;
 	Sprite * fightImg2;
