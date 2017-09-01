@@ -23,6 +23,7 @@ public:
 	void setType(int type);
 	void setGrade(int grade);
 	void setExp(int exp);
+	void setHp(int hp);
 	void onEquip(Equip * _equip);
 	void hero_death();
 	void removeHero(float dt);
@@ -30,6 +31,9 @@ public:
 	void removeEquip(Equip * _equip);
 	void setEquip_2(Equip * _equip);
 	void removeEquip_2(Equip * _equip);
+	void putOnEquip_1(int type);
+	void putOnEquip_2(int type);
+	void putOnEquip_3(int type);
 	Vector<Equip *>equip_list;
 	Vector<Equip *>equip_list_2;
 protected:
@@ -38,6 +42,10 @@ protected:
 	int exp;
 	int speed;
 	int grade;
+	Sprite * equip_1;
+	Sprite * equip_2;
+	Sprite * equip_3;
+	Sprite * equip_1_1;
 	Sprite * planeImg;
 	int type;
 };

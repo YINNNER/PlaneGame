@@ -572,6 +572,11 @@ void FightLayer::setPlayer(UserInfo &user) {
 	player_1->setAttri(user.getAtk(),user.getHp(),user.getSpd(),user.getPlaneLevel());	//坦克
 	player_1->setImg(CCString::createWithFormat("res/SpaceShooterRedux/PNG/Planes/playerShip%d_green.png", user.getPlaneType())->getCString());
 
+	player_1->putOnEquip_1(1);
+	//player_1->putOnEquip_2(4);
+	//player_1->putOnEquip_3(6);
+
+
 	this->addChild(player_1, 3);
     
     

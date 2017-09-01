@@ -126,6 +126,11 @@ void CCPlane::setExp(int exp)
 	this->exp = exp;
 }
 
+void CCPlane::setHp(int hp)
+{
+	this->hp = hp;
+}
+
 void CCPlane::onEquip(Equip * _equip)
 {
 	if (_equip->getEquipType()>6)
@@ -184,4 +189,32 @@ void CCPlane::setEquip_2(Equip * _equip)
 void CCPlane::removeEquip_2(Equip * _equip)
 {
 	equip_list_2.eraseObject(_equip);
+}
+
+void CCPlane::putOnEquip_1(int type)//123
+{
+	if (type==1)
+	{
+		equip_1 = Sprite::create("res/UI/plane_parts/playerShip1_orange_01.png");
+		equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip1_orange_03.png");
+		equip_1->setAnchorPoint(Vec2(0, 0));
+		equip_1->setPosition(Vec2(0, 0));
+		equip_1_1->setAnchorPoint(Vec2(1, 0));
+		equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+		this->addChild(equip_1_1);
+		this->addChild(equip_1);
+	}
+	else
+	{
+
+	}
+
+}
+void CCPlane::putOnEquip_2(int type)
+{
+	
+}
+void CCPlane::putOnEquip_3(int type)
+{
+	
 }
