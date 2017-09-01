@@ -14,6 +14,10 @@ bool MenuLayer::init(){
 	auto scale = winSize.width / _background->getContentSize().width;
 	_background->setScale(scale);
 	this->addChild(_background);
+
+	if (!SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+		SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3");
+	}
 	
 	Sprite *title = Sprite::create("res/UI/1Menu/title@3x.png");
 	title->setPosition(Vec2(winSize.width / 2, winSize.height*0.8));

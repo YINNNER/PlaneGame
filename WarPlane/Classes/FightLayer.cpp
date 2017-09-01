@@ -642,6 +642,8 @@ void FightLayer::expChange()
 
 void FightLayer::goToGameOver(int value)
 {
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+	
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	gameOver = Sprite::create("res/UI/a5GameFin/rect.png");
 	auto gameOverSize = gameOver->getContentSize();
@@ -702,6 +704,9 @@ void FightLayer::goToGameOver(int value)
 	{
 	case 1:
         gameOver->addChild(result_1);
+		if (SetLayer::effectState == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/lose1.wav");
+		}
 		if (scoreValue > 30)
 		{
 			gameOver->addChild(star_1);
@@ -720,6 +725,9 @@ void FightLayer::goToGameOver(int value)
         break;
 	case 2:
            gameOver->addChild(result_2);
+		   if (SetLayer::effectState == 1) {
+			   SimpleAudioEngine::getInstance()->playEffect("music/win02.mp3");
+		   }
 			gameOver->addChild(star_1);
 			 gameOver->addChild(star_2);
 			   gameOver->addChild(star_3);
@@ -762,6 +770,7 @@ void FightLayer::goToGameOver(int value)
     score->setTextColor(Color4B::BLACK);
 	score->setPosition(Vec2(gameOverSize.width *0.5, gameOverSize.height *0.55));
 	gameOver->addChild(score);
+
     //show time
     Label * time = Label::createWithTTF(CCString::createWithFormat("用时:%d:%d",minTime, secTime)->getCString(), "fonts/simhei.ttf", 28);
     time->setTextColor(Color4B::BLACK);
@@ -769,6 +778,7 @@ void FightLayer::goToGameOver(int value)
     gameOver->addChild(time);
 
 	gameOver->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+
 
 	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/saveS.png", CC_CALLBACK_1(FightLayer::goToSave, this));
 	save->setPosition(Vec2(gameOverSize.width *0.14, gameOverSize.height *0.2));
@@ -778,6 +788,8 @@ void FightLayer::goToGameOver(int value)
 	menu->setPosition(Vec2(0, 0));
 	menu->setAnchorPoint(Vec2(0, 0));
 	gameOver->addChild(menu);
+	auto move = MoveTo::create(1.0f, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	gameOver->runAction(move);
 	this->addChild(gameOver, 5);
 	this->unscheduleUpdate();
 	this->unschedule(schedule_selector(FightLayer::addSupply));
@@ -838,7 +850,6 @@ void FightLayer::gamePause()
 	this->unschedule(schedule_selector(FightLayer::timeSche));
 	this->unschedule(schedule_selector(FightLayer::addEnemy));
 	this->unschedule(schedule_selector(FightLayer::backMove));
-	SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 	if (bossExist==1)
 	{
 		this->unschedule(schedule_selector(FightLayer::bossSkill));
@@ -992,6 +1003,7 @@ void FightLayer::exitGame(Ref * psender)
         SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
         SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
     }
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	SceneManager::goMenuLayer(2);
 }
 
