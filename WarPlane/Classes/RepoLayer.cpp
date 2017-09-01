@@ -309,7 +309,9 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		}
 		//添加该位置装备
 		_body_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1, this, user)); 
-		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
+		_body_1->setAnchorPoint(Vec2(0.5, 1));
+		_body_1->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY()+_plane->getContentSize().height/2));
+		//_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		//this->addChild(_body_1, 2);
 		auto menu = Menu::create(_body_1, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -339,7 +341,9 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 			user.setHp(user.getHp() - 10);
 		}
 		_body_1_b = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1_b, this, user));
-		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
+		_body_1_b->setAnchorPoint(Vec2(0.5, 1));
+		_body_1_b->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() + _plane->getContentSize().height / 2));
+		//_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		//this->addChild(_body_1_b, 2);
 		auto menu = Menu::create(_body_1_b, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -367,7 +371,9 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 			user.setHp(user.getHp() - 10);
 		}
 		_body_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1_c, this, user));
-		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
+		_body_1_c->setAnchorPoint(Vec2(0.5, 1));
+		_body_1_c->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() + _plane->getContentSize().height / 2));
+		//_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		//this->addChild(_body_1_c, 2);
 		auto menu = Menu::create(_body_1_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -423,10 +429,14 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 			user.setAtk(user.getAtk() -10);
 		}
 		_wing_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1, this, user));
-		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
+		_wing_1->setAnchorPoint(Vec2(0, 0.5));
+		_wing_1->setPosition(Vec2(_plane->getPositionX() - _plane->getContentSize().width/2, _plane->getPositionY()));
+		//_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_1, 2);
 		_wing_2 = MenuItemImage::create(filename4.str().c_str(), filename4.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1, this, user));
-		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
+		_wing_2->setAnchorPoint(Vec2(1, 0.5));
+		_wing_2->setPosition(Vec2(_plane->getPositionX() +_plane->getContentSize().width / 2, _plane->getPositionY()));
+		//_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_2, 2);
 		AtkBar->setScale(0.35*(user.getAtk()+1) / 280, 0.5);
 		auto menu = Menu::create(_wing_1, _wing_2, NULL);
@@ -458,10 +468,14 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 			user.setAtk(user.getAtk() - 10);
 		}
 		_wing_1_b = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_b, this, user));
-		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
+		_wing_1_b->setAnchorPoint(Vec2(0, 0.5));
+		_wing_1_b->setPosition(Vec2(_plane->getPositionX() - _plane->getContentSize().width / 2, _plane->getPositionY()));
+		//_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_1_b, 2);
 		_wing_2_b = MenuItemImage::create(filename5.str().c_str(), filename5.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_b, this, user));
-		_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
+		_wing_2_b->setAnchorPoint(Vec2(1, 0.5));
+		_wing_2_b->setPosition(Vec2(_plane->getPositionX() + _plane->getContentSize().width / 2, _plane->getPositionY()));
+		//_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_2_b, 2);
 		auto menu = Menu::create(_wing_1_b, _wing_2_b, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -491,10 +505,14 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 			user.setAtk(user.getAtk() - 10);
 		}
 		_wing_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_c, this, user));
-		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
+		_wing_1_c->setAnchorPoint(Vec2(0, 0.5));
+		_wing_1_c->setPosition(Vec2(_plane->getPositionX() - _plane->getContentSize().width / 2, _plane->getPositionY()));
+		//_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_1_c, 2);
 		_wing_2_c = MenuItemImage::create(filename6.str().c_str(), filename6.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_c, this, user));
-		_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
+		_wing_2_c->setAnchorPoint(Vec2(1, 0.5));
+		_wing_2_c->setPosition(Vec2(_plane->getPositionX() + _plane->getContentSize().width / 2, _plane->getPositionY()));
+		//_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_2_c, 2);
 		auto menu = Menu::create(_wing_1_c, _wing_2_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -538,7 +556,9 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 			user.setSpd(user.getSpd() - 3);
 		}
 		_tail_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1, this, user));
-		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		_tail_1->setAnchorPoint(Vec2(0.5, 0));
+		_tail_1->setPosition(Vec2(_plane->getPositionX(),_plane->getPositionY()-_plane->getContentSize().height / 2));
+		//_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		//this->addChild(_tail_1, 2);
 		auto menu = Menu::create(_tail_1, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -565,7 +585,9 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 			user.setSpd(user.getSpd() - 3);
 		}
 		_tail_1_b = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1_b, this, user));
-		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		_tail_1_b->setAnchorPoint(Vec2(0.5, 0));
+		_tail_1_b->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() - _plane->getContentSize().height / 2));
+		//_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		//this->addChild(_tail_1_b, 2);
 		auto menu = Menu::create(_tail_1_b, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -591,7 +613,9 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 			user.setSpd(user.getSpd() - 3);
 		}
 		_tail_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1_c, this, user));
-		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		_tail_1_c->setAnchorPoint(Vec2(0.5, 0));
+		_tail_1_c->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() - _plane->getContentSize().height / 2));
+		//_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		//this->addChild(_tail_1_c, 2);
 		auto menu = Menu::create(_tail_1_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -837,6 +861,7 @@ void RepoLayer::setPlaneImg(int type) {
 	//显示对应飞机图片
 	filename << "playerShip" << type << "_green.png";
 	_plane = Sprite::createWithSpriteFrameName(filename.str().c_str());
+	//_plane->setAnchorPoint(Vec2(0, 0));
 	_plane->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 3 / 4));
 	this->addChild(_plane, 2);
 	CCLOG("%f /n", user.get_equip_head_load());
@@ -846,7 +871,9 @@ void RepoLayer::setPlaneImg(int type) {
 		stringstream filename1;
 		filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_02.png";
 		_body_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1, this, user));
-		_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
+		_body_1->setAnchorPoint(Vec2(0.5, 1));
+		_body_1->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() + _plane->getContentSize().height / 2));
+		//_body_1->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		//this->addChild(_body_1, 2);
 		auto menu = Menu::create(_body_1, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -858,7 +885,9 @@ void RepoLayer::setPlaneImg(int type) {
 		stringstream filename2;
 		filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_02.png";
 		_body_1_b = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1_b, this, user));
-		_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
+		_body_1_b->setAnchorPoint(Vec2(0.5, 1));
+		_body_1_b->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() + _plane->getContentSize().height / 2));
+		//_body_1_b->setPosition(Vec2(winSize.width*0.3, winSize.height * 0.757));
 		//this->addChild(_body_1_b, 2);
 		auto menu = Menu::create(_body_1_b, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -870,7 +899,9 @@ void RepoLayer::setPlaneImg(int type) {
 		stringstream filename3;
 		filename3 << "res/UI/plane_parts/playerShip" << type << "_red_02.png";
 		_body_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1_c, this, user));
-		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
+		_body_1_c->setAnchorPoint(Vec2(0.5, 1));
+		_body_1_c->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() + _plane->getContentSize().height / 2));
+		//_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		//this->addChild(_body_1_c, 2);
 		auto menu = Menu::create(_body_1_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -884,10 +915,14 @@ void RepoLayer::setPlaneImg(int type) {
 		filename4 << "res/UI/plane_parts/playerShip" << type << "_blue_01.png";
 		filename7 << "res/UI/plane_parts/playerShip" << type << "_blue_03.png";
 		_wing_1 = MenuItemImage::create(filename4.str().c_str(), filename4.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1, this, user));
-		_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
+		_wing_1->setAnchorPoint(Vec2(0, 0.5));
+		_wing_1->setPosition(Vec2(_plane->getPositionX() - _plane->getContentSize().width / 2, _plane->getPositionY()));
+		//_wing_1->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_1, 2);
 		_wing_2 = MenuItemImage::create(filename7.str().c_str(), filename7.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1, this, user));
-		_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
+		_wing_2->setAnchorPoint(Vec2(1, 0.5));
+		_wing_2->setPosition(Vec2(_plane->getPositionX() + _plane->getContentSize().width / 2, _plane->getPositionY()));
+		//_wing_2->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_2, 2);
 		auto menu = Menu::create(_wing_1, _wing_2, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -900,10 +935,12 @@ void RepoLayer::setPlaneImg(int type) {
 		filename5 << "res/UI/plane_parts/playerShip" << type << "_orange_01.png";
 		filename8 << "res/UI/plane_parts/playerShip" << type << "_orange_03.png";
 		_wing_1_b = MenuItemImage::create(filename5.str().c_str(), filename5.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_b, this, user));
-		_wing_1_b->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
+		_wing_1_b->setAnchorPoint(Vec2(0, 0.5));
+		_wing_1_b->setPosition(Vec2(_plane->getPositionX() - _plane->getContentSize().width / 2, _plane->getPositionY()));
 		//this->addChild(_wing_1_b, 2);
 		_wing_2_b = MenuItemImage::create(filename8.str().c_str(), filename8.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_b, this, user));
-		_wing_2_b->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
+		_wing_2_b->setAnchorPoint(Vec2(1, 0.5));
+		_wing_2_b->setPosition(Vec2(_plane->getPositionX() + _plane->getContentSize().width / 2, _plane->getPositionY()));
 		//this->addChild(_wing_2_b, 2);
 		auto menu = Menu::create(_wing_1_b, _wing_2_b, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -916,10 +953,12 @@ void RepoLayer::setPlaneImg(int type) {
 		filename6 << "res/UI/plane_parts/playerShip" << type << "_red_01.png";
 		filename9 << "res/UI/plane_parts/playerShip" << type << "_red_03.png";
 		_wing_1_c = MenuItemImage::create(filename6.str().c_str(), filename6.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_c, this, user));
-		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
+		_wing_1_c->setAnchorPoint(Vec2(0, 0.5));
+		_wing_1_c->setPosition(Vec2(_plane->getPositionX() - _plane->getContentSize().width / 2, _plane->getPositionY()));
 		//this->addChild(_wing_1_c, 2);
 		_wing_2_c = MenuItemImage::create(filename9.str().c_str(), filename9.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_c, this, user));
-		_wing_2_c->setPosition(Vec2(origin.x + winSize.width*0.34, origin.y + winSize.height * 0.75));
+		_wing_2_c->setAnchorPoint(Vec2(1, 0.5));
+		_wing_2_c->setPosition(Vec2(_plane->getPositionX() + _plane->getContentSize().width / 2, _plane->getPositionY()));
 		//this->addChild(_wing_2_c, 2);
 		auto menu = Menu::create(_wing_1_c, _wing_2_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -931,7 +970,9 @@ void RepoLayer::setPlaneImg(int type) {
 		stringstream filename1;
 		filename1 << "res/UI/plane_parts/playerShip" << type << "_blue_04.png";
 		_tail_1 = MenuItemImage::create(filename1.str().c_str(), filename1.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1, this, user));
-		_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		_tail_1->setAnchorPoint(Vec2(0.5, 0));
+		_tail_1->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() - _plane->getContentSize().height / 2));
+		//_tail_1->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		//this->addChild(_tail_1, 2);
 		auto menu = Menu::create(_tail_1, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -942,7 +983,9 @@ void RepoLayer::setPlaneImg(int type) {
 		stringstream filename2;
 		filename2 << "res/UI/plane_parts/playerShip" << type << "_orange_04.png";
 		_tail_1_b = MenuItemImage::create(filename2.str().c_str(), filename2.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1_b, this, user));
-		_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		_tail_1_b->setAnchorPoint(Vec2(0.5, 0));
+		_tail_1_b->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() - _plane->getContentSize().height / 2));
+		//_tail_1_b->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		//this->addChild(_tail_1_b, 2);
 		auto menu = Menu::create(_tail_1_b,  NULL);
 		menu->setPosition(Vec2(Point::ZERO));
@@ -953,7 +996,9 @@ void RepoLayer::setPlaneImg(int type) {
 		stringstream filename3;
 		filename3 << "res/UI/plane_parts/playerShip" << type << "_red_04.png";
 		_tail_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1_c, this, user));
-		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
+		_tail_1_c->setAnchorPoint(Vec2(0.5, 0));
+		_tail_1_c->setPosition(Vec2(_plane->getPositionX(), _plane->getPositionY() - _plane->getContentSize().height / 2));
+		//_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		//this->addChild(_tail_1_c, 2);
 		auto menu = Menu::create(_tail_1_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
