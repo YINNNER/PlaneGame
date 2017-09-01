@@ -131,20 +131,7 @@ void CCPlane::setHp(int hp)
 	this->hp = hp;
 }
 
-void CCPlane::onEquip(Equip * _equip)
-{
-	if (_equip->getEquipType()>6)
-	{
-		this->speed += _equip->getESpd();
-	}
-	else if (_equip->getEquipType()>3)
-	{
-		this->attack += _equip->getEAtk();
-	}
-	else {
-		this->hp += _equip->getEHp();
-	}
-}
+
 
 void CCPlane::hero_death()
 {

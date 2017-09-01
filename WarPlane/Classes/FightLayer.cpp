@@ -698,12 +698,12 @@ void FightLayer::goToGameOver(int value)
 	star_3->setPosition(Vec2(gameOverSize.width * 2 / 3, gameOverSize.height * 0.65));
 	star_3->setScale(2);
 
-	Label * result_1 = Label::createWithTTF("通关失败", "fonts/simhei.ttf", 30);
-    result_1->setTextColor(Color4B::BLACK);
+	Sprite * result_1 = Sprite::create("res/zujie0.png");
+
 	result_1->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 0.75));
-	
-	Label * result_2 = Label::createWithTTF("通关成功", "fonts/simhei.ttf", 30);
-    result_2->setTextColor(Color4B::BLACK);
+
+	Sprite * result_2 = Sprite::create("res/zujie3.png");
+
 	result_2->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 0.75));
 
 	for (int i = player_1->equip_list.size() - 1; i >= 0; i--)
@@ -837,6 +837,7 @@ void FightLayer::goToGameOver(int value)
 
 void FightLayer::timeSche(float dt)
 {
+	static Size visibleSize = Director::getInstance()->getVisibleSize();
 	secTime++;
 	if (secTime >= 60)
 	{
@@ -856,6 +857,19 @@ void FightLayer::timeSche(float dt)
 		//bullet_1->setScale(0.5);
 		this->addChild(bullet_1, 3);
 		GameManager::getInstance()->setEBullet(bullet_1);
+	}
+
+	if (minTime==0&&secTime==57)
+	{
+		bossTips = Sprite::create("res/bosstips.png");
+		bossTips->setPosition(Vec2(0,visibleSize.height*3/4));
+		this->addChild(bossTips, 4);
+		CCActionInterval *forward = CCMoveTo::create(1, Vec2(visibleSize.width/2,visibleSize.height/2));
+		bossTips->runAction(forward);
+	}
+	if (secTime==3&&minTime==0)
+	{
+		bossTips->removeFromParentAndCleanup(true);
 	}
 }
 
@@ -1178,10 +1192,10 @@ void FightLayer::openSkillI()
         break;
     case 3:
 		
-		player_1->changeAtk(player_1->getAtk());
+		player_1->changeAtk(5);
 		player_1->changeSpd(3);
 		this->schedule(schedule_selector(FightLayer::addHp), 1.0f);
-		this->scheduleOnce(schedule_selector(FightLayer::closeSkillI), 8.0f);
+		this->scheduleOnce(schedule_selector(FightLayer::closeSkillI), 5.0f);
 		break;
 	}
     auto barSize = skill_11->getContentSize();
@@ -1214,7 +1228,7 @@ void FightLayer::closeSkillI(float dt)
 	switch (player_1->getType())
 	{
 	case 3:
-		player_1->changeAtk(-player_1->getAtk() / 2);
+		player_1->changeAtk(-5);
 		player_1->changeSpd(-3);
 		this->unschedule(schedule_selector(FightLayer::addHp));
 		break;
@@ -1365,13 +1379,13 @@ void FightLayer::addBoss()
 		//初始化属性
 	boss = Enemy::create();
 	int lv = player_1->getGrade();
-	boss->setAttri(5*gameLevel, 200*gameLevel, 5, 1);
+	boss->setAttri(5*gameLevel, 400*gameLevel, 5, 1);
 	boss->setImg("res/SpaceShooterRedux/PNG/Enemies/enemyRed5.png");
 	boss->setScale(2);
 	boss->setIs_boss(1);
 	boss->bossMove();
 	this->addChild(boss, 3);	
-	bossMaxHp = 200*gameLevel;
+	bossMaxHp = 400*gameLevel;
 	GameManager::getInstance()->setPlane(boss);
 	bossExist = 1;
 	
@@ -1386,6 +1400,7 @@ void FightLayer::addBoss()
 	bossHp->setPosition(Vec2(10, visibleSize.height - 20));
 	this->addChild(bossHp, 4);
 	//计时器调用boss技能
+	bossTips->removeFromParentAndCleanup(true);
 	this->schedule(schedule_selector(FightLayer::bossSkill),5.0f);
 }
 
@@ -1446,7 +1461,9 @@ void FightLayer::removeMetor(float)
 void FightLayer::onEnter()
 
 {
+	
 	Layer::onEnter();
+	static Size visibleSize = Director::getInstance()->getVisibleSize();
 	SpriteBatchNode *batchNode;
 	if (gameLevel == 1)
 	{
@@ -1454,6 +1471,12 @@ void FightLayer::onEnter()
 		if (SetLayer::backState == 1) {
 			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
 		}
+		
+		bossTips = Sprite::create("res/zujie1.png");
+		bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+		this->addChild(bossTips, 4);
+		CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+		bossTips->runAction(forward);
 	}
 	else if (gameLevel == 2)
 	{
@@ -1461,6 +1484,11 @@ void FightLayer::onEnter()
 		if (SetLayer::backState == 1) {
 			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight04.mp3", true);
 		}
+		bossTips = Sprite::create("res/zhuiji2.png");
+		bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+		this->addChild(bossTips, 4);
+		CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+		bossTips->runAction(forward);
 	}
 	else
 	{
@@ -1468,6 +1496,12 @@ void FightLayer::onEnter()
 		if (SetLayer::backState == 1) {
 			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight06.mp3", true);
 		}
+
+		bossTips = Sprite::create("res/miesha.png");
+		bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+		this->addChild(bossTips, 4);
+		CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+		bossTips->runAction(forward);
 	}
 
 	if (cd1 == 1)
@@ -1508,9 +1542,6 @@ void FightLayer::onEnter()
 	}
 }
                            
-
-
-
 void FightLayer::getGameLevel(int l)
 {
 	gameLevel = l;

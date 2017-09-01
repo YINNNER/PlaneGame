@@ -68,6 +68,8 @@ public:
     void onEnter();
     void getGameLevel(int l);
 	void bossHpChange();
+
+	
 	Vector<Sprite *>ani;
 private:
 	Sprite * fightImg;
@@ -97,7 +99,7 @@ private:
 	Sprite * white;
     Sprite * metors;
 	Sprite * bossHp;
-    
+	Sprite * bossTips;
 	Enemy * boss;
 	int bossExist;
 	bool skill2_1;
