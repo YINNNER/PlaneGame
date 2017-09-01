@@ -1083,13 +1083,13 @@ void FightLayer::exitGame(Ref * psender)
 //代码优化 补给、陨石和敌机合并；
 void FightLayer::openSkillU()
 {
+    auto size = player_1->getContentSize();
 	switch (player_1->getType())
 	{
 	case 1:
         skill1_1 = true;
         shield = Sprite::create("res/shield1.png");
-        shield->setAnchorPoint(Vec2(0.1, 0));
-        shield->setPosition(player_1->getAnchorPoint());
+        shield->setPosition(Vec2(size.width/2,size.height/2));
         player_1->addChild(shield, 3);
 		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/hiding1.mp3");
