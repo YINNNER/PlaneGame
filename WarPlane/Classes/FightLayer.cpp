@@ -642,6 +642,8 @@ void FightLayer::expChange()
 
 void FightLayer::goToGameOver(int value)
 {
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+	
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	gameOver = Sprite::create("res/UI/a5GameFin/rect.png");
 	auto gameOverSize = gameOver->getContentSize();
@@ -702,6 +704,9 @@ void FightLayer::goToGameOver(int value)
 	{
 	case 1:
         gameOver->addChild(result_1);
+		if (SetLayer::effectState == 1) {
+			SimpleAudioEngine::getInstance()->playEffect("music/lose1.wav");
+		}
 		if (scoreValue > 30)
 		{
 			gameOver->addChild(star_1);
@@ -720,6 +725,9 @@ void FightLayer::goToGameOver(int value)
         break;
 	case 2:
            gameOver->addChild(result_2);
+		   if (SetLayer::effectState == 1) {
+			   SimpleAudioEngine::getInstance()->playEffect("music/win02.mp3");
+		   }
 			gameOver->addChild(star_1);
 			 gameOver->addChild(star_2);
 			   gameOver->addChild(star_3);
