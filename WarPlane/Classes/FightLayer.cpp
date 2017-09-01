@@ -436,7 +436,7 @@ void FightLayer::is_crash(float dt)
 						}
 						this->goToGameOver(2);
 					}
-					else if (rand() % 2==0)
+					else if (rand() % 10==0)
 					{
 						this->dropEquip(plane_list_1.at(i));
 					}
