@@ -777,7 +777,7 @@ void FightLayer::goToGameOver(int value)
     time->setPosition(Vec2(gameOverSize.width *0.5, gameOverSize.height *0.45));
     gameOver->addChild(time);
 
-	gameOver->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	gameOver->setPosition(Vec2(visibleSize.width / 2, 0));
 
 
 	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/saveS.png", CC_CALLBACK_1(FightLayer::goToSave, this));
