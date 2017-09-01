@@ -831,7 +831,6 @@ void FightLayer::gamePause()
 	this->unschedule(schedule_selector(FightLayer::timeSche));
 	this->unschedule(schedule_selector(FightLayer::addEnemy));
 	this->unschedule(schedule_selector(FightLayer::backMove));
-	SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 	if (bossExist==1)
 	{
 		this->unschedule(schedule_selector(FightLayer::bossSkill));
