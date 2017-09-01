@@ -9,7 +9,7 @@ bool RepoLayer::init() {
 	Size winSize = Director::getInstance()->getWinSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 
-	//监听键盘事件
+	//键盘监听事件
 	auto listenerKeyboard = EventListenerKeyboard::create();
 	listenerKeyboard->onKeyPressed = CC_CALLBACK_2(RepoLayer::onKeyPressed, this);
 	listenerKeyboard->onKeyReleased = CC_CALLBACK_2(RepoLayer::onKeyReleased, this);
@@ -292,6 +292,11 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 	//判断用户选择的是那个装备，当前装备位置为120
 	if (_equip_1->getPositionX()==120 && user.get_equip_head_have()==1) {
 		//一个部位的装备只允许穿一件，因此卸下其余装备
+		if (user.get_equip_head_load() == 1) {
+			_body_1->removeFromParent();
+			user.set_equip_head_load(0);
+			user.setHp(user.getHp() - 1);
+		}
 		if (user.get_equip_head_b_load() == 1) {
 			_body_1_b->removeFromParent();
 			user.set_equip_head_b_load(0);
@@ -311,7 +316,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		this->addChild(menu, 3);
 		HpBar->setScale(0.35*(user.getHp()+1) / 280, 0.5);
 		user. set_equip_head_load(1); 
-		user.set_equip_head_have(0);
+	//	user.set_equip_head_have(0);
 		user.setHp(user.getHp() + 1);
 		
 		
@@ -322,6 +327,11 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 			_body_1->removeFromParent();
 			user.set_equip_head_load(0);
 			user.setHp(user.getHp() - 1);
+		}
+		if (user.get_equip_head_b_load() == 1) {
+			_body_1_b->removeFromParent();
+			user.set_equip_head_b_load(0);
+			user.setHp(user.getHp() - 5);
 		}
 		if (user.get_equip_head_c_load() == 1) {
 			_body_1_c->removeFromParent();
@@ -336,7 +346,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		this->addChild(menu, 3);
 		HpBar->setScale(0.35*(user.getHp() + 5) / 280, 0.5);
 		user.set_equip_head_b_load(1);
-		user.set_equip_head_b_have(0);
+		//user.set_equip_head_b_have(0);
 		user.setHp(user.getHp() + 5);
 		
 	}
@@ -351,6 +361,11 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 			user.set_equip_head_b_load(0);
 			user.setHp(user.getHp() - 5);
 		}
+		if (user.get_equip_head_c_load() == 1) {
+			_body_1_c->removeFromParent();
+			user.set_equip_head_c_load(0);
+			user.setHp(user.getHp() - 10);
+		}
 		_body_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnBody_1_c, this, user));
 		_body_1_c->setPosition(Vec2(winSize.width*0.3, origin.y + winSize.height * 0.757));
 		//this->addChild(_body_1_c, 2);
@@ -359,7 +374,7 @@ void RepoLayer::menuCallBack_1(Ref * pSender,int type) {
 		this->addChild(menu, 3);
 		HpBar->setScale(0.35*(user.getHp() + 10) / 280, 0.5);
 		user.set_equip_head_c_load(1);
-		user.set_equip_head_c_have(0);
+		//user.set_equip_head_c_have(0);
 		user.setHp(user.getHp() + 10);
 	}
 
@@ -388,6 +403,12 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 	filename6 << "res/UI/plane_parts/playerShip" << type << "_red_03.png";
 
 	if (_equip_1->getPositionX() == 120&&user.get_equip_arm_have() == 1) {
+		if (user.get_equip_arm_load() == 1) {
+			_wing_1->removeFromParent();
+			_wing_2->removeFromParent();
+			user.set_equip_arm_load(0);
+			user.setAtk(user.getAtk() - 1);
+		}
 		if (user.get_equip_arm_b_load() == 1) {
 			_wing_1_b->removeFromParent();
 			_wing_2_b->removeFromParent();
@@ -412,7 +433,6 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
 		user.set_equip_arm_load(1);
-		user.set_equip_arm_have(0);
 		user.setAtk(user.getAtk() + 1);
 		
 		
@@ -423,6 +443,13 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 			_wing_2->removeFromParent();
 			user.set_equip_arm_load(0);
 			user.setAtk(user.getAtk() - 1);
+		}
+		if (user.get_equip_arm_b_load() == 1) {
+			_wing_1_b->removeFromParent();
+			_wing_2_b->removeFromParent();
+			user.set_equip_arm_b_load(0);
+			user.setAtk(user.getAtk() - 5);
+
 		}
 		if (user.get_equip_arm_c_load() == 1) {
 			_wing_1_c->removeFromParent();
@@ -441,7 +468,6 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		this->addChild(menu, 3);
 		AtkBar->setScale(0.35*(user.getAtk() + 5) / 100, 0.5);
 		user.set_equip_arm_b_load(1);
-		user.set_equip_arm_b_have(0);
 		user.setAtk(user.getAtk() + 5);
 		
 	}
@@ -458,6 +484,12 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 			user.set_equip_arm_b_load(0);
 			user.setAtk(user.getAtk() - 5);
 		}
+		if (user.get_equip_arm_c_load() == 1) {
+			_wing_1_c->removeFromParent();
+			_wing_2_c->removeFromParent();
+			user.set_equip_arm_c_load(0);
+			user.setAtk(user.getAtk() - 10);
+		}
 		_wing_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnWing_1_c, this, user));
 		_wing_1_c->setPosition(Vec2(origin.x + winSize.width*0.26, origin.y + winSize.height * 0.75));
 		//this->addChild(_wing_1_c, 2);
@@ -469,7 +501,6 @@ void RepoLayer::menuCallBack_2(Ref * pSender,int type) {
 		this->addChild(menu, 3);
 		AtkBar->setScale(0.35*(user.getAtk() + 10) / 100, 0.5);
 		user.set_equip_arm_c_load(1);		
-		user.set_equip_arm_c_have(0);
 		user.setAtk(user.getAtk() + 10);
 	}
 
@@ -491,6 +522,11 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 	filename3 << "res/UI/plane_parts/playerShip" << type << "_red_04.png";
 
 	if (_equip_1->getPositionX() == 120 && user.get_equip_tail_have() == 1) {
+		if (user.get_equip_tail_load() == 1) {
+			_tail_1->removeFromParent();
+			user.set_equip_tail_load(0);
+			user.setSpd(user.getSpd() - 1);
+		}
 		if (user.get_equip_tail_b_load() == 1) {
 			_tail_1_b->removeFromParent();
 			user.set_equip_tail_b_load(0);
@@ -509,7 +545,6 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 		this->addChild(menu, 3);
 		SpdBar->setScale(0.35*(user.getSpd() + 1) / 30, 0.5);
 		user.set_equip_tail_load(1);
-		user.set_equip_tail_have(0);
 		user.setSpd(user.getSpd() + 1);
 
 	}
@@ -518,6 +553,11 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 			_tail_1->removeFromParent();
 			user.set_equip_tail_load(0);
 			user.setSpd(user.getSpd() - 1);
+		}
+		if (user.get_equip_tail_b_load() == 1) {
+			_tail_1_b->removeFromParent();
+			user.set_equip_tail_b_load(0);
+			user.setSpd(user.getSpd() - 2);
 		}
 		if (user.get_equip_tail_c_load() == 1) {
 			_tail_1_c->removeFromParent();
@@ -532,7 +572,6 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 		this->addChild(menu, 3);
 		SpdBar->setScale(0.35*(user.getSpd() + 2) / 30, 0.5);
 		user.set_equip_tail_b_load(1);
-		user.set_equip_tail_b_have(0);
 		user.setSpd(user.getSpd() + 2);
 	}
 	else if (_equip_1_c->getPositionX() == 120 && user.get_equip_tail_c_have() == 1) {
@@ -546,6 +585,11 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 			user.set_equip_tail_b_load(0);
 			user.setSpd(user.getSpd() - 2);
 		}
+		if (user.get_equip_tail_c_load() == 1) {
+			_tail_1_c->removeFromParent();
+			user.set_equip_tail_c_load(0);
+			user.setSpd(user.getSpd() - 3);
+		}
 		_tail_1_c = MenuItemImage::create(filename3.str().c_str(), filename3.str().c_str(), CC_CALLBACK_1(RepoLayer::UnTail_1_c, this, user));
 		_tail_1_c->setPosition(Vec2(origin.x + winSize.width*0.3, origin.y + winSize.height * 0.717));
 		//this->addChild(_tail_1_c, 2);
@@ -554,7 +598,6 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 		this->addChild(menu, 3);
 		SpdBar->setScale(0.35*(user.getSpd() + 3) / 30, 0.5);
 		user.set_equip_tail_c_load(1);
-		user.set_equip_tail_c_have(0);
 		user.setSpd(user.getSpd() + 3);
 		
 	}
@@ -563,82 +606,121 @@ void RepoLayer::menuCallBack_3(Ref * pSender,int type) {
 //卸机身装备
 void RepoLayer::UnBody_1(Ref * pSender, UserInfo & userInfo)
 {
+	//音效
+	if (SetLayer::effectState == 1) {
+
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	_body_1->removeFromParent();
 	//恢复原始属性值
 	HpBar->setScale(0.35*(user.getHp()-1)/ 280, 0.5);
 	//恢复装备load状态
 	user.set_equip_head_load(0);
-	user.set_equip_head_have(1);
+	//user.set_equip_head_have(1);
 	user.setHp(user.getHp() - 1);
 }
 
 void RepoLayer::UnBody_1_b(Ref * pSender, UserInfo & userInfo)
 {
+	//音效
+	if (SetLayer::effectState == 1) {
+
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	_body_1_b->removeFromParent();
 	HpBar->setScale(0.35*(user.getHp()-5) / 280, 0.5);
 	user.set_equip_head_b_load(0);
-	user.set_equip_head_b_have(1);
+//	user.set_equip_head_b_have(1);
 	user.setHp(user.getHp() - 5);
 }
 void RepoLayer::UnBody_1_c(Ref * pSender, UserInfo & userInfo)
 {
+	//音效
+	if (SetLayer::effectState == 1) {
+
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	_body_1_c->removeFromParent();
 	HpBar->setScale(0.35*(user.getHp()-10) / 280, 0.5);
 	user.set_equip_head_c_load(0);
-	user.set_equip_head_c_have(1);
+	//user.set_equip_head_c_have(1);
 	user.setHp(user.getHp() - 10);
 }
 //卸载机翼装备
 void RepoLayer::UnWing_1(Ref * pSender, UserInfo & userInfo)
 {
+	//音效
+	if (SetLayer::effectState == 1) {
+
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	_wing_1->removeFromParent();
 	_wing_2->removeFromParent();
 	AtkBar->setScale(0.35*(user.getAtk()-1) / 100, 0.5);
 	user.set_equip_arm_load(0);
-	user.set_equip_arm_have(1);
 	user.setAtk(user.getAtk() - 1);
 }
 void RepoLayer::UnWing_1_b(Ref * pSender, UserInfo & userInfo)
 {
+	//音效
+	if (SetLayer::effectState == 1) {
+
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	_wing_1_b->removeFromParent();
 	_wing_2_b->removeFromParent();
 	AtkBar->setScale(0.35*(user.getAtk()-5) / 100, 0.5);
 	user.set_equip_arm_b_load(0);
-	user.set_equip_arm_b_have(1);
 	user.setAtk(user.getAtk() - 5);
 }
 void RepoLayer::UnWing_1_c(Ref * pSender, UserInfo & userInfo)
 {
+	//音效
+	if (SetLayer::effectState == 1) {
+
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	_wing_1_c->removeFromParent();
 	_wing_2_c->removeFromParent();
 	AtkBar->setScale(0.35*(user.getAtk()-10) / 100, 0.5);
 	user.set_equip_arm_c_load(0);
-	user.set_equip_arm_c_have(1);
 	user.setAtk(user.getAtk() - 10);
 }
 //卸载机尾装备
 void RepoLayer::UnTail_1(Ref * pSender, UserInfo & userInfo)
 {
+	//音效
+	if (SetLayer::effectState == 1) {
+
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	_tail_1->removeFromParent();
 	SpdBar->setScale(0.35*(user.getSpd()-1) / 30, 0.5);
 	user.set_equip_tail_load(0);
-	user.set_equip_tail_have(1);
 	user.setSpd(user.getSpd() - 1);
 }
 void RepoLayer::UnTail_1_b(Ref * pSender, UserInfo & userInfo)
 {
+	//音效
+	if (SetLayer::effectState == 1) {
+
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	_tail_1_b->removeFromParent();
 	SpdBar->setScale(0.35*(user.getSpd()-2) / 30, 0.5);
 	user.set_equip_tail_b_load(0);
-	user.set_equip_tail_b_have(1);
 	user.setSpd(user.getSpd() - 2);
 }
 void RepoLayer::UnTail_1_c(Ref * pSender, UserInfo & userInfo)
 {
+	//音效
+	if (SetLayer::effectState == 1) {
+
+		SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+	}
 	_tail_1_c->removeFromParent();
 	SpdBar->setScale(0.35*(user.getSpd()-3) / 30, 0.5);
 	user.set_equip_tail_c_load(0);
-	user.set_equip_tail_c_have(1);
 	user.setSpd(user.getSpd() - 3);
 }
 
@@ -770,7 +852,7 @@ void RepoLayer::setPlaneImg(int type) {
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
 		CCLOG("%f /n", user.getHp());
-		HpBar->setScale(0.35*(user.getHp() + 10) / 500, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 1) / 280, 0.5);
 	}
 	else if (user.get_equip_head_b_load() == 1) {
 		stringstream filename2;
@@ -782,7 +864,7 @@ void RepoLayer::setPlaneImg(int type) {
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
 		CCLOG("%f /n", user.getHp());
-		HpBar->setScale(0.35*(user.getHp() + 50) / 500, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 5) / 280, 0.5);
 	}
 	else if (user.get_equip_head_c_load() == 1) {
 		stringstream filename3;
@@ -793,7 +875,7 @@ void RepoLayer::setPlaneImg(int type) {
 		auto menu = Menu::create(_body_1_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		HpBar->setScale(0.35*(user.getHp() + 100) / 500, 0.5);
+		HpBar->setScale(0.35*(user.getHp() + 10) / 280, 0.5);
 	}
 	//机翼
 	if (user.get_equip_arm_load() == 1) {
@@ -810,7 +892,7 @@ void RepoLayer::setPlaneImg(int type) {
 		auto menu = Menu::create(_wing_1, _wing_2, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		AtkBar->setScale(0.35*(user.getAtk()+10) / 300, 0.5);
+		AtkBar->setScale(0.35*(user.getAtk()+1) / 100, 0.5);
 	}
 	else if (user.get_equip_arm_b_load() == 1) {
 		stringstream filename5;
@@ -826,7 +908,7 @@ void RepoLayer::setPlaneImg(int type) {
 		auto menu = Menu::create(_wing_1_b, _wing_2_b, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		AtkBar->setScale(0.35*(user.getAtk()+50) / 300, 0.5);
+		AtkBar->setScale(0.35*(user.getAtk()+5) / 100, 0.5);
 	}
 	else if (user.get_equip_arm_c_load() == 1) {
 		stringstream filename6;
@@ -842,7 +924,7 @@ void RepoLayer::setPlaneImg(int type) {
 		auto menu = Menu::create(_wing_1_c, _wing_2_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		AtkBar->setScale(0.35*(user.getAtk()+100) / 300, 0.5);
+		AtkBar->setScale(0.35*(user.getAtk()+10) / 100, 0.5);
 	}
 	//机尾
 	if (user.get_equip_tail_load() == 1) {
@@ -854,7 +936,7 @@ void RepoLayer::setPlaneImg(int type) {
 		auto menu = Menu::create(_tail_1, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		SpdBar->setScale(0.35*(user.getSpd()+10) / 200, 0.5);
+		SpdBar->setScale(0.35*(user.getSpd()+1) / 30, 0.5);
 	}
 	else if (user.get_equip_tail_b_load() == 1) {
 		stringstream filename2;
@@ -865,7 +947,7 @@ void RepoLayer::setPlaneImg(int type) {
 		auto menu = Menu::create(_tail_1_b,  NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		SpdBar->setScale(0.35*(user.getSpd()+50) / 200, 0.5);
+		SpdBar->setScale(0.35*(user.getSpd()+2) / 30, 0.5);
 	}
 	else if (user.get_equip_tail_c_load() == 1) {
 		stringstream filename3;
@@ -876,7 +958,7 @@ void RepoLayer::setPlaneImg(int type) {
 		auto menu = Menu::create(_tail_1_c, NULL);
 		menu->setPosition(Vec2(Point::ZERO));
 		this->addChild(menu, 3);
-		SpdBar->setScale(0.35*(user.getSpd()+100) / 200, 0.5);
+		SpdBar->setScale(0.35*(user.getSpd()+3) / 30, 0.5);
 	}
 }
 
