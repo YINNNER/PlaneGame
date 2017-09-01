@@ -721,9 +721,15 @@ void FightLayer::goToGameOver(int value)
 	case 2:
            gameOver->addChild(result_2);
 			gameOver->addChild(star_1);
-			   gameOver->addChild(star_2);
+			 gameOver->addChild(star_2);
 			   gameOver->addChild(star_3);
-			   gameLevel++;
+			   if (user.getGameLevel() == 3) {
+				   ;
+			   }
+			   else
+			   {
+				   gameLevel++;
+			   }
 
 
 		break;
@@ -741,7 +747,14 @@ void FightLayer::goToGameOver(int value)
     }
 
     user.setSpd(player_1->getSpd());
-    user.setGameLevel(gameLevel);
+	if (user.getGameLevel()>=gameLevel)
+	{
+		;
+	}
+	else {
+		user.setGameLevel(gameLevel);
+	}
+	
 	
   
 
@@ -1223,19 +1236,19 @@ void FightLayer::addEnemy(float dt)
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 1.0f);
 	}
 	else if (playerLevel <= 4) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.9f);
-	}
-	else if (playerLevel <= 7) {
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.8f);
 	}
+	else if (playerLevel <= 7) {
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.5f);
+	}
 	else if (playerLevel <= 9) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.7f);
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.4f);
 	}
 	else if (playerLevel <= 12) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.6f);
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.3f);
 	}
 	else if (playerLevel <= 14) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.5f);
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.2f);
 	}
 
 
