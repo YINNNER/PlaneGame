@@ -369,35 +369,6 @@ void FightLayer::is_crash(float dt)
 		}
 		for (int j = bullet_list_1.size() - 1; j >= 0; j--) {
 			
-			/*
-			if (bossExist == 1)
-			{
-				CCLOG("%d", bullet_list_1.size());
-				if (boss->getBoundingBox().containsPoint(bullet_list_1.at(j)->getPosition()))
-				{
-					boss->changeHp(-player_1->getAtk()/5);
-					CCLOG("%d", boss->getHp());
-					bullet_list_1.at(j)->removeBullet();
-					if (boss->getHp() <= 0)
-					{
-						bossExist = 0;
-						this->unschedule(schedule_selector(FightLayer::bossSkill));
-						boss->removeFromParent();
-						if (player_1->getGrade() < 10)
-						{
-							this->unschedule(schedule_selector(FightLayer::bossSkill_1));
-						}
-						else if (player_1->getGrade() < 15)
-						{
-							this->unschedule(schedule_selector(FightLayer::bossSkill_2));
-						}
-						else {
-							this->unschedule(schedule_selector(FightLayer::bossSkill_3));
-						}
-						this->goToGameOver(2);
-					}
-				}
-			}*/
 			if (enemy_size.containsPoint(bullet_list_1.at(j)->getPosition()))
 			{
 				bullet_list_1.at(j)->removeBullet();
@@ -577,9 +548,6 @@ void FightLayer::removeAnimation1(float dt)
 
 void FightLayer::removeAnimation2(float dt)
 {
-	/*
-    Anim2->setScale(100);
-	Anim2->removeFromParentAndCleanup(true);*/
 	for (int i = ani.size()-1; i >=0; i--)
 	{
 		ani.at(i)->removeFromParentAndCleanup(true);
