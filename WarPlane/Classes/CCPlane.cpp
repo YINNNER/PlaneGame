@@ -191,30 +191,266 @@ void CCPlane::removeEquip_2(Equip * _equip)
 	equip_list_2.eraseObject(_equip);
 }
 
-void CCPlane::putOnEquip_1(int type)//123
+void CCPlane::putOnEquip_1(int type)//123机翼
 {
-	if (type==1)
+	if (this->type==1)
 	{
-		equip_1 = Sprite::create("res/UI/plane_parts/playerShip1_orange_01.png");
-		equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip1_orange_03.png");
-		equip_1->setAnchorPoint(Vec2(0, 0));
-		equip_1->setPosition(Vec2(0, 0));
-		equip_1_1->setAnchorPoint(Vec2(1, 0));
-		equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
-		this->addChild(equip_1_1);
-		this->addChild(equip_1);
-	}
-	else
-	{
+		if (type==3)
+		{
+			equip_1 = Sprite::create("res/UI/plane_parts/playerShip1_orange_01.png");
+			equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip1_orange_03.png");
+			equip_1->setAnchorPoint(Vec2(0, 0));
+			equip_1->setPosition(Vec2(0, 0));
+			equip_1_1->setAnchorPoint(Vec2(1, 0));
+			equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+			this->addChild(equip_1_1);
+			this->addChild(equip_1);
+		}
+		else if (type==2)
+		{
+			equip_1 = Sprite::create("res/UI/plane_parts/playerShip1_red_01.png");
+			equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip1_red_03.png");
+			equip_1->setAnchorPoint(Vec2(0, 0));
+			equip_1->setPosition(Vec2(0, 0));
+			equip_1_1->setAnchorPoint(Vec2(1, 0));
+			equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+			this->addChild(equip_1_1);
+			this->addChild(equip_1);
+		}
+		else if (type==1)
+		{
+			equip_1 = Sprite::create("res/UI/plane_parts/playerShip1_blue_01.png");
+			equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip1_blue_03.png");
+			equip_1->setAnchorPoint(Vec2(0, 0));
+			equip_1->setPosition(Vec2(0, 0));
+			equip_1_1->setAnchorPoint(Vec2(1, 0));
+			equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+			this->addChild(equip_1_1);
+			this->addChild(equip_1);
+		}
 
 	}
+	else if (this->type==2)
+	{
+		if (type==3)
+		{
+			equip_1 = Sprite::create("res/UI/plane_parts/playerShip2_orange_01.png");
+			equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip2_orange_03.png");
+			equip_1->setAnchorPoint(Vec2(0, 0));
+			equip_1->setPosition(Vec2(0, 0));
+			equip_1_1->setAnchorPoint(Vec2(1, 0));
+			equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+			this->addChild(equip_1_1);
+			this->addChild(equip_1);
+		}
+		else if (type==2)
+		{
+			equip_1 = Sprite::create("res/UI/plane_parts/playerShip2_red_01.png");
+			equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip2_red_03.png");
+			equip_1->setAnchorPoint(Vec2(0, 0));
+			equip_1->setPosition(Vec2(0, 0));
+			equip_1_1->setAnchorPoint(Vec2(1, 0));
+			equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+			this->addChild(equip_1_1);
+			this->addChild(equip_1);
+		}
+		else if (type==1)
+		{
+			equip_1 = Sprite::create("res/UI/plane_parts/playerShip2_blue_01.png");
+			equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip2_blue_03.png");
+			equip_1->setAnchorPoint(Vec2(0, 0));
+			equip_1->setPosition(Vec2(0, 0));
+			equip_1_1->setAnchorPoint(Vec2(1, 0));
+			equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+			this->addChild(equip_1_1);
+			this->addChild(equip_1);
+		}
 
+	}
+	else if (this->type==3)
+	{
+		if (type==3)
+		{
+			equip_1 = Sprite::create("res/UI/plane_parts/playerShip3_orange_01.png");
+			equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip3_orange_03.png");
+			equip_1->setAnchorPoint(Vec2(0, 0));
+			equip_1->setPosition(Vec2(0, 0));
+			equip_1_1->setAnchorPoint(Vec2(1, 0));
+			equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+			this->addChild(equip_1_1);
+			this->addChild(equip_1);
+		}
+		else if (type==2)
+		{
+			equip_1 = Sprite::create("res/UI/plane_parts/playerShip3_red_01.png");
+			equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip3_red_03.png");
+			equip_1->setAnchorPoint(Vec2(0, 0));
+			equip_1->setPosition(Vec2(0, 0));
+			equip_1_1->setAnchorPoint(Vec2(1, 0));
+			equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+			this->addChild(equip_1_1);
+			this->addChild(equip_1);
+		}
+		else if (type==1)
+		{
+			equip_1 = Sprite::create("res/UI/plane_parts/playerShip3_blue_01.png");
+			equip_1_1 = Sprite::create("res/UI/plane_parts/playerShip3_blue_03.png");
+			equip_1->setAnchorPoint(Vec2(0, 0));
+			equip_1->setPosition(Vec2(0, 0));
+			equip_1_1->setAnchorPoint(Vec2(1, 0));
+			equip_1_1->setPosition(Vec2(this->getContentSize().width, 0));
+			this->addChild(equip_1_1);
+			this->addChild(equip_1);
+		}
+
+	}
 }
-void CCPlane::putOnEquip_2(int type)
+void CCPlane::putOnEquip_2(int type)//456机身
 {
-	
+	if (this->type==3)
+	{
+		if (type == 3) {
+			equip_2 = Sprite::create("res/UI/plane_parts/playerShip3_orange_02.png");
+			equip_2->setAnchorPoint(Vec2(0.5, 1));
+			equip_2->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height));
+			this->addChild(equip_2);
+		}
+		else if (type==2)
+		{
+			equip_2 = Sprite::create("res/UI/plane_parts/playerShip3_red_02.png");
+			equip_2->setAnchorPoint(Vec2(0.5, 1));
+			equip_2->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height));
+			this->addChild(equip_2);
+		}
+		else if (type==1)
+		{
+			equip_2 = Sprite::create("res/UI/plane_parts/playerShip3_blue_02.png");
+			equip_2->setAnchorPoint(Vec2(0.5, 1));
+			equip_2->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height));
+			this->addChild(equip_2);
+		}
+	}
+	else if (this->type==2)
+	{
+		if (type==3)
+		{
+			equip_2 = Sprite::create("res/UI/plane_parts/playerShip2_orange_02.png");
+			equip_2->setAnchorPoint(Vec2(0.5, 1));
+			equip_2->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height));
+			this->addChild(equip_2);
+		}
+		else if (type==2)
+		{
+			equip_2 = Sprite::create("res/UI/plane_parts/playerShip2_red_02.png");
+			equip_2->setAnchorPoint(Vec2(0.5, 1));
+			equip_2->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height));
+			this->addChild(equip_2);
+		}
+		else if (type==1)
+		{
+			equip_2 = Sprite::create("res/UI/plane_parts/playerShip2_blue_02.png");
+			equip_2->setAnchorPoint(Vec2(0.5, 1));
+			equip_2->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height));
+			this->addChild(equip_2);
+		}
+
+	}
+	else if (this->type==1)
+	{
+		if (type==3)
+		{
+			equip_2 = Sprite::create("res/UI/plane_parts/playerShip1_orange_02.png");
+			equip_2->setAnchorPoint(Vec2(0.5, 1));
+			equip_2->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height));
+			this->addChild(equip_2);
+		}
+		else if (type==2)
+		{
+			equip_2 = Sprite::create("res/UI/plane_parts/playerShip1_red_02.png");
+			equip_2->setAnchorPoint(Vec2(0.5, 1));
+			equip_2->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height));
+			this->addChild(equip_2);
+		}
+		else if (type==1)
+		{
+			equip_2 = Sprite::create("res/UI/plane_parts/playerShip1_blue_02.png");
+			equip_2->setAnchorPoint(Vec2(0.5, 1));
+			equip_2->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height));
+			this->addChild(equip_2);
+		}
+
+	}
 }
-void CCPlane::putOnEquip_3(int type)
+void CCPlane::putOnEquip_3(int type)//789引擎
 {
-	
+	if (this->type==3)
+	{
+		if (type==3) {
+			equip_3 = Sprite::create("res/UI/plane_parts/playerShip3_orange_04.png");
+			equip_3->setAnchorPoint(Vec2(0.5, 0));
+			equip_3->setPosition(Vec2(this->getContentSize().width / 2, 0));
+			this->addChild(equip_3);
+		}
+		else if (type==2)
+		{
+			equip_3 = Sprite::create("res/UI/plane_parts/playerShip3_red_04.png");
+			equip_3->setAnchorPoint(Vec2(0.5, 0));
+			equip_3->setPosition(Vec2(this->getContentSize().width / 2, 0));
+			this->addChild(equip_3);
+		}
+		else if (type==1)
+		{
+			equip_3 = Sprite::create("res/UI/plane_parts/playerShip3_blue_04.png");
+			equip_3->setAnchorPoint(Vec2(0.5, 0));
+			equip_3->setPosition(Vec2(this->getContentSize().width / 2, 0));
+			this->addChild(equip_3);
+		}
+	}
+	else if (this->type==2)
+	{
+		if (type == 3) {
+			equip_3 = Sprite::create("res/UI/plane_parts/playerShip2_orange_04.png");
+			equip_3->setAnchorPoint(Vec2(0.5, 0));
+			equip_3->setPosition(Vec2(this->getContentSize().width / 2, 0));
+			this->addChild(equip_3);
+		}
+		else if (type==2)
+		{
+			equip_3 = Sprite::create("res/UI/plane_parts/playerShip2_red_04.png");
+			equip_3->setAnchorPoint(Vec2(0.5, 0));
+			equip_3->setPosition(Vec2(this->getContentSize().width / 2, 0));
+			this->addChild(equip_3);
+		}
+		else if (type==1)
+		{
+			equip_3 = Sprite::create("res/UI/plane_parts/playerShip2_blue_04.png");
+			equip_3->setAnchorPoint(Vec2(0.5, 0));
+			equip_3->setPosition(Vec2(this->getContentSize().width / 2, 0));
+			this->addChild(equip_3);
+		}
+	}
+	else if (this->type==1)
+	{
+		if (type == 3) {
+			equip_3 = Sprite::create("res/UI/plane_parts/playerShip1_orange_04.png");
+			equip_3->setAnchorPoint(Vec2(0.5, 0));
+			equip_3->setPosition(Vec2(this->getContentSize().width / 2, 0));
+			this->addChild(equip_3);
+		}
+		else if (type==2)
+		{
+			equip_3 = Sprite::create("res/UI/plane_parts/playerShip1_red_04.png");
+			equip_3->setAnchorPoint(Vec2(0.5, 0));
+			equip_3->setPosition(Vec2(this->getContentSize().width / 2, 0));
+			this->addChild(equip_3);
+		}
+		else if (type==1)
+		{
+			equip_3 = Sprite::create("res/UI/plane_parts/playerShip1_blue_04.png");
+			equip_3->setAnchorPoint(Vec2(0.5, 0));
+			equip_3->setPosition(Vec2(this->getContentSize().width / 2, 0));
+			this->addChild(equip_3);
+
+		}
+	}
 }
