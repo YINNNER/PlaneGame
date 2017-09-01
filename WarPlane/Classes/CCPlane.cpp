@@ -38,6 +38,10 @@ void CCPlane::changeAttri()
 		this->attack += 4;
 		this->hp += 10;
 		break;
+	case 4:
+		this->attack += 3;
+		this->hp += 8;
+		break;
 	}
 }
 void CCPlane::changeAtk(int atk) {
