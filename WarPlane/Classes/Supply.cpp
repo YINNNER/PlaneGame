@@ -20,15 +20,37 @@ void Supply::setSpt(int type)
 		this->addChild(spyImg);
 		break;
 	case 2 :
-		this->sType = type;
-		this->spyImg = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png");
-		this->addChild(spyImg);
-		break;
+	{this->sType = type;
+	this->spyImg = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png");
+	CCParticleSystem* particleSystem1 = CCParticleSun::create();
+	particleSystem1->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png"));
+	//自动释放  
+	particleSystem1->setAutoRemoveOnFinish(true);
+	//设置移动类型:自由模式  
+	particleSystem1->setPositionType(kCCPositionTypeFree);
+	particleSystem1->setPosition(ccp(0, 0));
+	particleSystem1->setStartSize(9);
+	particleSystem1->setEndSize(10);
+	particleSystem1->setEmissionRate(100);
+	addChild(particleSystem1);
+	this->addChild(spyImg);
+	break; }
 	case 3:
-		this->sType = type;
-		this->spyImg = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png");
-		this->addChild(spyImg);
-		break;
+	{this->sType = type;
+	this->spyImg = Sprite::create("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png");
+	CCParticleSystem* particleSystem1 = CCParticleSun::create();
+	particleSystem1->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png"));
+	//自动释放  
+	particleSystem1->setAutoRemoveOnFinish(true);
+	//设置移动类型:自由模式  
+	particleSystem1->setPositionType(kCCPositionTypeFree);
+	particleSystem1->setPosition(ccp(0, 0));
+	particleSystem1->setStartSize(9);
+	particleSystem1->setEndSize(10);
+	particleSystem1->setEmissionRate(200);
+	addChild(particleSystem1);
+	this->addChild(spyImg);
+	break; }
 	default:
 		break;
 	}

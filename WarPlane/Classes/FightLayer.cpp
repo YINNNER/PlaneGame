@@ -534,6 +534,7 @@ void FightLayer::is_crash(float dt)
 		}
 		if (player_1->getHp() <= 0)
 		{
+			player_1->setHp(0);
 			this->goToGameOver(1);
 		}
 		score->setString(CCString::createWithFormat("score:%d", scoreValue)->getCString());
