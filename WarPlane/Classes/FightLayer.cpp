@@ -769,7 +769,7 @@ void FightLayer::goToGameOver(int value)
 	Label * score = Label::createWithTTF(CCString::createWithFormat("score:%d", scoreValue)->getCString(), "fonts/Marker Felt.ttf", 18);
 	score->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height / 2));
 	gameOver->addChild(score);
-	gameOver->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	gameOver->setPosition(Vec2(visibleSize.width / 2, 0));
 
 	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/saveS.png", CC_CALLBACK_1(FightLayer::goToSave, this));
 	save->setPosition(Vec2(gameOverSize.width *0.14, gameOverSize.height *0.2));
@@ -779,6 +779,8 @@ void FightLayer::goToGameOver(int value)
 	menu->setPosition(Vec2(0, 0));
 	menu->setAnchorPoint(Vec2(0, 0));
 	gameOver->addChild(menu);
+	auto move = MoveTo::create(1.0f, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	gameOver->runAction(move);
 	this->addChild(gameOver, 5);
 	this->unscheduleUpdate();
 	this->unschedule(schedule_selector(FightLayer::addSupply));
