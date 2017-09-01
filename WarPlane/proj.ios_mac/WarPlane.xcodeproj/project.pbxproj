@@ -41,8 +41,6 @@
 		3E96082C1F501AD90065E1DC /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9607901F4EA4910065E1DC /* SceneManager.cpp */; };
 		3E9608311F5022810065E1DC /* music in Resources */ = {isa = PBXBuildFile; fileRef = 3E96082E1F501BAF0065E1DC /* music */; };
 		3E9608331F5022CA0065E1DC /* music in Resources */ = {isa = PBXBuildFile; fileRef = 3E96082E1F501BAF0065E1DC /* music */; };
-		3E9608571F5176D80065E1DC /* enemyPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608551F5176D80065E1DC /* enemyPlane.cpp */; };
-		3E9608591F5177040065E1DC /* enemyPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608551F5176D80065E1DC /* enemyPlane.cpp */; };
 		3E9608861F55020D0065E1DC /* HelpLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608801F55020D0065E1DC /* HelpLayer.cpp */; };
 		3E9608871F55020D0065E1DC /* MapLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608821F55020D0065E1DC /* MapLayer.cpp */; };
 		3E9608881F55020D0065E1DC /* SetLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9608841F55020D0065E1DC /* SetLayer.cpp */; };
@@ -181,8 +179,6 @@
 		3E9607F41F50150D0065E1DC /* UserInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserInfo.cpp; sourceTree = "<group>"; };
 		3E9607F51F50150D0065E1DC /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		3E96082E1F501BAF0065E1DC /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = music; sourceTree = "<group>"; };
-		3E9608551F5176D80065E1DC /* enemyPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = enemyPlane.cpp; sourceTree = "<group>"; };
-		3E9608561F5176D80065E1DC /* enemyPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enemyPlane.h; sourceTree = "<group>"; };
 		3E9608801F55020D0065E1DC /* HelpLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelpLayer.cpp; sourceTree = "<group>"; };
 		3E9608811F55020D0065E1DC /* HelpLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpLayer.h; sourceTree = "<group>"; };
 		3E9608821F55020D0065E1DC /* MapLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapLayer.cpp; sourceTree = "<group>"; };
@@ -387,8 +383,6 @@
 				3E9608831F55020D0065E1DC /* MapLayer.h */,
 				3E9608841F55020D0065E1DC /* SetLayer.cpp */,
 				3E9608851F55020D0065E1DC /* SetLayer.h */,
-				3E9608551F5176D80065E1DC /* enemyPlane.cpp */,
-				3E9608561F5176D80065E1DC /* enemyPlane.h */,
 				3E9607E11F50150D0065E1DC /* Bullet.cpp */,
 				3E9607E21F50150D0065E1DC /* Bullet.h */,
 				3E9607E31F50150D0065E1DC /* CCPlane.cpp */,
@@ -631,7 +625,6 @@
 				3E96080F1F5017790065E1DC /* AppDelegate.cpp in Sources */,
 				3E9608101F5017790065E1DC /* CreateLayer.cpp in Sources */,
 				3E9608871F55020D0065E1DC /* MapLayer.cpp in Sources */,
-				3E9608571F5176D80065E1DC /* enemyPlane.cpp in Sources */,
 				3EDE02E01F566F5200282D6F /* Enemy.cpp in Sources */,
 				3E9608121F5017790065E1DC /* LoadLayer.cpp in Sources */,
 				3E9608141F5017790065E1DC /* MenuLayer.cpp in Sources */,
@@ -652,7 +645,6 @@
 				3E9608891F5502230065E1DC /* HelpLayer.cpp in Sources */,
 				3E96088A1F5502230065E1DC /* MapLayer.cpp in Sources */,
 				3E96088B1F5502230065E1DC /* SetLayer.cpp in Sources */,
-				3E9608591F5177040065E1DC /* enemyPlane.cpp in Sources */,
 				3E96081A1F501AD90065E1DC /* Bullet.cpp in Sources */,
 				3E96081B1F501AD90065E1DC /* CCPlane.cpp in Sources */,
 				3E96081C1F501AD90065E1DC /* Equip.cpp in Sources */,
