@@ -94,7 +94,8 @@ public:
     bool get_equip_tail_have();
     bool get_equip_tail_b_have();
     bool get_equip_tail_c_have();
-    bool get_equip_head_load();
+    
+	bool get_equip_head_load();
     bool get_equip_head_b_load();
     bool get_equip_head_c_load();
     bool get_equip_arm_load();
