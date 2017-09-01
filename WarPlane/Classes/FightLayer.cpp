@@ -721,9 +721,15 @@ void FightLayer::goToGameOver(int value)
 	case 2:
            gameOver->addChild(result_2);
 			gameOver->addChild(star_1);
-			   gameOver->addChild(star_2);
+			 gameOver->addChild(star_2);
 			   gameOver->addChild(star_3);
-			   gameLevel++;
+			   if (user.getGameLevel() == 3) {
+				   ;
+			   }
+			   else
+			   {
+				   gameLevel++;
+			   }
 
 
 		break;
@@ -741,7 +747,14 @@ void FightLayer::goToGameOver(int value)
     }
 
     user.setSpd(player_1->getSpd());
-    user.setGameLevel(gameLevel);
+	if (user.getGameLevel()>=gameLevel)
+	{
+		;
+	}
+	else {
+		user.setGameLevel(gameLevel);
+	}
+	
 	
   
 
