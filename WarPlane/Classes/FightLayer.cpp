@@ -407,7 +407,7 @@ void FightLayer::is_crash(float dt)
 						}
 						this->goToGameOver(2);
 					}
-					else if (rand() % 2==0)
+					else if (rand() % 10==0)
 					{
 						this->dropEquip(plane_list_1.at(i));
 					}
@@ -972,7 +972,7 @@ void FightLayer::exitGame(Ref * psender)
         SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
         SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
     }
-	Director::getInstance()->end();
+	SceneManager::goMenuLayer(2);
 }
 
 //代码优化 补给、陨石和敌机合并；
@@ -1241,7 +1241,7 @@ void FightLayer::addEnemy(float dt)
 
 	//随机判断飞行方式
 	Enemy * enemy_1 = Enemy::create();
-	enemy_1->setType(3);
+	enemy_1->setType(4);
 	enemy_1->setGrade(player_1->getGrade());
 	for (int i = player_1->getGrade(); i >0; i--)
 	{
