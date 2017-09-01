@@ -994,6 +994,7 @@ void FightLayer::exitGame(Ref * psender)
         SimpleAudioEngine::getInstance()->playEffect("music/trans1.wav");
         SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
     }
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	SceneManager::goMenuLayer(2);
 }
 
