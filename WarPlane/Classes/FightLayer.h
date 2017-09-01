@@ -105,6 +105,8 @@ private:
 	bool skill3_1;
     Sprite * CD1;
     Sprite * CD2;
+	int cd1;
+	int cd2;
     int gameLevel;
 	int bossMaxHp;
 };

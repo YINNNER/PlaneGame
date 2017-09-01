@@ -42,8 +42,9 @@ bool FightLayer::init() {
 	skill2_1 = false;
 	skill1_1 = false;
 	skill3_1 = false;
-
-    //set score label
+	cd1 = 0;
+	cd2 = 0;
+	//set score label
     scoreValue = 0;
     score = Label::createWithTTF(ttfConfig, CCString::createWithFormat("score:%d", scoreValue)->getCString());
     score->setColor(Color3B::WHITE);
@@ -706,14 +707,9 @@ void FightLayer::goToGameOver(int value)
 		{
 			gameOver->addChild(star_1);
 			gameOver->addChild(star_2);
-			gameOver->addChild(star_3);
 		}
 		else if (scoreValue > 20)
 		{
-			gameOver->addChild(star_1);
-			gameOver->addChild(star_2);
-		}
-		else {
 			gameOver->addChild(star_1);
 		}
         player_1->hero_death();
@@ -754,9 +750,6 @@ void FightLayer::goToGameOver(int value)
 	else {
 		user.setGameLevel(gameLevel);
 	}
-	
-	
-  
 
 	Label * score = Label::createWithTTF(CCString::createWithFormat("score:%d", scoreValue)->getCString(), "fonts/Marker Felt.ttf", 18);
 	score->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height / 2));
@@ -825,6 +818,17 @@ void FightLayer::goToMap(Ref * psender)
 
 void FightLayer::gamePause()
 {
+	_scheduler->pauseTarget(this);
+	if (cd1==1)
+	{
+		CD1->pause();
+	}
+	if (cd2==1)
+	{
+		CD2->pause();
+	}
+
+
 	this->unscheduleUpdate();
 	this->unschedule(schedule_selector(FightLayer::addSupply));
 	this->unschedule(schedule_selector(FightLayer::is_crash));
@@ -903,7 +907,17 @@ void FightLayer::goToBack(Ref * psender)
 	menu->removeFromParentAndCleanup(true);
 	pause->removeFromParentAndCleanup(true);
 	SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
-
+	_scheduler->resumeTarget(this);
+	if (cd1==1)
+	{
+		CD1->resume();
+	}
+	if (cd2==1)
+	{
+		CD2->resume();
+	}
+	
+	
 	this->resume();
 	this->scheduleUpdate();
 	this->schedule(schedule_selector(FightLayer::addSupply),5.0f);
@@ -1041,6 +1055,7 @@ void FightLayer::openSkillU()
     animation->setRestoreOriginalFrame(false);
     auto action = Animate::create(animation);
     CD1->runAction(action);
+	cd1 = 1;
 	this->scheduleOnce(schedule_selector(FightLayer::showSkillCD1), 10.0f);
 }
 
@@ -1125,6 +1140,7 @@ void FightLayer::openSkillI()
     animation->setRestoreOriginalFrame(false);
     auto action = Animate::create(animation);
     CD2->runAction(action);
+	cd2 = 1;
 	this->scheduleOnce(schedule_selector(FightLayer::showSkillCD2), 15.0f);
 }
 
@@ -1336,11 +1352,13 @@ void FightLayer::plane_death(Enemy * enemy)
 
 void FightLayer::showSkillCD1(float dt)
 {
+	cd1 = 0;
     CD1->removeFromParentAndCleanup(true);
 }
 
 void FightLayer::showSkillCD2(float dt)
 {
+	cd2 = 0;
 	CD2->removeFromParentAndCleanup(true);
 }
                            
@@ -1388,7 +1406,14 @@ void FightLayer::onEnter()
 		}
 	}
 
-
+	if (cd1 == 1)
+	{
+		CD1->pause();
+	}
+	if (cd2 == 1)
+	{
+		CD2->pause();
+	}
 
 	this->addChild(batchNode);
 	fightImg = Sprite::createWithTexture(batchNode->getTexture());
