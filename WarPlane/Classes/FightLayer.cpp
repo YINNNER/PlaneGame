@@ -1,4 +1,4 @@
-﻿#include "FightLayer.h"
+#include "FightLayer.h"
 #include"Supply.h"
 #include"GameManager.h"
 #include"Bullet.h"

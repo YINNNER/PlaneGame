@@ -296,7 +296,7 @@ void SaveLayer::setInfoLabel(float py){
 		std::stringstream picName;
 		picName << "res/SpaceShooterRedux/PNG/Planes/playerShip" << user.getPlaneType() << "_green.png";
 		auto planeImg = Sprite::create(picName.str());
-		planeImg->setPosition(Vec2(origin.x + winSize.width / 2 - planeImg->getContentSize().width*1.2, origin.y + winSize.height *py));
+		planeImg->setPosition(Vec2(origin.x + winSize.width *0.33, origin.y + winSize.height *py));
 		planeImg->setTag(101);
 		this->addChild(planeImg);
 
@@ -305,7 +305,7 @@ void SaveLayer::setInfoLabel(float py){
 		name << "战机名：" << user.getUserName() << std::endl << user.getSaveTime() << std::endl << user.getSaveDay() << std::endl;
 		auto infoPlane = Label::createWithTTF(name.str(), "fonts/simhei.ttf", 23);
 		infoPlane->enableOutline(Color4B(73, 75, 80, 130), 3);
-		infoPlane->setPosition(Vec2(origin.x + winSize.width / 2 + planeImg->getContentSize().width *0.52, origin.y + winSize.height *(py-0.02) ));
+		infoPlane->setPosition(Vec2(origin.x + winSize.width *0.58, origin.y + winSize.height *(py-0.02) ));
 		infoPlane->setAdditionalKerning(4);
 		infoPlane->setLineHeight(38);
 		infoPlane->setTag(102);
