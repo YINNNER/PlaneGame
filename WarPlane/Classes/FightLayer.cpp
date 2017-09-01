@@ -646,22 +646,22 @@ void FightLayer::goToGameOver(int value)
 	gameOver = Sprite::create("res/UI/a5GameFin/rect.png");
 	auto gameOverSize = gameOver->getContentSize();
 	Sprite * star_1 = Sprite::create("res/star_gold.png");
-	star_1->setPosition(Vec2(gameOverSize.width / 3, gameOverSize.height * 3 / 5));
+	star_1->setPosition(Vec2(gameOverSize.width / 3, gameOverSize.height * 0.65));
 	star_1->setScale(2);
 	Sprite * star_2 = Sprite::create("res/star_gold.png");
-	star_2->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 3 / 5));
+	star_2->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 0.65));
 	star_2->setScale(2);
 	Sprite * star_3 = Sprite::create("res/star_gold.png");
-	star_3->setPosition(Vec2(gameOverSize.width * 2 / 3, gameOverSize.height * 3 / 5));
+	star_3->setPosition(Vec2(gameOverSize.width * 2 / 3, gameOverSize.height * 0.65));
 	star_3->setScale(2);
 
-	Label * result_1 = Label::createWithTTF("通关失败", "fonts/simhei.ttf", 28);
+	Label * result_1 = Label::createWithTTF("通关失败", "fonts/simhei.ttf", 30);
     result_1->setTextColor(Color4B::BLACK);
-	result_1->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 4 / 5));
+	result_1->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 0.75));
 	
-	Label * result_2 = Label::createWithTTF("通关成功", "fonts/simhei.ttf", 28);
+	Label * result_2 = Label::createWithTTF("通关成功", "fonts/simhei.ttf", 30);
     result_2->setTextColor(Color4B::BLACK);
-	result_2->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 4 / 5));
+	result_2->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 0.75));
 
 	for (int i = player_1->equip_list.size() - 1; i >= 0; i--)
 	{
@@ -757,10 +757,17 @@ void FightLayer::goToGameOver(int value)
 	
 	
   
-
-	Label * score = Label::createWithTTF(CCString::createWithFormat("score:%d", scoreValue)->getCString(), "fonts/Marker Felt.ttf", 18);
-	score->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height / 2));
+    //show score
+	Label * score = Label::createWithTTF(CCString::createWithFormat("分数:%d", scoreValue)->getCString(), "fonts/simhei.ttf", 28);
+    score->setTextColor(Color4B::BLACK);
+	score->setPosition(Vec2(gameOverSize.width *0.5, gameOverSize.height *0.55));
 	gameOver->addChild(score);
+    //show time
+    Label * time = Label::createWithTTF(CCString::createWithFormat("用时:%d:%d",minTime, secTime)->getCString(), "fonts/simhei.ttf", 28);
+    time->setTextColor(Color4B::BLACK);
+    time->setPosition(Vec2(gameOverSize.width *0.5, gameOverSize.height *0.45));
+    gameOver->addChild(time);
+
 	gameOver->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 
 	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/saveS.png", CC_CALLBACK_1(FightLayer::goToSave, this));
