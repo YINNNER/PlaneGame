@@ -58,6 +58,7 @@ private:
     bool _equip_tail_c_load;
     
 public:
+    //读取存档的关键步骤：读取plist中的信息并赋值给userInfo对象的对应数据，用于游戏中信息传递
     void setInfo(int tag);
     //点击保存进度调用的api
     void saveInfoToPlist(UserInfo & userInfo,int tag);

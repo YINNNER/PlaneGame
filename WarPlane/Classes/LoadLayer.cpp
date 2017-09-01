@@ -26,7 +26,6 @@ bool LoadLayer::init() {
 	Director::getInstance()->getTextureCache()->addImageAsync("res/game.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
 	Director::getInstance()->getTextureCache()->addImageAsync("res/UI/plane_parts/planeParts.png", CC_CALLBACK_1(LoadLayer::loadingCallback, this));
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/UI/a1CreatePlayer/createScene.plist");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/background1.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/trans1.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/click8.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/click2.wav");
@@ -43,6 +42,8 @@ bool LoadLayer::init() {
 	SimpleAudioEngine::getInstance()->preloadEffect("music/bomb4.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/hited2.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/skill4.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/lose1.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/win02.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight05.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight08.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight04.mp3");
