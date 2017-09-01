@@ -1,4 +1,4 @@
-﻿#include "FightLayer.h"
+#include "FightLayer.h"
 #include"Supply.h"
 #include"GameManager.h"
 #include"Bullet.h"
@@ -272,7 +272,7 @@ void FightLayer::update(float dt)
 	break; }
 	case EventKeyboard::KeyCode::KEY_I:
 	{static long interval_2 = 0;
-	if ((this->getCurrentTime() - interval_2) < 2000)
+	if ((this->getCurrentTime() - interval_2) < 15000)
 	{
 		break;
 	}
