@@ -121,11 +121,11 @@ void FightLayer::bossSkill(float)
 	this->addChild(bullet_1, 3);
 	//各boss特性技能
 	GameManager::getInstance()->setEBullet(bullet_1);
-	if (player_1->getGrade()<10)
+	if (gameLevel==1)
 	{
 		this->schedule(schedule_selector(FightLayer::bossSkill_1), 10.0f);
 	}
-	else if (player_1->getGrade()<15)
+	else if (gameLevel==2)
 	{
 		this->schedule(schedule_selector(FightLayer::bossSkill_2), 10.0f);
 	}
