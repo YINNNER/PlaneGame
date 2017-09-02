@@ -135,31 +135,13 @@ void CCPlane::setHp(int hp)
 
 void CCPlane::hero_death()
 {
-	/*
-	Sprite * Anim2 = Sprite::create("res/crash1.png");
-	Anim2->setScale(1.0);
-	this->addChild(Anim2, 3);
-	Anim2->setPosition(this->getPosition());
-	auto animation = Animation::create();
-
-	char str[20] = { 0 };
-	for (int i = 1; i <= 9; i++)
-	{
-		sprintf(str, "res/crash%d.png", i);
-		animation->addSpriteFrameWithFile(str);
-	}
-	animation->setDelayPerUnit(0.04f);
-	animation->setLoops(1);
-	animation->setRestoreOriginalFrame(false);
-	auto action = Animate::create(animation);
-	Anim2->runAction(action);
-	this->addChild(Anim2);
-	scheduleOnce(schedule_selector(CCPlane::removeHero), 0.4f);
-*/
-	this->removeFromParentAndCleanup(true);
+	this->setImg("res/playerShip3_damage3.png");
+	this->scheduleOnce(schedule_selector(CCPlane::removeHero), 1.0f);
 }
 
-void CCPlane::removeHero(float){
+void CCPlane::removeHero(float dt)
+{
+	this->unschedule(schedule_selector(CCPlane::removeHero));
 	this->removeFromParentAndCleanup(true);
 }
 
@@ -457,23 +439,5 @@ void CCPlane::putOnEquip_3(int type)//789ÒýÇæ
 			this->addChild(equip_3);
 
 		}
-	}
-}
-
-int CCPlane::hpChange()
-{
-	switch (this->getType()) {
-	case 1:							//·À
-		return 12;
-		break;
-	case 2:							//¹¥
-		return 8;
-		break;
-	case 3:
-		return 10;
-		break;
-	case 4:
-		return 8;
-		break;
 	}
 }

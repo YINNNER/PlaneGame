@@ -48,9 +48,7 @@ bool MapLayer::init() {
 	save->setScale(0.25);
 	save->setTag(4);
 	//第一关文字显示
-	//auto level_1_label = Label::createWithSystemFont("Level 1", "fonts/AdobeHeitiStd-Regular.ttf", 20);
-    auto level_1_label = Sprite::create("res/UI/a2SelectLevel/firstLevel.png");
-    level_1_label->setScale(0.5);
+	auto level_1_label = Label::createWithSystemFont("Level 1", "fonts/AdobeHeitiStd-Regular.ttf", 20);
 	level_1_label->setPosition(Vec2(winSize.width*0.7, winSize.height*0.1));
 	this->addChild(level_1_label);
 	
@@ -64,8 +62,7 @@ bool MapLayer::init() {
 	level_1->setTag(31);
 
 	
-    auto level_2_label = Sprite::create("res/UI/a2SelectLevel/secondLevel.png");
-    level_2_label->setScale(0.5);
+	auto level_2_label = Label::createWithSystemFont("Level 2", "fonts/AdobeHeitiStd-Regular.ttf", 20);
 	level_2_label->setPosition(Vec2(winSize.width*0.2, winSize.height*0.35));
 	this->addChild(level_2_label);
 	
@@ -80,8 +77,7 @@ bool MapLayer::init() {
 	level_2->setTag(32);
 
 
-    auto level_3_label = Sprite::create("res/UI/a2SelectLevel/thirdLevel.png");
-    level_3_label->setScale(0.5);
+	auto level_3_label = Label::createWithSystemFont("Level 3", "fonts/AdobeHeitiStd-Regular.ttf", 20);
 	level_3_label->setPosition(Vec2(winSize.width*0.7, winSize.height*0.55));
 	this->addChild(level_3_label);
 	
@@ -114,6 +110,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 	int tag = ((MenuItem *)pSender)->getTag();
 	int times = 1;
 	int mode_1 = 1;
+	int mode_2 = 2;
 	switch (tag)
 	{
 	case 1:
@@ -139,7 +136,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
 		chooseLevel = 1;
-		SceneManager::goFightLayer(chooseLevel,user,mode_1);
+		SceneManager::goFightLayer(chooseLevel,user,mode_2);
 	}break;
 	case 32:
 	{
