@@ -15,8 +15,10 @@ bool MenuLayer::init(){
 	_background->setScale(scale);
 	this->addChild(_background);
 
-	if (!SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
-		SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3");
+	if (SetLayer::backState == 1) {
+		if (!SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/background3.mp3", true);
+		}
 	}
 	
 	Sprite *title = Sprite::create("res/UI/1Menu/title@3x.png");

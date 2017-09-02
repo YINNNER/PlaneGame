@@ -343,10 +343,10 @@ void FightLayer::addBullet(int bType)
     switch(bType)
     {
         case 1:
-            bullet_1->setBulletImg("res/fire01.png");
+            bullet_1->setBulletImg("res/major_bullet_1.png");
             break;
         case 2:
-            bullet_1->setBulletImg("res/fire02.png");
+            bullet_1->setBulletImg("res/major_bullet_3.png");
             break;
     }
 	
@@ -853,7 +853,7 @@ void FightLayer::timeSche(float dt)
 		Bullet * bullet_1 = Bullet::create();
 		bullet_1->setPosition(plane_list_1.at(i)->getPosition());
 		bullet_1->setType(2);
-		bullet_1->setBulletImg("res/SpaceShooterRedux/PNG/Effects/fire12.png");
+		bullet_1->setBulletImg("res/enemy_bullet_2.png");
 		//bullet_1->setScale(0.5);
 		this->addChild(bullet_1, 3);
 		GameManager::getInstance()->setEBullet(bullet_1);
@@ -1329,21 +1329,24 @@ void FightLayer::addEnemy(float dt)
 	int playerLevel = player_1->getGrade();
 	//随玩家等级改变生成频率
 	if (playerLevel <= 2) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 2.0f);
-	}
-	else if (playerLevel <= 4) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 1.5f);
-	}
-	else if (playerLevel <= 7) {
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 1.0f);
 	}
-	else if (playerLevel <= 9) {
+	else if (playerLevel <= 4) {
+
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.9f);
+	}
+	else if (playerLevel <= 7) {
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.8f);
+	}
+	else if (playerLevel <= 9) {
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.7f);
 	}
 	else if (playerLevel <= 12) {
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.6f);
 	}
-	else if (playerLevel <= 14) {
+
+	else if (playerLevel <= 15) {
+
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.5f);
 	}
 
