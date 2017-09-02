@@ -51,6 +51,7 @@ void Enemy::setEnemyImg()
 		}
 		else {
 			this->setImg("res/enemy2.png");
+			this->setScale(1.5f);
 		}
 	}
 	else if (level <= 9) {
@@ -59,6 +60,7 @@ void Enemy::setEnemyImg()
 		}
 		else {
 			this->setImg("res/enemy4.png");
+			this->setScale(1.5f);
 		}
 	}
 	else {
@@ -67,6 +69,7 @@ void Enemy::setEnemyImg()
 		}
 		else {
 			this->setImg("res/enemy6.png");
+			this->setScale(1.2f);
 		}
 	}
 }

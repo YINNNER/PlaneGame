@@ -116,8 +116,13 @@ void FightLayer::bossSkill(float)
 	bullet_1->setPosition(boss->getPosition());
     bullet_1->setType(3);
     bullet_1->move_1();
+<<<<<<< HEAD
+	bullet_1->setBulletImg("res/bigFire.png");
+	bullet_1->setScale(0.1f);
+=======
 	bullet_1->setBulletImg("res/bomb.png");
 	bullet_1->setScale(0.5);
+>>>>>>> c7ebd0a1eb3acb0602e929c30c2d938ee9aae2cb
 	this->addChild(bullet_1, 3);
 	//各boss特性技能
 	GameManager::getInstance()->setEBullet(bullet_1);
@@ -142,8 +147,17 @@ void FightLayer::bossSkill_1(float)
         if (i == 1)bullet->setPosition(size.width / 2 * CCRANDOM_0_1(), size.height);
         else bullet->setPosition(size.width / 2 * CCRANDOM_0_1() + size.width / 2, size.height);
         bullet->setType(2);
+<<<<<<< HEAD
+        bullet->setBulletImg("res/greenFire.png");
+        bullet->setScale(0.6f);
+=======
         bullet->setBulletImg("res/bigPlane.png");
+<<<<<<< HEAD
+        bullet->setScale(0.2f);
+>>>>>>> f963ea8cc3e86d4081a532eaed1f860310afadb2
+=======
         bullet->setScale(2.0f);
+>>>>>>> c7ebd0a1eb3acb0602e929c30c2d938ee9aae2cb
         GameManager::getInstance()->setEBullet(bullet);
         this->addChild(bullet, 3);
 
@@ -152,13 +166,15 @@ void FightLayer::bossSkill_1(float)
 //boss2技能，导弹群
 void FightLayer::bossSkill_2(float)
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 15; i++)
     {
+		auto size = Director::getInstance()->getWinSize();
         Bullet * bullet_1 = Bullet::create();
-        bullet_1->setPosition(boss->getPositionX(), boss->getPositionY());
+        bullet_1->setPosition(size.width * CCRANDOM_0_1(), size.height);
         bullet_1->setType(3);
         bullet_1->move_1();
-        bullet_1->setBulletImg("res/bomb.png");
+        bullet_1->setBulletImg("res/bigFire.png");
+		bullet_1->setScale(0.1f);
         this->addChild(bullet_1, 3);
         GameManager::getInstance()->setEBullet(bullet_1);
     }
@@ -1330,7 +1346,15 @@ void FightLayer::addEnemy(float dt)
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 1.0f);
 	}
 	else if (playerLevel <= 4) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> f963ea8cc3e86d4081a532eaed1f860310afadb2
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.9f);
+=======
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.8f);
+>>>>>>> c7ebd0a1eb3acb0602e929c30c2d938ee9aae2cb
 	}
 	else if (playerLevel <= 7) {
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.5f);
@@ -1341,8 +1365,19 @@ void FightLayer::addEnemy(float dt)
 	else if (playerLevel <= 12) {
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.3f);
 	}
+<<<<<<< HEAD
+<<<<<<< HEAD
+	else if (playerLevel <= 15) {
+=======
+
+	else if (playerLevel <= 15) {
+
+>>>>>>> f963ea8cc3e86d4081a532eaed1f860310afadb2
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.5f);
+=======
 	else if (playerLevel <= 14) {
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.2f);
+>>>>>>> c7ebd0a1eb3acb0602e929c30c2d938ee9aae2cb
 	}
 
 
