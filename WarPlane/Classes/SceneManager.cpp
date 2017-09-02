@@ -5,7 +5,6 @@
 #include "MenuLayer.h"
 #include "RepoLayer.h"
 #include "FightLayer.h"
-#include "ModeLayer.h"
 #include "SimpleAudioEngine.h"
 using namespace CocosDenshion;
 using namespace experimental;
@@ -220,24 +219,13 @@ void SceneManager::goRepoLayer(int tag,UserInfo &userInfo) {
 
 }
 
-void SceneManager::goGameMode(int tag, UserInfo & userInfo)
-{
-	auto modeScene = Scene::create();
-	auto layer = ModeLayer::create();
-	layer->user = userInfo;
-	modeScene->addChild(layer);
-	auto transit = TransitionSlideInR::create(0.5f, modeScene);
-	Director::getInstance()->replaceScene(transit);
-}
-
-void SceneManager::goFightLayer(int level,UserInfo &userInfo,int mode) {
+void SceneManager::goFightLayer(int level,UserInfo &userInfo) {
 	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	auto gameScene = Scene::create();
 	FightLayer * fightLayer_1 = FightLayer::create();
 	fightLayer_1->setPlayer(userInfo);
 	fightLayer_1->user = userInfo;
 	fightLayer_1->getGameLevel(level);
-	fightLayer_1->getGameMode(mode);
 	gameScene->addChild(fightLayer_1);
 	auto transit = TransitionSlideInR::create(0.5f, gameScene);
 	Director::getInstance()->replaceScene(transit);

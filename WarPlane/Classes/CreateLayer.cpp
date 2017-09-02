@@ -547,7 +547,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 		auto file = new UserInfo();//创建一个角色类对象用于暂时存储数据
 		UserInfo user = file->createUser(planeName, planeType);
 		delete file;
-		SceneManager::goGameMode(tag, user);
+		SceneManager::goMapLayer(tag, user);
 
 	}break;
 	case 2: {

@@ -19,8 +19,7 @@ public:
 	static void goHelpLayer(int tag);
 	static void goSetLayer(int tag);
 	static void goRepoLayer(int tag, UserInfo &userInfo);
-	static void goGameMode(int tag, UserInfo &userInfo);
-	static void goFightLayer(int level,UserInfo &userInfo,int mode);
+	static void goFightLayer(int level,UserInfo &userInfo);
 
 public:
 	Scene * loadScene;
