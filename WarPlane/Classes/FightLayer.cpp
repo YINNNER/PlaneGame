@@ -116,8 +116,13 @@ void FightLayer::bossSkill(float)
 	bullet_1->setPosition(boss->getPosition());
     bullet_1->setType(3);
     bullet_1->move_1();
+<<<<<<< HEAD
 	bullet_1->setBulletImg("res/bigFire.png");
 	bullet_1->setScale(0.1f);
+=======
+	bullet_1->setBulletImg("res/bomb.png");
+	bullet_1->setScale(0.5);
+>>>>>>> c7ebd0a1eb3acb0602e929c30c2d938ee9aae2cb
 	this->addChild(bullet_1, 3);
 	//各boss特性技能
 	GameManager::getInstance()->setEBullet(bullet_1);
@@ -147,8 +152,12 @@ void FightLayer::bossSkill_1(float)
         bullet->setScale(0.6f);
 =======
         bullet->setBulletImg("res/bigPlane.png");
+<<<<<<< HEAD
         bullet->setScale(0.2f);
 >>>>>>> f963ea8cc3e86d4081a532eaed1f860310afadb2
+=======
+        bullet->setScale(2.0f);
+>>>>>>> c7ebd0a1eb3acb0602e929c30c2d938ee9aae2cb
         GameManager::getInstance()->setEBullet(bullet);
         this->addChild(bullet, 3);
 
@@ -338,10 +347,10 @@ void FightLayer::addBullet(int bType)
     switch(bType)
     {
         case 1:
-            bullet_1->setBulletImg("res/major_bullet_1.png");
+            bullet_1->setBulletImg("res/fire01.png");
             break;
         case 2:
-            bullet_1->setBulletImg("res/major_bullet_3.png");
+            bullet_1->setBulletImg("res/fire02.png");
             break;
     }
 	
@@ -399,14 +408,14 @@ void FightLayer::is_crash(float dt)
 					{
 						bossExist = 2;
 						this->unschedule(schedule_selector(FightLayer::bossSkill));
-					
+						this->unschedule(schedule_selector(FightLayer::bossSkill_1));
 						boss->removeFromParent();
 						
-						if (gameLevel==1)
+						if (player_1->getGrade() < 10)
 						{
 							this->unschedule(schedule_selector(FightLayer::bossSkill_1));
 						}
-						else if (gameLevel==2)
+						else if (player_1->getGrade() < 15)
 						{
 							this->unschedule(schedule_selector(FightLayer::bossSkill_2));
 						}
@@ -526,7 +535,7 @@ void FightLayer::is_crash(float dt)
 						auto enemy_2 = plane_list_1.at(j);
 						if (rect.containsPoint(enemy_2->getPosition()))
 						{
-							enemy_2->changeHp(-player_1->getAtk()*3);
+							enemy_2->changeHp(-50);
 							if (enemy_2->getHp() <= 0)
 							{
 								this->dropEquip(enemy_2);
@@ -573,7 +582,7 @@ long FightLayer::getCurrentTime()
 void FightLayer::setPlayer(UserInfo &user) {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	player_1 = CCPlane::create();
-	player_1->setPosition(Vec2(visibleSize.width / 2,player_1->getContentSize().height));
+	player_1->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	player_1->setType(user.getPlaneType());
 	player_1->setExp(user.getExp());
 	player_1->setAttri(user.getAtk(),user.getHp(),user.getSpd(),user.getPlaneLevel());	//坦克
@@ -705,7 +714,13 @@ void FightLayer::goToGameOver(int value)
 	star_3->setPosition(Vec2(gameOverSize.width * 2 / 3, gameOverSize.height * 0.65));
 	star_3->setScale(2);
 
+	Sprite * result_1 = Sprite::create("res/zujie0.png");
 
+	result_1->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 0.75));
+
+	Sprite * result_2 = Sprite::create("res/zujie3.png");
+
+	result_2->setPosition(Vec2(gameOverSize.width / 2, gameOverSize.height * 0.75));
 
 	for (int i = player_1->equip_list.size() - 1; i >= 0; i--)
 	{
@@ -742,31 +757,10 @@ void FightLayer::goToGameOver(int value)
 			break;
 		}
 	}
-	Label * score = Label::createWithTTF(CCString::createWithFormat("分数:%d", scoreValue)->getCString(), "fonts/simhei.ttf", 28);
-	score->setTextColor(Color4B::BLACK);
-	score->setPosition(Vec2(gameOverSize.width *0.5, gameOverSize.height *0.55));
-	gameOver->addChild(score);
-	//show time
-	Label * time = Label::createWithTTF(CCString::createWithFormat("用时:%d:%d", minTime, secTime)->getCString(), "fonts/simhei.ttf", 28);
-	time->setTextColor(Color4B::BLACK);
-	time->setPosition(Vec2(gameOverSize.width *0.5, gameOverSize.height *0.45));
-	gameOver->addChild(time);
-	gameOver->setPosition(Vec2(visibleSize.width / 2, 0));
-	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/saveS.png", CC_CALLBACK_1(FightLayer::goToSave, this));
-	save->setPosition(Vec2(gameOverSize.width *0.14, gameOverSize.height *0.2));
-	MenuItemImage * map = MenuItemImage::create("res/UI/a5GameFin/selectLevel.png", "res/UI/a5GameFin/selectLevelS.png", CC_CALLBACK_1(FightLayer::goToMap, this));
-	map->setPosition(Vec2(gameOverSize.width * 0.86, gameOverSize.height *0.2));
-	Menu * menu = Menu::create(save, map, NULL);
-	menu->setPosition(Vec2(0, 0));
-	menu->setAnchorPoint(Vec2(0, 0));
-	gameOver->addChild(menu);
-	auto move = MoveTo::create(1.0f, Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	
 	switch (value)
 	{
 	case 1:
-		this->scheduleOnce(schedule_selector(FightLayer::addResault), 1.0);
-		this->scheduleOnce(schedule_selector(FightLayer::addResault_2), 1.5);
+        gameOver->addChild(result_1);
 		if (SetLayer::effectState == 1) {
 			SimpleAudioEngine::getInstance()->playEffect("music/lose1.wav");
 		}
@@ -779,13 +773,10 @@ void FightLayer::goToGameOver(int value)
 		{
 			gameOver->addChild(star_1);
 		}
-		player_1->hero_death();
+        player_1->hero_death();
         break;
 	case 2:
-		gameOver->runAction(move);
-		this->addChild(gameOver, 5);
-		this->scheduleOnce(schedule_selector(FightLayer::addResault), 1.0);
-		this->scheduleOnce(schedule_selector(FightLayer::addResault_3), 1.5);
+           gameOver->addChild(result_2);
 		   if (SetLayer::effectState == 1) {
 			   SimpleAudioEngine::getInstance()->playEffect("music/win02.mp3");
 		   }
@@ -806,8 +797,14 @@ void FightLayer::goToGameOver(int value)
     user.setAtk(player_1->getAtk());
     user.setExp(player_1->getExp());
     user.setPlaneLevel(player_1->getGrade());
-	user.setHp((player_1->getGrade()-user.getPlaneLevel())*player_1->hpChange()+user.getHp());
-    
+    if (player_1->getHp()>0)
+    {
+        user.setHp(player_1->getHp());
+    }
+    else
+    {
+        user.setHp(player_1->getMaxHp());
+    }
 
     user.setSpd(player_1->getSpd());
 	if (user.getGameLevel()>=gameLevel)
@@ -822,8 +819,32 @@ void FightLayer::goToGameOver(int value)
 	
   
     //show score
+	Label * score = Label::createWithTTF(CCString::createWithFormat("分数:%d", scoreValue)->getCString(), "fonts/simhei.ttf", 28);
+    score->setTextColor(Color4B::BLACK);
+	score->setPosition(Vec2(gameOverSize.width *0.5, gameOverSize.height *0.55));
 
-	
+	gameOver->addChild(score);
+
+    //show time
+    Label * time = Label::createWithTTF(CCString::createWithFormat("用时:%d:%d",minTime, secTime)->getCString(), "fonts/simhei.ttf", 28);
+    time->setTextColor(Color4B::BLACK);
+    time->setPosition(Vec2(gameOverSize.width *0.5, gameOverSize.height *0.45));
+    gameOver->addChild(time);
+
+	gameOver->setPosition(Vec2(visibleSize.width / 2, 0));
+
+
+	MenuItemImage * save = MenuItemImage::create("res/UI/a5GameFin/save.png", "res/UI/a5GameFin/saveS.png", CC_CALLBACK_1(FightLayer::goToSave, this));
+	save->setPosition(Vec2(gameOverSize.width *0.14, gameOverSize.height *0.2));
+	MenuItemImage * map = MenuItemImage::create("res/UI/a5GameFin/selectLevel.png", "res/UI/a5GameFin/selectLevelS.png", CC_CALLBACK_1(FightLayer::goToMap, this));
+	map->setPosition(Vec2(gameOverSize.width * 0.86, gameOverSize.height *0.2));
+	Menu * menu = Menu::create(save, map, NULL);
+	menu->setPosition(Vec2(0, 0));
+	menu->setAnchorPoint(Vec2(0, 0));
+	gameOver->addChild(menu);
+	auto move = MoveTo::create(1.0f, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	gameOver->runAction(move);
+	this->addChild(gameOver, 5);
 	this->unscheduleUpdate();
 	this->unschedule(schedule_selector(FightLayer::addSupply));
 	this->unschedule(schedule_selector(FightLayer::is_crash));
@@ -848,24 +869,26 @@ void FightLayer::timeSche(float dt)
 		Bullet * bullet_1 = Bullet::create();
 		bullet_1->setPosition(plane_list_1.at(i)->getPosition());
 		bullet_1->setType(2);
-		bullet_1->setBulletImg("res/enemy_bullet_2.png");
+		bullet_1->setBulletImg("res/SpaceShooterRedux/PNG/Effects/fire12.png");
 		//bullet_1->setScale(0.5);
 		this->addChild(bullet_1, 3);
 		GameManager::getInstance()->setEBullet(bullet_1);
 	}
-
-	if (minTime==0&&secTime==57)
-	{
-		bossTips = Sprite::create("res/bosstips.png");
-		bossTips->setPosition(Vec2(0,visibleSize.height/2));
-		this->addChild(bossTips, 4);
-		CCActionInterval *forward = CCMoveTo::create(1, Vec2(visibleSize.width/2,visibleSize.height/2));
-		bossTips->runAction(forward);
+	if (gameMode == 1) {
+		if (minTime == 0 && secTime == 57)
+		{
+			bossTips = Sprite::create("res/bosstips.png");
+			bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+			this->addChild(bossTips, 4);
+			CCActionInterval *forward = CCMoveTo::create(1, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+			bossTips->runAction(forward);
+		}
+		if (secTime == 3 && minTime == 0)
+		{
+			bossTips->removeFromParentAndCleanup(true);
+		}
 	}
-	if (secTime==3&&minTime==0)
-	{
-		bossTips->removeFromParentAndCleanup(true);
-	}
+	
 }
 
 void FightLayer::goToSave(Ref * psender)
@@ -1171,10 +1194,8 @@ void FightLayer::openSkillI()
             auto Ebullet_list_1 = GameManager::getInstance()->getEBulletList();
             for (int i = Ebullet_list_1.size() - 1; i >= 0; i--)
             {
-				auto Ebullet = Ebullet_list_1.at(i);
-				Ebullet->setType(1);
-				GameManager::getInstance()->removeEBullet(Ebullet);
-				GameManager::getInstance()->setBullet(Ebullet);
+                auto Ebullet = Ebullet_list_1.at(i);
+                Ebullet->removeBullet();
             }
             break;
         }
@@ -1328,20 +1349,25 @@ void FightLayer::addEnemy(float dt)
 	}
 	else if (playerLevel <= 4) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> f963ea8cc3e86d4081a532eaed1f860310afadb2
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.9f);
+=======
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.8f);
+>>>>>>> c7ebd0a1eb3acb0602e929c30c2d938ee9aae2cb
 	}
 	else if (playerLevel <= 7) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.8f);
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.5f);
 	}
 	else if (playerLevel <= 9) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.7f);
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.4f);
 	}
 	else if (playerLevel <= 12) {
-		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.6f);
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.3f);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	else if (playerLevel <= 15) {
 =======
@@ -1350,6 +1376,10 @@ void FightLayer::addEnemy(float dt)
 
 >>>>>>> f963ea8cc3e86d4081a532eaed1f860310afadb2
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.5f);
+=======
+	else if (playerLevel <= 14) {
+		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.2f);
+>>>>>>> c7ebd0a1eb3acb0602e929c30c2d938ee9aae2cb
 	}
 
 
@@ -1372,13 +1402,16 @@ void FightLayer::addEnemy(float dt)
 	}
 	GameManager::getInstance()->setPlane(enemy_1);
 	this->addChild(enemy_1,3);
-	//判断等级，是否生成boss
-	if (bossExist==0)
-	{
-		if (minTime == 1) {
-			this->addBoss();
+	if (gameMode == 1) {
+		//判断等级，是否生成boss
+		if (bossExist == 0)
+		{
+			if (minTime == 1) {
+				this->addBoss();
+			}
 		}
 	}
+	
 }
 //boss生成方式
 void FightLayer::addBoss()
@@ -1472,43 +1505,52 @@ void FightLayer::onEnter()
 	Layer::onEnter();
 	static Size visibleSize = Director::getInstance()->getVisibleSize();
 	SpriteBatchNode *batchNode;
-	if (gameLevel == 1)
-	{
+	if (gameMode == 1) {
+		if (gameLevel == 1)
+		{
+			batchNode = SpriteBatchNode::create("res/UI/a3Game/01.png");
+			if (SetLayer::backState == 1) {
+				SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
+			}
+
+			bossTips = Sprite::create("res/zujie1.png");
+			bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+			this->addChild(bossTips, 4);
+			CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+			bossTips->runAction(forward);
+		}
+		else if (gameLevel == 2)
+		{
+			batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
+			if (SetLayer::backState == 1) {
+				SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight04.mp3", true);
+			}
+			bossTips = Sprite::create("res/zhuiji2.png");
+			bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+			this->addChild(bossTips, 4);
+			CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+			bossTips->runAction(forward);
+		}
+		else
+		{
+			batchNode = SpriteBatchNode::create("res/UI/a3Game/081.png");
+			if (SetLayer::backState == 1) {
+				SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight06.mp3", true);
+			}
+
+			bossTips = Sprite::create("res/miesha.png");
+			bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+			this->addChild(bossTips, 4);
+			CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+			bossTips->runAction(forward);
+		}
+
+	}
+	else {
 		batchNode = SpriteBatchNode::create("res/UI/a3Game/01.png");
 		if (SetLayer::backState == 1) {
 			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
 		}
-		
-		bossTips = Sprite::create("res/zujie1.png");
-		bossTips->setPosition(Vec2(0, visibleSize.height /2));
-		this->addChild(bossTips, 4);
-		CCActionInterval *forward = CCMoveTo::create(1, Vec2(visibleSize.width / 2, visibleSize.height / 2));
-		bossTips->runAction(forward);
-	}
-	else if (gameLevel == 2)
-	{
-		batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
-		if (SetLayer::backState == 1) {
-			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight04.mp3", true);
-		}
-		bossTips = Sprite::create("res/zhuiji2.png");
-		bossTips->setPosition(Vec2(0, visibleSize.height /2));
-		this->addChild(bossTips, 4);
-		CCActionInterval *forward = CCMoveTo::create(1, Vec2(visibleSize.width / 2, visibleSize.height / 2));
-		bossTips->runAction(forward);
-	}
-	else
-	{
-		batchNode = SpriteBatchNode::create("res/UI/a3Game/081.png");
-		if (SetLayer::backState == 1) {
-			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight06.mp3", true);
-		}
-
-		bossTips = Sprite::create("res/miesha.png");
-		bossTips->setPosition(Vec2(0, visibleSize.height /2));
-		this->addChild(bossTips, 4);
-		CCActionInterval *forward = CCMoveTo::create(1, Vec2(visibleSize.width / 2, visibleSize.height / 2));
-		bossTips->runAction(forward);
 	}
 
 	if (cd1 == 1)
@@ -1567,29 +1609,8 @@ void FightLayer::bossHpChange()
 	}
 }
 
-void FightLayer::addResault(float)
+void FightLayer::getGameMode(int mode)
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Sprite * res_1 = Sprite::create("res/UI/a3Game/zuozhan.png");
-	res_1->setAnchorPoint(Vec2(0.5, 0));
-	res_1->setPosition(Vec2(visibleSize.width/4, visibleSize.height * 3 / 4));
-	this->addChild(res_1,4);
-}
-
-void FightLayer::addResault_2(float)
-{
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Sprite * res_1 = Sprite::create("res/UI/a3Game/shibai.png");
-	res_1->setAnchorPoint(Vec2(1, 0));
-	res_1->setPosition(Vec2(visibleSize.width *3/4, visibleSize.height * 3 / 4));
-	this->addChild(res_1,4);
-}
-void FightLayer::addResault_3(float)
-{
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Sprite * res_2 = Sprite::create("res/UI/a3Game/chenggong.png");
-	res_2->setAnchorPoint(Vec2(1, 0));
-	res_2->setPosition(Vec2(visibleSize.width *3/ 4, visibleSize.height * 3 / 4));
-	this->addChild(res_2,4);
+	gameMode = mode;
 }
 
