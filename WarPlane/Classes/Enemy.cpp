@@ -10,13 +10,26 @@ bool Enemy::init()
 //敌机飞行方式1：直线飞行
 void Enemy::planeMove_1()
 {
-	auto size = Director::getInstance()->getWinSize();
-	auto point = Point(getRandomNumber(this->getContentSize().width / 2, size.width - this->getContentSize().width / 2), size.height);
-	this->setPosition(point);
-	CCActionInterval * moveBy = MoveBy::create(5.0f, Point(0, -size.height - this->getContentSize().height));
-	this->runAction(moveBy);
-	if (this->getPositionY() < -this->getContentSize().height) {
-		this->removeFromParentAndCleanup(true);
+	int t = getRandomNumber(0, 10);
+	if (t > 5) {
+		auto size = Director::getInstance()->getWinSize();
+		auto point = Point(getRandomNumber(this->getContentSize().width / 2, size.width / 2 - 50 ), size.height);
+		this->setPosition(point);
+		CCActionInterval * moveBy = MoveBy::create(5.0f, Point(0, -size.height - this->getContentSize().height));
+		this->runAction(moveBy);
+		if (this->getPositionY() < -this->getContentSize().height) {
+			this->removeFromParentAndCleanup(true);
+		}
+	}
+	else {
+		auto size = Director::getInstance()->getWinSize();
+		auto point = Point(getRandomNumber(size.width / 2 + 50, size.width - this->getContentSize().width / 2), size.height);
+		this->setPosition(point);
+		CCActionInterval * moveBy = MoveBy::create(5.0f, Point(0, -size.height - this->getContentSize().height));
+		this->runAction(moveBy);
+		if (this->getPositionY() < -this->getContentSize().height) {
+			this->removeFromParentAndCleanup(true);
+		}
 	}
 }
 //敌机飞行方式2：贝塞尔飞行
@@ -51,6 +64,7 @@ void Enemy::setEnemyImg()
 		}
 		else {
 			this->setImg("res/enemy2.png");
+			this->setScale(1.5f);
 		}
 	}
 	else if (level <= 9) {
@@ -59,6 +73,7 @@ void Enemy::setEnemyImg()
 		}
 		else {
 			this->setImg("res/enemy4.png");
+			this->setScale(1.5f);
 		}
 	}
 	else {
@@ -67,6 +82,7 @@ void Enemy::setEnemyImg()
 		}
 		else {
 			this->setImg("res/enemy6.png");
+			this->setScale(1.2f);
 		}
 	}
 }
