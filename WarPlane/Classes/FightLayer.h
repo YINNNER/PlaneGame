@@ -68,7 +68,8 @@ public:
     void onEnter();
     void getGameLevel(int l);
 	void bossHpChange();
-
+	
+	void getGameMode(int mode);
 	
 	Vector<Sprite *>ani;
 private:
@@ -111,6 +112,7 @@ private:
 	int cd2;
     int gameLevel;
 	int bossMaxHp;
+	int gameMode;
 };
 
 

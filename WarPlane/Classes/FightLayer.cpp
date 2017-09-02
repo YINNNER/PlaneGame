@@ -858,19 +858,21 @@ void FightLayer::timeSche(float dt)
 		this->addChild(bullet_1, 3);
 		GameManager::getInstance()->setEBullet(bullet_1);
 	}
-
-	if (minTime==0&&secTime==57)
-	{
-		bossTips = Sprite::create("res/bosstips.png");
-		bossTips->setPosition(Vec2(0,visibleSize.height*3/4));
-		this->addChild(bossTips, 4);
-		CCActionInterval *forward = CCMoveTo::create(1, Vec2(visibleSize.width/2,visibleSize.height/2));
-		bossTips->runAction(forward);
+	if (gameMode == 1) {
+		if (minTime == 0 && secTime == 57)
+		{
+			bossTips = Sprite::create("res/bosstips.png");
+			bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+			this->addChild(bossTips, 4);
+			CCActionInterval *forward = CCMoveTo::create(1, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+			bossTips->runAction(forward);
+		}
+		if (secTime == 3 && minTime == 0)
+		{
+			bossTips->removeFromParentAndCleanup(true);
+		}
 	}
-	if (secTime==3&&minTime==0)
-	{
-		bossTips->removeFromParentAndCleanup(true);
-	}
+	
 }
 
 void FightLayer::goToSave(Ref * psender)
@@ -1365,13 +1367,16 @@ void FightLayer::addEnemy(float dt)
 	}
 	GameManager::getInstance()->setPlane(enemy_1);
 	this->addChild(enemy_1,3);
-	//判断等级，是否生成boss
-	if (bossExist==0)
-	{
-		if (minTime == 1) {
-			this->addBoss();
+	if (gameMode == 1) {
+		//判断等级，是否生成boss
+		if (bossExist == 0)
+		{
+			if (minTime == 1) {
+				this->addBoss();
+			}
 		}
 	}
+	
 }
 //boss生成方式
 void FightLayer::addBoss()
@@ -1465,43 +1470,52 @@ void FightLayer::onEnter()
 	Layer::onEnter();
 	static Size visibleSize = Director::getInstance()->getVisibleSize();
 	SpriteBatchNode *batchNode;
-	if (gameLevel == 1)
-	{
+	if (gameMode == 1) {
+		if (gameLevel == 1)
+		{
+			batchNode = SpriteBatchNode::create("res/UI/a3Game/01.png");
+			if (SetLayer::backState == 1) {
+				SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
+			}
+
+			bossTips = Sprite::create("res/zujie1.png");
+			bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+			this->addChild(bossTips, 4);
+			CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+			bossTips->runAction(forward);
+		}
+		else if (gameLevel == 2)
+		{
+			batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
+			if (SetLayer::backState == 1) {
+				SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight04.mp3", true);
+			}
+			bossTips = Sprite::create("res/zhuiji2.png");
+			bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+			this->addChild(bossTips, 4);
+			CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+			bossTips->runAction(forward);
+		}
+		else
+		{
+			batchNode = SpriteBatchNode::create("res/UI/a3Game/081.png");
+			if (SetLayer::backState == 1) {
+				SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight06.mp3", true);
+			}
+
+			bossTips = Sprite::create("res/miesha.png");
+			bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
+			this->addChild(bossTips, 4);
+			CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
+			bossTips->runAction(forward);
+		}
+
+	}
+	else {
 		batchNode = SpriteBatchNode::create("res/UI/a3Game/01.png");
 		if (SetLayer::backState == 1) {
 			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight05.mp3", true);
 		}
-		
-		bossTips = Sprite::create("res/zujie1.png");
-		bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
-		this->addChild(bossTips, 4);
-		CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
-		bossTips->runAction(forward);
-	}
-	else if (gameLevel == 2)
-	{
-		batchNode = SpriteBatchNode::create("res/UI/a3Game/11.png");
-		if (SetLayer::backState == 1) {
-			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight04.mp3", true);
-		}
-		bossTips = Sprite::create("res/zhuiji2.png");
-		bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
-		this->addChild(bossTips, 4);
-		CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
-		bossTips->runAction(forward);
-	}
-	else
-	{
-		batchNode = SpriteBatchNode::create("res/UI/a3Game/081.png");
-		if (SetLayer::backState == 1) {
-			SimpleAudioEngine::getInstance()->playBackgroundMusic("music/fight06.mp3", true);
-		}
-
-		bossTips = Sprite::create("res/miesha.png");
-		bossTips->setPosition(Vec2(0, visibleSize.height * 3 / 4));
-		this->addChild(bossTips, 4);
-		CCActionInterval *forward = CCMoveTo::create(1.5, Vec2(visibleSize.width / 2, visibleSize.height / 2));
-		bossTips->runAction(forward);
 	}
 
 	if (cd1 == 1)
@@ -1558,5 +1572,10 @@ void FightLayer::bossHpChange()
 	{
 		bossHp->setScaleX(0);
 	}
+}
+
+void FightLayer::getGameMode(int mode)
+{
+	gameMode = mode;
 }
 

@@ -109,6 +109,8 @@ bool MapLayer::init() {
 void MapLayer::CallMenu(Ref * pSender) {
 	int tag = ((MenuItem *)pSender)->getTag();
 	int times = 1;
+	int mode_1 = 1;
+	int mode_2 = 2;
 	switch (tag)
 	{
 	case 1:
@@ -134,7 +136,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
 		chooseLevel = 1;
-		SceneManager::goFightLayer(chooseLevel,user);
+		SceneManager::goFightLayer(chooseLevel,user,mode_2);
 	}break;
 	case 32:
 	{
@@ -143,7 +145,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
 		chooseLevel = 2;
-		SceneManager::goFightLayer(chooseLevel,user);
+		SceneManager::goFightLayer(chooseLevel,user, mode_1);
 	}break;
 	case 33:
 	{
@@ -151,7 +153,7 @@ void MapLayer::CallMenu(Ref * pSender) {
 			SimpleAudioEngine::getInstance()->playEffect("music/click2.wav");
 		}
 		chooseLevel = 3;
-		SceneManager::goFightLayer(chooseLevel,user);
+		SceneManager::goFightLayer(chooseLevel,user, mode_1);
 	}break;
 	case 4:
 	{
