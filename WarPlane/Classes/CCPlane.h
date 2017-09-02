@@ -34,6 +34,7 @@ public:
 	void putOnEquip_1(int type);
 	void putOnEquip_2(int type);
 	void putOnEquip_3(int type);
+	int hpChange();
 	Vector<Equip *>equip_list;
 	Vector<Equip *>equip_list_2;
 protected:
