@@ -68,7 +68,9 @@ public:
     void onEnter();
     void getGameLevel(int l);
 	void bossHpChange();
-
+	void addResault(float);
+	void addResault_2(float);
+	void addResault_3(float);
 	
 	Vector<Sprite *>ani;
 private:

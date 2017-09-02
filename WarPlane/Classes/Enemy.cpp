@@ -10,10 +10,10 @@ bool Enemy::init()
 //敌机飞行方式1：直线飞行
 void Enemy::planeMove_1()
 {
+	auto size = Director::getInstance()->getWinSize();
 	int t = getRandomNumber(0, 10);
-	if (t > 5) {
-		auto size = Director::getInstance()->getWinSize();
-		auto point = Point(getRandomNumber(this->getContentSize().width / 2, size.width / 2 - 50 ), size.height);
+	if (t <= 5) {
+		auto point = Point(getRandomNumber(this->getContentSize().width / 2, size.width / 2 - this->getContentSize().width ), size.height);
 		this->setPosition(point);
 		CCActionInterval * moveBy = MoveBy::create(5.0f, Point(0, -size.height - this->getContentSize().height));
 		this->runAction(moveBy);
@@ -21,9 +21,8 @@ void Enemy::planeMove_1()
 			this->removeFromParentAndCleanup(true);
 		}
 	}
-	else {
-		auto size = Director::getInstance()->getWinSize();
-		auto point = Point(getRandomNumber(size.width / 2 + 50, size.width - this->getContentSize().width / 2), size.height);
+	else  {
+		auto point = Point(getRandomNumber(this->getContentSize().width / 2 + size.width / 2, size.width / 2 - this->getContentSize().width / 2), size.height);
 		this->setPosition(point);
 		CCActionInterval * moveBy = MoveBy::create(5.0f, Point(0, -size.height - this->getContentSize().height));
 		this->runAction(moveBy);
@@ -95,7 +94,7 @@ void Enemy::removePlane()
 void Enemy::bossMove()
 {
 	auto size = Director::getInstance()->getWinSize();
-	auto point = Point(size.width / 2, size.height);
+	auto point = Point(size.width / 2, size.height-this->getContentSize().height/2);
 	this->setPosition(point);
 	schedule(SEL_SCHEDULE(&Enemy::enemyBossMove));
 }
