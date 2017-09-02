@@ -73,7 +73,7 @@ bool FightLayer::init() {
     //set exp bar
     expSprite = Sprite::create("res/expBar.png");
     expSprite->setAnchorPoint(Vec2(0, 0));
-    expSprite->setScaleX(1);
+    expSprite->setScaleX(0);
     expSprite->setPosition(Vec2(0, 0));
     Sprite * expImg = Sprite::create("res/expEmpty.png");
     expImg->setAnchorPoint(Vec2(0, 0));
@@ -116,10 +116,10 @@ void FightLayer::bossSkill(float)
 	bullet_1->setPosition(boss->getPosition());
     bullet_1->setType(3);
     bullet_1->move_1();
-	bullet_1->setBulletImg("res/bomb.png");
-	bullet_1->setScale(0.2);
+	bullet_1->setBulletImg("res/Bigfire.png");
+	bullet_1->setScale(0.1);
 	CCParticleSystem* particleSystem1 = CCParticleSun::create();
-	particleSystem1->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/bomb.png"));
+	particleSystem1->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Bigfire.png"));
 	//自动释放  
 	particleSystem1->setAutoRemoveOnFinish(true);
 	//设置移动类型:自由模式  
@@ -127,7 +127,7 @@ void FightLayer::bossSkill(float)
 	particleSystem1->setPosition(ccp(0, 0));
 	particleSystem1->setStartSize(10);
 	particleSystem1->setEndSize(15);
-	particleSystem1->setEmissionRate(200);
+	particleSystem1->setEmissionRate(2000);
 	bullet_1->addChild(particleSystem1);
 	this->addChild(bullet_1, 3);
 	//各boss特性技能
@@ -154,7 +154,7 @@ void FightLayer::bossSkill_1(float)
         else bullet->setPosition(size.width / 2 * CCRANDOM_0_1() + size.width / 2, size.height);
         bullet->setType(2);
         bullet->setBulletImg("res/bigPlane.png");
-        bullet->setScale(0.2f);
+        bullet->setScale(2.0f);
         GameManager::getInstance()->setEBullet(bullet);
         this->addChild(bullet, 3);
 
@@ -163,14 +163,26 @@ void FightLayer::bossSkill_1(float)
 //boss2技能，导弹群
 void FightLayer::bossSkill_2(float)
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 15; i++)
     {
+        auto size=Director::getInstance()->getWinSize();
         Bullet * bullet_1 = Bullet::create();
-        bullet_1->setPosition(boss->getPositionX(), boss->getPositionY());
+        bullet_1->setPosition(size.width*CCRANDOM_0_1(), size.height);
         bullet_1->setType(3);
         bullet_1->move_1();
-        bullet_1->setBulletImg("res/bomb.png");
-		bullet_1->setScale(0.3f);
+        bullet_1->setBulletImg("res/Bigfire.png");
+		bullet_1->setScale(0.05f);
+        CCParticleSystem* particleSystem1 = CCParticleSun::create();
+        particleSystem1->setTexture(CCTextureCache::sharedTextureCache()->addImage("res/Bigfire.png"));
+        //自动释放
+        particleSystem1->setAutoRemoveOnFinish(true);
+        //设置移动类型:自由模式
+        particleSystem1->setPositionType(kCCPositionTypeFree);
+        particleSystem1->setPosition(ccp(0, 0));
+        particleSystem1->setStartSize(10);
+        particleSystem1->setEndSize(15);
+        particleSystem1->setEmissionRate(2000);
+        bullet_1->addChild(particleSystem1);
         this->addChild(bullet_1, 3);
         GameManager::getInstance()->setEBullet(bullet_1);
     }
@@ -434,18 +446,20 @@ void FightLayer::is_crash(float dt)
 	}
 		for (int i = Ebullet_list_1.size() - 1; i >= 0; i--)
 		{
-			if (skill1_1)
-			{
-				Ebullet_list_1.at(i)->removeBullet();
-				break;
-			}
-			else if (skill3_1)
-			{
-				break;
-			}
-			else {
+			
+			
 				if (player_1->getBoundingBox().containsPoint(Ebullet_list_1.at(i)->getPosition())) {
 					SimpleAudioEngine::getInstance()->playEffect("music/hited2.wav");
+                    if (skill1_1)
+                    {
+                        Ebullet_list_1.at(i)->removeBullet();
+                        break;
+                    }
+                    else if (skill3_1)
+                    {
+                        break;
+                    }
+                    else {
 					player_1->changeHp(-player_1->getGrade());
 					Ebullet_list_1.at(i)->removeBullet();
 					this->hpChange();
@@ -690,7 +704,7 @@ void FightLayer::hpChange()
 
 void FightLayer::expChange()
 {
-	expSprite->setScaleX(((float)player_1->getExp()) / (1.0*player_1->getGrade()));
+	expSprite->setScaleX(((float)player_1->getExp()) / (10*player_1->getGrade()));
 }
 
 void FightLayer::goToGameOver(int value)
@@ -853,13 +867,13 @@ void FightLayer::timeSche(float dt)
 		Bullet * bullet_1 = Bullet::create();
 		bullet_1->setPosition(plane_list_1.at(i)->getPosition());
 		bullet_1->setType(2);
-		bullet_1->setBulletImg("res/enemy_bullet_2.png");
+		bullet_1->setBulletImg("res/enemy_bullet_21.png");
 		//bullet_1->setScale(0.5);
 		this->addChild(bullet_1, 3);
 		GameManager::getInstance()->setEBullet(bullet_1);
 	}
 
-	if (minTime==0&&secTime==57)
+	if (minTime==0&&secTime==27)
 	{
 		bossTips = Sprite::create("res/bosstips.png");
 		bossTips->setPosition(Vec2(0,visibleSize.height/2));
@@ -1371,7 +1385,7 @@ void FightLayer::addEnemy(float dt)
 	//判断等级，是否生成boss
 	if (bossExist==0)
 	{
-		if (minTime == 1) {
+		if (minTime == 0&&secTime==30) {
 			this->addBoss();
 		}
 	}
@@ -1567,8 +1581,9 @@ void FightLayer::addResault(float)
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Sprite * res_1 = Sprite::create("res/UI/a3Game/zuozhan.png");
-	res_1->setAnchorPoint(Vec2(0.5, 0));
-	res_1->setPosition(Vec2(visibleSize.width/4, visibleSize.height * 3 / 4));
+	res_1->setAnchorPoint(Vec2(0, 0));
+	res_1->setPosition(Vec2(visibleSize.width*0.35, visibleSize.height * 0.65));
+    res_1->setScale(0.7);
 	this->addChild(res_1,5);
 }
 
@@ -1577,7 +1592,8 @@ void FightLayer::addResault_2(float)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Sprite * res_1 = Sprite::create("res/UI/a3Game/shibai.png");
 	res_1->setAnchorPoint(Vec2(1, 0));
-	res_1->setPosition(Vec2(visibleSize.width *3/4, visibleSize.height * 3 / 4));
+	res_1->setPosition(Vec2(visibleSize.width *0.65, visibleSize.height *0.65));
+    res_1->setScale(0.7);
 	this->addChild(res_1,5);
 }
 void FightLayer::addResault_3(float)
@@ -1585,7 +1601,8 @@ void FightLayer::addResault_3(float)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Sprite * res_2 = Sprite::create("res/UI/a3Game/chenggong.png");
 	res_2->setAnchorPoint(Vec2(1, 0));
-	res_2->setPosition(Vec2(visibleSize.width *3/ 4, visibleSize.height * 3 / 4));
+	res_2->setPosition(Vec2(visibleSize.width *0.65, visibleSize.height *0.65));
+    res_2->setScale(0.7);
 	this->addChild(res_2,5);
 }
 
