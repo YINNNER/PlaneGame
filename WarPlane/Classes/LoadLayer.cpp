@@ -44,6 +44,9 @@ bool LoadLayer::init() {
 	SimpleAudioEngine::getInstance()->preloadEffect("music/skill4.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/lose1.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/win02.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/1.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/12.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/16.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight05.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight08.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/fight04.mp3");

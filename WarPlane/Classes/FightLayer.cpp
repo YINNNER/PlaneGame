@@ -787,8 +787,7 @@ void FightLayer::goToGameOver(int value)
 		player_1->hero_death();
         break;
 	case 2:
-		gameOver->runAction(move);
-		this->addChild(gameOver, 5);
+
 		this->scheduleOnce(schedule_selector(FightLayer::addResault), 1.0);
 		this->scheduleOnce(schedule_selector(FightLayer::addResault_3), 1.5);
 		   if (SetLayer::effectState == 1) {
@@ -813,7 +812,8 @@ void FightLayer::goToGameOver(int value)
     user.setPlaneLevel(player_1->getGrade());
 	user.setHp((player_1->getGrade()-user.getPlaneLevel())*player_1->hpChange()+user.getHp());
     
-
+	gameOver->runAction(move);
+	this->addChild(gameOver, 5);
     user.setSpd(player_1->getSpd());
 	if (user.getGameLevel()>=gameLevel)
 	{
@@ -1344,9 +1344,7 @@ void FightLayer::addEnemy(float dt)
 	else if (playerLevel <= 12) {
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.6f);
 	}
-
 	else if (playerLevel <= 15) {
-
 		this->schedule(SEL_SCHEDULE(&FightLayer::addEnemy), 0.5f);
 	}
 
@@ -1571,7 +1569,7 @@ void FightLayer::addResault(float)
 	Sprite * res_1 = Sprite::create("res/UI/a3Game/zuozhan.png");
 	res_1->setAnchorPoint(Vec2(0.5, 0));
 	res_1->setPosition(Vec2(visibleSize.width/4, visibleSize.height * 3 / 4));
-	this->addChild(res_1,4);
+	this->addChild(res_1,5);
 }
 
 void FightLayer::addResault_2(float)
@@ -1580,7 +1578,7 @@ void FightLayer::addResault_2(float)
 	Sprite * res_1 = Sprite::create("res/UI/a3Game/shibai.png");
 	res_1->setAnchorPoint(Vec2(1, 0));
 	res_1->setPosition(Vec2(visibleSize.width *3/4, visibleSize.height * 3 / 4));
-	this->addChild(res_1,4);
+	this->addChild(res_1,5);
 }
 void FightLayer::addResault_3(float)
 {
@@ -1588,6 +1586,6 @@ void FightLayer::addResault_3(float)
 	Sprite * res_2 = Sprite::create("res/UI/a3Game/chenggong.png");
 	res_2->setAnchorPoint(Vec2(1, 0));
 	res_2->setPosition(Vec2(visibleSize.width *3/ 4, visibleSize.height * 3 / 4));
-	this->addChild(res_2,4);
+	this->addChild(res_2,5);
 }
 

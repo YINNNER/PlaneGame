@@ -156,11 +156,11 @@ void CCPlane::hero_death()
 	this->addChild(Anim2);
 	scheduleOnce(schedule_selector(CCPlane::removeHero), 0.4f);
 */
-	this->removeFromParentAndCleanup(true);
+	this->scheduleOnce(schedule_selector(CCPlane::removeHero), 1.0);
 }
 
 void CCPlane::removeHero(float){
-	this->removeFromParentAndCleanup(true);
+	this->removeFromParent();
 }
 
 void CCPlane::setEquip(Equip * _equip)

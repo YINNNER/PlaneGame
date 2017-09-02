@@ -561,7 +561,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 	case 10: {
 		if (SetLayer::effectState == 1) {
 			
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.mp3");
 		}
 		if (selected_2->isVisible())
 			selected_2->setVisible(false);
@@ -576,7 +576,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 	case 11: {
 		if (SetLayer::effectState == 1) {
 			
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.mp3");
 		}
 		if(selected_1->isVisible())
 			selected_1->setVisible(false);
@@ -591,7 +591,7 @@ void CreateLayer::CallBack(Ref *pSender) {
 	case 12: {
 		if (SetLayer::effectState == 1) {
 			
-			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.wav");
+			SimpleAudioEngine::sharedEngine()->playEffect("music/click8.mp3");
 		}
 		if (selected_1->isVisible())
 			selected_1->setVisible(false);
